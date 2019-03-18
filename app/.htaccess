@@ -1,0 +1,8 @@
+RewriteEngine on
+RewriteRule ^([a-z]+)\/?$ public/$1.php [NC]
+
+
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
