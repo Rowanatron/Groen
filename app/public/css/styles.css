@@ -1,0 +1,10 @@
+/********* HEADER STYLING *********/
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.logo {
+    max-width: 200px;
+}
