@@ -1,0 +1,2 @@
+RewriteEngineOn
+RewriteRule ^([a-z]+)\/?$ $1.php [NC]
