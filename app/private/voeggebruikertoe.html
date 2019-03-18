@@ -1,0 +1,92 @@
+<!doctype html>
+
+<!-- Cooments -->
+
+<html>
+
+<head>
+    <title>Gebruiker aanmaken</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="">
+
+</head>
+
+<body>
+
+    <h1>Voeg gebruiker toe</h1>
+
+    <form method="post" action="insert.php">
+
+        <p>
+
+            <label>
+                Gebruikersnaam
+                <input name="username" type=text />
+            </label>
+
+        </p>
+        <p>
+
+            <label>
+                Wachtwoord
+                <input name="password" type="password" />
+            </label>
+            <div>Minimaal 8 karakters waarvan 1 hoofdletter, 1 kleine letter en 1 getal</div>
+
+        </p>
+        <p>
+
+            <label>
+                Herhaal wachtwoord
+                <input name="repeatpassword" type="password" />
+            </label>
+
+        </p>
+        
+        <p>
+
+            <label>
+                Voornaam 
+                <input name="givenname" type=text />
+            </label>
+
+        </p>
+        <p>
+
+            <label>
+                Achternaam
+                <input name="familyname" type=text />
+            </label>
+
+        </p>
+        <p>
+
+            <label>
+                Emailadress
+                <input name="email" type="email" />
+            </label>
+
+        </p>
+
+
+        <label for="role">Selecteer rol:</label>
+
+        <select name="role" id="role">
+            <option value="" disabled selected hidden>--Kies rol--</option>
+            <option value="admin">admin</option>
+            <option value="user">user</option>
+        </select>
+
+        <p>
+
+            <input type="submit" value="Bestel" />
+
+
+        </p>
+
+
+    </form>
+
+</body>
+
+</html>
