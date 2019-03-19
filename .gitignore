@@ -2,3 +2,5 @@
 app/.DS_Store
 .vscode/
 test.php
+dbconfig.php
+app/private/dbconfig.php
