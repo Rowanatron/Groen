@@ -21,55 +21,56 @@
 
             <label>
                 Gebruikersnaam
-                <input name="username" type=text />
+                <input id="testUsername" name="username" type=text minlength="5" onkeydown="setTimeout(errorUsername, 1500)" required/>
             </label>
+            <p id="errorUser"></p>
 
         </p>
         <p>
 
             <label>
                 Wachtwoord
-                <input name="password" type="password" />
+                <input id="testPassword" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(errorPassword, 1500)" required/>
             </label>
-            <div>Minimaal 8 karakters waarvan 1 hoofdletter, 1 kleine letter en 1 getal</div>
+            <p id="errorPass"></p>
 
         </p>
         <p>
 
             <label>
                 Herhaal wachtwoord
-                <input name="repeatpassword" type="password" />
+                <input id="testPasswordRepeat" name="repeatpassword" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(errorPasswordRepeat, 1500)" required/>
             </label>
-
+            <p id="errorPassRepeat"></p>
         </p>
         
         <p>
 
             <label>
                 Voornaam 
-                <input name="givenname" type=text />
+                <input id="testGivenname" name="givenname" type=text minlength="2" onkeydown="setTimeout(errorGivenname, 1500)" required/>
             </label>
-
+            <p id="errorGiven"></p>
         </p>
         <p>
 
             <label>
                 Achternaam
-                <input name="familyname" type=text />
+                <input id="testFamilyname" name="familyname" type=text minlength="2" onkeydown="setTimeout(errorFamilyname, 1500)" required/>
             </label>
-
+            <p id="errorFamily"></p>
         </p>
         <p>
 
             <label>
-                Emailadress
-                <input name="email" type="email" />
+                Emailadres
+                <input id="testEmail" name="email" type="email" onkeydown="setTimeout(errorEmailadres, 1500)"  required/>
             </label>
-
+            <p id="errorEmail"></p>
         </p>
 
 
-        <label for="role">Selecteer rol:</label>
+        <label for="role" required>Selecteer rol:</label>
 
         <select name="role" id="role">
             <option value="" disabled selected hidden>--Kies rol--</option>
@@ -78,7 +79,7 @@
         </select>
 
         <p>
-
+        
             <input type="submit" value="Bestel" />
 
 
@@ -88,5 +89,6 @@
     </form>
 
 </body>
-
+<script type="text/javascript" src="UserJavaScript.js">
+</script>
 </html>
