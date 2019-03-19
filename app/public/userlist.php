@@ -4,6 +4,7 @@ require_once('../private/pathConstants.php');
 require_once('../private/functions.php');
 
 $page_title = 'Userlist';
+$page = "userlist";
 include(SHARED_PATH . '/header.php');
 include(PRIVATE_PATH . '/User.php');
 ?>
@@ -14,6 +15,7 @@ include(PRIVATE_PATH . '/User.php');
 	
 	 <div class="table-header-container">
 		 <h2 class="tabel-header">Gebruikersoverzicht</h2>
+		 <a href="usercreate.html">Nieuwe gebruiker aanmaken</a>
 	</div>
 	<table>
 		<tr>

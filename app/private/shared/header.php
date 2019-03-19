@@ -21,6 +21,11 @@
           <button type="submit" onclick="alert('U bent succesvol uitgelogd')">Log uit</button>
           
           </form>
+          <ul>
+            <!-- <li>Monitor</li> -->
+            <li class="<?php if($page == "userlist") {echo "active";} ?>">Gebruikers</li>
+          </ul>
+          <a>Uitloggen</a>
         </div>
   	</header>
 
