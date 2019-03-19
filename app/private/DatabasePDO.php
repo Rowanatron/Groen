@@ -6,7 +6,7 @@ class DatabasePDO {
     private $password = '123456';
     private $schema = 'userlist';
     private $driver = 'mysql';
-    private $host = 'localhost:3306';
+    private $host = 'localhost:3307';
     
     public function get(){
         $dsn = "{$this->driver}:dbname={$this->schema};host={$this->host}";
