@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validator gebruiken.
     if ($username_from_post && $password_from_post){
     
-        $query = "SELECT * FROM users WHERE username = '$username_from_post' AND password = '$password_from_post';";
+        $query = "SELECT * FROM userlist WHERE username = '$username_from_post' AND password = '$password_from_post';";
 
         try {
             $statement = $conn->prepare($query);
@@ -30,6 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         
         if (!$result){
+            var_dump($result);
             echo 'Onbekende combinatie van gebruikersnaam en wachtwoord. Redirect naar loginscherm';
         } else {
             header("Location: public/systemoverview.php");
