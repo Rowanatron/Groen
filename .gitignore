@@ -1,5 +1,6 @@
 .DS_Store
 app/.DS_Store
-DatabasePDO.php
 .vscode/
 test.php
+dbconfig.php
+app/private/dbconfig.php
