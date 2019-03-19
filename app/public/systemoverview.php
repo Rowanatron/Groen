@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
     if(isset($_SESSION["isAdmin"])){
@@ -14,17 +15,17 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
     header("Location: ../login.php");
 }
 
+require_once('../private/pathConstants.php');
+require_once('../private/functions.php');
 
-require_once('../private/initialize.php');
 
 $page_title = 'Systemoverview';
 include(SHARED_PATH . '/header.php');
 
+<div id="content" class="container">
 
-
-?>
-<div id="content">
  <!-- Hier komt de content -->
+  
 </div>
 
 <?php include(SHARED_PATH . '/footer.php')?>
