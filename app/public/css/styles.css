@@ -53,6 +53,9 @@ background grey: #F2F6FA
 header border: #D9DCDF
 table borders color: #E2E9F0
 background color highlighted table rows #FAFCFD
+knop achtergrondkleur: #99AFC6
+navigatie txt kleur: #707070
+red: #EB1114
 */
 
 body {
@@ -62,7 +65,8 @@ body {
 }
 
 a {
-    color: #4A4A4A; 
+    color: #4A4A4A;
+    text-decoration: none; 
 }
 
 a:hover {
@@ -73,6 +77,8 @@ header {
     background-color: #ffffff;
     border-bottom: solid 1px #D9DCDF;
     margin-bottom: 30px;
+    vertical-align: middle;
+    height: 65px;
 }
 
 .container {
@@ -82,8 +88,45 @@ header {
 
 .logo {
     max-width: 200px;
+    float: left;
 }
 
+header ul {
+    display: inline;
+    float: left;
+    margin-left: 50px;
+}
+
+header li {
+    display: inline-block;
+    height: 63px;
+    line-height: 63px;
+    margin-left: 40px;
+}
+
+header li, header a {
+    text-transform: uppercase;
+    font-size: .7em;
+    font-weight: 700;
+    color: #707070;
+}
+
+header li:hover, header a:hover, .active {
+    color: #EB1114;
+    border-bottom: 2px solid #EB1114;
+}
+
+
+header a {
+    display: inline-block;
+    height: 63px;
+    line-height: 63px;
+    float: right;
+}
+
+/* header container {
+    line-height: 63px;
+} */
 /********* CONTENT STYLING *********/
 
 #content {
@@ -93,10 +136,31 @@ header {
 /********* TABLE STYLING *********/
 
 .table-header-container {
-    padding: 20px;
+    padding: 15px;
     border-top: 1px solid #E2E9F0;
     border-left: 1px solid #E2E9F0;
     border-right: 1px solid #E2E9F0;
+    height: 38px;
+    line-height: 38px;
+}
+
+.tabel-header {
+    font-size: 1.1em;
+    display: inline;
+    /* vertical-align: middle; */
+}
+
+
+.table-header-container a {
+    float: right;
+    border-radius: 2px;
+    background-color: #99AFC6;
+    padding: 15px;
+    color: #fff;
+    font-size: .7em;
+    line-height: .7em;
+    vertical-align: middle;
+    font-weight: 600;
 }
 
 table {
@@ -129,9 +193,5 @@ table tr:nth-child(odd) {
 
 tr {
     border-bottom: 1px solid #E2E9F0;  
-}
-
-.tabel-header {
-    font-size: 1.1em;
 }
 
