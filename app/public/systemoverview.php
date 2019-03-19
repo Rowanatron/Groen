@@ -6,7 +6,7 @@ $page_title = 'Systemoverview';
 include(SHARED_PATH . '/header.php');
 ?>
 
-<div id="content">
+<div id="content container">
  <!-- Hier komt de content -->
 </div>
 
