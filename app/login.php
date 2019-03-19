@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             $statement = $conn->prepare($query);
-            $statement->execute(array('username' => $username_from_post, 'password' => $password_from_post));    
+            $statement->execute(array('username' => $username_from_post, 'password' => $password_from_post));
         } catch (PDOException $e) {
             echo "Error: {$e->getMessage()}";
         }
@@ -73,21 +73,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" media="all" href="public/css/styles.css">
     <title>Login</title>
 </head>
 
 <body>
-    <h1>Server Monitor</h1>
-    <form method="POST" action="login.php">
-        Gebruikersnaam:<br>
-        <input type="text" name="username">
-        <br>
-        Wachtwoord:<br>
-        <input type="password" name="password">
-        <br><br>
-        <input type="submit" value="Inloggen">
-    </form>
-
+    <div id="content" class="container">
+        <img class="logo" src="public/img/logo.jpg" alt="Logo">
+        <form method="POST" action="login.php">
+            <p>
+                <label>
+                    Gebruikersnaam: <br>
+                    <input type="text" name="username">
+                </label>
+            </p>
+            <p>
+                <label>
+                    Wachtwoord:<br>
+                    <input type="password" name="password">
+                </label>
+            </p>
+            <input type="submit" value="Inloggen">
+        </form>
+    </div>
 </body>
 
 </html> 
