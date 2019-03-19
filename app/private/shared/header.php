@@ -16,5 +16,10 @@
   	<header>
 	  	<div class="container">
           <img class="logo" src="<?php echo url_for('/img/logo.jpg'); ?>" alt="Logo">
+          <ul>
+            <!-- <li>Monitor</li> -->
+            <li class="<?php if($page == "userlist") {echo "active";} ?>">Gebruikers</li>
+          </ul>
+          <a>Uitloggen</a>
         </div>
   	</header>
