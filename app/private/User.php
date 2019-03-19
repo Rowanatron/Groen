@@ -10,13 +10,13 @@ class User {
 function User(){
 }
 
-function __construct($u, $p, $g, $f, $e, $a){
+function __construct($u, $p, $g, $f, $e, $r){
     $this->username=$u;
     $this->password=$p;
     $this->givenname=$g;
     $this->familyname=$f;
     $this->email=$e;
-    $this->admin=$a;
+    $this->role=$r;
 }
 
 function set_username($new_username){
