@@ -4,6 +4,7 @@ session_start();
 
 if(time() - $_SESSION["StartSession"] > 3600){
     // errormessage dat sessie verlopen is
+    unset($_SESSION);
     session_destroy();
     header("Location: ../login.php");
 }
@@ -20,7 +21,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
 } else {
     // errormessage dat de bezoeker hier niet zomaar mag komen!
     
-    header("Location: ../login.php");
+    //header("Location: ../login.php");
 }
 
 require_once('../private/pathConstants.php');

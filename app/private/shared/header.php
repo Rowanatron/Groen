@@ -16,12 +16,11 @@
   	<header>
 	  	<div class="container">
           <img class="logo" src="<?php echo url_for('/img/logo.jpg'); ?>" alt="Logo">
-          <button type="button" onclick="alert('U bent succesvol uitgelogd')" 
-          <?php 
-          session_destroy();
-          header("Location: ../login.php");
-          ?>
-          >Log uit</button>
+          
+          <form action = "../private/logout.php";>
+          <button type="submit" onclick="alert('U bent succesvol uitgelogd')">Log uit</button>
+          
+          </form>
         </div>
   	</header>
 
