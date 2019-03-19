@@ -1,21 +1,19 @@
-<!doctype html>
+<?php
+        require_once('../private/pathConstants.php');
+        require_once('../private/functions.php');
+        
+        $page_title = 'Userlist';
+        include(SHARED_PATH . '/header.php');
+        //include(PRIVATE_PATH . '/User.php');
+        ?>
+<div id="content" class="container">
 
-<!-- Cooments -->
+        <div class="table-header-container">
+                <h2 class="tabel-header">Voeg gebruiker toe</h2>
+           </div>
 
-<html>
 
-<head>
-    <title>Gebruiker aanmaken</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="">
-
-</head>
-
-<body>
-
-    <h1>Voeg gebruiker toe</h1>
-
-    <form method="post" action="insert.php">
+    <form method="post" action="../private/insert.php">
 
         <p>
 
@@ -80,7 +78,9 @@
 
         <p>
         
-            <input type="submit" value="Bestel" />
+            <input type="submit" value="gebruiker aanmaken" />
+
+            <a href="userlist.php">annuleren</a>
 
 
         </p>
@@ -88,7 +88,15 @@
 
     </form>
 
-</body>
-<script type="text/javascript" src="UserJavaScript.js">
+</div>
+
+<script type="text/javascript" src="../private/UserJavascript.js">
 </script>
+
+</body>
+
+
+
+
+
 </html>
