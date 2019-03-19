@@ -22,11 +22,9 @@
           
           </form>
           <ul>
-            <!-- <li>Monitor</li> -->
-            <li class="<?php if($page == "userlist") {echo "active";} ?>">Gebruikers</li>
+            <li><a href="systemoverview.php">Monitor</a></li>
+            <li class="<?php if($page == "userlist") {echo "active";} ?>"><a href="userlist.php">Gebruikers</a></li>
           </ul>
           <a>Uitloggen</a>
         </div>
   	</header>
-
-
