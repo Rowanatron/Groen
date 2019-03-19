@@ -1,7 +1,6 @@
 <?php
 
-include_once("private/DatabasePDO.php");
-
+include_once("../private/DatabasePDO.php");
 session_start();
 // if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 //     header("Location: public/systemoverview.php");
@@ -30,19 +29,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashed_password = $result["password"];
         $valid_password = password_verify($password_from_post, $hashed_password);
 
-            if ($valid_password) {
-                $_SESSION["loggedin"] = true;
-                // $_SESSION["id"] = $id;
-                if ($result["role"] === "admin") {
-                    $_SESSION["isAdmin"] = true;
-                }
-                header("Location: public/systemoverview.php");
-            } else {
-                echo 'Onbekende combinatie van gebruikersnaam en wachtwoord. Redirect naar loginscherm';
+        if ($valid_password) {
+            $_SESSION["loggedin"] = true;
+            // $_SESSION["id"] = $id;
+            if ($result["role"] === "admin") {
+                $_SESSION["isAdmin"] = true;
             }
-        
+            header("Location: systemoverview.php");
+        } else {
+            $message = 'Onbekende combinatie van gebruikersnaam en wachtwoord.';
+        }
     } else {
-        echo "Vul alle velden in. Redirect naar loginscherm.";
+        $message = 'Vul alle velden in.';
     }
 }
 
@@ -55,13 +53,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" media="all" href="public/css/styles.css">
+    
     <title>Login</title>
 </head>
 
 <body>
     <div id="content" class="container">
-        <img class="logo" src="public/img/logo.jpg" alt="Logo">
+        <img class="logo" src="img/logo.jpg" alt="Logo">
         <form method="POST" action="login.php">
             <p>
                 <label>
@@ -76,7 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </label>
             </p>
             <p>
-                <?php echo $message ?>
+                <label>
+                    <?php echo isset($message) ? $message : ''?>
+                </label>
             </p>
             <input type="submit" value="Inloggen">
         </form>
