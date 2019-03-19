@@ -1,12 +1,21 @@
 <?php
 
 class DatabasePDO {
-    
-    private $username = 'code';
-    private $password = '123456';
-    private $schema = 'users';
-    private $driver = 'mysql';
-    private $host = 'localhost:3307';
+
+    private $username;
+    private $password;
+    private $schema;
+    private $driver;
+    private $host;
+	
+	public function __construct() {
+		require_once('dbconfig.php');
+		$this->username = $username;
+		$this->password = $password;
+		$this->schema = $schema;
+		$this->driver = $driver;
+		$this->host = $host;		
+	}
     
     public function get(){
         $dsn = "{$this->driver}:dbname={$this->schema};host={$this->host}";

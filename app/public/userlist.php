@@ -11,16 +11,17 @@ include(PRIVATE_PATH . '/User.php');
 <div id="content" class="container">
  <!-- Hier komt de content -->
 
-	<h2>Gebruikersoverzicht</h2>
 	
+	 <div class="table-header-container">
+		 <h2 class="tabel-header">Gebruikersoverzicht</h2>
+	</div>
 	<table>
 		<tr>
 			<th>Gebruikersnaam</th>
 			<th>Voornaam</th>
 			<th>Achternaam</th>
 			<th>Rol</th>
-			<th>Edit</th>
-			<th>Delete</th>
+			<th></th>
 		</tr>
 
 		<?php
@@ -51,8 +52,7 @@ include(PRIVATE_PATH . '/User.php');
 			<td><?php echo $user->givenname ?></td>
 			<td><?php echo $user->familyname ?></td>
 			<td><?php echo $user->role ?></td>
-			<td><a href="#edit-<?php echo $user->username ?>">Edit</a></td>
-			<td><a href="#delete-<?php echo $user->username ?>">Delete</a></td>
+			<td><a href="#edit-<?php echo $user->username ?>"></a><a href="#delete-<?php echo $user->username ?>"></a></td>
 		</tr>
 		<?php } ?>
 		<!-- End for loop -->
