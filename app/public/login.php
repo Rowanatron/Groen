@@ -2,9 +2,9 @@
 
 include_once("../private/DatabasePDO.php");
 session_start();
-// if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-//     header("Location: public/systemoverview.php");
-// }
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && (time() - $_SESSION["StartSession"] < 3600)){
+    header("Location: systemoverview.php");
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $databasePDOInstance = new DatabasePDO();
@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($valid_password) {
             $_SESSION["loggedin"] = true;
+            $_SESSION["StartSession"] = time();
             // $_SESSION["id"] = $id;
             if ($result["role"] === "admin") {
                 $_SESSION["isAdmin"] = true;
