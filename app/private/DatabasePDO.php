@@ -2,7 +2,7 @@
 
 class DatabasePDO {
     
-    private $username = 'henk';
+    private $username = 'code';
     private $password = '123456';
     private $schema = 'users';
     private $driver = 'mysql';
