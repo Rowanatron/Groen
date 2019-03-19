@@ -26,8 +26,6 @@ class DatabasePDO {
             echo "Fuck deze shit ik ga naar huis: {$e->getMessage()}";
         }
         
-        
-       
     }
     
 }
