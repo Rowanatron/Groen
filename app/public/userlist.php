@@ -37,28 +37,24 @@ include(PRIVATE_PATH . '/User.php');
 		</tr>
 
 		<?php
-		include '../private/DatabasePDO.php';
-		$pdo = new DatabasePDO();
-		$connection = $pdo->get();
-		$query = "SELECT * FROM users";
-		
-		try {
-			$statement = $connection->prepare($query);
-			$statement->execute($data);
-		} catch (PDOException $e) {
-			echo "Connection failed: {$e->getMessage()}";
-		}
-		
-		while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-			echo $row['username'];
-			echo $row['password'];
-		}
-
-		// Voorbeeld users
-		$user1 = new User("annejan", "annejan", "Anne Jan", "Sikkema", "anne@jan.nl", "user");
-		$user2 = new User("charlotte", "charlotte", "Charlotte", "Brakel, van", "charlotte@brakelvan.nl", "admin");		
-		$userArray = array($user1, $user2);
-		
+			include '../private/DatabasePDO.php';
+			$pdo = new DatabasePDO();
+			$conn = $pdo->get();
+			$query = "SELECT * FROM userlist";
+			
+			try {
+				$statement = $conn->prepare($query);
+				$statement->execute();
+			} catch (PDOException $e) {
+				echo "Connection failed: {$e->getMessage()}";
+			}
+			
+			$userArray = array();
+			
+			while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+				$user = new User($row['username'], $row['username'], $row['givenname'], $row['familyname'], $row['email'], $row['role']);
+				array_push($userArray, $user);
+			}	
 		?>
 		
 		<!-- For loop -->
