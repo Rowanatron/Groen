@@ -51,7 +51,7 @@ else if (strlen($data['familyname']) < 2){
 
 else{
 
-    $query = "SELECT `username` FROM users.userlist";
+    $query = "SELECT `username` FROM users.userlist;";
 
 try{
     $statement = $conn->prepare($query);
@@ -62,9 +62,14 @@ try{
 
     while($usernamelist = $statement->fetch(PDO::FETCH_ASSOC)){
 
-        if ($usernamelist == $data['username']){
-        $message = "gebruikersnaam is al in gebruik, kies een andere";
+        if (strtolower($usernamelist['username']) == strtolower($data['username'])){
+        $message = "Deze gebruikersnaam bestaat al";
         echo "<script type='text/javascript'>alert('$message');</script>";
+        ?>
+        
+        <meta http-equiv="refresh" content="2; ../public/createuser.php" />
+        <?php
+        exit();
         }
     }
 
@@ -79,9 +84,9 @@ try{
     echo "Oops er ging iets mis {$e->getMessage()}";
 }
 
- }
+}
 
 ?>
 
-Je wordt na 13 seconden omgeleid
-<meta http-equiv="refresh" content="13; ./voeggebruikertoe.html" />
+Je wordt na 2 seconden omgeleid
+<meta http-equiv="refresh" content="2; ../public/userlist.php" />
