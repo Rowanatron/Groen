@@ -1,5 +1,6 @@
 <?php
-require_once('../private/initialize.php');
+require_once('../private/pathConstants.php');
+require_once('../private/functions.php');
 
 $page_title = 'Systemoverview';
 include(SHARED_PATH . '/header.php');
