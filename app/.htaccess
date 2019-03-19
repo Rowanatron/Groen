@@ -1,5 +1,5 @@
-RewriteEngine on
-RewriteRule ^([a-z]+)\/?$ public/$1.php [NC]
+# RewriteEngine on
+# RewriteRule ^([a-z]+)\/?$ public/$1.php [NC]
 
 
 <Files .htaccess>
