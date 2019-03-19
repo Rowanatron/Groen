@@ -1,6 +1,7 @@
 <?php
 
 class DatabasePDO {
+
     private $username;
     private $password;
     private $schema;
