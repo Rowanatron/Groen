@@ -30,7 +30,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         
         if (!$result){
-            var_dump($result);
             echo 'Onbekende combinatie van gebruikersnaam en wachtwoord. Redirect naar loginscherm';
         } else {
             header("Location: public/systemoverview.php");
