@@ -1,66 +1,52 @@
-
+<!-- Default PHP header -->
 <?php
+
 require_once('../private/pathConstants.php');
-require_once('../private/functions.php');
 
 $page_title = 'Userlist';
 $page = "userlist";
+
+require_once(PRIVATE_PATH . '/functions.php');
+require_once(PRIVATE_PATH . '/userfunctions.php');
+require_once(PRIVATE_PATH . '/User.php');
+
 include(SHARED_PATH . '/header.php');
-include(PRIVATE_PATH . '/User.php');
+
 ?>
 
-<div id="content" class="container">
- <!-- Hier komt de content -->
 
-	
+<!-- Hier komt de content -->
+<div id="content" class="container">
+
 	 <div class="table-header-container">
-		 <h2 class="tabel-header">Gebruikersoverzicht</h2>
-		 <a href="usercreate.html">Nieuwe gebruiker aanmaken</a>
+		<h2 class="tabel-header">Gebruikersoverzicht</h2>
+		<a href="createuser.php">Nieuwe gebruiker aanmaken</a>
 	</div>
 	<table>
-		<tr>
-			<th>Gebruikersnaam</th>
-			<th>Voornaam</th>
-			<th>Achternaam</th>
-			<th>Rol</th>
-			<th></th>
-		</tr>
-
-		<?php
-			include '../private/DatabasePDO.php';
-			$pdo = new DatabasePDO();
-			$conn = $pdo->get();
-			$query = "SELECT * FROM userlist ORDER BY username;";
-			
-			try {
-				$statement = $conn->prepare($query);
-				$statement->execute();
-			} catch (PDOException $e) {
-				echo "Connection failed: {$e->getMessage()}";
-			}
-			
-			$userArray = array();
-			
-			while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-				$user = new User($row['username'], $row['password'], $row['givenname'], $row['familyname'], $row['email'], $row['role']);
-				array_push($userArray, $user);
-			}	
-		?>
+		<thead>
+			<tr>
+				<th>Gebruikersnaam</th>
+				<th>Voornaam</th>
+				<th>Achternaam</th>
+				<th>Rol</th>
+				<!-- <th></th> -->
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach (getUserList() as $user) : ?>
+			<tr>
+				<td><?=$user->username; ?></td>
+				<td><?=$user->givenname; ?></td>
+				<td><?=$user->familyname; ?></td>
+				<td><?=$user->role; ?></td>
+				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
+			</tr>
+			<?php endforeach; ?>
 		
-		<!-- For loop -->
-		<?php foreach ($userArray as $user) { ?>
-		<tr>
-			<td><?php echo $user->username ?></td>
-			<td><?php echo $user->givenname ?></td>
-			<td><?php echo $user->familyname ?></td>
-			<td><?php echo $user->role ?></td>
-			<td><a href="#edit-<?php echo $user->username ?>"></a><a href="#delete-<?php echo $user->username ?>"></a></td>
-		</tr>
-		<?php } ?>
-		<!-- End for loop -->
-		
+		</tbody>
 	</table>
 
 </div>
 
+<!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>
