@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Server Monitor</h1>
-    <form method="POST" action="login_validation.php">
+    <form method="POST" action="private/login_validation.php">
         Gebruikersnaam:<br>
         <input type="text" name="username">
         <br>

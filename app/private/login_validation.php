@@ -1,6 +1,6 @@
 <?php
 
-include_once("app/private/DatabasePDO.php");
+include_once("DatabasePDO.php");
 
 $databasePDOInstance = new DatabasePDO();
 
@@ -27,7 +27,7 @@ if ($username_from_post && $password_from_post){
     if (!$result){
         echo 'Onbekende combinatie van gebruikersnaam en wachtwoord. Redirect naar loginscherm';
     } else {
-        header("Location: app/public/systemoverview.php");
+        header("Location: systemoverview.php");
     }
 } else {
     echo "Vul alle velden in. Redirect naar loginscherm.";
