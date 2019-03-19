@@ -8,9 +8,12 @@ $databasePDOInstance = new DatabasePDO();
 
 $conn = $databasePDOInstance->get();
 
+$password = $_POST['password'];
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
 $data = [
     'username' => $_POST['username'],
-    'password' => $_POST['password'],
+    'password' => $hashed_password,
     'givenname' => $_POST['givenname'],
     'familyname' => $_POST['familyname'],
     'email' => $_POST['email'],
@@ -34,7 +37,7 @@ else if (strlen($data['password']) < 8 || 0 === preg_match('~[A-Z]~', $data['pas
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
-else if ($data['password']!= $_POST['repeatpassword']) {
+else if ($_POST['password']!= $_POST['repeatpassword']) {
     $message = "wachtwoord was niet gelijk";
     echo "<script type='text/javascript'>alert('$message');</script>";
  }
@@ -73,6 +76,7 @@ try{
         }
     }
 
+
     
 $query = "INSERT INTO users.userlist (`username`,`password`,`givenname`,`familyname`,`email`, `role`)
 VALUES(:username, :password, :givenname, :familyname, :email, :role);";
@@ -84,9 +88,15 @@ try{
     echo "Oops er ging iets mis {$e->getMessage()}";
 }
 
+?>
+        
+        <meta http-equiv="refresh" content="2; ../public/userlist.php" />
+        <?php
+        exit();
+
 }
 
 ?>
 
 Je wordt na 2 seconden omgeleid
-<meta http-equiv="refresh" content="2; ../public/userlist.php" />
+<meta http-equiv="refresh" content="2; ../public/createuser.php" />
