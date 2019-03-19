@@ -1,62 +1,14 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-
-/* COLORS
+/********* COLORS *********
 background grey: #F2F6FA
 header border: #D9DCDF
 table borders color: #E2E9F0
 background color highlighted table rows #FAFCFD
-knop achtergrondkleur: #99AFC6
-navigatie txt kleur: #707070
+button backgroud color: #99AFC6
+nav txt color: #707070
 red: #EB1114
 */
+
+/********* GENERAL STYLING *********/
 
 body {
     background-color: #F2F6FA;
@@ -72,13 +24,14 @@ a {
 a:hover {
     color: #EB1114;
 }
+
 /********* HEADER STYLING *********/
 header {
     background-color: #ffffff;
     border-bottom: solid 1px #D9DCDF;
     margin-bottom: 30px;
     vertical-align: middle;
-    height: 65px;
+    height: 63px;
 }
 
 .container {
@@ -98,6 +51,7 @@ header ul {
 }
 
 header li {
+    
     display: inline-block;
     height: 63px;
     line-height: 63px;
@@ -105,17 +59,21 @@ header li {
 }
 
 header li, header a {
+    box-sizing: border-box;
     text-transform: uppercase;
-    font-size: .7em;
-    font-weight: 700;
+    font-size: 14px;;
+    font-weight: 500;
     color: #707070;
 }
 
-header li:hover, header a:hover, .active {
+header li:hover, header a.uitloggen-link-header:hover, li.active {
     color: #EB1114;
     border-bottom: 2px solid #EB1114;
 }
 
+li.active a {
+    color: #EB1114;
+}
 
 header a {
     display: inline-block;
@@ -124,9 +82,6 @@ header a {
     float: right;
 }
 
-/* header container {
-    line-height: 63px;
-} */
 /********* CONTENT STYLING *********/
 
 #content {
@@ -147,9 +102,7 @@ header a {
 .tabel-header {
     font-size: 1.1em;
     display: inline;
-    /* vertical-align: middle; */
 }
-
 
 .table-header-container a {
     float: right;
@@ -182,14 +135,16 @@ th, td {
 }
 
 td {
-    font-size: .7em;
-    
+    font-size: .7em;    
 }
 
-table tr:nth-child(odd) {
+thead tr {
+    background-color: #FAFCFD; 
+}
+
+tbody tr:nth-child(even) {
     background-color: #FAFCFD;
 }
-
 
 tr {
     border-bottom: 1px solid #E2E9F0;  

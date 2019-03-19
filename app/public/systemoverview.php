@@ -29,6 +29,7 @@ require_once('../private/functions.php');
 
 
 $page_title = 'Systemoverview';
+$page = "systemoverview";
 include(SHARED_PATH . '/header.php');
 ?>
 <div id="content" class="container">
