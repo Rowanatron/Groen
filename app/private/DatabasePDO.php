@@ -2,11 +2,11 @@
 
 class DatabasePDO {
     
-    private $username = 'root';
-    private $password = 'pimpampet';
-    private $schema = 'users';
+    private $username = 'code';
+    private $password = '123456';
+    private $schema = 'userlist';
     private $driver = 'mysql';
-    private $host = 'localhost:3306';
+    private $host = 'localhost:3307';
     
     public function get(){
         $dsn = "{$this->driver}:dbname={$this->schema};host={$this->host}";

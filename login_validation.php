@@ -6,27 +6,31 @@ $databasePDOInstance = new DatabasePDO();
 
 $conn = $databasePDOInstance->get();
 
-echo "hallo";
+$username_from_post = isset($_POST['username']) ? $_POST['username'] : false;
+$password_from_post = isset($_POST['password']) ? $_POST['password'] : false;
 
-// $data = [
-//     'username' => $_POST['username'],
-//     'password' => $_POST['password'],
-// ];
+// SQL injection prevention in.
+// Validator gebruiken.
 
-// $query = "SELECT * FROM users 
-// WHERE username=':username' AND password=':password';";
+if ($username_from_post && $password_from_post){
+  
+    $query = "SELECT * FROM userlist WHERE username = '$username_from_post' AND password = '$password_from_post';";
 
-// try{
-//     $statement = $conn->prepare($query);
-//     $statement->execute($data);
-//     $result = $statement;
-//     // if (empty($result)){
-//     //     echo "failed";
-//     // } else {
-//     //     echo "succes";
-//     // }
-// } catch (PDOException $e) {
-//     echo "Error: {$e->getMessage()}";
-// }
+    try {
+        $statement = $conn->prepare($query);
+        $statement->execute();    
+    } catch(PDOException $e){
+        echo "Error: {$e->getMessage()}";
+    }
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+    
+    if (!$result){
+        echo 'Onbekende combinatie van gebruikersnaam en wachtwoord. Redirect naar loginscherm';
+    } else {
+        header("Location: app/public/systemoverview.php");
+    }
+} else {
+    echo "Vul alle velden in. Redirect naar loginscherm.";
+}
 
-?>
+ ?>
