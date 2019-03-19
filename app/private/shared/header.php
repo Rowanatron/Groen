@@ -16,6 +16,11 @@
   	<header>
 	  	<div class="container">
           <img class="logo" src="<?php echo url_for('/img/logo.jpg'); ?>" alt="Logo">
+          
+          <form action = "../private/logout.php";>
+          <button type="submit" onclick="alert('U bent succesvol uitgelogd')">Log uit</button>
+          
+          </form>
           <ul>
             <!-- <li>Monitor</li> -->
             <li class="<?php if($page == "userlist") {echo "active";} ?>">Gebruikers</li>
@@ -23,3 +28,5 @@
           <a>Uitloggen</a>
         </div>
   	</header>
+
+
