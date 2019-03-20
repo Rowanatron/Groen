@@ -54,32 +54,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+    <link rel="stylesheet" media="all" href="css/login.css">
     <title>Login</title>
 </head>
 
 <body>
-    <div id="content" class="container">
-        <img class="logo" src="img/logo.jpg" alt="Logo">
+    <div id="content">
+		<div id="logobox">
+				<img src="img/logo.jpg" alt="Logo">
+		</div>
         <form method="POST" action="login.php">
             <p>
-                <label>
-                    Gebruikersnaam: <br>
-                    <input type="text" name="username">
-                </label>
+				<label>
+					Gebruikersnaam
+					<input type="text" name="username">
+				</label>
             </p>
             <p>
                 <label>
-                    Wachtwoord:<br>
-                    <input type="password" name="password">
-                </label>
-            </p>
-            <p>
-                <label>
-                    <?php echo isset($message) ? $message : ''?>
-                </label>
-            </p>
-            <input type="submit" value="Inloggen">
+					Wachtwoord
+					<input type="password" name="password">
+				</label>
+			</p>
+            <div class="errormsg">
+				<?php echo isset($message) ? $message : ''?>
+            </div>
+			<p class="submitp">
+				<input type="submit" value="Inloggen">
+			</p>
         </form>
     </div>
 </body>
