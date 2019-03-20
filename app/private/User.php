@@ -1,22 +1,32 @@
 <?php
 class User {
+    var $user_id;
     var $username;
     var $password;
-    var $givenname;
-    var $familyname;
+    var $given_name;
+    var $family_name;
     var $email;
     var $role;
 
 function User(){
 }
 
-function __construct($u, $p, $g, $f, $e, $r){
+function __construct($i, $u, $p, $g, $f, $e, $r){
+    $this->user_id=$i;
     $this->username=$u;
     $this->password=$p;
-    $this->givenname=$g;
-    $this->familyname=$f;
+    $this->given_name=$g;
+    $this->family_name=$f;
     $this->email=$e;
     $this->role=$r;
+}
+
+function set_user_id($new_user_id){
+    $this->user_id = $new_user_id;
+}
+
+function get_user_id(){
+    $this->user_id = $new_user_id;
 }
 
 function set_username($new_username){
@@ -35,20 +45,20 @@ function get_password(){
     return $this->password;
 }
 
-function set_givenname($new_givenname){
-    $this->givenname = $new_givenname;
+function set_given_name($new_given_name){
+    $this->given_name = $new_given_name;
 }
 
-function get_givenname(){
-    return $this->givenname;
+function get_given_name(){
+    return $this->given_name;
 }
 
-function set_familyname($new_familyname){
-    $this->familyname = $new_familyname;
+function set_family_name($new_family_name){
+    $this->family_name = $new_family_name;
 }
 
-function get_familyname(){
-    return $this->familyname;
+function get_family_name(){
+    return $this->family_name;
 }
 
 function set_email($new_email){
