@@ -1,19 +1,23 @@
 <?php
 
-session_start();
-
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && (time() - $_SESSION["StartSession"] < 3600)) {
-    header("Location: systemoverview.php");
-}
-
 require_once('../private/pathConstants.php');
+require_once(PRIVATE_PATH . '/functions.php');
+require_once(PRIVATE_PATH . '/userfunctions.php');
+require_once(PRIVATE_PATH . '/User.php');
+require_once(PRIVATE_PATH . '/authorisation_functions.php');
+
+session_start();
 
 $page_title = 'Log in';
 $page = "login";
 
-require_once(PRIVATE_PATH . '/functions.php');
-require_once(PRIVATE_PATH . '/userfunctions.php');
-require_once(PRIVATE_PATH . '/User.php');
+if(isset($_SESSION["message"])){
+    $message = $_SESSION["message"];
+    session_destroy();
+}
+
+
+skip_login_page();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
