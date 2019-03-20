@@ -14,15 +14,20 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == false) {
 }
 
 require_once('../private/pathConstants.php');
-require_once('../private/functions.php');
 
-$page_title = 'Systemoverview';
+$page_title = 'System overview';
 $page = "systemoverview";
-include(SHARED_PATH . '/header.php');
-?>
-<div id="content" class="container">
 
- <!-- Hier komt de content -->
+require_once(PRIVATE_PATH . '/functions.php');
+require_once(PRIVATE_PATH . '/userfunctions.php');
+require_once(PRIVATE_PATH . '/User.php');
+
+include(SHARED_PATH . '/header.php');
+
+?>
+
+<!-- Hier komt de content -->
+<div id="content" class="container">
  <?php if(isset($_SESSION["isAdmin"])) : ?>
  Hallo, adminnetje
  <?php else : ?>
