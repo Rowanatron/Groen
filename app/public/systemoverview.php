@@ -33,6 +33,9 @@ include(SHARED_PATH . '/header.php');
  <?php else : ?>
  Hallo, groepsapi
  <?php endif; ?>
+ 
+ <h1>Systeem overzicht</h1>
+ 
   
 </div>
 
