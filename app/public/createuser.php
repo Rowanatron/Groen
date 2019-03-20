@@ -1,17 +1,25 @@
+<!-- Default PHP header -->
 <?php
-        require_once('../private/pathConstants.php');
-        require_once('../private/functions.php');
-        
-        $page_title = 'Userlist';
-        include(SHARED_PATH . '/header.php');
-        //include(PRIVATE_PATH . '/User.php');
-        ?>
+
+require_once('../private/pathConstants.php');
+
+$page_title = 'Create user';
+$page = "createuser";
+
+require_once(PRIVATE_PATH . '/functions.php');
+require_once(PRIVATE_PATH . '/userfunctions.php');
+require_once(PRIVATE_PATH . '/User.php');
+
+include(SHARED_PATH . '/header.php');
+
+?>
+
+<!-- Hier komt de content -->
 <div id="content" class="container">
 
-        <div class="table-header-container">
-                <h2 class="tabel-header">Voeg gebruiker toe</h2>
-           </div>
-
+	<div class="table-header-container">
+		<h2 class="tabel-header">Voeg gebruiker toe</h2>
+	</div>
 
     <form method="post" action="../private/insert.php">
 
@@ -90,13 +98,9 @@
 
 </div>
 
+<!-- Nu staat Javascript niet achteraan. Probleem? -->
 <script type="text/javascript" src="../private/UserJavascript.js">
 </script>
 
-</body>
-
-
-
-
-
-</html>
+<!-- Default PHP footer -->
+<?php include(SHARED_PATH . '/footer.php')?>
