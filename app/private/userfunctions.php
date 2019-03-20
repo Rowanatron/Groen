@@ -3,10 +3,10 @@
 include_once 'DatabasePDO.php';
 include_once 'User.php';
 
-function getUserList() {
+function get_userlist() {
 	$pdo = new DatabasePDO();
 	$conn = $pdo->get();
-	$query = "SELECT * FROM userlist ORDER BY username;";
+	$query = "SELECT * FROM user ORDER BY username;";
 	
 	try {
 		$statement = $conn->prepare($query);
@@ -18,17 +18,17 @@ function getUserList() {
 	$userArray = array();
 	
 	while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-		$user = new User($row['username'], $row['password'], $row['givenname'], $row['familyname'], $row['email'], $row['role']);
+		$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role']);
 		array_push($userArray, $user);
 	}
 	
 	return $userArray;
 }
 
-function getUserByUsername($username) {
+function get_user_by_username($username) {
 	$pdo = new DatabasePDO();
 	$conn = $pdo->get();
-	$query = "SELECT * FROM userlist WHERE username = :username";
+	$query = "SELECT * FROM user WHERE username = :username";
 	
 	try {
 		$statement = $conn->prepare($query);
@@ -39,7 +39,26 @@ function getUserByUsername($username) {
 	
 	$row = $statement->fetch(PDO::FETCH_ASSOC);
 	
-	$user = new User($row['username'], $row['password'], $row['givenname'], $row['familyname'], $row['email'], $row['role']);
+	$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role']);
+	
+	return $user;
+}
+
+function get_user_by_id($user_id) {
+	$pdo = new DatabasePDO();
+	$conn = $pdo->get();
+	$query = "SELECT * FROM user WHERE user_id = :user_id";
+	
+	try {
+		$statement = $conn->prepare($query);
+		$statement->execute(array('user_id' => $user_id));
+	} catch (PDOException $e) {
+		echo "Connection failed: {$e->getMessage()}";
+	}
+	
+	$row = $statement->fetch(PDO::FETCH_ASSOC);
+	
+	$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role']);
 	
 	return $user;
 }
