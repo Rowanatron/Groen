@@ -14,7 +14,6 @@ include(SHARED_PATH . '/header.php');
 
 ?>
 
-
 <!-- Hier komt de content -->
 <div id="content" class="container">
 
@@ -45,7 +44,16 @@ include(SHARED_PATH . '/header.php');
 		
 		</tbody>
 	</table>
-
+	<?php 
+		$userK3 = getUserByUsername('Kareltje3!'); 
+		echo $userK3->username;
+	?>
+	
+	<?=$userK3->username; ?>
+	<?=$userK3->givenname; ?>
+	<?=$userK3->familyname; ?>
+	<?=$userK3->role; ?>
+	<?=$userK3->password; ?>
 </div>
 
 <!-- Default PHP footer -->
