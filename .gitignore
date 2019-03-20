@@ -4,4 +4,3 @@ app/.DS_Store
 test.php
 dbconfig.php
 app/private/dbconfig.php
-passtest.php
