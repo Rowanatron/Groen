@@ -18,11 +18,11 @@ curl_setopt($ch, CURLOPT_URL,$url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 // volgende regels voor eventueel inloggen
-// curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-// curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
 
 // include header in output: false;
-//curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_HEADER, 0);
 
 // Execute
 $result=curl_exec($ch);
