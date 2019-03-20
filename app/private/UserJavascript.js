@@ -1,14 +1,13 @@
 
 
 function errorUsername(){
-                var testable = document.getElementById("testUsername");
-                if (!testable.checkValidity()) {
-                document.getElementById("errorUser").innerHTML = "De gebruikersnaam moet minimaal 5 karakters bevatten";
-            } else{
-                document.getElementById("errorUser").innerHTML = "";
-            }
-
-            }
+    var testable = document.getElementById("testUsername");
+    if (!testable.checkValidity()) {
+        document.getElementById("errorUser").innerHTML = "De gebruikersnaam moet minimaal 5 karakters bevatten";
+    } else{
+        document.getElementById("errorUser").innerHTML = "";
+    }
+}
 
 function errorPassword(){
                 var testable = document.getElementById("testPassword");
