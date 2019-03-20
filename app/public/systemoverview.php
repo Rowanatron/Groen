@@ -1,24 +1,21 @@
 <?php
 
-session_start();
-
-if(time() - $_SESSION["StartSession"] > 3600){
-    // errormessage dat sessie verlopen is
-    unset($_SESSION);
-    session_destroy();
-    header("Location: login.php");
-}
-
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] == false) {
-    header("Location: login.php");
-}
-
 require_once('../private/pathConstants.php');
 require_once('../private/functions.php');
+require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 $page_title = 'Systemoverview';
 $page = "systemoverview";
+
+session_start();
+is_logged_in();
+session_expired();
+
 include(SHARED_PATH . '/header.php');
+
+if(isset($_SESSION[message])){
+    $message = $_SESSION[message];}
+
 ?>
 <div id="content" class="container">
 
@@ -28,6 +25,8 @@ include(SHARED_PATH . '/header.php');
  <?php else : ?>
  Hallo, groepsapi
  <?php endif; ?>
+ <?php echo isset($message) ? $message : '' ?>
+
   
 </div>
 
