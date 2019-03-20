@@ -3,9 +3,9 @@
 function error_username(){
     var testable = document.getElementById("test_username");
     if (!testable.checkValidity()) {
-        document.getElementById("error_user").innerHTML = "De gebruikersnaam moet minimaal 5 karakters bevatten";
+        document.getElementById("error_username").innerHTML = "De gebruikersnaam moet minimaal 5 karakters bevatten";
     } else{
-        document.getElementById("error_user").innerHTML = "";
+        document.getElementById("error_username").innerHTML = "";
     }
 }
 
