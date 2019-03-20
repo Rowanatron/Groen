@@ -8,6 +8,9 @@ require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
 
+$page_title = 'Log in';
+$page = "login";
+
 if(isset($_SESSION["message"])){
     $message = $_SESSION["message"];
     session_destroy();

@@ -1,0 +1,74 @@
+.form_block{
+  font-family: Helvetica, Arial;
+  font-size: 90%;
+  color:#4A4A4A;
+  padding: 1em;
+}
+
+.form_container{
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 15px;
+  width: 97%;
+  border: 1px solid #D9DCDF;
+}
+
+.form_full_length{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.buttons_bottom{
+  //hier moet nog iets komen om de pijl van de knop aan te passen: V
+}
+
+input[type=text], input[type=password], input[type=email], #role{
+  width: 35em;
+  padding: 12px 20px;
+  margin-top: 0.8em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  box-sizing: border-box;
+}
+
+#role{
+  cursor: pointer;
+  height: 40px;
+  background-color: white;
+}
+
+.error_message{
+  font-family: Helvetica, Arial;
+  font-size: 90%;
+  font-style: italic;
+  color:red;
+  margin-top: 0.5em;
+}
+
+input[type=submit] {
+	min-width: 20%;
+	background-color: #b4c1cd;
+	padding: 1em;
+	border-radius: 3px;
+	color: white;
+  margin-top: 1em;
+  float: right;
+}
+
+input[type=submit]:hover, button:hover {
+	background-color: #EB1114;
+	cursor: pointer;
+}
+
+
+button {
+  min-width: 10%;
+	background-color: white;
+	padding: 1em;
+  border-radius: 3px;
+  border-color: grey;
+	color:#b4c1cd;
+  margin-top: 1em;
+  float: right;
+}

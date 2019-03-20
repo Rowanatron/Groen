@@ -1,10 +1,12 @@
 <?php
 
 require_once('../private/pathConstants.php');
-require_once('../private/functions.php');
+require_once(PRIVATE_PATH . '/functions.php');
+require_once(PRIVATE_PATH . '/userfunctions.php');
+require_once(PRIVATE_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
-$page_title = 'Systemoverview';
+$page_title = 'System overview';
 $page = "systemoverview";
 
 session_start();
@@ -14,12 +16,13 @@ session_expired();
 include(SHARED_PATH . '/header.php');
 
 if(isset($_SESSION[message])){
-    $message = $_SESSION[message];}
+    $message = $_SESSION[message];
+}
 
 ?>
-<div id="content" class="container">
 
- <!-- Hier komt de content -->
+<!-- Hier komt de content -->
+<div id="content" class="container">
  <?php if(isset($_SESSION["isAdmin"])) : ?>
  Hallo, adminnetje
  <?php else : ?>
