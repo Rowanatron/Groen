@@ -18,7 +18,6 @@ $data = [
     'family_name' => $_POST['family_name'],
     'email' => $_POST['email'],
     'role' => $_POST['role']
-    
 ];
 
 if (empty($data['username']) || empty($data['password']) || empty($_POST['repeat_password']) ||empty($data['given_name']) ||empty($data['family_name']) ||empty($data['email']) || empty($data['role'])){

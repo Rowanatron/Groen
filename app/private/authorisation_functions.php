@@ -14,7 +14,7 @@ function is_logged_in () {
 }
 
 function session_expired () {
-    if(time() - $_SESSION["StartSession"] > 15){
+    if(time() - $_SESSION["StartSession"] > 3600){
         session_destroy();
         session_start();
         $_SESSION["message"] = "Sessie verlopen. Log opnieuw in.";
