@@ -19,7 +19,7 @@
 
             <label>
                 Gebruikersnaam
-                <input id="testUsername" name="username" type=text minlength="5" onkeydown="setTimeout(errorUsername, 1500)" required/>
+                <input id="testUsername" name="username" type=text minlength="5" maxlength="50" onkeydown="setTimeout(errorUsername, 1500)" required/>
             </label>
             <p id="errorUser"></p>
 
@@ -46,7 +46,7 @@
 
             <label>
                 Voornaam 
-                <input id="testGivenname" name="givenname" type=text minlength="2" onkeydown="setTimeout(errorGivenname, 1500)" required/>
+                <input id="testGivenname" name="givenname" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(errorGivenname, 1500)" required/>
             </label>
             <p id="errorGiven"></p>
         </p>
@@ -54,7 +54,7 @@
 
             <label>
                 Achternaam
-                <input id="testFamilyname" name="familyname" type=text minlength="2" onkeydown="setTimeout(errorFamilyname, 1500)" required/>
+                <input id="testFamilyname" name="familyname" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(errorFamilyname, 1500)" required/>
             </label>
             <p id="errorFamily"></p>
         </p>
@@ -62,7 +62,7 @@
 
             <label>
                 Emailadres
-                <input id="testEmail" name="email" type="email" onkeydown="setTimeout(errorEmailadres, 1500)"  required/>
+                <input id="testEmail" name="email" type="email" maxlength="45" onkeydown="setTimeout(errorEmailadres, 1500)"  required/>
             </label>
             <p id="errorEmail"></p>
         </p>
@@ -80,7 +80,7 @@
         
             <input type="submit" value="gebruiker aanmaken" />
 
-            <a href="userlist.php">annuleren</a>
+            <button onclick="window.location.href = 'userlist.php';"> annuleren </button>
 
 
         </p>
