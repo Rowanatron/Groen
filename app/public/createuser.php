@@ -70,7 +70,7 @@ include(SHARED_PATH . '/header.php');
 
             <label>
                 Emailadres
-                <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email_adres, 1500)"  required/>
+                <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email, 1500)"  required/>
             </label>
             <p id="error_email"></p>
         </p>
