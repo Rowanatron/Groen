@@ -54,12 +54,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+    <link rel="stylesheet" type="text/css" href="css/styles_login.css">
     <title>Login</title>
 </head>
 
 <body>
-    <div id="content" class="container">
+    <div class="menu centered">
         <img class="logo" src="img/logo.jpg" alt="Logo">
         <form method="POST" action="login.php">
             <p>
