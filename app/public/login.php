@@ -3,7 +3,6 @@
 session_start();
 
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && (time() - $_SESSION["StartSession"] < 3600)) {
->>>>>>> abb372a093e414a7eb0b14f6b55e37e1fa1e423e
     header("Location: systemoverview.php");
 }
 
