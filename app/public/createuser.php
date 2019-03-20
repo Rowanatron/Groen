@@ -8,9 +8,19 @@ $page = "createuser";
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/userfunctions.php');
+require_once(PRIVATE_PATH . '/authorisation_functions.php');
 require_once(PRIVATE_PATH . '/User.php');
 
+session_start();
 include(SHARED_PATH . '/header.php');
+
+// authorisatiechecks. zie authorisation_functions.php
+// de eerste twee functions worden aangeroepen op elke pagina
+// de derde wordt aangeroepen op alle pagina's waar alleen admins mogen komen
+is_logged_in();
+session_expired();
+only_for_admins();
+
 
 ?>
 
