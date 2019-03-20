@@ -1,6 +1,7 @@
 <?php 
           session_start();
-          unset($_SESSION);
           session_destroy();
+          session_start();
+          $_SESSION["message"] = "U bent succesvol uitgelogd.";
           header("Location: ../public/login.php");
 ?>
