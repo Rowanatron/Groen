@@ -10,7 +10,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" media="all" href="<?php echo url_for('/css/css-reset.css'); ?>">
     <link rel="stylesheet" media="all" href="<?php echo url_for('/css/styles.css'); ?>">
-	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/form.csss'); ?>">
+	<?php if ($page == "createuser"): ?>
+	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/form.css'); ?>">
+	<?php endif; ?>
   </head>
 
   <body>
@@ -18,8 +20,10 @@
 	  	<div class="container">
           <img class="logo" src="<?php echo url_for('/img/logo.jpg'); ?>" alt="Logo">
           <ul>
-            <li class="<?php if($page == "systemoverview") {echo "active";} ?>"><a href="systemoverview.php">Monitor</a></li>
-            <li class="<?php if($page == "userlist") {echo "active";} ?>"><a href="userlist.php">Gebruikers</a></li>
+			<li class="<?php if($page == "systemoverview") {echo "active";} ?>"><a href="systemoverview.php">Monitor</a></li>
+			<?php if(isset($_SESSION["isAdmin"])) : ?>
+			<li class="<?php if($page == "userlist") {echo "active";} ?>"><a href="userlist.php">Gebruikers</a></li>
+			<?php endif; ?>
           </ul>
           <a class="uitloggen-link-header" href="../private/logout.php">Uitloggen</a>
         </div>
