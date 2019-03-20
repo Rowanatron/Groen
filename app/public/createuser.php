@@ -27,58 +27,58 @@ include(SHARED_PATH . '/header.php');
 
             <label>
                 Gebruikersnaam
-                <input id="testUsername" name="username" type=text minlength="5" maxlength="50" onkeydown="setTimeout(errorUsername, 1500)" required/>
+                <input id="test_username" name="username" type="text" minlength="5" maxlength="45" onkeydown="setTimeout(error_username, 1500)" required/>
             </label>
-            <p id="errorUser"></p>
+            <p id="error_user"></p>
 
         </p>
         <p>
 
             <label>
                 Wachtwoord
-                <input id="testPassword" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(errorPassword, 1500)" required/>
+                <input id="test_password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(error_password, 1500)" required/>
             </label>
-            <p id="errorPass"></p>
+            <p id="error_pass"></p>
 
         </p>
         <p>
 
             <label>
                 Herhaal wachtwoord
-                <input id="testPasswordRepeat" name="repeatpassword" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(errorPasswordRepeat, 1500)" required/>
+                <input id="test_password_repeat" name="repeat_password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(error_password_repeat, 1500)" required/>
             </label>
-            <p id="errorPassRepeat"></p>
+            <p id="error_pass_repeat"></p>
         </p>
         
         <p>
 
             <label>
                 Voornaam 
-                <input id="testGivenname" name="givenname" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(errorGivenname, 1500)" required/>
+                <input id="test_given_name" name="given_name" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(error_given_name, 1500)" required/>
             </label>
-            <p id="errorGiven"></p>
+            <p id="error_given_name"></p>
         </p>
         <p>
 
             <label>
                 Achternaam
-                <input id="testFamilyname" name="familyname" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(errorFamilyname, 1500)" required/>
+                <input id="test_family_name" name="family_name" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(error_family_name, 1500)" required/>
             </label>
-            <p id="errorFamily"></p>
+            <p id="error_family_name"></p>
         </p>
         <p>
 
             <label>
                 Emailadres
-                <input id="testEmail" name="email" type="email" maxlength="45" onkeydown="setTimeout(errorEmailadres, 1500)"  required/>
+                <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email_adres, 1500)"  required/>
             </label>
-            <p id="errorEmail"></p>
+            <p id="error_email"></p>
         </p>
 
 
-        <label for="role" required>Selecteer rol:</label>
+        <label for="role">Selecteer rol:</label>
 
-        <select name="role" id="role">
+        <select name="role" id="role" required>
             <option value="" disabled selected hidden>--Kies rol--</option>
             <option value="admin">admin</option>
             <option value="user">user</option>
@@ -86,9 +86,9 @@ include(SHARED_PATH . '/header.php');
 
         <p>
         
-            <input type="submit" value="gebruiker aanmaken" />
+            <input type="submit" value="Gebruiker aanmaken" />
 
-            <button onclick="window.location.href = 'userlist.php';"> annuleren </button>
+            <button onclick="window.location.href = 'userlist.php';"> Annuleren </button>
 
 
         </p>
