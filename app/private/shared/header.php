@@ -11,7 +11,7 @@
     <link rel="stylesheet" media="all" href="<?php echo url_for('/css/css-reset.css'); ?>">
     <link rel="stylesheet" media="all" href="<?php echo url_for('/css/styles.css'); ?>">
 	<?php if ($page == "createuser"): ?>
-	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/form.csss'); ?>">
+	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/form.css'); ?>">
 	<?php endif; ?>
   </head>
 
