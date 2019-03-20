@@ -17,9 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($username && $password) {
         $user = get_user_by_username($username);
-
-        $hashed_password = $user->get_password();
-        $valid_password = password_verify($password, $hashed_password);
+    
+        $valid_password = password_verify($password, $user->get_password());
 
         if ($valid_password) {
             $_SESSION["loggedin"] = true;
