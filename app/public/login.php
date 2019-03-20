@@ -2,7 +2,8 @@
 
 session_start();
 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && (time() - $_SESSION["StartSession"] < 3600)){
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && (time() - $_SESSION["StartSession"] < 3600)) {
+>>>>>>> abb372a093e414a7eb0b14f6b55e37e1fa1e423e
     header("Location: systemoverview.php");
 }
 
@@ -30,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["loggedin"] = true;
             $_SESSION["StartSession"] = time();
             // $_SESSION["id"] = $id;
-            if ($result["role"] === "admin") {
+            if ($user->get_role() === "admin") {
                 $_SESSION["isAdmin"] = true;
             }
             header("Location: systemoverview.php");
@@ -57,28 +58,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div id="content">
-		<div id="logobox">
-				<img src="img/logo.jpg" alt="Logo">
-		</div>
+        <div id="logobox">
+            <img src="img/logo.jpg" alt="Logo">
+        </div>
         <form method="POST" action="login.php">
             <p>
-				<label>
-					Gebruikersnaam
-					<input type="text" name="username">
-				</label>
+                <label>
+                    Gebruikersnaam
+                    <input type="text" name="username">
+                </label>
             </p>
             <p>
                 <label>
-					Wachtwoord
-					<input type="password" name="password">
-				</label>
-			</p>
+                    Wachtwoord
+                    <input type="password" name="password">
+                </label>
+            </p>
             <div class="errormsg">
-				<?php echo isset($message) ? $message : ''?>
+                <?php echo isset($message) ? $message : '' ?>
             </div>
-			<p class="submitp">
-				<input type="submit" value="Inloggen">
-			</p>
+            <p class="submitp">
+                <input type="submit" value="Inloggen">
+            </p>
         </form>
     </div>
 </body>
