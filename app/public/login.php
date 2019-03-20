@@ -1,33 +1,25 @@
 <?php
 
-include_once("../private/DatabasePDO.php");
+require_once('../private/pathConstants.php');
+require_once(PRIVATE_PATH . '/functions.php');
+require_once(PRIVATE_PATH . '/userfunctions.php');
+require_once(PRIVATE_PATH . '/User.php');
+
 session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && (time() - $_SESSION["StartSession"] < 3600)){
     header("Location: systemoverview.php");
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $databasePDOInstance = new DatabasePDO();
 
-    $conn = $databasePDOInstance->get();
+    $username = isset($_POST['username']) ? $_POST['username'] : false;
+    $password = isset($_POST['password']) ? $_POST['password'] : false;
 
-    $username_from_post = isset($_POST['username']) ? $_POST['username'] : false;
-    $password_from_post = isset($_POST['password']) ? $_POST['password'] : false;
+    if ($username && $password) {
+        $user = get_user_by_username($username);
 
-    if ($username_from_post && $password_from_post) {
-        $query = "SELECT * FROM userlist WHERE username = :username";
-
-        try {
-            $statement = $conn->prepare($query);
-            $statement->execute(array('username' => $username_from_post));
-        } catch (PDOException $e) {
-            echo "Error: {$e->getMessage()}";
-        }
-
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-        $hashed_password = $result["password"];
-        $valid_password = password_verify($password_from_post, $hashed_password);
+        $hashed_password = $user->get_password();
+        $valid_password = password_verify($password, $hashed_password);
 
         if ($valid_password) {
             $_SESSION["loggedin"] = true;
