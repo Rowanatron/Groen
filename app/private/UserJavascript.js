@@ -19,7 +19,7 @@ function error_password(){
 
             }
 
-function errorPasswordRepeat(){
+function error_password_repeat(){
                 var testable = document.getElementById("test_password_repeat");
                 if (testable.value != document.getElementById("test_password").value) {
                 document.getElementById("error_pass_repeat").innerHTML = "De wachtwoorden komen niet overeen";
@@ -29,7 +29,7 @@ function errorPasswordRepeat(){
 
             }
 
-function errorGivenname(){
+function error_given_name(){
                  var testable = document.getElementById("test_given_name");
                 if (!testable.checkValidity()) {
                 document.getElementById("error_given_name").innerHTML = "De voornaam moet minimaal 2 karakters bevatten";
@@ -39,7 +39,7 @@ function errorGivenname(){
 
             }
 
-function errorFamilyname(){
+function error_family_name(){
                  var testable = document.getElementById("test_family_name");
                 if (!testable.checkValidity()) {
                 document.getElementById("error_family_name").innerHTML = "De achternaam moet minimaal 2 karakters bevatten";
@@ -49,7 +49,7 @@ function errorFamilyname(){
 
             }
 
-function errorEmailadres(){
+function error_email(){
                  var testable = document.getElementById("test_email");
                 if (!testable.checkValidity()) {
                 document.getElementById("error_email").innerHTML = "Dit is geen geldig emailadres";

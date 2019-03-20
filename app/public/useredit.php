@@ -3,7 +3,7 @@
 
 require_once('../private/pathConstants.php');
 
-$page_title = 'Create user';
+$page_title = 'Bewerk gebruiker';
 $page = "createuser";
 
 require_once(PRIVATE_PATH . '/functions.php');
@@ -20,10 +20,13 @@ $user = get_user_by_id($_POST['user_id']);
 <div id="content" class="container">
 
 	<div class="table-header-container">
-		<h2 class="tabel-header">Voeg gebruiker toe</h2>
+		<h2 class="tabel-header">Bewerk gebruiker</h2>
 	</div>
 
-    <form method="post" action="../private/insert.php">
+    <form method="post" action="../private/edit.php">
+
+    <input type=hidden name="user_id" value="<?=$user->user_id; ?>"/>
+    <input type=hidden name="original_username" value="<?=$user->username; ?>"/>
 
         <p>
 
@@ -72,7 +75,7 @@ $user = get_user_by_id($_POST['user_id']);
 
             <label>
                 Emailadres
-                <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email_adres, 1500)" value="<?=$user->family_name; ?>" required/>
+                <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email, 1500)" value="<?=$user->family_name; ?>" required/>
             </label>
             <p id="error_email"></p>
         </p>
@@ -88,9 +91,10 @@ $user = get_user_by_id($_POST['user_id']);
 
         <p>
         
-            <input type="submit" value="Gebruiker aanmaken" />
 
             <button onclick="window.location.href = 'userlist.php';"> Annuleren </button>
+
+            <input type="submit" value="Gebruiker bewerken"/>
 
 
         </p>
