@@ -14,14 +14,14 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 $data = [
     'username' => $_POST['username'],
     'password' => $hashed_password,
-    'givenname' => $_POST['givenname'],
-    'familyname' => $_POST['familyname'],
+    'given_name' => $_POST['given_name'],
+    'family_name' => $_POST['family_name'],
     'email' => $_POST['email'],
     'role' => $_POST['role']
     
 ];
 
-if (empty($data['username']) || empty($data['password']) || empty($_POST['repeatpassword']) ||empty($data['givenname']) ||empty($data['familyname']) ||empty($data['email']) || empty($data['role'])){
+if (empty($data['username']) || empty($data['password']) || empty($_POST['repeat_password']) ||empty($data['given_name']) ||empty($data['family_name']) ||empty($data['email']) || empty($data['role'])){
     $message = "alle velden moeten worden ingevuld";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
@@ -37,24 +37,24 @@ else if (strlen($data['password']) < 8 || 0 === preg_match('~[A-Z]~', $data['pas
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
-else if ($_POST['password']!= $_POST['repeatpassword']) {
+else if ($_POST['password']!= $_POST['repeat_password']) {
     $message = "wachtwoord was niet gelijk";
     echo "<script type='text/javascript'>alert('$message');</script>";
  }
 
-else if (strlen($data['givenname']) < 2){
+else if (strlen($data['given_name']) < 2){
     $message = "voornaam moet minstens 2 letters zijn";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
-else if (strlen($data['familyname']) < 2){
+else if (strlen($data['family_name']) < 2){
     $message = "achternaam moet minstens 2 letters zijn";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
 else{
 
-    $query = "SELECT `username` FROM users.userlist;";
+    $query = "SELECT `username` FROM server_monitor.user;";
 
 try{
     $statement = $conn->prepare($query);
@@ -78,8 +78,8 @@ try{
 
 
     
-$query = "INSERT INTO users.userlist (`username`,`password`,`givenname`,`familyname`,`email`, `role`)
-VALUES(:username, :password, :givenname, :familyname, :email, :role);";
+$query = "INSERT INTO user (`username`,`password`,`given_name`,`family_name`,`email`, `role`)
+VALUES(:username, :password, :given_name, :family_name, :email, :role);";
 
 try{
     $statement = $conn->prepare($query);
