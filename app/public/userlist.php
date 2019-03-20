@@ -42,7 +42,8 @@ include(SHARED_PATH . '/header.php');
 				<td>
 				<form action="useredit.php" method="post">
 				<input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
-				<input type="submit" value="Bewerk">
+				<input type="submit" value="Bewerk"/>
+				</form>
 				</td>
 				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
 			</tr>
