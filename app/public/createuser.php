@@ -69,8 +69,8 @@ include(SHARED_PATH . '/header.php');
 <div class="form_block form_full_length">
 
             <label>
-                Emailadres<br>
-                <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email_adres, 1500)"  required/>
+                Emailadres
+                <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email, 1500)"  required/>
             </label>
             <p id="error_email" class="error_message"></p>
 </div>

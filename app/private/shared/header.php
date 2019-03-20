@@ -28,6 +28,7 @@
           <a class="uitloggen-link-header" href="../private/logout.php">Uitloggen</a>
         </div>
   	</header>
+	
 		<!-- <form action="../private/logout.php">
 			<button type="submit" onclick="alert('U bent succesvol uitgelogd')">Log uit</button>  
         </form> -->
