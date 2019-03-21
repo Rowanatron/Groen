@@ -9,8 +9,8 @@ body, input {
 }
 
 #content {
-	max-width: 100%;
-	min-width: 430px;
+	box-sizing:border-box;
+	min-width: 440px;
 	height: auto;
 	margin: 0;
 	
@@ -26,15 +26,28 @@ body, input {
 	border-color: #e2e9f0;
 }
 
-#logobox {
-	margin-top: 1em;
-	margin-bottom: 1.5em;
+@media only screen and (max-width: 440px) {
+  #content {
+	min-width: 0;
+	width: 100%;
+	transform: translate(0, -50%);
+	left: 0;
+  }
 }
 
-#logobox img {
+#logo {
 	display: block;
-	margin: auto auto;
 	width: 50%;
+	min-width: 100px;
+	margin-top: 1em;
+	margin-bottom: 1.5em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+form {
+	margin: auto auto;
+	width: 80%;
 }
 
 fieldset {
@@ -44,12 +57,7 @@ fieldset {
 	padding: 0;
 }
 
-form {
-	margin: auto auto;
-	width: 80%;
-}
-
-label, input[type=submit], .errormsg {
+label, input[type=submit], .msgcontainer p {
 	font-size: 0.75em;
 }
 
@@ -59,7 +67,6 @@ input[type=text], input[type=password] {
 	margin-right: 0;
 	margin-bottom: 0;
 	width: 100%;
-	font-size: 1em;
 	padding: 0.6em;
 	
 	box-sizing:border-box;
@@ -91,19 +98,21 @@ input[type=submit]:hover {
 	cursor: pointer;
 }
 
-.errormsg {
-/*	animation: shake 2s;  */
-	color: red;
+.msgcontainer {
+	margin-top: 0.7em;
+	min-height: 1.4em;
+}
+
+.msgcontainer p {
 	font-weight: bold;
-	min-height: 1em;
-	margin-top: 2em;
-	margin-bottom: 0.75em;
+	margin: 0;
+	padding: 0;
+}
+
+.errormsg {
+	color: red;
+	
 }
 .logoutmsg {
-	/*	animation: shake 2s;  */
 	color: green;
-	font-weight: bold;
-	min-height: 1em;
-	margin-top: 2em;
-	margin-bottom: 0.75em;
 }
