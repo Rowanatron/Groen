@@ -99,11 +99,13 @@ $user = get_user_by_id($_POST['user_id']);
         <p>
         
 
-            <button onclick="window.location.href = 'userlist.php';"> Annuleren </button>
+
 
             <input type="submit" value="Gebruiker bewerken"/>
         
 </form>
+
+        <button onclick="window.location.href = 'userlist.php';"> Annuleren </button>
             
             <form method="post" action="../private/delete.php" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen');">
             <input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
