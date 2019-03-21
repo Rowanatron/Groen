@@ -99,3 +99,11 @@ input[type=submit]:hover {
 	margin-top: 2em;
 	margin-bottom: 0.75em;
 }
+.logoutmsg {
+	/*	animation: shake 2s;  */
+	color: green;
+	font-weight: bold;
+	min-height: 1em;
+	margin-top: 2em;
+	margin-bottom: 0.75em;
+}

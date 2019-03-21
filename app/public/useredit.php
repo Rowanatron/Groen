@@ -9,6 +9,13 @@ $page = "createuser";
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
 require_once(PRIVATE_PATH . '/User.php');
+require_once(PRIVATE_PATH . '/authorisation_functions.php');
+
+session_start();
+
+is_logged_in();
+session_expired();
+only_for_admins();
 
 include(SHARED_PATH . '/header.php');
 

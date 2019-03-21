@@ -3,16 +3,17 @@
 require_once('../private/path_constants.php');
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
-require_once(PRIVATE_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 $page_title = 'System overview';
 
 session_start();
+
 is_logged_in();
 session_expired();
 
 include(SHARED_PATH . '/header.php');
+// $welkom = 'Welkom, ' .$_SESSION["given_name"]. '. ';
 
 if(isset($_SESSION['message'])){
     $message = $_SESSION['message'];
@@ -22,12 +23,11 @@ if(isset($_SESSION['message'])){
 
 <!-- Hier komt de content -->
 <div id="content" class="container">
- <?php if(isset($_SESSION['isAdmin'])) : ?>
- Hallo, adminnetje
- <?php else : ?>
- Hallo, groepsapi
- <?php endif; ?>
- <?php echo isset($message) ? $message : '' ?>
+ <?php 
+//  echo $welkom;
+ echo isset($message) ? $message : '';
+ unset($_SESSION['message']);
+ ?>
 
   
 </div>
