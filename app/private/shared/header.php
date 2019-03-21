@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" media="all" href="<?php echo url_for('/css/css-reset.css'); ?>">
     <link rel="stylesheet" media="all" href="<?php echo url_for('/css/styles.css'); ?>">
-	<?php if ($pagename == "createuser.php"): ?>
+	<?php if ($pagename == "createuser.php" || $pagename == "useredit.php" ): ?>
 	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/form.css'); ?>">
 	<?php endif; ?>
   </head>
@@ -27,8 +27,8 @@
 				<a href="systemoverview.php">Monitor</a>
 			</li>
 			
+			<li <?php if($pagename == "userlist.php" || $pagename == "createuser.php" || $pagename == "useredit.php") : ?>class="active"<?php endif; ?>>
 			<?php if(isset($_SESSION["is_admin"])) : ?>
-			<li <?php if($pagename == "userlist.php") : ?>class="active"<?php endif; ?>>
 				<a href="userlist.php">Gebruikers</a>
 			</li>
 			<?php endif; ?>

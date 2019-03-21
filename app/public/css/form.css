@@ -1,16 +1,21 @@
 .form_block{
-  font-family: Helvetica, Arial;
-  font-size: 90%;
-  color:#4A4A4A;
   padding: 1em;
+}
+
+.table-header-container {
+  padding-left: 2em;
+}
+
+form {
+    border: 1px solid #E2E9F0;
 }
 
 .form_container{
   display: grid;
   grid-template-columns: auto auto;
   padding: 15px;
-  width: 97%;
-  border: 1px solid #D9DCDF;
+  font-size: .85em;
+  font-weight: 500;
 }
 
 .form_full_length{
@@ -18,17 +23,13 @@
   grid-column-end: 3;
 }
 
-.buttons_bottom{
-  //hier moet nog iets komen om de pijl van de knop aan te passen: V
-}
-
 input[type=text], input[type=password], input[type=email], #role{
   width: 35em;
   padding: 12px 20px;
   margin-top: 0.8em;
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 1px;
+  border: 1px solid #E2E9F0;
+  border-radius: 2px;
   box-sizing: border-box;
 }
 
@@ -46,29 +47,45 @@ input[type=text], input[type=password], input[type=email], #role{
   margin-top: 0.5em;
 }
 
-input[type=submit] {
-	min-width: 20%;
-	background-color: #b4c1cd;
-	padding: 1em;
-	border-radius: 3px;
-	color: white;
-  margin-top: 1em;
-  float: right;
+.buttons_bottom {
+  min-height: 50px;
+  background-color: #fff;
+  padding: 1em;
+  border-left: 1px solid #E2E9F0;
+  border-right: 1px solid #E2E9F0;
+  border-bottom: 1px solid #E2E9F0;
 }
-
-input[type=submit]:hover, button:hover {
-	background-color: #EB1114;
-	cursor: pointer;
-}
-
 
 button {
-  min-width: 10%;
+  font-size: .8em;
 	background-color: white;
 	padding: 1em;
-  border-radius: 3px;
-  border-color: grey;
-	color:#b4c1cd;
-  margin-top: 1em;
+  border-radius: 2px;
+  border: 1px solid #99AFC6;
+	color:#99AFC6;
   float: right;
+  margin-left: 1em;
+  -webkit-transition: background-color 300ms, color 300ms, border-color 300ms; /* Safari */
+  transition: background-color 300ms, color 300ms, border-color 300ms;
+}
+
+button.aanmaken {
+    color: #fff;
+    background-color: #99AFC6;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button.annuleren:hover {
+  background-color: #EB1312;
+  color: white;
+  border-color: #EB1312;
+}
+
+button.aanmaken:hover {
+  background-color: #54ce54;
+  color: white;
+  border-color: #54ce54;
 }
