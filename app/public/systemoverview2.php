@@ -1,11 +1,11 @@
     <?php 
-    require_once('../private/pathConstants.php');
+    require_once('../private/path_constants.php');
 
     $page_title = 'System overview';
     $page = "systemoverview";
 
     require_once(PRIVATE_PATH . '/functions.php');
-    require_once(PRIVATE_PATH . '/userfunctions.php');
+    require_once(PRIVATE_PATH . '/user_functions.php');
     require_once(PRIVATE_PATH . '/User.php');
     require_once(PRIVATE_PATH . '/vm_functions.php');
 
