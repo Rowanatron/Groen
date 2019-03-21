@@ -9,6 +9,7 @@ require_once(PRIVATE_PATH . '/authorisation_functions.php');
 $page_title = 'System overview';
 
 session_start();
+
 is_logged_in();
 session_expired();
 

@@ -1,6 +1,8 @@
 <?php
 
 include_once("DatabasePDO.php");
+require_once(PRIVATE_PATH . '/authorisation_functions.php');
+
 
 $databasePDOInstance = new DatabasePDO();
 
