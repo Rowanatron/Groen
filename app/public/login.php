@@ -15,6 +15,11 @@ if(isset($_SESSION["message"])){
     session_destroy();
 }
 
+if(isset($_SESSION["logout_message"])){
+    $logout_message = $_SESSION["logout_message"];
+    session_destroy();
+}
+
 
 skip_login_page();
 
@@ -30,11 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $valid_password = password_verify($password, $hashed_password);
 
         if ($valid_password) {
-            $_SESSION["loggedin"] = true;
-            $_SESSION["StartSession"] = time();
-            // $_SESSION["id"] = $id;
+            $_SESSION["logged_in"] = true;
+            $_SESSION["start_session"] = time();
+            // $_SESSION["user_id"] = $user->get_user_id();
+            $_SESSION["message"] = 'Welkom, ' . $user->get_given_name() . '. ';
             if ($user->get_role() === "admin") {
-                $_SESSION["isAdmin"] = true;
+                $_SESSION["is_admin"] = true;
             }
             header("Location: systemoverview.php");
         } else {
@@ -76,9 +82,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" name="password">
                 </label>
             </fieldset>
-            <div class="errormsg">
-                <?php echo isset($message) ? $message : '' ?>
+            <?php if(isset($message)){ // css is niet helemaal netjes, mooie opdracht voor de css masters. Groetjes, de sessionmasters
+                ?>
+                <div class="errormsg">
+                <?php echo $message;
+            } else if (isset($logout_message)){
+                ?>
+                <div class="logoutmsg">
+                <?php echo $logout_message;
+            } else {
+                ?>
+                <div> 
+                <?php 
+                echo '';
+
+            }
+            ?>
             </div>
+                      
+            
+            
             <fieldset class="submit_field">
                 <input type="submit" value="Inloggen">
             </fieldset>
