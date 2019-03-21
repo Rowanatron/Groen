@@ -1,8 +1,8 @@
 <?php
 
-require_once('../private/pathConstants.php');
+require_once('../private/path_constants.php');
 require_once(PRIVATE_PATH . '/functions.php');
-require_once(PRIVATE_PATH . '/userfunctions.php');
+require_once(PRIVATE_PATH . '/user_functions.php');
 require_once(PRIVATE_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
@@ -66,9 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div id="content">
-        <div id="logobox">
-            <img src="img/logo.jpg" alt="Logo">
-        </div>
+        <img id="logo" src="img/logo.jpg" alt="Logo">
         <form method="POST" action="login.php">
             <fieldset>
                 <label>
@@ -82,26 +80,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" name="password">
                 </label>
             </fieldset>
-            <?php if(isset($message)){ // css is niet helemaal netjes, mooie opdracht voor de css masters. Groetjes, de sessionmasters
-                ?>
-                <div class="errormsg">
-                <?php echo $message;
-            } else if (isset($logout_message)){
-                ?>
-                <div class="logoutmsg">
-                <?php echo $logout_message;
-            } else {
-                ?>
-                <div> 
-                <?php 
-                echo '';
-
-            }
-            ?>
-            </div>
-                      
-            
-            
+			<div class="msgcontainer">
+				<?php if(isset($message)) : ?>
+					<p class="errormsg">
+						<?= $message; ?>
+					</p>
+				<?php elseif (isset($logout_message)) : ?>
+					<p class="logoutmsg">
+						<?= $logout_message; ?>
+					</p>
+				<?php endif; ?>
+			</div>            
             <fieldset class="submit_field">
                 <input type="submit" value="Inloggen">
             </fieldset>
