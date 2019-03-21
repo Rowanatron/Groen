@@ -63,4 +63,17 @@ function get_user_by_id($user_id) {
 	return $user;
 }
 
+function delete_user($user_id) {
+	$pdo = new DatabasePDO();
+	$conn = $pdo->get();
+	$query = "DELETE FROM user WHERE user_id = :user_id";
+	
+	try {
+		$statement = $conn->prepare($query);
+		$statement->execute(array('user_id' => $user_id));
+	} catch (PDOException $e) {
+		echo "Connection failed: {$e->getMessage()}";
+	}
+}
+
 ?>
