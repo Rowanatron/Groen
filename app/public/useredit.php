@@ -75,7 +75,7 @@ $user = get_user_by_id($_POST['user_id']);
 
             <label>
                 Emailadres
-                <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email, 1500)" value="<?=$user->family_name; ?>" required/>
+                <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email, 1500)" value="<?=$user->email; ?>" required/>
             </label>
             <p id="error_email"></p>
         </p>
@@ -95,6 +95,14 @@ $user = get_user_by_id($_POST['user_id']);
             <button onclick="window.location.href = 'userlist.php';"> Annuleren </button>
 
             <input type="submit" value="Gebruiker bewerken"/>
+        
+</form>
+            
+            <form method="post" action="../private/delete.php" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen');">
+            <input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
+            <input type="hidden" name="username" value="<?=$user->username; ?>"/>
+            <input type="submit" value="Gebruiker verwijderen"/>
+
 
 
         </p>

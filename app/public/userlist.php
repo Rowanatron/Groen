@@ -29,6 +29,7 @@ include(SHARED_PATH . '/header.php');
 				<th>Achternaam</th>
 				<th>Rol</th>
 				<th>Bewerk</th>
+				<th>Verwijder</th>
 				<!-- <th></th> -->
 			</tr>
 		</thead>
@@ -42,7 +43,14 @@ include(SHARED_PATH . '/header.php');
 				<td>
 				<form action="useredit.php" method="post">
 				<input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
-				<input type="submit" value="Bewerk"/>
+				<input type="image" name="submit" src="../public/img/edit_pencil.png" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
+				</form>
+				</td>
+				<td>
+				<form action="../private/delete.php" method="post" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen');">
+				<input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
+				<input type="hidden" name="username" value="<?=$user->username; ?>"/>
+				<input type="image" name="submit" src="../public/img/delete_bin.png" border="0" alt="delete" style="width: 10%; height: 10%;" />
 				</form>
 				</td>
 				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
