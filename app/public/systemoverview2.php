@@ -70,14 +70,26 @@
             ?>
 
             <div id="server">
-                <ul>
-                    <li><img src="<?php echo "img/" . $image?>" alt="logo van virtuele machine"></li>
-                    <li><?php echo $vm->getName(); ?></li>
-                    <li>Latency: <?php echo $vm->getLatency(); ?></li>
-                    <li>Storage: <?php echo $vm->getDiskSize(); ?></li>
-                    <li>Memory: <?php echo $vm->getMemory(); ?></li>
-                    <li>vCPU: <?php echo $vm->getVCPU(); ?></li>
-                </ul>    
+                <div class="server-img">
+                    <img src="<?php echo "img/" . $image?>" alt="logo van virtuele machine">
+                </div>
+                <div class="server-info">
+                    <div class="server-name">
+                        <span><?php echo $vm->getName(); ?></span>
+                    </div>
+                    <div class="server-info-top">
+                        <span>Latency:</span>
+                        <span><?php echo $vm->getLatency(); ?></span>
+                        <span>Memory:</span>
+                        <span><?php echo $vm->getMemory(); ?></span>
+                    </div>
+                    <div class="server-info-bottom">
+                        <span>Storage:</span>
+                        <span><?php echo $vm->getDiskSize(); ?></span>
+                        <span>vCPU:</span>
+                        <span><?php echo $vm->getVCPU(); ?></span>
+                    </div>
+                </div>    
             </div>
             <?php endforeach; ?>
         </div>
