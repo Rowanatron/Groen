@@ -37,14 +37,16 @@ body, input {
 	width: 50%;
 }
 
+fieldset {
+	border: none;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	padding: 0;
+}
+
 form {
 	margin: auto auto;
 	width: 80%;
-}
-
-p {
-	margin-top: 1em;
-	margin-bottom: 1em;
 }
 
 label, input[type=submit], .errormsg {
@@ -70,7 +72,7 @@ input[type=text], input[type=password] {
 	border-color: #b4c1cd;
 }
 
-.submitp {
+.submit_field {
 	text-align: right;
 }
 
@@ -90,6 +92,10 @@ input[type=submit]:hover {
 }
 
 .errormsg {
-	min-height: 0.7em;
-	margin-bottom: 0.7em;
+/*	animation: shake 2s;  */
+	color: red;
+	font-weight: bold;
+	min-height: 1em;
+	margin-top: 2em;
+	margin-bottom: 0.75em;
 }

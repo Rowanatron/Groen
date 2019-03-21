@@ -9,7 +9,6 @@ require_once(PRIVATE_PATH . '/authorisation_functions.php');
 session_start();
 
 $page_title = 'Log in';
-$page = "login";
 
 if(isset($_SESSION["message"])){
     $message = $_SESSION["message"];
@@ -65,24 +64,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <img src="img/logo.jpg" alt="Logo">
         </div>
         <form method="POST" action="login.php">
-            <p>
+            <fieldset>
                 <label>
                     Gebruikersnaam
                     <input type="text" name="username">
                 </label>
-            </p>
-            <p>
+            </fieldset>
+            <fieldset>
                 <label>
                     Wachtwoord
                     <input type="password" name="password">
                 </label>
-            </p>
+            </fieldset>
             <div class="errormsg">
                 <?php echo isset($message) ? $message : '' ?>
             </div>
-            <p class="submitp">
+            <fieldset class="submit_field">
                 <input type="submit" value="Inloggen">
-            </p>
+            </fieldset>
         </form>
     </div>
 </body>
