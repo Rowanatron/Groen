@@ -1,27 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
-    <style>
-    #container {
-        background-color: white;
-        width: 75%;
-        margin: auto;
-    } 
-    
-    
-    </style>
-
-
-</head>
-
-<body>
-
     <?php 
     require_once('../private/pathConstants.php');
 
@@ -72,30 +48,50 @@
         $virtual_machine_list[$row->name] = $virtual_machine;
     }
 
-    krsort($virtual_machine_list);
+    ksort($virtual_machine_list);
+
     ?>
 
-    <div id="container">
-        <h1>Systeem Overzicht</h1><br>
+    <div id="content" class="container">
+        <div class="system-overview-header-container">
+            <h1>Systeem Overzicht</h1>
+        </div>
+        <div class="system-overview-servers-container">
+            <?php foreach ($virtual_machine_list as $vm) : ?>
+            
+            <?php
+                if($vm->getLatency() > 1.45) {
+                    $image = "vm_red.png";
+                } else if ($vm->getLatency() < 1.2){
+                    $image = "vm_green.png";
+                } else {
+                    $image = "vm_orange.png";
+                }
+            ?>
 
-        <?php foreach($virtual_machine_list as $vm){ ?>
-    
             <div id="server">
-                <ul>
-                    <li><img src="img/vm_green.png" alt="logo van virtuele machine"> </li>
-                    <li><?php echo $vm->getName(); ?></li>
-                    <li>Latency: <?php echo $vm->getLatency(); ?></li>
-                    <li>Storage: <?php echo $vm->getDiskSize(); ?></li>
-                    <li>Memory: <?php echo $vm->getMemory(); ?></li>
-                    <li>vCPU: <?php echo $vm->getVCPU(); ?></li>
-                </ul>    
+                <div class="server-img">
+                    <img src="<?php echo "img/" . $image?>" alt="logo van virtuele machine">
+                </div>
+                <div class="server-info">
+                    <div class="server-name">
+                        <span><?php echo $vm->getName(); ?></span>
+                    </div>
+                    <div class="server-info-top">
+                        <span>Latency:</span>
+                        <span><?php echo $vm->getLatency(); ?></span>
+                        <span>Memory:</span>
+                        <span><?php echo $vm->getMemory(); ?></span>
+                    </div>
+                    <div class="server-info-bottom">
+                        <span>Storage:</span>
+                        <span><?php echo $vm->getDiskSize(); ?></span>
+                        <span>vCPU:</span>
+                        <span><?php echo $vm->getVCPU(); ?></span>
+                    </div>
+                </div>    
             </div>
-            <br>
-        <?php } ?>
-
+            <?php endforeach; ?>
+        </div>
     </div>
-
-
-</body>
-
-</html> 
+<?php include(SHARED_PATH . '/footer.php'); ?>
