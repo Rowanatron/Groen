@@ -4,7 +4,7 @@
 require_once('../private/pathConstants.php');
 
 $page_title = 'Bewerk gebruiker';
-$page = "createuser";
+//$page = "createuser";
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/userfunctions.php');
