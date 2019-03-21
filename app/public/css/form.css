@@ -23,14 +23,18 @@ form {
   grid-column-end: 3;
 }
 
-input[type=text], input[type=password], input[type=email], #role{
+input[type=text], input[type=password], input[type=email], select#role{
   width: 35em;
   padding: 12px 20px;
   margin-top: 0.8em;
   display: inline-block;
   border: 1px solid #E2E9F0;
-  border-radius: 2px;
+  border-radius: 2px !important;
   box-sizing: border-box;
+}
+
+input {
+  color: #8e8e8e;
 }
 
 #role{
@@ -69,7 +73,7 @@ button {
   transition: background-color 300ms, color 300ms, border-color 300ms;
 }
 
-button.aanmaken {
+button.aanmaken, button.btn-user-save {
     color: #fff;
     background-color: #99AFC6;
 }
@@ -78,13 +82,13 @@ button:hover {
   cursor: pointer;
 }
 
-button.annuleren:hover {
+button.annuleren:hover, button.btn-user-cancel:hover, button.btn-user-delete {
   background-color: #EB1312;
   color: white;
   border-color: #EB1312;
 }
 
-button.aanmaken:hover {
+button.aanmaken:hover, button.btn-user-save:hover {
   background-color: #54ce54;
   color: white;
   border-color: #54ce54;
