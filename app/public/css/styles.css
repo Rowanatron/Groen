@@ -62,7 +62,7 @@ header li {
 header li, header a {
     box-sizing: border-box;
     text-transform: uppercase;
-    font-size: 14px;;
+    font-size: 14px;
     font-weight: 500;
     color: #707070;
 }
