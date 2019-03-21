@@ -5,3 +5,4 @@ test.php
 dbconfig.php
 app/private/dbconfig.php
 apitest.php
+.idea/

@@ -27,8 +27,8 @@
 				<a href="systemoverview.php">Monitor</a>
 			</li>
 			
-			<?php if(isset($_SESSION["isAdmin"])) : ?>
 			<li <?php if($pagename == "userlist.php" || $pagename == "createuser.php" || $pagename == "useredit.php") : ?>class="active"<?php endif; ?>>
+			<?php if(isset($_SESSION["is_admin"])) : ?>
 				<a href="userlist.php">Gebruikers</a>
 			</li>
 			<?php endif; ?>
@@ -37,6 +37,4 @@
         </div>
   	</header>
 	
-		<!-- <form action="../private/logout.php">
-			<button type="submit" onclick="alert('U bent succesvol uitgelogd')">Log uit</button>  
-        </form> -->
+	

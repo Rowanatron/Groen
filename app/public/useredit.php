@@ -9,6 +9,13 @@ $page_title = 'Bewerk gebruiker';
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/userfunctions.php');
 require_once(PRIVATE_PATH . '/User.php');
+require_once(PRIVATE_PATH . '/authorisation_functions.php');
+
+session_start();
+
+is_logged_in();
+session_expired();
+only_for_admins();
 
 include(SHARED_PATH . '/header.php');
 
@@ -92,11 +99,13 @@ $user = get_user_by_id($_POST['user_id']);
         <p>
         
 
-            <button onclick="window.location.href = 'userlist.php';"> Annuleren </button>
+
 
             <input type="submit" value="Gebruiker bewerken"/>
         
 </form>
+
+        <button onclick="window.location.href = 'userlist.php';"> Annuleren </button>
             
             <form method="post" action="../private/delete.php" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen');">
             <input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
