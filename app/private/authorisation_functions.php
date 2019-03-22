@@ -31,7 +31,7 @@ function only_for_admins () {
     $user = $_SESSION["user"];
     if (!($user->get_role() === "admin")) {
 
-        $_SESSION["message"] = "Je bent niet bevoegd om de opgevraagde pagina te bezoeken.";
+        // $_SESSION["message"] = "Je bent niet bevoegd om de opgevraagde pagina te bezoeken.";
         header("Location: systemoverview.php");
     } else { 
         return true;    

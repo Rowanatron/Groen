@@ -16,9 +16,9 @@ session_expired();
 include(SHARED_PATH . '/header.php');
 // $welkom = 'Welkom, ' .$_SESSION["given_name"]. '. ';
 
-if (isset($_SESSION['message'])) {
-    $message = $_SESSION['message'];
-}
+// if (isset($_SESSION['message'])) {
+//     $message = $_SESSION['message'];
+// }
 
 ?>
 
@@ -26,8 +26,8 @@ if (isset($_SESSION['message'])) {
 <div id="message-area" class='container'>
     <?php 
     //  echo $welkom;
-    echo isset($message) ? $message : '';
-    unset($_SESSION['message']);
+    // echo isset($message) ? $message : '';
+    // unset($_SESSION['message']);
     ?>
 </div>
 
