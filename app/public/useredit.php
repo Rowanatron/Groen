@@ -80,8 +80,16 @@ $user = get_user_by_id($_POST['user_id']);
                 <label for="role">Selecteer rol:</label><br>
                 <select name="role" id="role" required>
                     <option value="<?=$user->role; ?>" selected><?=$user->role; ?></option>
-                    <option value="admin">admin</option>
+                    <?php if ($user->role == "user"){
+                     ?>
+                     <option value="admin">admin</option>
+                    <?php } else {
+                        ?>
                     <option value="user">user</option>
+                    <?php 
+                    }
+                    ?>
+                    
                 </select>
             </div>       
         </div>  
