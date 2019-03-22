@@ -4,7 +4,6 @@
 require_once('../private/path_constants.php');
 
 $page_title = 'Bewerk gebruiker';
-//$page = "createuser";
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
@@ -80,8 +79,16 @@ $user = get_user_by_id($_POST['user_id']);
                 <label for="role">Selecteer rol:</label><br>
                 <select name="role" id="role" required>
                     <option value="<?=$user->role; ?>" selected><?=$user->role; ?></option>
-                    <option value="admin">admin</option>
+                    <?php if ($user->role == "user"){
+                     ?>
+                     <option value="admin">admin</option>
+                    <?php } else {
+                        ?>
                     <option value="user">user</option>
+                    <?php 
+                    }
+                    ?>
+                    
                 </select>
             </div>       
         </div>  
@@ -93,7 +100,7 @@ $user = get_user_by_id($_POST['user_id']);
     <div class="buttons_bottom">
         <button class="btn-user-save" form="form-edit" type="submit">Gebruiker opslaan</button>        
         <button class="btn-user-delete" form="form-delete" type="submit">Gebruiker verwijderen</button>
-        <button class="btn-user-cancel" onclick="window.location.href = 'userlist.php';"> Annuleren </button>
+        <button class="btn-user-cancel" onclick="window.location.href = 'userlist';"> Annuleren </button>
     </div>       
 </div>
 
