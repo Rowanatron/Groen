@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="content">
         <img id="logo" src="img/logo.jpg" alt="Logo">
-        <form method="POST" action="login.php">
+        <form method="POST" action="login">
             <fieldset>
                 <label>
                     Gebruikersnaam
