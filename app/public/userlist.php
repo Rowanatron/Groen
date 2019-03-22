@@ -43,8 +43,8 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<th>Voornaam</th>
 				<th>Achternaam</th>
 				<th>Rol</th>
-				<th>Bewerk</th>
-				<th>Verwijder</th>
+				<th></th>
+				<th></th>
 				<!-- <th></th> -->
 			</tr>
 		</thead>
