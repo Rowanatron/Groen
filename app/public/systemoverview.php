@@ -15,7 +15,7 @@ session_expired();
 include(SHARED_PATH . '/header.php');
 // $welkom = 'Welkom, ' .$_SESSION["given_name"]. '. ';
 
-if(isset($_SESSION['message'])){
+if (isset($_SESSION['message'])) {
     $message = $_SESSION['message'];
 }
 
@@ -23,13 +23,23 @@ if(isset($_SESSION['message'])){
 
 <!-- Hier komt de content -->
 <div id="content" class="container">
- <?php 
-//  echo $welkom;
- echo isset($message) ? $message : '';
- unset($_SESSION['message']);
- ?>
+    <?php 
+    //  echo $welkom;
+    echo isset($message) ? $message : '';
+    unset($_SESSION['message']);
+    ?>
 
-  
 </div>
 
-<?php include(SHARED_PATH . '/footer.php')?>
+<div id="test"><?php echo "hi" ?></div>
+
+<script>
+    var $test = $("#test");
+    setInterval(function() {
+        $test.load("./systemoverview.php #test");
+    }, 3000);
+</script>
+
+<!-- <meta http-equiv="refresh" content="10; ./systemoverview.php" /> -->
+
+<?php include(SHARED_PATH . '/footer.php') ?> 

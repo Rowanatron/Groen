@@ -2,7 +2,7 @@
     require_once('../private/path_constants.php');
 
     $page_title = 'System overview';
-    $page = "systemoverview";
+        $page = "systemoverview";
 
     require_once(PRIVATE_PATH . '/functions.php');
     require_once(PRIVATE_PATH . '/user_functions.php');
