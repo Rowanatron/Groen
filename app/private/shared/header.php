@@ -19,7 +19,7 @@
   <body>
   	<header>
 	  	<div class="container">
-          <img class="logo" src="<?= url_for('/img/logo.jpg'); ?>" alt="Logo">
+          <a class="logo" href="systemoverview.php"> <img class="logo" src="<?= url_for('/img/logo.jpg'); ?>" alt="Logo"> </a>
           
 		  <ul>
 		  
