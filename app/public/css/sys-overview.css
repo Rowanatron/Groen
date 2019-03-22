@@ -1,0 +1,70 @@
+.system-overview-header-container {
+    padding: 3%;
+    color: black;
+    border-top: 1px solid #D9DCDF;
+    border-left: 1px solid #D9DCDF;
+    border-right: 1px solid #D9DCDF;
+}
+
+.system-overview-servers-container {
+    border: 1px solid #D9DCDF;
+    padding-bottom: 20px;
+}
+
+#server {
+    box-sizing: border-box;
+    background-color: #F2F6FA;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    margin: 20px 20px 0px 20px;
+    padding: 10px;
+    min-width: 46%;
+    display: inline-block;
+}
+
+.server-img {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.server-info {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.server-name {
+    font-size: smaller;
+    font-weight: 700;
+    padding: 5px;
+}
+
+.server-info-top {
+    padding: 3px;
+}
+
+.server-info-bottom {
+    padding: 3px;
+}
+
+.key-value:first-child {
+    min-width: 100px;
+}
+
+.server-info-top {
+    min-width: 3px;
+}
+
+.key {
+    font-weight: 600;
+    font-size: .7em;
+    display: inline-block;
+}
+
+.value {
+    font-size: .7em;
+    display: inline-block;
+}
+
+.key-value {
+    display: inline-block;
+}
