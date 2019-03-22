@@ -28,7 +28,7 @@ try{
         echo "<script type='text/javascript'>alert('$message');</script>";
         ?>
         
-        <meta http-equiv="refresh" content="1; ../public/userlist.php" />
+        <meta http-equiv="refresh" content="0; ../public/userlist.php" />
         <?php
         exit();
         }
@@ -58,7 +58,7 @@ try{
 
 ?>
         
-        <meta http-equiv="refresh" content="1; ../public/userlist.php" />
+        <meta http-equiv="refresh" content="0; ../public/userlist.php" />
         <?php
         exit();
 
@@ -85,7 +85,7 @@ if (strlen($_POST['password']) < 8 || 0 === preg_match('~[A-Z]~', $_POST['passwo
     echo "<script type='text/javascript'>alert('$message');</script>";
     ?>
         
-        <meta http-equiv="refresh" content="2; ../public/userlist.php" />
+        <meta http-equiv="refresh" content="0; ../public/userlist.php" />
         <?php
         exit();
 
@@ -96,7 +96,7 @@ else if ($_POST['password']!= $_POST['repeat_password']) {
     echo "<script type='text/javascript'>alert('$message');</script>";
     ?>
         
-        <meta http-equiv="refresh" content="2; ../public/userlist.php" />
+        <meta http-equiv="refresh" content="0; ../public/userlist.php" />
         <?php
         exit();
  }
@@ -115,7 +115,7 @@ try{
 
 ?>
         
-        <meta http-equiv="refresh" content="2; ../public/userlist.php" />
+        <meta http-equiv="refresh" content="0; ../public/userlist.php" />
         <?php
         exit();
 

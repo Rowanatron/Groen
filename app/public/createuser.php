@@ -76,7 +76,7 @@ include(SHARED_PATH . '/header.php');
                 <select name="role" id="role" required>
                     <option value="" disabled selected hidden>Kies een rol</option>
                     <option value="admin">admin</option>
-                    <option value="user">user</option>
+                    <option value="user">gebruiker</option>
                 </select>
             </div>
         </div>   
@@ -87,7 +87,7 @@ include(SHARED_PATH . '/header.php');
     </div> 
 </div>
 
-<meta http-equiv="refresh" content="3601; ../public/login.php" />
+<meta http-equiv="refresh" content="1801; ../public/login.php" />
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
 <script type="text/javascript" src="../private/UserJavascript.js">

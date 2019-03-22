@@ -77,7 +77,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 	</table>
 </div>
 
-<meta http-equiv="refresh" content="3601; ../public/login.php" />
+<meta http-equiv="refresh" content="1801; ../public/login.php" />
 
 <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>
