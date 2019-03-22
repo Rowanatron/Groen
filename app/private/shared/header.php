@@ -35,10 +35,13 @@ $pagename = basename($_SERVER['PHP_SELF']);
 			</li>
 			
 			<li <?php if($pagename == "userlist.php" || $pagename == "createuser.php" || $pagename == "useredit.php") : ?>class="active"<?php endif; ?>>
-			<?php if(isset($_SESSION["is_admin"])) : ?>
+			<?php 
+			$user = $_SESSION["user"];
+			if ($user->get_role() === "admin") {
+		  ?>
 				<a href="userlist">Gebruikers</a>
 			</li>
-			<?php endif; ?>
+			<?php } ?>
           </ul>
           <a class="uitloggen-link-header" href="../public/logout.php">Uitloggen</a>
         </div>

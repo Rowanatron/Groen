@@ -93,7 +93,8 @@ $user = get_user_by_id($_POST['user_id']);
             </div>       
         </div>  
     </form>
-    <form style="display:none;" method="post" action="../private/delete.php" id="form-delete" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen');">
+    <form style="display:none;" method="post" action="userlist" id="form-delete" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen');">
+		<input type="hidden" name="action" value="delete_user" />
         <input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
         <input type="hidden" name="username" value="<?=$user->username; ?>"/>
     </form>
