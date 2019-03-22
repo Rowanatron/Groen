@@ -60,17 +60,17 @@ include(SHARED_PATH . '/header.php');
                 <div class="server-info-top">
                     <div class="key-value">
                         <div class="key">Latency:</div>
-                        <div class="value"><?php echo $vm->getLatency(); ?></div>
+                        <div class="value"><?php echo $vm->getLatency(); ?> sec</div>
                     </div>
                     <div class="key-value">
                         <div class="key">Memory:</div>
-                        <div class="value"><?php echo $vm->getMemory(); ?></div>
+                        <div class="value"><?php echo $vm->getMemory(); ?> GB</div>    
                     </div>
                 </div>
                 <div class="server-info-bottom">
                     <div class="key-value">
                         <div class="key">Storage:</div>
-                        <div class="value"><?php echo round($vm->getDiskSize(), 2); ?></div>
+                        <div class="value"><?php echo round($vm->getDiskSize(), 1); ?> GB</div>
                     </div>
                     <div class="key-value">
                         <div class="key">vCPU:</div>
