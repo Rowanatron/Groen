@@ -14,6 +14,7 @@ body {
     background-color: #F2F6FA;
     font-family: Helvetica, Arial;
     color: #4A4A4A;
+    position: relative;
 }
 
 a {
@@ -156,3 +157,34 @@ tr {
     border-bottom: 1px solid #E2E9F0;  
 }
 
+/********* MODAL STYLING *********/
+
+#modal {
+    margin: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    background-color: rgba(200, 200, 200, .7);
+    height: 100%;
+    width: 100%;
+    visibility: hidden;
+}
+
+#modal-content {
+    width: 600px;
+    height: 400px;
+    background-color:#fff;
+    margin: 200px auto 0 auto;
+    padding: 60px;
+}
+
+#modal-content h1 {
+    color: #4a4a4a;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+#modal-content p {
+    margin-bottom: 20px;
+}
