@@ -1,11 +1,24 @@
 RewriteEngine on
 # RewriteRule ^([a-z]+)\/?$ public/$1.php [NC]
+
 RewriteRule ^userlist$ public/userlist.php [L]
 RewriteRule ^systemoverview$ public/systemoverview.php [L]
 RewriteRule ^createuser$ public/createuser.php [L]
+RewriteRule ^useredit$ public/useredit.php [L]
 RewriteRule ^login$ public/login.php [L]
+
+RewriteRule ^public/userlist$ public/userlist.php [L]
+RewriteRule ^public/systemoverview$ public/systemoverview.php [L]
+RewriteRule ^public/createuser$ public/createuser.php [L]
+RewriteRule ^public/login$ public/login.php [L]
+RewriteRule ^public/useredit$ public/useredit.php [L]
 
 <Files .htaccess>
 order allow,deny
 deny from all
 </Files>
+
+DirectoryIndex login.php
+
+ErrorDocument 403 "<!doctype><html><head><title>Error 403</title><style>body{font-family: Papyrus; background-color: darkgreen;}</style></head><body><h1>Error 403</h1><p>Of je bent hier per ongeluk terecht gekomen, of je weet precies wat je aan het doen bent. In beide gevallen: opdonderen.</p><img src='https://media.giphy.com/media/E6y0A4wUIC71m/giphy.gif' /></body></html>"
+ErrorDocument 404 "<!doctype><html><head><title>Error 404</title><style>body{font-family: Papyrus; background-color: darkgreen;}</style></head><body><h1>Error 404</h1><p>Pagina niet gevonden.</p><img src='https://media.giphy.com/media/yQWkWLGL120so/giphy.gif' /></body></html>"

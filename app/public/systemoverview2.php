@@ -2,14 +2,14 @@
     require_once('../private/path_constants.php');
 
     $page_title = 'System overview';
-    $page = "systemoverview";
+        $page = "systemoverview";
 
     require_once(PRIVATE_PATH . '/functions.php');
     require_once(PRIVATE_PATH . '/user_functions.php');
     require_once(PRIVATE_PATH . '/User.php');
     require_once(PRIVATE_PATH . '/vm_functions.php');
 
-    include(SHARED_PATH . '/header.php');
+    include_once(SHARED_PATH . '/header.php');
     ?>
 
     <div id="content" class="container">

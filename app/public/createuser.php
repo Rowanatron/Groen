@@ -4,7 +4,6 @@
 require_once('../private/path_constants.php');
 
 $page_title = 'Create user';
-//$page = "createuser.php";
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
@@ -84,9 +83,12 @@ include(SHARED_PATH . '/header.php');
     </form>
     <div class="buttons_bottom">
         <button class="aanmaken" form="form" type="submit">Gebruiker aanmaken</button>
-        <button class="annuleren" onclick="window.location.href = 'userlist.php';">Annuleren</button>
+        <button class="annuleren" onclick="window.location.href ='userlist';">Annuleren</button>
     </div> 
 </div>
+
+<meta http-equiv="refresh" content="3601; ../public/login.php" />
+
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
 <script type="text/javascript" src="../private/UserJavascript.js">
 </script>

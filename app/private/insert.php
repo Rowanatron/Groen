@@ -2,100 +2,72 @@
 
 <?php
 
-include_once("DatabasePDO.php");
+require_once('../private/path_constants.php');
+require_once(PRIVATE_PATH . '/user_functions.php');
+require_once(PRIVATE_PATH . '/User.php');
 
-$databasePDOInstance = new DatabasePDO();
-
-$conn = $databasePDOInstance->get();
-
+$username = $_POST['username'];
 $password = $_POST['password'];
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+$repeat_password = $_POST['repeat_password'];
+$given_name = $_POST['given_name'];
+$family_name = $_POST['family_name'];
+$email = $_POST['email'];
+$role = $_POST['role'];
 
-$data = [
-    'username' => $_POST['username'],
-    'password' => $hashed_password,
-    'given_name' => $_POST['given_name'],
-    'family_name' => $_POST['family_name'],
-    'email' => $_POST['email'],
-    'role' => $_POST['role']
-];
-
-if (empty($data['username']) || empty($data['password']) || empty($_POST['repeat_password']) ||empty($data['given_name']) ||empty($data['family_name']) ||empty($data['email']) || empty($data['role'])){
-    $message = "alle velden moeten worden ingevuld";
+// Checks
+if (empty($username) || empty($password) || empty($repeat_password) || empty($given_name) || empty($family_name) || empty($email) || empty($role)){
+    $message = "Alle velden moeten worden ingevuld";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
-
-else if (strlen($data['username']) < 5){
-    $message = "gebruikersnaam moet minstens 5 letters zijn";
+else if (strlen($username) < 5){
+    $message = "De gebruikersnaam moet minimaal 5 karakters bevatten";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
-else if (strlen($data['password']) < 8 || 0 === preg_match('~[A-Z]~', $data['password'])  || 0 === preg_match('~[0-9]~', $data['password']) || 0 === preg_match('~[a-z]~', $data['password'])) {
+else if (strlen($password) < 8 || 0 === preg_match('~[A-Z]~', $password)  || 0 === preg_match('~[0-9]~', $password) || 0 === preg_match('~[a-z]~', $password)) {
     $message = "Wachtwoord moet minimaal 8 karakters bevatten, waarvan 1 hoofdletter, 1 kleine letter en 1 getal";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
-else if ($_POST['password']!= $_POST['repeat_password']) {
-    $message = "wachtwoord was niet gelijk";
+else if ($password!= $repeat_password) {
+    $message = "De wachtwoorden komen niet overeen";
     echo "<script type='text/javascript'>alert('$message');</script>";
  }
 
-else if (strlen($data['given_name']) < 2){
-    $message = "voornaam moet minstens 2 letters zijn";
+else if (strlen($given_name) < 2){
+    $message = "De voornaam moet minimaal 2 karakters bevatten";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
-else if (strlen($data['family_name']) < 2){
-    $message = "achternaam moet minstens 2 letters zijn";
+else if (strlen($family_name) < 2){
+    $message = "De achternaam moet minimaal 2 karakters bevatten";
     echo "<script type='text/javascript'>alert('$message');</script>";
 }
 
-else{
+else {
 
-    $query = "SELECT `username` FROM server_monitor.user;";
+$testuser = get_user_by_username($username);
 
-try{
-    $statement = $conn->prepare($query);
-    $statement->execute();
-        } catch(PDOException $e) {
-    echo "oops {$e->getMessage()}";
-    }
+if (strtolower($testuser->get_username()) == strtolower($username)){
+    $message = "Deze gebruikersnaam bestaat al";
+    echo "<script type='text/javascript'>alert('$message');</script>"; ?>
+    <meta http-equiv="refresh" content="1; ../public/createuser.php" />
+    <?php
+    exit();    
+}
 
-    while($usernamelist = $statement->fetch(PDO::FETCH_ASSOC)){
+// Password hash
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        if (strtolower($usernamelist['username']) == strtolower($data['username'])){
-        $message = "Deze gebruikersnaam bestaat al";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-        ?>
-        
-        <meta http-equiv="refresh" content="2; ../public/createuser.php" />
-        <?php
-        exit();
-        }
-    }
+// Zet user in database
+$user = new User(0, $username, $hashed_password, $given_name, $family_name, $email, $role);
+insert_user($user);
 
-
-    
-$query = "INSERT INTO user (`username`,`password`,`given_name`,`family_name`,`email`, `role`)
-VALUES(:username, :password, :given_name, :family_name, :email, :role);";
-
-try{
-    $statement = $conn->prepare($query);
-    $statement->execute($data);
-} catch(PDOException $e) {
-    echo "Oops er ging iets mis {$e->getMessage()}";
+?>
+    <meta http-equiv="refresh" content="1; ../public/userlist.php" />
+    <?php
+    exit();
 }
 
 ?>
-        
-        <meta http-equiv="refresh" content="2; ../public/userlist.php" />
-        <?php
-        exit();
-
-}
-
-?>
-
-Je wordt na 2 seconden omgeleid
-<meta http-equiv="refresh" content="2; ../public/createuser.php" />

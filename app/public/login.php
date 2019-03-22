@@ -30,9 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($username && $password) {
         $user = get_user_by_username($username);
-
-        $hashed_password = $user->get_password();
-        $valid_password = password_verify($password, $hashed_password);
+    
+        $valid_password = password_verify($password, $user->get_password());
 
         if ($valid_password) {
             $_SESSION["logged_in"] = true;
@@ -68,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="content">
         <img id="logo" src="img/logo.jpg" alt="Logo">
-        <form method="POST" action="login.php">
+        <form method="POST" action="login">
             <fieldset>
                 <label>
                     Gebruikersnaam
