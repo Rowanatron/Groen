@@ -46,8 +46,6 @@ $data = [
     'role' => $_POST['role']
 ];
 
-var_dump($data['user_id']);
-
 $query = "UPDATE user SET `username` = :username, `given_name` = :given_name, `family_name` = :family_name, `email` = :email, `role` = :role 
 WHERE (`user_id` = :user_id);";
 

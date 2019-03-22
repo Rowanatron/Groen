@@ -1,97 +1,113 @@
     <?php 
-    require_once('../private/pathConstants.php');
+    require_once('../private/path_constants.php');
 
     $page_title = 'System overview';
     $page = "systemoverview";
 
     require_once(PRIVATE_PATH . '/functions.php');
-    require_once(PRIVATE_PATH . '/userfunctions.php');
+    require_once(PRIVATE_PATH . '/user_functions.php');
     require_once(PRIVATE_PATH . '/User.php');
+    require_once(PRIVATE_PATH . '/vm_functions.php');
 
     include(SHARED_PATH . '/header.php');
-
-
-    $username = 'makeitwork';
-    $password = 'itWorkMake2018';
-
-    // create curl resource
-    $ch = curl_init();
-
-    // set url
-    curl_setopt($ch, CURLOPT_URL, "https://makeitwork.local.mybit.nl:8443/vms/klanty/testing");
-
-    // return the transfer as a string
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    // set password
-    curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
-
-    $output = curl_exec($ch);
-
-    // var_dump($output);
-
-    $data = json_decode($output);
-
-    // var_dump($data);
-
-    curl_close($ch);
-
-
-    // Servers opslaaan als objecten
-    require_once(PRIVATE_PATH . '/VirtualMachine.php');
-
-    $virtual_machine_list = array();
-
-    foreach($data as $row){
-        $virtual_machine = new VirtualMachine($row->HostSystem, $row->customer, $row->disk_size, 
-        $row->env, $row->latency, $row->memory, $row->name, $row->omgeving, $row->vCPU);
-        $virtual_machine_list[$row->name] = $virtual_machine;
-    }
-
-    ksort($virtual_machine_list);
-
     ?>
+
+    <style>
+        .system-overview-header-container {
+            padding: 30px;
+            font-weight: bolder;
+            color: black;
+        }
+
+        #server {
+            background-color: #F2F6FA;
+            border: 1px solid lightgrey;
+            border-radius: 10px;
+            margin: 20px;
+            padding: 10px;
+            min-width: 40%;
+            display: inline-block;
+        }
+
+        .server-img {
+            display: inline-block;
+        }
+
+        .server-info {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .server-name {
+            font-size: smaller;
+            font-weight: 700;
+            padding: 5px;
+        }
+
+        .server-info-top {
+            padding: 3px;
+        }
+
+        .server-info-bottom {
+            padding: 3px;
+        }
+
+        .server-info-top {
+            min-width: 3px;
+        }
+
+        .key {
+            font-weight: 600;
+            font-size: .7em;
+            display: inline-block;
+        }
+
+        .value {
+            font-size: .7em;
+            display: inline-block;
+        }
+    </style>
 
     <div id="content" class="container">
         <div class="system-overview-header-container">
             <h1>Systeem Overzicht</h1>
         </div>
         <div class="system-overview-servers-container">
-            <?php foreach ($virtual_machine_list as $vm) : ?>
-            
+            <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+
             <?php
-                if($vm->getLatency() > 1.45) {
-                    $image = "vm_red.png";
-                } else if ($vm->getLatency() < 1.2){
-                    $image = "vm_green.png";
-                } else {
-                    $image = "vm_orange.png";
-                }
+            if ($vm->getLatency() > 1.45) {
+                $image = "vm_red.png";
+            } else if ($vm->getLatency() < 1.2) {
+                $image = "vm_green.png";
+            } else {
+                $image = "vm_orange.png";
+            }
             ?>
 
             <div id="server">
                 <div class="server-img">
-                    <img src="<?php echo "img/" . $image?>" alt="logo van virtuele machine">
+                    <img src="<?php echo "img/" . $image ?>" alt="logo van virtuele machine">
                 </div>
                 <div class="server-info">
                     <div class="server-name">
-                        <span><?php echo $vm->getName(); ?></span>
+                        <div><?php echo $vm->getName(); ?></div>
                     </div>
                     <div class="server-info-top">
-                        <span>Latency:</span>
-                        <span><?php echo $vm->getLatency(); ?></span>
-                        <span>Memory:</span>
-                        <span><?php echo $vm->getMemory(); ?></span>
+                        <div class="key">Latency:</div>
+                        <div class="value"><?php echo $vm->getLatency(); ?></div>
+                        <div class="key">Memory:</div>
+                        <div class="value"><?php echo $vm->getMemory(); ?></div>
                     </div>
                     <div class="server-info-bottom">
-                        <span>Storage:</span>
-                        <span><?php echo $vm->getDiskSize(); ?></span>
-                        <span>vCPU:</span>
-                        <span><?php echo $vm->getVCPU(); ?></span>
+                        <div class="key">Storage:</div>
+                        <div class="value"><?php echo $vm->getDiskSize(); ?></div>
+                        <div class="key">vCPU:</div>
+                        <div class="value"><?php echo $vm->getVCPU(); ?></div>
                     </div>
-                </div>    
+                </div>
             </div>
             <?php endforeach; ?>
         </div>
     </div>
-<?php include(SHARED_PATH . '/footer.php'); ?>
+    <?php include(SHARED_PATH . '/footer.php'); ?> 
