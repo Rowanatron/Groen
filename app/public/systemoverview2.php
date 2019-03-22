@@ -9,7 +9,7 @@
     require_once(PRIVATE_PATH . '/User.php');
     require_once(PRIVATE_PATH . '/vm_functions.php');
 
-    include(SHARED_PATH . '/header.php');
+    include_once(SHARED_PATH . '/header.php');
     ?>
 
     <div id="content" class="container">
