@@ -26,7 +26,7 @@ class ApiConnector{
 
         $output = curl_exec($ch);
         
-        $data = json_decode($output);
+        $data = (array)json_decode($output);
 
         curl_close($ch);
 
