@@ -59,7 +59,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<td>
 					<form action="useredit.php" method="post">
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
-						<input type="image" name="submit" src="../public/img/edit_pencil.png" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
+						<input type="image" name="submit" src="../public/img/edit_pencil.png" onmouseover="this.src='../public/img/edit-hover.png';" onmouseout="this.src='../public/img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
 					</form>
 				</td>
 				<td>
@@ -67,7 +67,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 						<input type="hidden" name="action" value="delete_user" />
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>" />
 						<input type="hidden" name="username" value="<?=$user->username; ?>" />
-						<input type="image" src="../public/img/delete_bin.png" border="0" alt="delete" style="width: 10%; height: 10%;" />
+						<input type="image" src="../public/img/delete.png" onmouseover="this.src='../public/img/delete-hover.png';" onmouseout="this.src='../public/img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" />
 					</form>
 				</td>
 				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
