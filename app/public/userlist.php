@@ -43,8 +43,8 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<th>Voornaam</th>
 				<th>Achternaam</th>
 				<th>Rol</th>
-				<th>Bewerk</th>
-				<th>Verwijder</th>
+				<th></th>
+				<th></th>
 				<!-- <th></th> -->
 			</tr>
 		</thead>
@@ -77,7 +77,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 	</table>
 </div>
 
-<meta http-equiv="refresh" content="3601; ../public/login.php" />
+<meta http-equiv="refresh" content="1801; ../public/login.php" />
 
 <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>
