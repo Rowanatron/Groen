@@ -1,9 +1,15 @@
 .system-overview-header-container {
-    padding: 3%;
+    padding: 15px;
     color: black;
     border-top: 1px solid #D9DCDF;
     border-left: 1px solid #D9DCDF;
     border-right: 1px solid #D9DCDF;
+    height: 38px;
+    line-height: 38px;
+}
+.system-overview-header-container h1 {
+    color: #4a4a4a;
+    font-size: 1.1em;
 }
 
 .system-overview-servers-container {
