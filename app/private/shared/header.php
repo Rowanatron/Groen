@@ -36,7 +36,7 @@
 			</li>
 			<?php endif; ?>
           </ul>
-          <a class="uitloggen-link-header" href="../private/logout.php">Uitloggen</a>
+          <a class="uitloggen-link-header" href="../public/logout.php">Uitloggen</a>
         </div>
   	</header>
 	
