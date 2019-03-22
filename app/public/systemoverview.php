@@ -34,7 +34,7 @@ include(SHARED_PATH . '/header.php');
 <!-- Hier komt de content -->
 <div id="content" class="container">
     <div class="system-overview-header-container">
-        <h1>Systeem Overzicht</h1>
+        <h1>Systeem overzicht</h1>
     </div>
     <div class="system-overview-servers-container">
         <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
