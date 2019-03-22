@@ -35,7 +35,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 
 	 <div class="table-header-container">
 		<h2 class="tabel-header">Gebruikersoverzicht</h2>
-		<a href="createuser.php">Nieuwe gebruiker aanmaken</a>
+		<a href="createuser">Nieuwe gebruiker aanmaken</a>
 	</div>
 	<table>
 		<thead>
