@@ -17,9 +17,11 @@ session_expired();
 only_for_admins();
 
 include(SHARED_PATH . '/header.php');
-
+if($_POST['user_id'] == 0) {
+    header("Location: userlist.php");
+} else {
 $user = get_user_by_id($_POST['user_id']);
-
+}
 ?>
 
 <!-- Hier komt de content -->
