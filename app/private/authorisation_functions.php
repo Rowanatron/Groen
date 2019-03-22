@@ -15,7 +15,7 @@ function is_logged_in () {
 }
 
 function session_expired () {
-    if(time() - $_SESSION["start_session"] > 3600){
+    if(time() - $_SESSION["start_session"] > 1800){
         session_destroy();
         session_start();
         $_SESSION["message"] = "Sessie verlopen. Log opnieuw in.";
@@ -28,9 +28,9 @@ function session_expired () {
 }
 
 function only_for_admins () {
-    // if (!isset($_SESSION["is_admin"])){
     $user = $_SESSION["user"];
     if (!($user->get_role() === "admin")) {
+
         $_SESSION["message"] = "Je hebt geen toegang tot deze pagina, omdat je geen admin-rechten hebt.";
         header("Location: systemoverview.php");
     } else { 
