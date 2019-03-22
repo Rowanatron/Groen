@@ -122,6 +122,12 @@ header a {
     font-weight: 600;
 }
 
+.table-header-container a:hover {
+	background-color: #54ce54;
+	transition: background-color: 300ms, color: 300ms, border-color: 300ms;
+	-webkit-transition: background-color: 300ms, color: 300ms, border-color: 300ms; /* Safari */
+}
+
 table {
     padding: 20px;
     width: 100%;
