@@ -12,19 +12,26 @@ form {
 
 .form_container{
   display: grid;
-  grid-template-columns: auto auto;
+  margin-right: 3em;
+  grid-template-columns: 50% 50%;
   padding: 15px;
   font-size: .85em;
   font-weight: 500;
 }
 
+.form_block {
+	display: inline-block;
+	padding-right: 2em;
+}
+
 .form_full_length{
   grid-column-start: 1;
   grid-column-end: 3;
+  margin-right: 50%;
 }
 
 input[type=text], input[type=password], input[type=email], select#role{
-  width: 35em;
+  width: 100%;
   padding: 12px 20px;
   margin-top: 0.8em;
   display: inline-block;
@@ -44,11 +51,14 @@ input {
 }
 
 .error_message{
+  display: inline-block;
+  width: 100%;
   font-family: Helvetica, Arial;
   font-size: 90%;
   font-style: italic;
   color:red;
   margin-top: 0.5em;
+  padding-right: 4em;
 }
 
 .buttons_bottom {
