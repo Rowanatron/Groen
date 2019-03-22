@@ -14,6 +14,9 @@
 	<?php if ($pagename == "createuser.php" || $pagename == "useredit.php" ): ?>
 	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/form.css'); ?>">
 	<?php endif; ?>
+	<?php if ($pagename == "systemoverview.php" || $pagename == "systemoverview2.php" ): ?>
+	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/sys-overview.css'); ?>">
+	<?php endif; ?>
   </head>
 
   <body>
