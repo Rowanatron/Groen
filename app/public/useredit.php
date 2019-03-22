@@ -94,14 +94,15 @@ $user = get_user_by_id($_POST['user_id']);
             </div>       
         </div>  
     </form>
-    <form style="display:none;" method="post" action="userlist" id="form-delete" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen?');">
+    <form style="display:none;" method="post" action="userlist" id="form-delete" onsubmit="return (<?=$user->username; ?>);">
 		<input type="hidden" name="action" value="delete_user" />
         <input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
         <input type="hidden" name="username" value="<?=$user->username; ?>"/>
     </form>
     <div class="buttons_bottom">
-        <button class="btn-user-save" form="form-edit" type="submit">Gebruiker opslaan</button>        
-        <button class="btn-user-delete" form="form-delete" type="submit">Gebruiker verwijderen</button>
+        <button class="btn-user-save" form="form-edit" type="submit">Gebruiker opslaan</button>
+		<button  class="btn-user-delete" id="show_modal" onclick="showModal('<?=$user->username; ?>')" value="Modal">asdfsdf</buton>
+ <!--       <button class="btn-user-delete" form="form-delete" type="submit">Gebruiker verwijderen</button> -->
         <button class="btn-user-cancel" onclick="window.location.href = 'userlist';"> Annuleren </button>
     </div>       
 </div>
@@ -109,8 +110,8 @@ $user = get_user_by_id($_POST['user_id']);
 <meta http-equiv="refresh" content="1801; ../public/login.php" />
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="../private/UserJavascript.js">
-</script>
+<script type="text/javascript" src="../private/UserJavascript.js"></script>
+<script type="text/javascript" src="../private/modal.js"></script>
 
 <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>
