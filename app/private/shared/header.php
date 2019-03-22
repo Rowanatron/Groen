@@ -1,14 +1,18 @@
 <?php
-    if(!isset($page_title)) { $page_title = 'Groen'; }
-	$pagename = basename($_SERVER['PHP_SELF']);
+if (!isset($page_title)) {
+	$page_title = 'Groen';
+}
+$pagename = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!doctype html>
 
 <html lang="en">
-  <head>
-    <title><?=$page_title; ?></title>
+
+<head>
+    <title><?= $page_title; ?></title>
     <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" media="all" href="<?php echo url_for('/css/css-reset.css'); ?>">
     <link rel="stylesheet" media="all" href="<?php echo url_for('/css/styles.css'); ?>">
 	<?php if ($pagename == "createuser.php" || $pagename == "useredit.php" ): ?>
@@ -36,8 +40,6 @@
 			</li>
 			<?php endif; ?>
           </ul>
-          <a class="uitloggen-link-header" href="../private/logout.php">Uitloggen</a>
+          <a class="uitloggen-link-header" href="../public/logout.php">Uitloggen</a>
         </div>
-  	</header>
-	
-	
+    </header> 

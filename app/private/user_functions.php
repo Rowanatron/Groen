@@ -76,4 +76,28 @@ function delete_user($user_id) {
 	}
 }
 
+function insert_user($user){
+	$pdo = new DatabasePDO();
+	$conn = $pdo->get();
+
+	$data = [
+		'username' => $user->get_username(),
+		'password' => $user->get_password(),
+		'given_name' => $user->get_given_name(),
+		'family_name' => $user->get_family_name(),
+		'email' => $user->get_email(),
+		'role' => $user->get_role()
+	];
+	  
+	$query = "INSERT INTO user (`username`,`password`,`given_name`,`family_name`,`email`, `role`)
+	VALUES(:username, :password, :given_name, :family_name, :email, :role);";
+
+	try{
+		$statement = $conn->prepare($query);
+		$statement->execute($data);
+	} catch(PDOException $e) {
+		echo "Oops er ging iets mis {$e->getMessage()}";
+	}
+}
+
 ?>
