@@ -1,5 +1,6 @@
 <?php
 
+require_once(PRIVATE_PATH . '/User.php');
 
 function is_logged_in () {
     if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
@@ -27,7 +28,9 @@ function session_expired () {
 }
 
 function only_for_admins () {
-    if (!isset($_SESSION["is_admin"])){
+    // if (!isset($_SESSION["is_admin"])){
+    $user = $_SESSION["user"];
+    if (!($user->get_role() === "admin")) {
         $_SESSION["message"] = "Je hebt geen toegang tot deze pagina, omdat je geen admin-rechten hebt.";
         header("Location: systemoverview.php");
     } else { 

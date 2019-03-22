@@ -37,11 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($valid_password) {
             $_SESSION["logged_in"] = true;
             $_SESSION["start_session"] = time();
-            // $_SESSION["user_id"] = $user->get_user_id();
+            // // $_SESSION["user_id"] = $user->get_user_id();
             $_SESSION["message"] = 'Welkom, ' . $user->get_given_name() . '. ';
-            if ($user->get_role() === "admin") {
-                $_SESSION["is_admin"] = true;
-            }
+            // if ($user->get_role() === "admin") {
+            //     $_SESSION["is_admin"] = true;
+            // }
+            $_SESSION["user"] = $user;
             header("Location: systemoverview.php");
         } else {
             $message = 'Onbekende combinatie van gebruikersnaam en wachtwoord.';
