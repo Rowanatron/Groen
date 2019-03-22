@@ -86,6 +86,9 @@ include(SHARED_PATH . '/header.php');
         <button class="annuleren" onclick="window.location.href ='userlist';">Annuleren</button>
     </div> 
 </div>
+
+<meta http-equiv="refresh" content="3601; ../public/login.php" />
+
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
 <script type="text/javascript" src="../private/UserJavascript.js">
 </script>
