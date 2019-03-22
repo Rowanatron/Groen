@@ -77,6 +77,15 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 	</table>
 </div>
 
+<div id="modal">
+	<div id="modal-content">
+		<h1>Gebruiker verwijderen</h1>
+		<p>Weet u zeker dat u user wil verwijderen</p>
+		<button>Gebruiker verwijderen</button>
+		<button>Annuleren</button>
+	</div>
+</div>
+
 <meta http-equiv="refresh" content="1801; ../public/login.php" />
 
 <!-- Default PHP footer -->
