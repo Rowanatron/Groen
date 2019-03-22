@@ -31,12 +31,12 @@ $pagename = basename($_SERVER['PHP_SELF']);
 		  <ul>
 		  
 			<li <?php if($pagename == "systemoverview.php") : ?>class="active"<?php endif; ?>>
-				<a href="systemoverview.php">Monitor</a>
+				<a href="systemoverview">Monitor</a>
 			</li>
 			
 			<li <?php if($pagename == "userlist.php" || $pagename == "createuser.php" || $pagename == "useredit.php") : ?>class="active"<?php endif; ?>>
 			<?php if(isset($_SESSION["is_admin"])) : ?>
-				<a href="userlist.php">Gebruikers</a>
+				<a href="userlist">Gebruikers</a>
 			</li>
 			<?php endif; ?>
           </ul>

@@ -4,7 +4,6 @@
 require_once('../private/path_constants.php');
 
 $page_title = 'Userlist';
-$page = "userlist";
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
@@ -35,7 +34,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 
 	 <div class="table-header-container">
 		<h2 class="tabel-header">Gebruikersoverzicht</h2>
-		<a href="createuser.php">Nieuwe gebruiker aanmaken</a>
+		<a href="createuser">Nieuwe gebruiker aanmaken</a>
 	</div>
 	<table>
 		<thead>
@@ -57,13 +56,13 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<td><?=$user->family_name; ?></td>
 				<td><?=$user->role; ?></td>
 				<td>
-					<form action="useredit.php" method="post">
+					<form action="useredit" method="post">
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
 						<input type="image" name="submit" src="../public/img/edit_pencil.png" onmouseover="this.src='../public/img/edit-hover.png';" onmouseout="this.src='../public/img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
 					</form>
 				</td>
 				<td>
-					<form action="userlist.php" method="post" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen?');">
+					<form action="userlist" method="post" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen?');">
 						<input type="hidden" name="action" value="delete_user" />
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>" />
 						<input type="hidden" name="username" value="<?=$user->username; ?>" />
