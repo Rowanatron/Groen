@@ -26,7 +26,7 @@ function set_user_id($new_user_id){
 }
 
 function get_user_id(){
-    $this->user_id = $new_user_id;
+    return $this->user_id;
 }
 
 function set_username($new_username){
