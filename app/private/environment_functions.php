@@ -4,7 +4,7 @@ require_once('path_constants.php');
 
 require_once(CLASS_PATH . '/DatabasePDO.php');
 require_once(CLASS_PATH . '/Environment.php');
-// include_once 'customer_function.php';
+
 
 function get_environmentlist() {
 	$pdo = new DatabasePDO();
