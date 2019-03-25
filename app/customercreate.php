@@ -6,8 +6,8 @@ require_once('private/path_constants.php');
 $page_title = 'Create customer';
 
 require_once('private/functions.php');
-require_once('customer_functions.php');
-require_once('Customer.php');
+require_once('private/customer_functions.php');
+require_once('private/class/Customer.php');
 require_once('private/authorisation_functions.php');
 
 session_start();
@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Zet klant in database
     $customer = new Customer(0, $customer_name);
-    insert_customer($customer_name);
+    insert_customer($customer);
     
     ?>
         <meta http-equiv="refresh" content="0; customerlist.php" />
@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form_block form_full_length">
                 <label>
                     Klantnaam<br>
-                    <input id="test_customer_name" name="customername" type="text" minlength="5" maxlength="45" onkeydown="setTimeout(error_customer_name, 1500)" required/>
+                    <input id="test_customer_name" name="customer_name" type="text" minlength="5" maxlength="45" onkeydown="setTimeout(error_customer_name, 1500)" required/>
                 </label>
                 <br>
                 <p id="error_customer_name" class="error_message"></p>
@@ -85,10 +85,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div> 
 </div>
 
-<meta http-equiv="refresh" content="1801; public/login.php" />
+<meta http-equiv="refresh" content="1801; login.php" />
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="CustomerJavascript.js">
+<script type="text/javascript" src="private/js/customer.js">
 </script>
 
 <!-- Default PHP footer -->
