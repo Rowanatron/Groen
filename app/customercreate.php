@@ -81,7 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </form>
     <div class="buttons_bottom">
         <button class="aanmaken" form="form" type="submit">Klant aanmaken</button>
-        <button class="annuleren" onclick="window.location.href ='customerlist';">Annuleren</button>
+        <button class="annuleren" onclick="window.location.href ='customerlist.php';">Annuleren</button>
     </div> 
 </div>
 
