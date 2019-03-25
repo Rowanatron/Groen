@@ -20,13 +20,54 @@ session_expired();
 only_for_admins();
 
 include('private/shared/header.php');
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // <link rel="stylesheet" href="/stylesheet.css">
+
+    $customer_name = $_POST['customer_name'];
+    
+    // Checks
+    if (empty($customer_name)){
+        $message = "Alle velden moeten worden ingevuld";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+    }
+    
+    else if (strlen($customer_name) < 2){
+        $message = "De gebruikersnaam moet minimaal 2 karakters bevatten";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+    }
+    
+    else {
+    
+    $testcustomer = get_customer_by_customer_name($customer_name);
+    
+    if (strtolower($testcustomer->get_customer_name()) == strtolower($customer_name)){
+        $message = "Deze klantnaam bestaat al";
+        echo "<script type='text/javascript'>alert('$message');</script>"; ?>
+        <meta http-equiv="refresh" content="0; customercreate.php" />
+        <?php
+        exit();    
+    }
+    
+    // Zet klant in database
+    $customer = new Customer(0, $customer_name);
+    insert_customer($customer_name);
+    
+    ?>
+        <meta http-equiv="refresh" content="0; customerlist.php" />
+        <?php
+        exit();
+    }
+    
+}
 ?>
 
 <div id="content" class="container">
 	<div class="table-header-container">
 		<h2 class="tabel-header">Customer aanmaken</h2>
 	</div>
-    <form method="post" action="insert_customer.php" id="form">
+    <form method="post" action="customercreate.php" id="form">
         <div class="form_container">    
             <div class="form_block form_full_length">
                 <label>
