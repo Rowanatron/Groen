@@ -49,10 +49,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 			<tr>
 				<td><?=$customer->customer_name; ?></td>
 				<td>
-					<form action="customeredit.php">
-						<!-- <input type="hidden" name="customer_id" value="<?=$customer->customer_id; ?>"/> -->
-						<input type="image" name="submit" src="img/edit_pencil.png" onmouseover="this.src='img/edit-hover.png';" onmouseout="this.src='img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
-					</form>
+                    <a href="customeredit.php?id=<?= $customer->get_customer_id() ?>" alt="bewerk">
+                        <img type="image" src="img/edit_pencil.png" onmouseover="this.src='img/edit-hover.png';" onmouseout="this.src='img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
+                    </a>
 				</td>
 				<td>
 					<form action="customerlist.php" method="post" onsubmit="return confirm('Weet u zeker dat u <?=$customer->customer_name; ?> wilt verwijderen?');">
