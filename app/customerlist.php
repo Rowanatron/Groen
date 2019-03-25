@@ -56,7 +56,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 						<input type="hidden" name="action" value="delete_customer" />
 						<input type="hidden" name="customer_id" value="<?=$customer->customer_id; ?>" />
 						<input type="hidden" name="customer_name" value="<?=$customer->customer_name; ?>" />
-						<img class="img-remove" src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';"border="0" alt="delete" style="width: 3%; height: 3%;" onclick="showModal('<?= $customer->customer_name; ?>', 'userdelete-<?= $customer->customer_name; ?>')" />
+						<img class="img-remove" src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';"border="0" alt="delete" style="width: 3%; height: 3%;" onclick="show_modal('<?= $customer->customer_name; ?>', 'userdelete-<?= $customer->customer_name; ?>')" />
 					</form>
 				</td>
 				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
@@ -73,7 +73,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
 		<div id="button-container">
 			<button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Klant verwijderen</button>
-			<button onClick="hideModal()" class="annuleren">Annuleren</button>
+			<button onClick="hide_modal()" class="annuleren">Annuleren</button>
 		</div>
 	</div>
 </div>
