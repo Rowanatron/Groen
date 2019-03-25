@@ -4,10 +4,10 @@
 
 $page_title = 'Environmentlist';
 
-require_once(PRIVATE_PATH . '/functions.php');
-require_once('/environment_functions.php');
+// require_once(PRIVATE_PATH . '/functions.php');
+require_once('/environment_functions.php');	
 require_once('/Environment.php');
-require_once(PRIVATE_PATH . '/authorisation_functions.php');
+// require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
 
