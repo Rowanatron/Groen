@@ -1,7 +1,9 @@
 <?php
 
-include_once 'DatabasePDO.php';
-include_once 'User.php';
+require_once 'path_constants.php';
+
+require_once(CLASS_PATH . '/DatabasePDO.php');
+require_once(CLASS_PATH . '/User.php');
 
 function get_userlist() {
 	$pdo = new DatabasePDO();

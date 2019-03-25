@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="/stylesheet.css">
 
 <?php
-require_once('../private/path_constants.php');
+require_once('path_constants.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
-require_once(PRIVATE_PATH . '/User.php');
+require_once(CLASS_PATH . '/User.php');
 
 $original_username = $_POST['original_username'];
 $user_id = $_POST['user_id'];
@@ -22,7 +22,7 @@ if ($original_username != $username) {
         $message = "Bewerken mislukt! Deze gebruikersnaam bestaat al";
         echo "<script type='text/javascript'>alert('$message');</script>";
         ?>
-        <meta http-equiv="refresh" content="0; ../public/userlist.php" />
+        <meta http-equiv="refresh" content="0; ../userlist" />
         <?php
         exit();
     }
@@ -33,7 +33,7 @@ if ($password == null) {
     $updated_user = new User($user_id, $username, $user_from_database->get_password(), $given_name, $family_name, $email, $role);
     update_user($updated_user);
 ?>
-        <meta http-equiv="refresh" content="0; ../public/userlist.php" />
+        <meta http-equiv="refresh" content="0; ../userlist" />
         <?php
         exit();
 } 
@@ -42,7 +42,7 @@ else if (strlen($password) < 8 || 0 === preg_match('~[A-Z]~', $password)  || 0 =
     $message = "Bewerken mislukt! Wachtwoord moet minimaal 8 karakters bevatten, waarvan 1 hoofdletter, 1 kleine letter en 1 getal";
     echo "<script type='text/javascript'>alert('$message');</script>";
     ?>
-        <meta http-equiv="refresh" content="0; ../public/userlist.php" />
+        <meta http-equiv="refresh" content="0; ../userlist" />
         <?php
         exit();
 } 
@@ -51,7 +51,7 @@ else if ($password != $repeat_password) {
     $message = "wachtwoord was niet gelijk, bewerken mislukt";
     echo "<script type='text/javascript'>alert('$message');</script>";
     ?>
-        <meta http-equiv="refresh" content="0; ../public/userlist.php" />
+        <meta http-equiv="refresh" content="0; ../userlist" />
         <?php
         exit();
  } 
@@ -63,7 +63,7 @@ else if ($password != $repeat_password) {
  }
 
 ?>
-    <meta http-equiv="refresh" content="0; ../public/userlist.php" />
+    <meta http-equiv="refresh" content="0; ../userlist" />
     <?php
     exit();
 
