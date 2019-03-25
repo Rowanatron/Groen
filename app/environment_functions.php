@@ -19,10 +19,11 @@ function get_environmentlist() {
 	$environment_array = array();
 	
 	while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-        $customer_name = get_user_by_id($row['customer_id']);
-		$environment = new Environment($row['environment_id'], $row['environment_name'], $customer_name);
+        // $customer_name = get_customer_by_id($row['customer_id']);
+		$environment = new Environment($row['environment_id'], $row['environment_name'], $$row['customer_id']);
 		array_push($environment_array, $environment);
 	}
 	
 	return $environment_array;
 }
+

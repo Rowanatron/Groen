@@ -3,7 +3,7 @@ class Environment
 {
     var $environment_id;
     var $environment_name;
-    var $customer_name; 
+    var $customer_id; 
 
     function Environment()
     { }
@@ -14,5 +14,9 @@ class Environment
         $this->environment_name = $environment_name;
         $this->customer_id = $customer_id;
     }
+
+    
+
 }
+
 
