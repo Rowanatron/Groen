@@ -24,21 +24,23 @@ include(SHARED_PATH . '/header.php');
 
 <div id="content" class="container">
     <div class="table-header-container">
-        <h2 class="tabel-header">Systeem aanmaken</h2>
+        <h2 class="tabel-header">Omgeving aanmaken</h2>
     </div>
-
+    <div class="form_container">
     <form method="post" action="private/environment_insert.php" id="form" class="form_block form_full_length">
+        <label for = "environment_name">Omgevingsnaam</label><br/>
         <input id="test_environment_name" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
-        </label>
+
+
         <br>
         <p id="error_environment_name" class="error_message"></p>
 
-            <label for="customer">Gekoppelde klant</label><br>
+            <label for="customer_id">Gekoppelde klant</label><br>
 
-                <?php $customer = get_customerlist() ?>
+                <?php $customerlist = get_customerlist() ?>
 			<?php foreach ($customerlist as $customer) : ?>
 
-                <select name="customer" id="customer" required>
+                <select name="customer_id" id="customer_id" required>
                 <option value="" disabled selected hidden>Kies een klant</option>
                 <option value="<?=$customer->customer_id; ?>"><?=$customer->customer_name; ?></option>
             </select>
