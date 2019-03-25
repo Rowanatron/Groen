@@ -9,7 +9,7 @@ require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
 require_once(CLASS_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
-require_once(PRIVATE_PATH . '/user_edit');
+require_once(PRIVATE_PATH . '/user_edit.php');
 
 session_start();
 
@@ -27,12 +27,12 @@ if(isset($_POST['user_id'])) {
 	$family_name = $_POST['family_name'];
 	$email = $_POST['email'];
 	$role = $_POST['role'];
-	
-	$password = isset($_POST['password']);
-	$repeat_password = isset($_POST['edit_repeat_password']);
+
+	$password = $_POST['password'];
+	$repeat_password = $_POST['repeat_password'];
 	
 	$edit_user = new User($id, $username, $password, $given_name, $family_name, $email, $role);
-	edit_user($edit_user);
+	edit_user($edit_user, $repeat_password);
 } else if(isset($_GET['id'])) {
 	$edit_user = get_user_by_id($_GET['id']);
 } else {
