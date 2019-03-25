@@ -103,18 +103,20 @@ $user = get_user_by_id($_POST['user_id']);
     </form>
     <div class="buttons_bottom">
         <button class="btn-user-save" form="form-edit" type="submit">Gebruiker opslaan</button>
-		<button class="btn-user-delete" id="show_modal" onclick="showModal('<?= $user->username; ?>', 'form-delete')" value="delete-user">Gebruiker verwijderen</buton>
+		<button class="btn-user-delete" id="show_modal" onclick="showModal('<?= $user->username; ?>', 'form-delete')" value="delete-user">Gebruiker verwijderen</button>
  <!--       <button class="btn-user-delete" form="form-delete" type="submit">Gebruiker verwijderen</button> -->
         <button class="btn-user-cancel" onclick="window.location.href = 'userlist';"> Annuleren </button>
     </div>       
 </div>
 <div class="modal" id="modal">
-	<div id="modal-content">
-		<h1>Gebruiker verwijderen</h1>
-		<p>Weet u zeker dat u <span id="modal-username"></span> wil verwijderen</p>
-		<button id="modal-delete-button" form="form-delete" type="submit">Gebruiker verwijderen</button>
-		<button onClick="hideModal()">Annuleren</button>
-	</div>
+    <div id="modal-content">
+        <div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
+        <div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
+        <div id="button-container">
+            <button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Gebruiker verwijderen</button>
+            <button onClick="hideModal()" class="annuleren">Annuleren</button>
+        </div>
+    </div>
 </div>
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->

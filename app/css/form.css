@@ -92,10 +92,15 @@ button:hover {
   cursor: pointer;
 }
 
-button.annuleren:hover, button.btn-user-cancel:hover, button.btn-user-delete {
+button.annuleren:hover, button.btn-user-delete:hover {
   background-color: #EB1312;
   color: white;
   border-color: #EB1312;
+}
+
+button.btn-user-cancel:hover {
+  color: #fff;
+  background-color: #99AFC6;
 }
 
 button.aanmaken:hover, button.btn-user-save:hover {
