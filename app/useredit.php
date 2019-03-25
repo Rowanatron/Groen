@@ -118,7 +118,7 @@ $user = get_user_by_id($_POST['user_id']);
 </div>
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="private/js/UserJavascript.js"></script>
+<script type="text/javascript" src="private/js/user_crud.js"></script>
 <script type="text/javascript" src="private/js/modal.js"></script>
 
 <!-- Default PHP footer -->
