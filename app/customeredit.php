@@ -77,7 +77,7 @@ if (!isset($_GET['id'])) {
     </form>
     <div class="buttons_bottom">
         <button class="btn-user-save" form="form-edit" type="submit">Klant opslaan</button>
-		<button class="btn-user-delete" id="show_modal" onclick="showModal('<?= $customer->customer_name; ?>', 'form-delete')" value="delete-customer">Klant verwijderen</button>
+		<button class="btn-user-delete" id="show_modal" onclick="show_modal('<?= $customer->customer_name; ?>', 'form-delete')" value="delete-customer">Klant verwijderen</button>
         <button class="btn-user-cancel" onclick="window.location.href = 'customerlist.php';"> Annuleren </button>
     </div>       
 </div>
@@ -86,7 +86,7 @@ if (!isset($_GET['id'])) {
 		<h1>Klant verwijderen</h1>
 		<p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen</p>
 		<button id="modal-delete-button" form="form-delete" type="submit">Klant verwijderen</button>
-		<button onClick="hideModal()">Annuleren</button>
+		<button onClick="hide_modal()">Annuleren</button>
 	</div>
 </div>
 

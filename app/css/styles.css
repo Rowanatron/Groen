@@ -148,7 +148,8 @@ th, td {
 }
 
 td {
-    font-size: .7em;    
+    font-size: .7em;   
+	vertical-align: middle;
 }
 
 thead tr {
@@ -248,4 +249,35 @@ tr {
     background-color: #99AFC6;
     color: white;
     border-color: #99AFC6;
+}
+
+/********* ICON LINK *********/
+
+.icon-link {
+	display: inline-block;
+	height: 1.3em;
+	border: none;
+	background-size: cover;
+}
+
+.icon-link:hover {
+	cursor: pointer;
+}
+
+.edit-icon {
+	width: 1.3em;
+	background-image: url('../img/edit_pencil.png');
+}
+
+.edit-icon:hover {
+	background-image: url('../img/edit-hover.png');
+}
+
+.delete-icon {
+	width: 1.1em;
+	background-image: url('../img/delete.png');
+}
+
+.delete-icon:hover {
+	background-image: url('../img/delete-hover.png');
 }

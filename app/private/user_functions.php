@@ -46,6 +46,26 @@ function get_user_by_username($username) {
 	return $user;
 }
 
+function username_exists($username) {
+	$pdo = new DatabasePDO();
+	$conn = $pdo->get();
+	$query = "SELECT * FROM user WHERE username = :username";
+	
+	try {
+		$statement = $conn->prepare($query);
+		$statement->execute(array('username' => $username));
+	} catch (PDOException $e) {
+		echo "Connection failed: {$e->getMessage()}";
+	}
+	
+	$row = $statement->fetch(PDO::FETCH_ASSOC);
+	
+	if ($row['username'] == $username) {
+		return true;
+	}
+	return false;
+}
+
 function get_user_by_id($user_id) {
 	$pdo = new DatabasePDO();
 	$conn = $pdo->get();
