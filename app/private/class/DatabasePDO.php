@@ -9,7 +9,7 @@ class DatabasePDO {
     private $host;
 	
 	public function __construct() {
-		require('dbconfig.php');
+		require('../dbconfig.php');
 		$this->username = $username;
 		$this->password = $password;
 		$this->schema = $schema;

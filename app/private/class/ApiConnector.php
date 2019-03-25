@@ -7,7 +7,7 @@ class ApiConnector{
     private $url;
 
     public function __construct(){
-        require('apiconfig.php');
+        require('../apiconfig.php');
         $this->username = $username;
         $this->password = $password;
         $this->url = $url;

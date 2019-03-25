@@ -1,6 +1,6 @@
 <?php
 
-require_once(PRIVATE_PATH . '/User.php');
+require_once(CLASS_PATH . '/User.php');
 
 function is_logged_in () {
     if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
