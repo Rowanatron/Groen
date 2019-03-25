@@ -15,7 +15,7 @@ $pagename = basename($_SERVER['PHP_SELF']);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" media="all" href="css/css-reset.css">
     <link rel="stylesheet" media="all" href="css/styles.css">
-	<?php if ($pagename == "usercreate.php" || $pagename == "useredit.php" || $pagename == "customercreate.php" || $pagename == "customeredit.php"): ?>
+	<?php if ($pagename == "usercreate.php" || $pagename == "useredit.php" || $pagename == "customercreate.php" || $pagename == "customeredit.php" || $pagename=="environment_create.php"): ?>
 	<link rel="stylesheet" media="all" href="css/form.css">
 	<?php endif; ?>
 	<?php if ($pagename == "systemoverview.php"): ?>
