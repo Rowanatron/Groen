@@ -6,8 +6,8 @@ require_once('private/path_constants.php');
 $page_title = 'Customerlist';
 
 require_once('private/functions.php');
-require_once('customer_functions.php');
-require_once('Customer.php');
+require_once('private/customer_functions.php');
+require_once('private/class/Customer.php');
 require_once('private/authorisation_functions.php');
 
 session_start();
@@ -34,7 +34,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 
 	 <div class="table-header-container">
 		<h2 class="tabel-header">Klantenoverzicht</h2>
-		<a href="createcustomer">Nieuwe klant aanmaken</a>
+		<a href="customercreate.php">Nieuwe klant aanmaken</a>
 	</div>
 	<table>
 		<thead>
@@ -49,17 +49,17 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 			<tr>
 				<td><?=$customer->customer_name; ?></td>
 				<td>
-					<form action="customeredit" method="post">
+					<form action="customeredit.php" method="post">
 						<input type="hidden" name="customer_id" value="<?=$customer->customer_id; ?>"/>
-						<input type="image" name="submit" src="public/img/edit_pencil.png" onmouseover="this.src='public/img/edit-hover.png';" onmouseout="this.src='public/img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
+						<input type="image" name="submit" src="img/edit_pencil.png" onmouseover="this.src='img/edit-hover.png';" onmouseout="this.src='img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
 					</form>
 				</td>
 				<td>
-					<form action="customerlist" method="post" onsubmit="return confirm('Weet u zeker dat u <?=$customer->customer_name; ?> wilt verwijderen?');">
+					<form action="customerlist.php" method="post" onsubmit="return confirm('Weet u zeker dat u <?=$customer->customer_name; ?> wilt verwijderen?');">
 						<input type="hidden" name="action" value="delete_customer" />
 						<input type="hidden" name="customer_id" value="<?=$customer->customer_id; ?>" />
 						<input type="hidden" name="customer_name" value="<?=$customer->customer_name; ?>" />
-						<input type="image" src="public/img/delete.png" onmouseover="this.src='public/img/delete-hover.png';" onmouseout="this.src='public/img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" />
+						<input type="image" src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';" border="0" alt="delete" style="width: 7%; height: 7%;" />
 					</form>
 				</td>
 				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
@@ -81,7 +81,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 	</div>
 </div>
 
-<meta http-equiv="refresh" content="1801; /public/login.php" />
+<meta http-equiv="refresh" content="1801; login.php" />
 
 <!-- Default PHP footer -->
-<?php include(SHARED_PATH . 'private/shared/footer.php')?>
+<?php include('private/shared/footer.php')?>
