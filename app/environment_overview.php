@@ -1,13 +1,12 @@
 <?php
 
-// require_once('../private/path_constants.php');
+require_once('private/path_constants.php');
 
 $page_title = 'Environmentlist';
 
-// require_once(PRIVATE_PATH . '/functions.php');
-require_once('/environment_functions.php');	
-require_once('/Environment.php');
-// require_once(PRIVATE_PATH . '/authorisation_functions.php');
+require_once(PRIVATE_PATH . '/environment_functions.php');	
+require_once(CLASS_PATH . '/Environment.php');
+require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
 
@@ -15,7 +14,7 @@ is_logged_in();
 session_expired();
 only_for_admins();
 
-// include(SHARED_PATH . '/header.php');
+include(SHARED_PATH . '/header.php');
 
 // // Code om omgeving te verwijderen
 // if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_environment')) {
