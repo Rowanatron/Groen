@@ -10,8 +10,8 @@ $page_title = 'System overview';
 
 session_start();
 
-is_logged_in();
 session_expired();
+is_logged_in();
 
 include(SHARED_PATH . '/header.php');
 // $welkom = 'Welkom, ' .$_SESSION["given_name"]. '. ';

@@ -108,8 +108,6 @@ $user = get_user_by_id($_POST['user_id']);
     </div>       
 </div>
 
-<meta http-equiv="refresh" content="1801; ../public/login.php" />
-
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
 <script type="text/javascript" src="../private/UserJavascript.js">
 </script>
