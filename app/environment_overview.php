@@ -31,7 +31,7 @@ include(SHARED_PATH . '/header.php');
 
 	 <div class="table-header-container">
 		<h2 class="tabel-header">Omgevingsoverzicht</h2>
-		<a href="createenvironment">Nieuwe omgeving aanmaken</a>
+		<a href="environment_create.php">Nieuwe omgeving aanmaken</a>
 	</div>
 	<table>
 		<thead>
@@ -45,16 +45,14 @@ include(SHARED_PATH . '/header.php');
 		</thead>
         <tbody>
 		<?php $environmentlist = get_environmentlist() ?>
-			<?php foreach ($environmentlist as $environment) :
-				
-				?>
+			<?php foreach ($environmentlist as $environment) : ?>
 			<tr>
 				<td><?=$environment->environment_name; ?></td>
 				<td><?=$get_customer_by_id(($environment->customer_id))->customer_name; ?></td>
 				<td>
 					<form action="environmentedit" method="post">
 						<input type="hidden" name="environment_id" value="<?=$environment->environment_id; ?>"/>
-						<input type="image" name="submit" src="../public/img/edit_pencil.png" onmouseover="this.src='../public/img/edit-hover.png';" onmouseout="this.src='../public/img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
+						<input type="image" name="submit" src="/img/edit_pencil.png" onmouseover="this.src='/img/edit-hover.png';" onmouseout="this.src='/img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
 					</form>
 				</td>
 				<td>
@@ -62,7 +60,7 @@ include(SHARED_PATH . '/header.php');
 						<input type="hidden" name="action" value="delete_environment" />
 						<input type="hidden" name="environment_id" value="<?=$environment->environment_id; ?>" />
 						<input type="hidden" name="environment_name" value="<?=$environment->environment_name; ?>" />
-						<img src="../public/img/delete.png" onmouseover="this.src='../public/img/delete-hover.png';" onmouseout="this.src='../public/img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" onclick="showModal('<?= $environment->environmentname; ?>', 'environmentdelete-<?= $environment->environmentname; ?>')" />
+						<img src="/img/delete.png" onmouseover="this.src='/img/delete-hover.png';" onmouseout="this.src='/img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" onclick="showModal('<?= $environment->environmentname; ?>', 'environmentdelete-<?= $environment->environmentname; ?>')" />
 					</form>
 				</td>
 			</tr>
