@@ -47,16 +47,14 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 			<tr>
 				<td><?=$customer->customer_name; ?></td>
 				<td>
-                    <a href="customeredit.php?id=<?= $customer->get_customer_id() ?>" alt="bewerk">
-                        <img type="image" src="img/edit_pencil.png" onmouseover="this.src='img/edit-hover.png';" onmouseout="this.src='img/edit_pencil.png';" border="0" alt="bewerk" style="width: 4%; height: 4%;" />
-                    </a>
+					<a href="customeredit.php?id=<?= $customer->get_customer_id() ?>" class="icon-link edit-icon" alt="bewerk"></a>
 				</td>
 				<td>
 					<form id="userdelete-<?= $customer->customer_name; ?>" action="customerlist.php" method="post">
 						<input type="hidden" name="action" value="delete_customer" />
 						<input type="hidden" name="customer_id" value="<?=$customer->customer_id; ?>" />
 						<input type="hidden" name="customer_name" value="<?=$customer->customer_name; ?>" />
-						<img class="img-remove" src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';"border="0" alt="delete" style="width: 3%; height: 3%;" onclick="show_modal('<?= $customer->customer_name; ?>', 'userdelete-<?= $customer->customer_name; ?>')" />
+						<a class="icon-link delete-icon" onclick="show_modal('<?= $customer->customer_name; ?>', 'userdelete-<?= $customer->customer_name; ?>')" alt="verwijder"></a>
 					</form>
 				</td>
 				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
@@ -72,7 +70,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 		<div id="modal-title"><h1>Klant verwijderen</h1></div>
 		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
 		<div id="button-container">
-			<button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Klant verwijderen</button>
+			<button id="modal-delete-button" class="verwijderen" form="" type="submit">Klant verwijderen</button>
 			<button onClick="hide_modal()" class="annuleren">Annuleren</button>
 		</div>
 	</div>
