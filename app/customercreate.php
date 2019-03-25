@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="form_block form_full_length">
                 <label>
                     Klantnaam<br>
-                    <input id="test_customer_name" name="customer_name" type="text" minlength="2" maxlength="45" onkeydown="setTimeout(error_customer_name, 1500)" required/>
+                    <input autofocus id="test_customer_name" name="customer_name" type="text" minlength="2" maxlength="45" onkeydown="setTimeout(error_customer_name, 1500)" required/>
                 </label>
                 <br>
                 <p id="error_customer_name" class="error_message"></p>

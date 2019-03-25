@@ -1,12 +1,11 @@
 <?php
 
-
-$page_title = 'Create user';
+require_once('path_constants.php');
 
 require_once(PRIVATE_PATH . '/functions.php');
-require_once(PRIVATE_PATH . '/Environment.php');
+require_once(CLASS_PATH . '/Environment.php');
 require_once(PRIVATE_PATH . '/environment_functions.php');
-require_once(PRIVATE_PATH . '/Customer.php');
+require_once(CLASS_PATH . '/Customer.php');
 require_once(PRIVATE_PATH . '/customer_functions.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
@@ -17,7 +16,6 @@ session_start();
 // de derde wordt aangeroepen op alle pagina's waar alleen admins mogen komen
 is_logged_in();
 session_expired();
-only_for_admins();
 
 $environment_name = $_POST['environment_name'];
 $customer_id = $_POST['customer_id'];
@@ -36,9 +34,9 @@ else if (strlen($environment_name) < 3){
 
 else {
 
-    $test_environment_name = get_environment_by_environmentname($environment_name);
+    $test_environment_name = get_environment_by_environment_name($environment_name);
 
-    if (strtolower($test_environment_name->get_environement_name()) == strtolower($environment_name)){
+    if (strtolower($test_environment_name->get_environment_name()) == strtolower($environment_name)){
         $message = "Deze omgevingsnaam bestaat al";
         echo "<script type='text/javascript'>alert('$message');</script>"; ?>
         <meta http-equiv="refresh" content="0; ../environment_create.php" />
@@ -48,11 +46,11 @@ else {
 
 
 // Zet omgeving in database
-    $environment = new Environment($environment_name, $customer_id);
+    $environment = new Environment(0, $environment_name, $customer_id);
     insert_environment($environment);
 
     ?>
-    <meta http-equiv="refresh" content="0; ../env_mv_relation_create.php" />
+    <meta http-equiv="refresh" content="0; ../env_vm_relation_create.php" />
     <?php
     exit();
 }
