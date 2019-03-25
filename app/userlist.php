@@ -89,8 +89,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 	</div>
 </div>
 
-<meta http-equiv="refresh" content="1801; login.php" />
-
 <!-- Default PHP footer -->
 <script type="text/javascript" src="private/js/modal.js"></script>
 <?php include(SHARED_PATH . '/footer.php')?>
