@@ -8,6 +8,7 @@ require_once(PRIVATE_PATH . '/functions.php');
 require_once(CLASS_PATH . '/VirtualMachine.php');
 require_once(PRIVATE_PATH . '/vm_functions.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
+require_once (CLASS_PATH . '/DatabasePDO.php');
 
 session_start();
 
@@ -22,18 +23,14 @@ include(SHARED_PATH . '/header.php');
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
-    $environment_id = 1;
+    $environment_id = "1";
     $vm_name_from = $_POST['vm_name_from'];
     $vm_name_to = $_POST['vm_name_to'];
-    $description = $_POST['description'];
+    $relation_description = $_POST['relation_description'];
     $bidirectional = $_POST['bidirectional'];
 
-    var_dump($environment_id, $vm_name_from, $vm_name_to, $description, $bidirectional);
 
-
-    vm_relation_add($environment_id, $vm_name_from, $vm_name_to, $description, $bidirectional);
-
-
+    vm_relation_add($environment_id, $vm_name_from, $vm_name_to, $relation_description, $bidirectional);
 
 }
 
@@ -84,7 +81,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <label>
                 Omschrijving<br>
-                <input id="test_description" name="description" type="text" maxlength="255" onkeydown="setTimeout(error_description, 1500)" required/>
+                <input id="test_description" name="relation_description" type="text" maxlength="255" onkeydown="setTimeout(error_description, 1500)"/>
                 <p id="error_description" class="error_message"></p>
             </label>
             <br>

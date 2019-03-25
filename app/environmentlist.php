@@ -33,7 +33,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 
 	 <div class="table-header-container">
 		<h2 class="tabel-header">Omgevingsoverzicht</h2>
-		<a href="environment_create.php">Nieuwe omgeving aanmaken</a>
+		<a href="environmentcreate.php">Nieuwe omgeving aanmaken</a>
 	</div>
 	<table>
 		<thead>

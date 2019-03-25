@@ -38,16 +38,18 @@ include(SHARED_PATH . '/header.php');
             <label for="customer_id">Gekoppelde klant</label><br>
 
                 <?php $customerlist = get_customerlist() ?>
-			<?php foreach ($customerlist as $customer) : ?>
+
 
                 <select name="customer_id" id="customer_id" required>
                 <option value="" disabled selected hidden>Kies een klant</option>
+                    <?php foreach ($customerlist as $customer) : ?>
                 <option value="<?=$customer->customer_id; ?>"><?=$customer->customer_name; ?></option>
+                    <?php endforeach; ?>
             </select>
 
 
 
-<?php endforeach; ?>
+
 
  </form>
      <div class="buttons_bottom">
