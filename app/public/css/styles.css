@@ -165,7 +165,7 @@ tr {
 
 /********* MODAL STYLING *********/
 
-#modal {
+.modal {
     margin: auto;
     position: fixed;
     top: 0;
