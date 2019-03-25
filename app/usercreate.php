@@ -1,7 +1,7 @@
 <!-- Default PHP header -->
 <?php
 
-require_once('../private/path_constants.php');
+require_once('private/path_constants.php');
 
 $page_title = 'Create user';
 
@@ -26,7 +26,7 @@ include(SHARED_PATH . '/header.php');
 	<div class="table-header-container">
 		<h2 class="tabel-header">Gebruiker aanmaken</h2>
 	</div>
-    <form method="post" action="../private/insert.php" id="form">
+    <form method="post" action="private/insert.php" id="form">
         <div class="form_container">    
             <div class="form_block form_full_length">
                 <label>
@@ -87,10 +87,10 @@ include(SHARED_PATH . '/header.php');
     </div> 
 </div>
 
-<meta http-equiv="refresh" content="1801; ../public/login.php" />
+<meta http-equiv="refresh" content="1801; login" />
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="../private/UserJavascript.js">
+<script type="text/javascript" src="private/UserJavascript.js">
 </script>
 
 <!-- Default PHP footer -->
