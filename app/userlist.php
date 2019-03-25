@@ -7,7 +7,7 @@ $page_title = 'Userlist';
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
-require_once(PRIVATE_PATH . '/class/User.php');
+require_once(CLASS_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
@@ -34,7 +34,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 
 	 <div class="table-header-container">
 		<h2 class="tabel-header">Gebruikersoverzicht</h2>
-		<a href="createuser">Nieuwe gebruiker aanmaken</a>
+		<a href="usercreate">Nieuwe gebruiker aanmaken</a>
 	</div>
 	<table>
 		<thead>

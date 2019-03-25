@@ -3,9 +3,10 @@ RewriteEngine on
 
 RewriteRule ^userlist$ userlist.php [L]
 RewriteRule ^systemoverview$ systemoverview.php [L]
-RewriteRule ^createuser$ createuser.php [L]
+RewriteRule ^usercreate$ usercreate.php [L]
 RewriteRule ^useredit$ useredit.php [L]
 RewriteRule ^login$ login.php [L]
+RewriteRule ^logout$ logout.php [L]
 
 <Files .htaccess>
 order allow,deny

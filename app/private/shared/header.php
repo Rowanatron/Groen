@@ -13,20 +13,20 @@ $pagename = basename($_SERVER['PHP_SELF']);
     <title><?= $page_title; ?></title>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" media="all" href="<?php echo url_for('/css/css-reset.css'); ?>">
-    <link rel="stylesheet" media="all" href="<?php echo url_for('/css/styles.css'); ?>">
+    <link rel="stylesheet" media="all" href="css/css-reset.css">
+    <link rel="stylesheet" media="all" href="css/styles.css">
 	<?php if ($pagename == "usercreate.php" || $pagename == "useredit.php" ): ?>
-	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/form.css'); ?>">
+	<link rel="stylesheet" media="all" href="css/form.css">
 	<?php endif; ?>
 	<?php if ($pagename == "systemoverview.php"): ?>
-	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/sys-overview.css'); ?>">
+	<link rel="stylesheet" media="all" href="css/sys-overview.css">
 	<?php endif; ?>
   </head>
 
   <body>
   	<header>
 	  	<div class="container">
-          <a class="logo" href="systemoverview"> <img class="logo" src="<?= url_for('/img/logo.jpg'); ?>" alt="Logo"> </a>
+          <a class="logo" href="systemoverview"> <img class="logo" src="img/logo.jpg" alt="Logo"> </a>
           
 		  <ul>
 		  
