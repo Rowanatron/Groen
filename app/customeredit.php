@@ -17,10 +17,42 @@ session_expired();
 only_for_admins();
 
 include(SHARED_PATH . '/header.php');
-if($_POST['customer_id'] == 0) {
-    header("Location: customerlist.php");
-} else {
-$customer = get_customer_by_id($_POST['customer_id']);
+// if($_POST['customer_id'] == 0) {
+//     header("Location: customerlist.php");
+// } else {
+// $customer = get_customer_by_id($_POST['customer_id']);
+// }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    
+    $original_customer_name = $_POST['original_customer_name'];
+    $customer_id = $_POST['customer_id'];
+    $customer_name = $_POST['customer_name'];
+
+    
+    if ($original_customer_name != $customer_name) {
+        $customer1 = get_customer_by_customer_name($customer_name);
+    
+        if (strtolower($customer->get_customer_name()) == strtolower($customer_name)){
+            $message = "Bewerken mislukt! Deze klantnaam bestaat al";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            ?>
+            <meta http-equiv="refresh" content="0; customerlist.php" />
+            <?php
+            exit();
+        }
+    }
+     
+     else {
+        $updated_customer = new Customer($customer_id, $customer_name);
+        update_customer($updated_customer);
+     }
+    
+    ?>
+        <meta http-equiv="refresh" content="0; customerlist.php" />
+        <?php
+        exit();
+
 }
 ?>
 
