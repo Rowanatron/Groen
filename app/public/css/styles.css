@@ -17,7 +17,7 @@ body {
     position: relative;
 }
 
-a {
+a {F
     color: #4A4A4A;
     text-decoration: none; 
 }
@@ -165,7 +165,7 @@ tr {
 
 /********* MODAL STYLING *********/
 
-#modal {
+.modal {
     margin: auto;
     position: fixed;
     top: 0;
@@ -174,7 +174,8 @@ tr {
     background-color: rgba(200, 200, 200, .7);
     height: 100%;
     width: 100%;
-    visibility: hidden;
+    visibility: hidden; 
+    
 }
 
 #modal-content {
@@ -182,15 +183,64 @@ tr {
     height: 400px;
     background-color:#fff;
     margin: 200px auto 0 auto;
-    padding: 60px;
+    border: 1px solid #E2E9F0;
 }
 
 #modal-content h1 {
-    color: #4a4a4a;
+    color: #E2E9F0;
     font-size: 1.1em;
     margin-bottom: 20px;
 }
 
 #modal-content p {
     margin-bottom: 20px;
+}
+
+#button-container {
+    padding: 20px;
+}
+
+#modal-content button {
+    float: right;
+    margin-left: 10px;
+}
+
+#modal-title, #modal-p {
+    height: 40px;
+    line-height: 40px;
+    padding: 20px;
+}
+
+#modal-title {
+    border-bottom: 1px solid #E2E9F0;
+}
+
+
+#modal-p {
+    text-align: center;
+}
+
+#modal-content button {
+    font-size: .8em;
+      background-color: white;
+      padding: 1em;
+    border-radius: 2px;
+    border: 1px solid #99AFC6;
+      color:#99AFC6;
+    float: right;
+    margin-left: 1em;
+    -webkit-transition: background-color 300ms, color 300ms, border-color 300ms; /* Safari */
+    transition: background-color 300ms, color 300ms, border-color 300ms;
+}
+
+#modal-content button:hover {
+    background-color: #54ce54;
+  color: white;
+  border-color: #54ce54;
+}
+
+#modal-content button.annuleren:hover {
+    background-color: #EB1312 !important;
+    color: white;
+    border-color: #EB1312;
 }
