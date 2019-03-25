@@ -2,9 +2,9 @@
 
 <?php
 
-require_once('../private/path_constants.php');
+require_once('path_constants.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
-require_once(PRIVATE_PATH . '/User.php');
+require_once(CLASS_PATH . '/User.php');
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -52,7 +52,7 @@ $testuser = get_user_by_username($username);
 if (strtolower($testuser->get_username()) == strtolower($username)){
     $message = "Deze gebruikersnaam bestaat al";
     echo "<script type='text/javascript'>alert('$message');</script>"; ?>
-    <meta http-equiv="refresh" content="0; ../public/createuser.php" />
+    <meta http-equiv="refresh" content="0; ../usercreate.php" />
     <?php
     exit();    
 }
@@ -65,7 +65,7 @@ $user = new User(0, $username, $hashed_password, $given_name, $family_name, $ema
 insert_user($user);
 
 ?>
-    <meta http-equiv="refresh" content="0; ../public/userlist.php" />
+    <meta http-equiv="refresh" content="0; ../userlist.php" />
     <?php
     exit();
 }
