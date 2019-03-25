@@ -65,14 +65,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 <div id="content" class="container">
 	<div class="table-header-container">
-		<h2 class="tabel-header">Customer aanmaken</h2>
+		<h2 class="tabel-header">Klant aanmaken</h2>
 	</div>
     <form method="post" action="customercreate.php" id="form">
         <div class="form_container">    
             <div class="form_block form_full_length">
                 <label>
                     Klantnaam<br>
-                    <input id="test_customer_name" name="customer_name" type="text" minlength="5" maxlength="45" onkeydown="setTimeout(error_customer_name, 1500)" required/>
+                    <input id="test_customer_name" name="customer_name" type="text" minlength="2" maxlength="45" onkeydown="setTimeout(error_customer_name, 1500)" required/>
                 </label>
                 <br>
                 <p id="error_customer_name" class="error_message"></p>
@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <meta http-equiv="refresh" content="1801; login.php" />
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="private/js/customer.js">
+<script type="text/javascript" src="private/js/customer_crud.js">
 </script>
 
 <!-- Default PHP footer -->
