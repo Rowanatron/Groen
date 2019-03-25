@@ -57,10 +57,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<td><?=$user->family_name; ?></td>
 				<td><?=$user->role; ?></td>
 				<td>
-					<form action="useredit" method="post">
-						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
-						<input type="image" name="submit" src="img/edit_pencil.png" onmouseover="this.src='img/edit-hover.png';" onmouseout="this.src='img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
-					</form>
+					<a href="useredit.php?id=<?= $user->get_user_id() ?>" alt="bewerk">
+						<img type="image" src="img/edit_pencil.png" onmouseover="this.src='img/edit-hover.png';" onmouseout="this.src='img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
+					</a>
 				</td>
 				<td>
 					<form id="userdelete-<?= $user->username; ?>" action="userlist" method="post">
