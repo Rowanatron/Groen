@@ -89,9 +89,5 @@ include(SHARED_PATH . '/header.php');
 
 <meta http-equiv="refresh" content="1801; login" />
 
-<!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="private/UserJavascript.js">
-</script>
-
 <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>
