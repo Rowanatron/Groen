@@ -1,6 +1,6 @@
 <?php
 
-include_once 'DatabasePDO.php';
+include_once 'private/DatabasePDO.php';
 include_once 'Customer.php';
 
 function get_customerlist() {
