@@ -36,7 +36,6 @@ if(isset($_GET['id'])) {
             exit();
         } else {
             $updated_customer = new Customer($customer_id, $customer_name);
-            var_dump($updated_customer);
             update_customer($updated_customer);
         }
     ?>
@@ -45,7 +44,7 @@ if(isset($_GET['id'])) {
         exit();
     }
 }
-if (!$customer->get_customer_id()) {
+if (!isset($_GET['id'])) {
 	header("Location: customerlist.php");
 }
 
@@ -64,7 +63,7 @@ if (!$customer->get_customer_id()) {
             <div class="form_block form_full_length">
                 <label>
                     Klantnaam<br>
-                    <input id="test_customer_name" name="customer_name" type="text" minlength="2" maxlength="45" onkeydown="setTimeout(error_username, 1500)" value="<?=$customer->customer_name; ?>" required/>
+                    <input id="test_customer_name" name="customer_name" type="text" minlength="2" maxlength="45" onkeydown="setTimeout(error_customer_name, 1500)" value="<?=$customer->customer_name; ?>" required/>
                 </label>
                 <br>
                 <p id="error_customer_name" class="error_message"></p>
@@ -92,7 +91,7 @@ if (!$customer->get_customer_id()) {
 </div>
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="private/js/customer.js"></script>
+<script type="text/javascript" src="private/js/customer_crud.js"></script>
 <script type="text/javascript" src="private/js/modal.js"></script>
 
 <!-- Default PHP footer -->
