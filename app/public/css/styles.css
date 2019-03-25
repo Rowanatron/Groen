@@ -17,7 +17,7 @@ body {
     position: relative;
 }
 
-a {
+a {F
     color: #4A4A4A;
     text-decoration: none; 
 }
@@ -174,7 +174,7 @@ tr {
     background-color: rgba(200, 200, 200, .7);
     height: 100%;
     width: 100%;
-    /* visibility: hidden; */
+    visibility: hidden; 
     
 }
 
