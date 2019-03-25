@@ -1,9 +1,9 @@
 <?php
 
-require_once('../private/path_constants.php');
+require_once(PRIVATE_PATH .'/path_constants.php');
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
-require_once(PRIVATE_PATH . '/User.php');
+require_once(CLASS_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //     $_SESSION["is_admin"] = true;
             // }
             $_SESSION["user"] = $user;
-            header("Location: systemoverview.php");
+            header("Location: systemoverview");
         } else {
             $message = 'Onbekende combinatie van gebruikersnaam en wachtwoord.';
         }
