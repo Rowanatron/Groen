@@ -56,7 +56,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 						<input type="hidden" name="action" value="delete_customer" />
 						<input type="hidden" name="customer_id" value="<?=$customer->customer_id; ?>" />
 						<input type="hidden" name="customer_name" value="<?=$customer->customer_name; ?>" />
-						<input type="image" src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';" border="0" alt="delete" style="width: 7%; height: 7%;" />
+						<img class="img-remove" src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" onclick="showModal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')" />
 					</form>
 				</td>
 				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
@@ -67,13 +67,13 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 	</table>
 </div>
 
-<div id="modal">
+<div class="modal" id="modal">
 	<div id="modal-content">
-		<div id="modal-title"><h1>Klant verwijderen</h1></div>
-		<div id="modal-p"><p>Weet u zeker dat u de klant wilt verwijderen?</p></div>
+		<div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
+		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
 		<div id="button-container">
-			<button class="verwijderen">Klant verwijderen</button>
-			<button class="annuleren">Annuleren</button>
+			<button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Gebruiker verwijderen</button>
+			<button onClick="hideModal()" class="annuleren">Annuleren</button>
 		</div>
 	</div>
 </div>
@@ -81,4 +81,5 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 <meta http-equiv="refresh" content="1801; login.php" />
 
 <!-- Default PHP footer -->
+<script type="text/javascript" src="private/js/modal.js"></script>
 <?php include('private/shared/footer.php')?>
