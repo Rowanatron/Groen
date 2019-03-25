@@ -46,10 +46,12 @@ only_for_admins();
 		</thead>
         <tbody>
 		<?php $environmentlist = get_environmentlist() ?>
-			<?php foreach ($environmentlist as $environment) : ?>
+			<?php foreach ($environmentlist as $environment) :
+				
+				?>
 			<tr>
 				<td><?=$environment->environment_name; ?></td>
-				<td><?=$environment->customer_name; ?></td>
+				<td><?=$get_customer_by_id(($environment->customer_id))->customer_name; ?></td>
 				<td>
 					<form action="environmentedit" method="post">
 						<input type="hidden" name="environment_id" value="<?=$environment->environment_id; ?>"/>
