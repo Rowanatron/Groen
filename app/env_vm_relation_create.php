@@ -43,8 +43,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="table-header-container">
             <h2 class="tabel-header">Relaties</h2>
         </div>
-
-        <form method="post" action="env_vm_relation_create.php" id="form" class="form_block form_full_length">
+        <div class="form_container">
+        <div method="post" action="env_vm_relation_create.php" id="form" class="form_block form_full_length">
 
             <label for="vm_name_from">Machine 1</label><br>
 
@@ -60,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-            <label for="bidirectional">Relatie</label><br>
+            <br><label for="bidirectional">Relatie</label><br>
 
                 <select name="bidirectional" id="bidirectional" required>
                     <option value="" disabled selected hidden>Relatie</option>
@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
 
 
-            <label for="vm_name_to">Machine 2</label><br>
+            <br><label for="vm_name_to">Machine 2</label><br>
 
                 <select name="vm_name_to" id="vm_name_to" required>
                     <option value="" disabled selected hidden>Kies een machine</option>
@@ -79,19 +79,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
 
 
-            <label>
-                Omschrijving<br>
+            <br><label> Omschrijving<br>
                 <input id="test_description" name="relation_description" type="text" maxlength="255" onkeydown="setTimeout(error_description, 1500)"/>
                 <p id="error_description" class="error_message"></p>
             </label>
             <br>
+        </div>
     </div>
 
 
         </form>
         <div class="buttons_bottom">
             <button class="volgende" form="form" type="submit">Opslaan</button>
-            <button class="annuleren" onclick="window.location.href ='userlist';">Annuleren</button>
+            <button class="annuleren" onclick="window.location.href ='environmentlist';">Afbreken</button>
         </div>
 
 
