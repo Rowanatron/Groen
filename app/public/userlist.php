@@ -49,7 +49,8 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach (get_userlist() as $user) : ?>
+			<?php $userlist = get_userlist() ?>
+			<?php foreach ($userlist as $user) : ?>
 			<tr>
 				<td><?=$user->username; ?></td>
 				<td><?=$user->given_name; ?></td>
@@ -62,14 +63,13 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 					</form>
 				</td>
 				<td>
-					<form action="userlist" method="post" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen?');">
+					<form id="userdelete-<?= $user->username; ?>" action="userlist" method="post">
 						<input type="hidden" name="action" value="delete_user" />
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>" />
 						<input type="hidden" name="username" value="<?=$user->username; ?>" />
-						<input type="image" src="../public/img/delete.png" onmouseover="this.src='../public/img/delete-hover.png';" onmouseout="this.src='../public/img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" />
+						<img src="../public/img/delete.png" onmouseover="this.src='../public/img/delete-hover.png';" onmouseout="this.src='../public/img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" onclick="showModal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')" />
 					</form>
 				</td>
-				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
 			</tr>
 			<?php endforeach; ?>
 		
@@ -77,13 +77,14 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 	</table>
 </div>
 
-<div id="modal">
+<div class="modal" id="modal">
 	<div id="modal-content">
+
 		<div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
-		<div id="modal-p"><p>Weet u zeker dat u user wil verwijderen</p></div>
+		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wil verwijderen</p></div>
 		<div id="button-container">
-			<button class="verwijderen">Gebruiker verwijderen</button>
-			<button class="annuleren">Annuleren</button>
+			<button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Gebruiker verwijderen</button>
+			<button onClick="hideModal()" class="annuleren">Annuleren</button>
 		</div>
 	</div>
 </div>
@@ -91,4 +92,5 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 <meta http-equiv="refresh" content="1801; ../public/login.php" />
 
 <!-- Default PHP footer -->
+<script type="text/javascript" src="../private/modal.js"></script>
 <?php include(SHARED_PATH . '/footer.php')?>
