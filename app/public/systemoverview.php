@@ -31,12 +31,46 @@ include(SHARED_PATH . '/header.php');
     ?>
 </div>
 
+
+<style>
+    .progress-bar {
+        width: calc(100%);
+        height: 3px;
+        background: #e0e0e0;
+        /* padding: 3px; */
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+    }
+
+    .progress-bar-fill {
+        display: block;
+        height: 3px;
+        background: green;
+        /* border-radius: 3px; */
+        /*transition: width 250ms ease-in-out;*/
+        transition: width 5s ease-in-out;
+    }
+</style>
+
+
 <!-- Hier komt de content -->
 <div id="content" class="container">
+
     <div class="system-overview-header-container">
         <h1>Systeem overzicht</h1>
     </div>
     <div class="system-overview-servers-container">
+
+        <div class="progress-bar">
+            <span class="progress-bar-fill" style="width: 0%"></span>
+        </div>
+
+        <!-- <script>
+            $(".progress-bar-fill").css({
+                "width": "100%",
+                "transition": "3s"
+            });
+        </script> -->
+
         <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
 
         <?php
@@ -64,7 +98,7 @@ include(SHARED_PATH . '/header.php');
                     </div>
                     <div class="key-value">
                         <div class="key">Memory:</div>
-                        <div class="value"><?php echo $vm->getMemory(); ?> GB</div>    
+                        <div class="value"><?php echo $vm->getMemory(); ?> GB</div>
                     </div>
                 </div>
                 <div class="server-info-bottom">
@@ -84,12 +118,30 @@ include(SHARED_PATH . '/header.php');
 </div>
 
 
+
+
+
 <!--Auto-refresh van het virtual machine overzicht -->
 <script>
+
+    function reload_pbar() {
+        $(".progress-bar-fill").css({
+            "width": "100%",
+            "transition": "10s"
+        });
+    }
+
     var $content = $("#content");
-    setInterval(function() {
-        $content.load("./systemoverview.php #content");
-    }, 10000);
+
+    function reload_servers() {
+        $content.load("./systemoverview.php #content", reload_pbar);
+    }
+
+    reload_pbar();
+    setInterval(reload_servers, 10000);
+
+    /** Shorthand notatie */
+    // setInterval(function() {$content.load("./systemoverview.php .progress-bar");}, 10000);
 </script>
 
 <?php include(SHARED_PATH . '/footer.php') ?> 
