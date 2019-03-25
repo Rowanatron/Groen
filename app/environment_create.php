@@ -1,13 +1,13 @@
 <?php
 
-require_once('../private/path_constants.php');
+require_once('private/path_constants.php');
 
 $page_title = 'Omgeving aanmaken';
 
 require_once(PRIVATE_PATH . '/functions.php');
-require_once(PRIVATE_PATH . '/Environment.php');
+require_once(CLASS_PATH . '/Environment.php');
 require_once(PRIVATE_PATH . '/environment_functions.php');
-require_once(PRIVATE_PATH . '/Customer.php');
+require_once(CLASS_PATH . '/Customer.php');
 require_once(PRIVATE_PATH . '/customer_functions.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
@@ -18,7 +18,6 @@ session_start();
 // de derde wordt aangeroepen op alle pagina's waar alleen admins mogen komen
 is_logged_in();
 session_expired();
-only_for_admins();
 
 include(SHARED_PATH . '/header.php');
 ?>
