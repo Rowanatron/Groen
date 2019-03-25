@@ -1,17 +1,11 @@
 RewriteEngine on
 # RewriteRule ^([a-z]+)\/?$ public/$1.php [NC]
 
-RewriteRule ^userlist$ public/userlist.php [L]
-RewriteRule ^systemoverview$ public/systemoverview.php [L]
-RewriteRule ^createuser$ public/createuser.php [L]
-RewriteRule ^useredit$ public/useredit.php [L]
-RewriteRule ^login$ public/login.php [L]
-
-RewriteRule ^public/userlist$ public/userlist.php [L]
-RewriteRule ^public/systemoverview$ public/systemoverview.php [L]
-RewriteRule ^public/createuser$ public/createuser.php [L]
-RewriteRule ^public/login$ public/login.php [L]
-RewriteRule ^public/useredit$ public/useredit.php [L]
+RewriteRule ^userlist$ userlist.php [L]
+RewriteRule ^systemoverview$ systemoverview.php [L]
+RewriteRule ^createuser$ createuser.php [L]
+RewriteRule ^useredit$ useredit.php [L]
+RewriteRule ^login$ login.php [L]
 
 <Files .htaccess>
 order allow,deny

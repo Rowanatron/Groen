@@ -2,7 +2,7 @@
 
 function get_sorted_virtualmachine_list() {
     include_once(PRIVATE_PATH . '/VirtualMachine.php');
-    include_once 'ApiConnector.php';
+    include_once (PRIVATE_PATH . '/ApiConnector.php');
 
     $api_connection = new ApiConnector;
 

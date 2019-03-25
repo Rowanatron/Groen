@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="/stylesheet.css">
 
 <?php
-require_once('../private/path_constants.php');
+require_once('path_constants.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
-require_once(PRIVATE_PATH . '/User.php');
+require_once(CLASS_PATH . '/User.php');
 
 $original_username = $_POST['original_username'];
 $user_id = $_POST['user_id'];
