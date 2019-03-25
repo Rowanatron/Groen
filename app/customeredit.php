@@ -11,7 +11,6 @@ require_once(CLASS_PATH . '/Customer.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
-
 is_logged_in();
 session_expired();
 only_for_admins();
@@ -19,50 +18,32 @@ only_for_admins();
 include(SHARED_PATH . '/header.php');
 
 if(isset($_GET['id'])) {
-	$customer = get_customer_by_id($_GET['id']);
-} else if(isset($_POST['customer_id'])) {
-	// POST DINGEN HIER
-    $customer = get_customer_by_id($_POST['customer_id']);
-    
+    $customer = get_customer_by_id($_GET['id']);
+} else if (isset($_POST['customer_id'])) {
+    $original_customer_name = $_POST['original_customer_name'];
+    $customer_id = $_POST['customer_id'];
+    $customer_name = $_POST['customer_name'];
 
-    // if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if ($original_customer_name != $customer_name) {
+        $customer1 = get_customer_by_customer_name($customer_name);
     
-        $original_customer_name = $_POST['original_customer_name'];
-        $customer_id = $_POST['customer_id'];
-        $customer_name = $_POST['customer_name'];
-    
-        
-        if ($original_customer_name != $customer_name) {
-            $customer1 = get_customer_by_customer_name($customer_name);
-        
-            if (strtolower($customer1->get_customer_name()) == strtolower($customer_name)){
-                $message = "Bewerken mislukt! Deze klantnaam bestaat al";
-                echo "<script type='text/javascript'>alert('$message');</script>";
-                ?>
-                <meta http-equiv="refresh" content="0; customerlist.php" />
-                <?php
-                exit();
-            }
-        }
-         
-         else {
-            $updated_customer = new Customer($customer_id, $customer_name);
-            update_customer($updated_customer);
-         }
-        
-        ?>
+        if (strtolower($customer1->get_customer_name()) == strtolower($customer_name)){
+            $message = "Bewerken mislukt! Deze klantnaam bestaat al";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            ?>
             <meta http-equiv="refresh" content="0; customerlist.php" />
             <?php
             exit();
-    
-    // }
-
-
-
-
-
-
-
+        } else {
+            $updated_customer = new Customer($customer_id, $customer_name);
+            var_dump($updated_customer);
+            update_customer($updated_customer);
+        }
+    ?>
+        <meta http-equiv="refresh" content="0; customerlist.php" />
+        <?php
+        exit();
+    }
 }
 if (!$customer->get_customer_id()) {
 	header("Location: customerlist.php");
@@ -98,7 +79,6 @@ if (!$customer->get_customer_id()) {
     <div class="buttons_bottom">
         <button class="btn-user-save" form="form-edit" type="submit">Klant opslaan</button>
 		<button class="btn-user-delete" id="show_modal" onclick="showModal('<?= $customer->customer_name; ?>', 'form-delete')" value="delete-customer">Klant verwijderen</button>
- <!--       <button class="btn-user-delete" form="form-delete" type="submit">Gebruiker verwijderen</button> -->
         <button class="btn-user-cancel" onclick="window.location.href = 'customerlist.php';"> Annuleren </button>
     </div>       
 </div>

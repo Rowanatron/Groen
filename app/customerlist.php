@@ -11,13 +11,11 @@ require_once('private/class/Customer.php');
 require_once('private/authorisation_functions.php');
 
 session_start();
-
 is_logged_in();
 session_expired();
 only_for_admins();
 
 include('private/shared/header.php');
-
 
 // Code om klant te verwijderen
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_customer')) {
