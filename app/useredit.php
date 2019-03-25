@@ -1,13 +1,13 @@
 <!-- Default PHP header -->
 <?php
 
-require_once('../private/path_constants.php');
+require_once('private/path_constants.php');
 
 $page_title = 'Bewerk gebruiker';
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
-require_once(PRIVATE_PATH . '/User.php');
+require_once(CLASS_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
@@ -18,7 +18,7 @@ only_for_admins();
 
 include(SHARED_PATH . '/header.php');
 if($_POST['user_id'] == 0) {
-    header("Location: userlist.php");
+    header("Location: userlist");
 } else {
 $user = get_user_by_id($_POST['user_id']);
 }
@@ -30,7 +30,7 @@ $user = get_user_by_id($_POST['user_id']);
 		<h2 class="tabel-header">Gebruiker bewerken</h2>
 	</div>
 
-    <form method="post" action="../private/edit.php" id="form-edit">
+    <form method="post" action="private/user_edit.php" id="form-edit">
         <input type=hidden name="user_id" value="<?=$user->user_id; ?>"/>
         <input type=hidden name="original_username" value="<?=$user->username; ?>"/>
         <div class="form_container">
@@ -117,11 +117,9 @@ $user = get_user_by_id($_POST['user_id']);
 	</div>
 </div>
 
-<meta http-equiv="refresh" content="1801; ../public/login.php" />
-
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="../private/UserJavascript.js"></script>
-<script type="text/javascript" src="../private/modal.js"></script>
+<script type="text/javascript" src="private/js/UserJavascript.js"></script>
+<script type="text/javascript" src="private/js/modal.js"></script>
 
 <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>

@@ -13,20 +13,20 @@ $pagename = basename($_SERVER['PHP_SELF']);
     <title><?= $page_title; ?></title>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" media="all" href="<?php echo url_for('/css/css-reset.css'); ?>">
-    <link rel="stylesheet" media="all" href="<?php echo url_for('/css/styles.css'); ?>">
-	<?php if ($pagename == "createuser.php" || $pagename == "useredit.php" ): ?>
-	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/form.css'); ?>">
+    <link rel="stylesheet" media="all" href="css/css-reset.css">
+    <link rel="stylesheet" media="all" href="css/styles.css">
+	<?php if ($pagename == "usercreate.php" || $pagename == "useredit.php" ): ?>
+	<link rel="stylesheet" media="all" href="css/form.css">
 	<?php endif; ?>
-	<?php if ($pagename == "systemoverview.php" || $pagename == "systemoverview2.php" ): ?>
-	<link rel="stylesheet" media="all" href="<?php echo url_for('/css/sys-overview.css'); ?>">
+	<?php if ($pagename == "systemoverview.php"): ?>
+	<link rel="stylesheet" media="all" href="css/sys-overview.css">
 	<?php endif; ?>
   </head>
 
   <body>
   	<header>
 	  	<div class="container">
-          <a class="logo" href="systemoverview.php"> <img class="logo" src="<?= url_for('/img/logo.jpg'); ?>" alt="Logo"> </a>
+          <a class="logo" href="systemoverview"> <img class="logo" src="img/logo.jpg" alt="Logo"> </a>
           
 		  <ul>
 		  
@@ -34,7 +34,7 @@ $pagename = basename($_SERVER['PHP_SELF']);
 				<a href="systemoverview">Monitor</a>
 			</li>
 			
-			<li <?php if($pagename == "userlist.php" || $pagename == "createuser.php" || $pagename == "useredit.php") : ?>class="active"<?php endif; ?>>
+			<li <?php if($pagename == "userlist.php" || $pagename == "usercreate.php" || $pagename == "useredit.php") : ?>class="active"<?php endif; ?>>
 			<?php 
 			$user = $_SESSION["user"];
 			if ($user->get_role() === "admin") {
@@ -43,6 +43,6 @@ $pagename = basename($_SERVER['PHP_SELF']);
 			</li>
 			<?php } ?>
           </ul>
-          <a class="uitloggen-link-header" href="../public/logout.php">Uitloggen</a>
+          <a class="uitloggen-link-header" href="logout">Uitloggen</a>
         </div>
     </header> 

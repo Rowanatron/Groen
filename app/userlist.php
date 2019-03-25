@@ -1,13 +1,13 @@
 <!-- Default PHP header -->
 <?php
 
-require_once('../private/path_constants.php');
+require_once('private/path_constants.php');
 
 $page_title = 'Userlist';
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
-require_once(PRIVATE_PATH . '/User.php');
+require_once(CLASS_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
@@ -34,7 +34,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 
 	 <div class="table-header-container">
 		<h2 class="tabel-header">Gebruikersoverzicht</h2>
-		<a href="createuser">Nieuwe gebruiker aanmaken</a>
+		<a href="usercreate">Nieuwe gebruiker aanmaken</a>
 	</div>
 	<table>
 		<thead>
@@ -59,7 +59,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<td>
 					<form action="useredit" method="post">
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
-						<input type="image" name="submit" src="../public/img/edit_pencil.png" onmouseover="this.src='../public/img/edit-hover.png';" onmouseout="this.src='../public/img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
+						<input type="image" name="submit" src="img/edit_pencil.png" onmouseover="this.src='img/edit-hover.png';" onmouseout="this.src='img/edit_pencil.png';" border="0" alt="bewerk" style="width: 10%; height: 10%;" />
 					</form>
 				</td>
 				<td>
@@ -67,7 +67,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 						<input type="hidden" name="action" value="delete_user" />
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>" />
 						<input type="hidden" name="username" value="<?=$user->username; ?>" />
-						<img src="../public/img/delete.png" onmouseover="this.src='../public/img/delete-hover.png';" onmouseout="this.src='../public/img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" onclick="showModal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')" />
+						<img src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" onclick="showModal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')" />
 					</form>
 				</td>
 			</tr>
@@ -89,8 +89,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 	</div>
 </div>
 
-<meta http-equiv="refresh" content="1801; ../public/login.php" />
-
 <!-- Default PHP footer -->
-<script type="text/javascript" src="../private/modal.js"></script>
+<script type="text/javascript" src="private/js/modal.js"></script>
 <?php include(SHARED_PATH . '/footer.php')?>
