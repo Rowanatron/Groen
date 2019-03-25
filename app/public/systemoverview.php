@@ -47,7 +47,8 @@ include(SHARED_PATH . '/header.php');
         background: green;
         /* border-radius: 3px; */
         /*transition: width 250ms ease-in-out;*/
-        transition: width 5s ease-in-out;
+        /* transition: width 5s ease-in-out; */
+        /* transition-timing-function: linear; */
     }
 </style>
 
@@ -63,13 +64,6 @@ include(SHARED_PATH . '/header.php');
         <div class="progress-bar">
             <span class="progress-bar-fill" style="width: 0%"></span>
         </div>
-
-        <!-- <script>
-            $(".progress-bar-fill").css({
-                "width": "100%",
-                "transition": "3s"
-            });
-        </script> -->
 
         <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
 
@@ -127,14 +121,12 @@ include(SHARED_PATH . '/header.php');
     function reload_pbar() {
         $(".progress-bar-fill").css({
             "width": "100%",
-            "transition": "10s"
+            "transition": "10s linear"
         });
     }
 
-    var $content = $("#content");
-
     function reload_servers() {
-        $content.load("./systemoverview.php #content", reload_pbar);
+        $("#content").load("./systemoverview.php #content", reload_pbar);
     }
 
     reload_pbar();
@@ -142,6 +134,7 @@ include(SHARED_PATH . '/header.php');
 
     /** Shorthand notatie */
     // setInterval(function() {$content.load("./systemoverview.php .progress-bar");}, 10000);
+
 </script>
 
 <?php include(SHARED_PATH . '/footer.php') ?> 
