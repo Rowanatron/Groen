@@ -9,6 +9,7 @@ require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
 require_once(CLASS_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
+require_once(PRIVATE_PATH . '/user_edit');
 
 session_start();
 
@@ -17,11 +18,27 @@ session_expired();
 only_for_admins();
 
 include(SHARED_PATH . '/header.php');
-if($_POST['user_id'] == 0) {
-    header("Location: userlist");
+
+
+if(isset($_POST['user_id'])) {
+	$id = $_POST['user_id'];
+	$username = $_POST['username'];
+	$given_name = $_POST['given_name'];
+	$family_name = $_POST['family_name'];
+	$email = $_POST['email'];
+	$role = $_POST['role'];
+	
+	$password = isset($_POST['password']);
+	$repeat_password = isset($_POST['edit_repeat_password']);
+	
+	$edit_user = new User($id, $username, $password, $given_name, $family_name, $email, $role);
+	edit_user($edit_user);
+} else if(isset($_GET['id'])) {
+	$edit_user = get_user_by_id($_GET['id']);
 } else {
-$user = get_user_by_id($_POST['user_id']);
+	// header("Location: userlist");
 }
+
 ?>
 
 <!-- Hier komt de content -->
@@ -30,14 +47,14 @@ $user = get_user_by_id($_POST['user_id']);
 		<h2 class="tabel-header">Gebruiker bewerken</h2>
 	</div>
 
-    <form method="post" action="private/user_edit.php" id="form-edit">
-        <input type=hidden name="user_id" value="<?=$user->user_id; ?>"/>
-        <input type=hidden name="original_username" value="<?=$user->username; ?>"/>
+    <form method="post" action="useredit" id="form-edit">
+        <input type=hidden name="user_id" value="<?=$edit_user->user_id; ?>"/>
+        <input type=hidden name="original_username" value="<?=$edit_user->username; ?>"/>
         <div class="form_container">
             <div class="form_block form_full_length">
                 <label>
                     Gebruikersnaam<br>
-                    <input id="test_username" name="username" type="text" minlength="5" maxlength="45" onkeydown="setTimeout(error_username, 1500)" value="<?=$user->username; ?>" required/>
+                    <input id="test_username" name="username" type="text" minlength="5" maxlength="45" onkeydown="setTimeout(error_username, 1500)" value="<?=$edit_user->username; ?>" required />
                 </label>
                 <br>
                 <p id="error_username" class="error_message"></p>
@@ -45,42 +62,42 @@ $user = get_user_by_id($_POST['user_id']);
             <div class="form_block">
                 <label>
                     Wachtwoord<br>
-                    <input id="test_password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(error_password, 1500)"/>
+                    <input id="test_password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(error_password, 1500)" />
                 </label>
                 <p id="error_pass" class="error_message"></p>
             </div>
             <div class="form_block">
                 <label>
                     Herhaal wachtwoord<br>
-                    <input id="test_password_repeat" name="repeat_password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(error_password_repeat, 1500)"/>
+                    <input id="test_password_repeat" name="repeat_password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(error_password_repeat, 1500)" />
                 </label>
                 <p id="error_pass_repeat" class="error_message"></p>
             </div>        
             <div class="form_block">
                 <label>
                     Voornaam <br>
-                    <input id="test_given_name" name="given_name" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(error_given_name, 1500)" value="<?=$user->given_name; ?>" required/>
+                    <input id="test_given_name" name="given_name" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(error_given_name, 1500)" value="<?=$edit_user->given_name; ?>" required />
                 </label>
                 <p id="error_given_name" class="error_message"></p>
             </div>
             <div class="form_block">
                 <label>
                     Achternaam<br>
-                    <input id="test_family_name" name="family_name" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(error_family_name, 1500)" value="<?=$user->family_name; ?>"required/>
+                    <input id="test_family_name" name="family_name" type=text minlength="2" maxlenght="45" onkeydown="setTimeout(error_family_name, 1500)" value="<?=$edit_user->family_name; ?>"required />
                 </label>
                 <p id="error_family_name" class="error_message"></p>
             </div>
             <div class="form_block form_full_length">
                 <label>
                     Emailadres<br>
-                    <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email, 1500)" value="<?=$user->email; ?>" required/>
+                    <input id="test_email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email, 1500)" value="<?=$edit_user->email; ?>" required />
                 </label>
                 <p id="error_email" class="error_message"></p>
             </div>
             <div class="form_block form_full_length">
                 <label for="role">Selecteer rol:</label><br>
                 <select name="role" id="role" required>
-                    <?php if ($user->role == "user"){
+                    <?php if ($edit_user->role == "user"){
                      ?>
                         <option value="user" selected>gebruiker</option>
                      <option value="admin">admin</option>
