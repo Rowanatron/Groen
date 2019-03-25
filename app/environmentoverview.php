@@ -1,12 +1,12 @@
 <?php
 
-require_once('../private/path_constants.php');
+// require_once('../private/path_constants.php');
 
 $page_title = 'Environmentlist';
 
-// require_once(PRIVATE_PATH . '/functions.php');
-// require_once(PRIVATE_PATH . '/environment_functions.php');
-// require_once(PRIVATE_PATH . '/User.php');
+require_once(PRIVATE_PATH . '/functions.php');
+require_once('/environment_functions.php');
+require_once('/Environment.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
@@ -15,13 +15,13 @@ is_logged_in();
 session_expired();
 only_for_admins();
 
-include(SHARED_PATH . '/header.php');
+// include(SHARED_PATH . '/header.php');
 
 // // Code om omgeving te verwijderen
 // if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_environment')) {
 // 	$environment_id = $_POST['environment_id'];
-// 	$environmentname = $_POST['environmentname'];
-// 	delete_user($environment_id);
+// 	$environment_name = $_POST['environment_name'];
+// 	delete_environment($environment_id);
 // 	echo "<script type='text/javascript'>alert('Omgeving " . $environmentname . " verwijderd.');</script>";
 // }
 
@@ -45,10 +45,10 @@ include(SHARED_PATH . '/header.php');
 			</tr>
 		</thead>
         <tbody>
-			<!-- <?php $environmentlist = get_environmentlist() ?>
+		<?php $environmentlist = get_environmentlist() ?>
 			<?php foreach ($environmentlist as $environment) : ?>
 			<tr>
-				<td><?=$environment->environmentname; ?></td>
+				<td><?=$environment->environment_name; ?></td>
 				<td><?=$environment->customer_name; ?></td>
 				<td>
 					<form action="environmentedit" method="post">
@@ -57,10 +57,10 @@ include(SHARED_PATH . '/header.php');
 					</form>
 				</td>
 				<td>
-					<form id="environmentdelete-<?= $environment->environmentname; ?>" action="environmentlist" method="post">
+					<form id="environmentdelete-<?= $environment->environment_name; ?>" action="environmentlist" method="post">
 						<input type="hidden" name="action" value="delete_environment" />
 						<input type="hidden" name="environment_id" value="<?=$environment->environment_id; ?>" />
-						<input type="hidden" name="environmentname" value="<?=$environment->environmentname; ?>" />
+						<input type="hidden" name="environment_name" value="<?=$environment->environment_name; ?>" />
 						<img src="../public/img/delete.png" onmouseover="this.src='../public/img/delete-hover.png';" onmouseout="this.src='../public/img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" onclick="showModal('<?= $environment->environmentname; ?>', 'environmentdelete-<?= $environment->environmentname; ?>')" />
 					</form>
 				</td>
@@ -71,7 +71,7 @@ include(SHARED_PATH . '/header.php');
 	</table>
 </div>
 
-<div class="modal" id="modal">
+<!-- <div class="modal" id="modal">
 	<div id="modal-content">
 
 		<div id="modal-title"><h1>Omgeving verwijderen</h1></div>
@@ -81,7 +81,7 @@ include(SHARED_PATH . '/header.php');
 			<button onClick="hideModal()" class="annuleren">Annuleren</button>
 		</div>
 	</div>
-</div> -->
+</div> --> -->
 
 
 
