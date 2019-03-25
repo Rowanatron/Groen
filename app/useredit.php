@@ -115,25 +115,25 @@ if(isset($_POST['user_id'])) {
     </form>
     <form style="display:none;" method="post" action="userlist" id="form-delete">
 		<input type="hidden" name="action" value="delete_user" />
-        <input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
-        <input type="hidden" name="username" value="<?=$user->username; ?>"/>
+        <input type="hidden" name="user_id" value="<?=$edit_user->user_id; ?>"/>
+        <input type="hidden" name="username" value="<?=$edit_user->username; ?>"/>
     </form>
     <div class="buttons_bottom">
         <button class="btn-user-save" form="form-edit" type="submit">Gebruiker opslaan</button>
-		<button class="btn-user-delete" id="show_modal" onclick="show_modal('<?= $user->username; ?>', 'form-delete')" value="delete-user">Gebruiker verwijderen</button>
+		<button class="btn-user-delete" id="show_modal" onclick="show_modal('<?= $edit_user->username; ?>', 'form-delete')" value="delete-user">Gebruiker verwijderen</button>
  <!--       <button class="btn-user-delete" form="form-delete" type="submit">Gebruiker verwijderen</button> -->
         <button class="btn-user-cancel" onclick="window.location.href = 'userlist';"> Annuleren </button>
     </div>       
 </div>
 <div class="modal" id="modal">
-    <div id="modal-content">
-        <div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
-        <div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
-        <div id="button-container">
-            <button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Gebruiker verwijderen</button>
-            <button onClick="hide_modal()" class="annuleren">Annuleren</button>
-        </div>
-    </div>
+	<div id="modal-content">
+		<div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
+		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
+		<div id="button-container">
+			<button id="modal-delete-button" class="verwijderen" form="" type="submit">Gebruiker verwijderen</button>
+			<button onClick="hide_modal()" class="annuleren">Annuleren</button>
+		</div>
+	</div>
 </div>
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
