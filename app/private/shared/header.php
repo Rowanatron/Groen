@@ -41,6 +41,12 @@ $pagename = basename($_SERVER['PHP_SELF']);
 		  ?>
 				<a href="userlist">Gebruikers</a>
 			</li>
+			<li <?php if($pagename == "customerlist.php" || $pagename == "customercreate.php" || $pagename == "customeredit.php") : ?>class="active"<?php endif; ?>>
+				<a href="customerlist.php">Klanten</a>
+			</li>
+			<li <?php if($pagename == "environmentlist.php") : ?>class="active"<?php endif; ?>>
+				<a href="environmentlist.php">Omgevingen</a>
+			</li>
 			<?php } ?>
           </ul>
           <a class="uitloggen-link-header" href="logout">Uitloggen</a>

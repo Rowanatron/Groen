@@ -31,7 +31,7 @@ include(SHARED_PATH . '/header.php');
             <div class="form_block form_full_length">
                 <label>
                     Gebruikersnaam<br>
-                    <input id="test_username" name="username" type="text" minlength="5" maxlength="45" onkeydown="setTimeout(error_username, 1500)" required/>
+                    <input autofocus id="test_username" name="username" type="text" minlength="5" maxlength="45" onkeydown="setTimeout(error_username, 1500)" required/>
                 </label>
                 <br>
                 <p id="error_username" class="error_message"></p>
