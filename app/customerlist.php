@@ -84,4 +84,4 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 <meta http-equiv="refresh" content="1801; /public/login.php" />
 
 <!-- Default PHP footer -->
-<?php include('private/shared/footer.php')?>
+<?php include(SHARED_PATH . 'private/shared/footer.php')?>
