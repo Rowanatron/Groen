@@ -18,6 +18,26 @@ is_logged_in();
 session_expired();
 
 include(SHARED_PATH . '/header.php');
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+    $environment_id = 1;
+    $vm_name_from = $_POST['vm_name_from'];
+    $vm_name_to = $_POST['vm_name_to'];
+    $description = $_POST['description'];
+    $bidirectional = $_POST['bidirectional'];
+
+    var_dump($environment_id, $vm_name_from, $vm_name_to, $description, $bidirectional);
+
+
+    vm_relation_add($environment_id, $vm_name_from, $vm_name_to, $description, $bidirectional);
+
+
+
+}
+
+
 ?>
 
 
@@ -27,39 +47,49 @@ include(SHARED_PATH . '/header.php');
             <h2 class="tabel-header">Relaties</h2>
         </div>
 
-        <form method="post" action="private/environment_insert.php" id="form" class="form_block form_full_length">
+        <form method="post" action="env_vm_relation_create.php" id="form" class="form_block form_full_length">
 
             <label for="vm_name_from">Machine 1</label><br>
 
-            <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+
 
                 <select name="vm_name_from" id="vm_name_from" required>
                     <option value="" disabled selected hidden>Kies een machine</option>
-                    <option value="<?=$vm->name; ?>"><?=$vm->name; ?></option>
-                </select>
+                    <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+                    <option value="<?=$vm->getName(); ?>"><?=$vm->getName(); ?></option>
+                    <?php endforeach; ?>
+        </select>
 
-            <?php endforeach; ?>
+
 
 
             <label for="bidirectional">Relatie</label><br>
 
                 <select name="bidirectional" id="bidirectional" required>
                     <option value="" disabled selected hidden>Relatie</option>
-                    <option value="FALSE">enkelvoudig</option>
-                    <option value="TRUE">tweevoudig</option>
+                    <option value="0">enkelvoudig</option>
+                    <option value="1">tweevoudig</option>
                 </select>
 
 
             <label for="vm_name_to">Machine 2</label><br>
 
-            <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
-
                 <select name="vm_name_to" id="vm_name_to" required>
                     <option value="" disabled selected hidden>Kies een machine</option>
-                    <option value="<?=$vm->name; ?>"><?=$vm->name; ?></option>
+                    <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+                        <option value="<?=$vm->getName(); ?>"><?=$vm->getName(); ?></option>
+                    <?php endforeach; ?>
                 </select>
 
-            <?php endforeach; ?>
+
+            <label>
+                Omschrijving<br>
+                <input id="test_description" name="description" type="text" maxlength="255" onkeydown="setTimeout(error_description, 1500)" required/>
+                <p id="error_description" class="error_message"></p>
+            </label>
+            <br>
+    </div>
+
 
         </form>
         <div class="buttons_bottom">
@@ -73,4 +103,4 @@ include(SHARED_PATH . '/header.php');
 
 
 
-<?php include(SHARED_PATH . '/footer.php')?>
+<?php include(SHARED_PATH . '/footer.php') ?>

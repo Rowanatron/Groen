@@ -5,6 +5,7 @@ function get_sorted_virtualmachine_list() {
     include_once (CLASS_PATH . '/ApiConnector.php');
     require_once(CLASS_PATH . '/DatabasePDO.php');
 
+
     $api_connection = new ApiConnector;
 
     $virtual_machine_list = array();
@@ -35,14 +36,16 @@ function vm_relation_add($environment_id, $vm_name_from, $vm_name_to, $descripti
     $conn = $pdo->get();
 
     $data = [
-        'environment_id' => $environment_id,
-        'vm_from' => $vm_name_from,
-        'vm_to' => $vm_name_to,
-        'description' => $description,
+        'environment_id' => 1,
+        'vm_id_from' => "ASDFASDFA",
+        'vm_id_to' => "ASDFADSF",
+        'relation_description' => "FUCK DEZE SHIT",
     ];
 
-    $query = "INSERT INTO env_vm_relation (`environment_id`,`vm_from`,`vm_to`,`description`)
-	VALUES(:environment_id, :vm_from, :vm_to, :description);";
+    var_dump($environment_id, $vm_name_from, $vm_name_to, $description, $bidirectional);
+
+    $query = "INSERT INTO env_vm_relation (`environment_id`,`vm_id_from`,`vm_id_to`,`relation_description`)
+	VALUES(:environment_id, :vm_id_from, :vm_id_to, :relation_description);";
 
     try{
         $statement = $conn->prepare($query);
@@ -51,10 +54,9 @@ function vm_relation_add($environment_id, $vm_name_from, $vm_name_to, $descripti
         echo "Oops er ging iets mis {$e->getMessage()}";
     }
 
-    if ($bidirectional){
+    if ($bidirectional == 1){
 
-        $query = "INSERT INTO env_vm_relation (`environment_id`,`vm_from`,`vm_to`,`description`)
-	VALUES(:environment_id, :vm_to, :vm_from, :description);";
+        $query = "INSERT INTO env_vm_relation (`environment_id`, `vm_id_from`, `vm_id_to`, `relation_description`) VALUES (:environment_id, :vm_to, :vm_from, :description);";
 
         try{
             $statement = $conn->prepare($query);
