@@ -1,13 +1,13 @@
 <!-- Default PHP header -->
 <?php
 
-require_once('../private/path_constants.php');
+require_once('private/path_constants.php');
 
 $page_title = 'Bewerk gebruiker';
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
-require_once(PRIVATE_PATH . '/User.php');
+require_once(CLASS_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 
 session_start();
@@ -18,7 +18,7 @@ only_for_admins();
 
 include(SHARED_PATH . '/header.php');
 if($_POST['user_id'] == 0) {
-    header("Location: userlist.php");
+    header("Location: userlist");
 } else {
 $user = get_user_by_id($_POST['user_id']);
 }
@@ -30,7 +30,7 @@ $user = get_user_by_id($_POST['user_id']);
 		<h2 class="tabel-header">Gebruiker bewerken</h2>
 	</div>
 
-    <form method="post" action="../private/edit.php" id="form-edit">
+    <form method="post" action="private/user_edit.php" id="form-edit">
         <input type=hidden name="user_id" value="<?=$user->user_id; ?>"/>
         <input type=hidden name="original_username" value="<?=$user->username; ?>"/>
         <div class="form_container">
@@ -96,23 +96,30 @@ $user = get_user_by_id($_POST['user_id']);
             </div>       
         </div>  
     </form>
-    <form style="display:none;" method="post" action="userlist" id="form-delete" onsubmit="return confirm('Weet u zeker dat u <?=$user->username; ?> wilt verwijderen?');">
+    <form style="display:none;" method="post" action="userlist" id="form-delete">
 		<input type="hidden" name="action" value="delete_user" />
         <input type="hidden" name="user_id" value="<?=$user->user_id; ?>"/>
         <input type="hidden" name="username" value="<?=$user->username; ?>"/>
     </form>
     <div class="buttons_bottom">
-        <button class="btn-user-save" form="form-edit" type="submit">Gebruiker opslaan</button>        
-        <button class="btn-user-delete" form="form-delete" type="submit">Gebruiker verwijderen</button>
+        <button class="btn-user-save" form="form-edit" type="submit">Gebruiker opslaan</button>
+		<button class="btn-user-delete" id="show_modal" onclick="showModal('<?= $user->username; ?>', 'form-delete')" value="delete-user">Gebruiker verwijderen</buton>
+ <!--       <button class="btn-user-delete" form="form-delete" type="submit">Gebruiker verwijderen</button> -->
         <button class="btn-user-cancel" onclick="window.location.href = 'userlist';"> Annuleren </button>
     </div>       
 </div>
-
-<meta http-equiv="refresh" content="1801; ../public/login.php" />
+<div class="modal" id="modal">
+	<div id="modal-content">
+		<h1>Gebruiker verwijderen</h1>
+		<p>Weet u zeker dat u <span id="modal-username"></span> wil verwijderen</p>
+		<button id="modal-delete-button" form="form-delete" type="submit">Gebruiker verwijderen</button>
+		<button onClick="hideModal()">Annuleren</button>
+	</div>
+</div>
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="../private/UserJavascript.js">
-</script>
+<script type="text/javascript" src="private/js/UserJavascript.js"></script>
+<script type="text/javascript" src="private/js/modal.js"></script>
 
 <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>
