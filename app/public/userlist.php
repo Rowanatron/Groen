@@ -79,10 +79,13 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 
 <div class="modal" id="modal">
 	<div id="modal-content">
-		<h1>Gebruiker verwijderen</h1>
-		<p>Weet u zeker dat u <span id="modal-username"></span> wil verwijderen</p>
-		<button id="modal-delete-button" form="form-delete" type="submit">Gebruiker verwijderen</button>
-		<button onClick="hideModal()">Annuleren</button>
+
+		<div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
+		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wil verwijderen</p></div>
+		<div id="button-container">
+			<button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Gebruiker verwijderen</button>
+			<button onClick="hideModal()" class="annuleren">Annuleren</button>
+		</div>
 	</div>
 </div>
 
