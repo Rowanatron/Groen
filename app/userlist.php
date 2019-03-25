@@ -67,7 +67,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 						<input type="hidden" name="action" value="delete_user" />
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>" />
 						<input type="hidden" name="username" value="<?=$user->username; ?>" />
-						<img class="img-remove" src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" onclick="showModal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')" />
+						<img class="img-remove" src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';"border="0" alt="delete" style="width: 7%; height: 7%;" onclick="show_modal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')" />
 					</form>
 				</td>
 			</tr>
@@ -83,7 +83,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
 		<div id="button-container">
 			<button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Gebruiker verwijderen</button>
-			<button onClick="hideModal()" class="annuleren">Annuleren</button>
+			<button onClick="hide_modal()" class="annuleren">Annuleren</button>
 		</div>
 	</div>
 </div>
