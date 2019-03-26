@@ -31,28 +31,6 @@ include(SHARED_PATH . '/header.php');
     ?>
 </div>
 
-
-<style>
-    .progress-bar {
-        width: calc(100%);
-        height: 3px;
-        background: #e0e0e0;
-        /* padding: 3px; */
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
-    }
-
-    .progress-bar-fill {
-        display: block;
-        height: 3px;
-        background: green;
-        /* border-radius: 3px; */
-        /*transition: width 250ms ease-in-out;*/
-        /* transition: width 5s ease-in-out; */
-        /* transition-timing-function: linear; */
-    }
-</style>
-
-
 <!-- Hier komt de content -->
 <div id="content" class="container">
 
@@ -60,11 +38,12 @@ include(SHARED_PATH . '/header.php');
         <h1>Systeem overzicht</h1>
     </div>
     <div class="system-overview-servers-container">
-
         <div class="progress-bar">
             <span class="progress-bar-fill" style="width: 0%"></span>
         </div>
-
+        <div class="desc">
+            <span>Ververs elke 10 seconden</span>
+        </div>
         <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
 
         <?php

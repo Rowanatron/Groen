@@ -108,3 +108,17 @@ button.aanmaken:hover, button.btn-user-save:hover {
   color: white;
   border-color: #54ce54;
 }
+
+.table-header-container {
+  padding: 15px;
+  border-top: 1px solid #E2E9F0;
+  border-left: 1px solid #E2E9F0;
+  border-right: 1px solid #E2E9F0;
+  height: 38px;
+  line-height: 38px;
+}
+
+.tabel-header {
+  font-size: 1.1em;
+  display: inline;
+}
