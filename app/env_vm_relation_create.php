@@ -44,8 +44,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2 class="tabel-header">Relaties</h2>
         </div>
         <div class="form_container">
-        <div method="post" action="env_vm_relation_create.php" id="form" class="form_block form_full_length">
-
+        <form method="post" action="env_vm_relation_create.php" id="form" class="form_block form_full_length">
+        <div id="dynamic_input"
             <label for="vm_name_from">Machine 1</label><br>
 
 
@@ -84,12 +84,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p id="error_description" class="error_message"></p>
             </label>
             <br>
-        </div>
+        </form>
     </div>
-
+    </div>
 
         </form>
         <div class="buttons_bottom">
+            <input type="button" value="Voeg een relatie toe" onClick="add_input('dynamic_input');">
             <button class="volgende" form="form" type="submit">Opslaan</button>
             <button class="annuleren" onclick="window.location.href ='environmentlist';">Afbreken</button>
         </div>
