@@ -48,7 +48,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 				<td><?=$customer->customer_name; ?></td>
 				<td>
 					<a href="customeredit.php?id=<?= $customer->get_customer_id() ?>">
-						<i class="material-icons">mode_edit</i>
+						<i class="material-icons table-icons">mode_edit</i>
 					</a>
 				</td>
 				<td>
@@ -58,7 +58,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 						<input type="hidden" name="customer_name" value="<?=$customer->get_customer_name(); ?>" />
 					</form>
 					<a onclick="show_modal('<?= $customer->get_customer_name(); ?>', 'delete-<?= $customer->get_customer_name(); ?>')">
-						<i class="material-icons">delete</i>
+						<i class="material-icons table-icons">delete</i>
 					</a>
 				</td>
 				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->

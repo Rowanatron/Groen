@@ -68,8 +68,9 @@ tr {
 }
 
 .userimg {
-    height: 20px;
-    width: 20px;
+    height: 22px;
+    width: 22px;
+    border-radius: 15%;
 }
 
 td img {
@@ -80,7 +81,7 @@ td img {
 
 /********* ICON LINK *********/
 
-.material-icons {
+.table-icons {
     font-size: 17px !important;
 }
 
