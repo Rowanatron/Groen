@@ -14,20 +14,20 @@ session_expired();
 is_logged_in();
 
 include(SHARED_PATH . '/header.php');
-// $welkom = 'Welkom, ' .$_SESSION["given_name"]. '. ';
+ //$welkom = 'Welkom, ' .$_SESSION["given_name"]. '. ';
 
-// if (isset($_SESSION['message'])) {
-//     $message = $_SESSION['message'];
-// }
+ if (isset($_SESSION['message'])) {
+     $message = $_SESSION['message'];
+ }
 
 ?>
 
 <!-- Message aan gebruiker -->
 <div id="message-area" class='container'>
-    <?php 
-    //  echo $welkom;
-    // echo isset($message) ? $message : '';
-    // unset($_SESSION['message']);
+    <?php
+     // echo $welkom;
+     echo isset($message) ? $message : '';
+     unset($_SESSION['message']);
     ?>
 </div>
 
@@ -113,6 +113,12 @@ include(SHARED_PATH . '/header.php');
 
     /** Shorthand notatie */
     // setInterval(function() {$content.load("./systemoverview.php .progress-bar");}, 10000);
+
+    var welkom = document.getElementById('message-area');
+
+    if(welkom.innerText == '') {
+        welkom.style.display = "none";
+    }
 
 </script>
 
