@@ -23,9 +23,14 @@ include(SHARED_PATH . '/header.php');
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user')) {
 	$user_id = $_POST['user_id'];
 	$username = $_POST['username'];
+	if($_SESSION["user"]->get_user_id() == $user_id){
+		echo "<script type='text/javascript'>alert('Het is helaas niet mogelijk om jezelf te verwijderen.');</script>";
+	} else {
 	delete_user($user_id);
 	echo "<script type='text/javascript'>alert('Gebruiker " . $username . " verwijderd.');</script>";
+	}
 }
+
 
 ?>
 
