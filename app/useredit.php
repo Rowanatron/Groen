@@ -7,6 +7,7 @@ $page_title = 'Bewerk gebruiker';
 
 require_once(PRIVATE_PATH . '/functions.php');
 require_once(PRIVATE_PATH . '/user_functions.php');
+require_once(PRIVATE_PATH . '/img_functions.php');
 require_once(CLASS_PATH . '/User.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 require_once(PRIVATE_PATH . '/user_edit.php');
@@ -32,9 +33,10 @@ if(isset($_POST['user_id'])) {
 	$repeat_password = $_POST['repeat_password'];
 	
 	$edit_user = new User($id, $username, $password, $given_name, $family_name, $email, $role);
-    edit_user($edit_user, $repeat_password);
-    if ($_POST['img'])
-    update_img();
+    if ($_FILES['user_img']['size'] > 0) {
+		upload_file($id, $_FILES['user_img']);
+	}
+	edit_user($edit_user, $repeat_password);
 } else if(isset($_GET['id'])) {
 	$edit_user = get_user_by_id($_GET['id']);
 } else {
@@ -49,7 +51,7 @@ if(isset($_POST['user_id'])) {
 		<h2 class="tabel-header">Gebruiker bewerken</h2>
 	</div>
 
-    <form method="post" action="useredit" id="form-edit">
+    <form method="post" action="useredit" id="form-edit" enctype="multipart/form-data">
         <input type=hidden name="user_id" value="<?=$edit_user->user_id; ?>"/>
         <input type=hidden name="original_username" value="<?=$edit_user->username; ?>"/>
         <div class="form_container">
@@ -112,7 +114,11 @@ if(isset($_POST['user_id'])) {
                     ?>
                     
                 </select>
-            </div>       
+            </div>
+            <div class="form_block form_full_length">
+                <label for="user_img">Upload profielfoto:</label><br>
+				<input type="file" name="user_img" id="user_img">
+            </div>   			
         </div>  
     </form>
     <form style="display:none;" method="post" action="userlist" id="form-delete">
