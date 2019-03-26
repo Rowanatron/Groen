@@ -76,7 +76,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 	<div id="modal-content">
 
 		<div id="modal-title"><h1>Omgeving verwijderen</h1></div>
-		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
+		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-name"></span> wilt verwijderen?</p></div>
 		<div id="button-container">
 			<button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Omgeving verwijderen</button>
 			<button onClick="hide_modal()" class="annuleren">Annuleren</button>
