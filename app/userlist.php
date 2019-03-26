@@ -64,7 +64,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<td><?= $user->role; ?></td>
 				<td>
 					<a href="useredit.php?id=<?= $user->get_user_id() ?>">
-						<i class="material-icons">mode_edit</i>
+						<i class="material-icons table-icons">mode_edit</i>
 					</a>
 				</td>
 				<td>
@@ -74,7 +74,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 						<input type="hidden" name="username" value="<?=$user->username; ?>" />
 					</form>
 					<a onclick="show_modal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')">
-						<i class="material-icons">delete</i>
+						<i class="material-icons table-icons">delete</i>
 					</a>
 				</td>
 			</tr>

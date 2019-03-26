@@ -43,7 +43,7 @@ function get_user_by_username($username) {
 	$row = $statement->fetch(PDO::FETCH_ASSOC);
 	
 	$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role'], $row['img']);
-	
+	$user->set_img($row['img']);
 	return $user;
 }
 
