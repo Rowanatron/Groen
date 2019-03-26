@@ -22,8 +22,8 @@ var counter = 1;
 
 function add_input(div_name){
         var new_div = document.createElement('div');
-        new_div.innerHTML = "Relatie" + (counter + 1) + document.getElementById(div_name);
-        document.getElementById(div_name).appendChild(newdiv);
+        new_div.innerHTML = 'Hallo';
+        document.getElementById(div_name).appendChild(new_div);
         counter++;
 
 }
