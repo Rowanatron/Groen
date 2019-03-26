@@ -156,7 +156,7 @@ function upload_img($user){
 		'img' => $user->get_img()
 	];
 
-	$query = "UPDATE user SET `img` = :img, WHERE (`user_id` = :user_id);";
+	$query = "UPDATE user SET `img` = :img WHERE (`user_id` = :user_id);";
 
 	try{
 		$statement = $conn->prepare($query);

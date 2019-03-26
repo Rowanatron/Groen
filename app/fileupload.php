@@ -63,6 +63,7 @@ if ($uploadOk == 0) {
 $current_user->set_img($target_file_name);
 upload_img($current_user);
 }
+
 ?>
 
 <!-- Hier komt de content -->
