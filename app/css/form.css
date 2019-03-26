@@ -30,7 +30,9 @@ form {
   margin-right: 50%;
 }
 
-input[type=text], input[type=password], input[type=email], select#role, select#customer{
+input[type=text], input[type=password],
+input[type=email], select#role, select#customer,
+select#vm_name_from, select#bidirectional, select#vm_name_to, #test_description {
   width: 100%;
   padding: 12px 20px;
   margin-top: 0.8em;
@@ -44,7 +46,7 @@ input {
   color: #8e8e8e;
 }
 
-#role, #customer{
+#role, #customer, #vm_name_from, #bidirectional, #vm_name_to {
   cursor: pointer;
   height: 40px;
   background-color: white;
@@ -148,5 +150,32 @@ label div {
 
 label {
 	width: 100%;
+}
+
+/******* ENV_VM_RELATION_CREATE *******/
+
+#dynamic_input, #extra_fields div {
+    margin-top: 15px;
+    background-color: #FAFBFD;
+    margin-right: 10%;
+    position: relative;
+}
+
+#add-relationship-btn {
+    margin-top: 15px;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: center;
+}
+
+
+.material-icons {
+    cursor: pointer;
+}
+
+#del-relationship-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
