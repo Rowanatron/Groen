@@ -1,9 +1,11 @@
 <?php
 
-function get_sorted_virtualmachine_list() {
+function get_sorted_virtualmachine_list()
+{
     include_once(CLASS_PATH . '/VirtualMachine.php');
-    include_once (CLASS_PATH . '/ApiConnector.php');
+    include_once(CLASS_PATH . '/ApiConnector.php');
     require_once(CLASS_PATH . '/DatabasePDO.php');
+
 
     $api_connection = new ApiConnector;
 
@@ -30,38 +32,34 @@ function get_sorted_virtualmachine_list() {
 }
 
 
-function vm_relation_add($environment_id, $vm_name_from, $vm_name_to, $description, $bidirectional) {
+function vm_relation_add($environment_id, $vm_name_from, $vm_name_to, $relation_description, $bidirectional)
+{
     $pdo = new DatabasePDO();
     $conn = $pdo->get();
 
+
     $data = [
         'environment_id' => $environment_id,
-        'vm_from' => $vm_name_from,
-        'vm_to' => $vm_name_to,
-        'description' => $description,
+        'vm_name_from' => $vm_name_from,
+        'vm_name_to' => $vm_name_to,
+        'relation_description' => $relation_description,
     ];
 
-    $query = "INSERT INTO env_vm_relation (`environment_id`,`vm_from`,`vm_to`,`description`)
-	VALUES(:environment_id, :vm_from, :vm_to, :description);";
 
-    try{
+    $query = "INSERT INTO `server_monitor`.`env_vm_relation` (`environment_id`, `vm_name_from`, `vm_name_to`, `description`) VALUES (:environment_id, :vm_name_from, :vm_name_to, :relation_description);
+";
+
+
+    try {
         $statement = $conn->prepare($query);
         $statement->execute($data);
-    } catch(PDOException $e) {
+    } catch (PDOException $e) {
         echo "Oops er ging iets mis {$e->getMessage()}";
     }
 
-    if ($bidirectional){
+    if ($bidirectional == 1) {
 
-        $query = "INSERT INTO env_vm_relation (`environment_id`,`vm_from`,`vm_to`,`description`)
-	VALUES(:environment_id, :vm_to, :vm_from, :description);";
-
-        try{
-            $statement = $conn->prepare($query);
-            $statement->execute($data);
-        } catch(PDOException $e) {
-            echo "Oops er ging iets mis {$e->getMessage()}";
-        }
+        vm_relation_add($environment_id, $vm_name_to, $vm_name_from, $relation_description, 0);
 
     }
 
