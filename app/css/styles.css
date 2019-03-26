@@ -227,11 +227,11 @@ tr {
 
 #modal-content button {
     font-size: .8em;
-      background-color: white;
-      padding: 1em;
+    background-color: white;
+    padding: 1em;
     border-radius: 2px;
     border: 1px solid #99AFC6;
-      color:#99AFC6;
+    color:#99AFC6;
     float: right;
     margin-left: 1em;
     -webkit-transition: background-color 300ms, color 300ms, border-color 300ms; /* Safari */
@@ -253,31 +253,11 @@ tr {
 
 /********* ICON LINK *********/
 
-.icon-link {
-	display: inline-block;
-	height: 1.3em;
-	border: none;
-	background-size: cover;
+.material-icons {
+	width: 1em;
+	height: 1em;
 }
 
-.icon-link:hover {
+.material-icons {
 	cursor: pointer;
-}
-
-.edit-icon {
-	width: 1.3em;
-	background-image: url('../img/edit_pencil.png');
-}
-
-.edit-icon:hover {
-	background-image: url('../img/edit-hover.png');
-}
-
-.delete-icon {
-	width: 1.1em;
-	background-image: url('../img/delete.png');
-}
-
-.delete-icon:hover {
-	background-image: url('../img/delete-hover.png');
 }

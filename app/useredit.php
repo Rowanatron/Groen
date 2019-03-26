@@ -128,7 +128,7 @@ if(isset($_POST['user_id'])) {
 <div class="modal" id="modal">
 	<div id="modal-content">
 		<div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
-		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
+		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-name"></span> wilt verwijderen?</p></div>
 		<div id="button-container">
 			<button id="modal-delete-button" class="verwijderen" form="" type="submit">Gebruiker verwijderen</button>
 			<button onClick="hide_modal()" class="annuleren">Annuleren</button>
