@@ -20,7 +20,8 @@ function get_userlist() {
 	$userArray = array();
 	
 	while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-		$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role'], $row['img']);
+		$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role']);
+		$user->set_img($row['img']);
 		array_push($userArray, $user);
 	}
 	

@@ -77,3 +77,8 @@ tr {
 .material-icons {
     cursor: pointer;
 }
+
+.userimg{
+    height: 20px;
+    width: 20px;
+}

@@ -36,7 +36,7 @@ if(isset($_POST['user_id'])) {
     if ($_FILES['user_img']['size'] > 0) {
 		upload_file($id, $_FILES['user_img']);
 	}
-	edit_user($edit_user, $repeat_password);
+    edit_user($edit_user, $repeat_password);
 } else if(isset($_GET['id'])) {
 	$edit_user = get_user_by_id($_GET['id']);
 } else {
