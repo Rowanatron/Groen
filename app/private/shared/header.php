@@ -1,4 +1,7 @@
-<?php $pagename = basename($_SERVER['PHP_SELF']); ?>
+<?php 
+$pagename = basename($_SERVER['PHP_SELF']); 
+$user = $_SESSION["user"];
+?>
 
 <!doctype html>
 
@@ -25,8 +28,8 @@
 	<!-- Table styling & Google Icons -->
 	<?php if ($pagename == "userlist.php" ||  $pagename == "customerlist.php" || $pagename == "environmentlist.php") : ?>
     <link rel="stylesheet" media="all" href="css/table.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<?php endif; ?>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
@@ -51,7 +54,16 @@
 					<a href="environmentlist">Omgevingen</a>
 				</li>
 			<?php } ?>
-          </ul>
-          <a class="uitloggen-link-header" href="logout">Uitloggen</a>
+		  </ul>
+		  <div class="dropdown">
+			<div>
+				<img class="user_img" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" />
+				<i class="material-icons size-icons">keyboard_arrow_down</i>
+			
+				<div class="dropdown-content">
+					<a href="logout">Uitloggen</a>
+				</div>
+				</div>
+			</div>
         </div>
     </header> 

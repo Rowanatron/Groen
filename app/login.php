@@ -20,7 +20,6 @@ if(isset($_SESSION["logout_message"])){
     session_destroy();
 }
 
-
 skip_login_page();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

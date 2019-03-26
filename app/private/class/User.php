@@ -7,6 +7,7 @@ class User {
     var $family_name;
     var $email;
     var $role;
+    var $img;
 
 function User(){
 }
@@ -73,6 +74,13 @@ function set_role($new_role){
 }
 function get_role(){
     return $this->role;
+}
+
+function set_img($new_img){
+    $this->img = $new_img;
+}
+function get_img(){
+    return $this->img;
 }
 }
 ?>
