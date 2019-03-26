@@ -52,7 +52,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 				<td><?=(get_customer_by_id($environment->get_customer_id()))->get_customer_name(); ?></td>
 				<td>
 					<a href="environmentedit.php?id=<?= $environment->get_environment_id() ?>">
-						<i class="material-icons">mode_edit</i>
+						<i class="material-icons table-icons">mode_edit</i>
 					</a>
 				</td>
 				<td>
@@ -62,7 +62,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 						<input type="hidden" name="environment_name" value="<?=$environment->get_environment_name(); ?>" />
 					</form>
 					<a onclick="show_modal('<?= $environment->get_environment_name(); ?>', 'delete-<?= $environment->get_environment_name(); ?>')">
-						<i class="material-icons">delete</i>
+						<i class="material-icons table-icons">delete</i>
 					</a>
 				</td>
 			</tr>
