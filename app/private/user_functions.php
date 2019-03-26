@@ -145,6 +145,7 @@ function update_user($user){
 	} catch(PDOException $e) {
 		echo "Oops er ging iets mis {$e->getMessage()}";
 	}
+}
 
 function upload_img($user){
 	$pdo = new DatabasePDO();
@@ -155,7 +156,7 @@ function upload_img($user){
 		'img' => $user->get_img()
 	];
 
-	$query = "UPDATE user SET `img` = :img, WHERE (`user_id` = :user_id);";
+	$query = "UPDATE user SET `img` = :img WHERE (`user_id` = :user_id);";
 
 	try{
 		$statement = $conn->prepare($query);
@@ -165,7 +166,5 @@ function upload_img($user){
 	}
 }
 
-
-}
 
 ?>
