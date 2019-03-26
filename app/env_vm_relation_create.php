@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    
+
     $environment_name = $_POST['environment_name'];
     $customer_id = $_POST['customer_id'];
 
@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="hidden" name="environment_name" value="<?= $_GET['environment_name']?>"/>
             <input type="hidden" name="customer_id" value="<?= $_GET['customer_id']?>"/>
 
-            <div id="dynamicInput">
+            <div id="dynamic_input">
             <label for="vm_name_from">Machine 1</label><br>
 
 
@@ -180,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         <div class="buttons_bottom">
-            <input type="button" value="Voeg een relatie toe" onclick="addInput('dynamicInput', 'extra_fields');">
+            <input type="button" value="Voeg een relatie toe" onclick="add_input('dynamic_input', 'extra_fields');">
             <button class="volgende" form="form" type="submit">Opslaan</button>
             <button class="annuleren" onclick="window.location.href ='environmentlist';">Afbreken</button>
         </div>
@@ -191,13 +191,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script>
 
 
-    function addInput(divName, extra_fields){
+    function add_input(div_name, extra_fields){
 
-            var newdiv = document.createElement('div');
+            var new_div = document.createElement('div');
             var delete_button = document.createElement('div');
             delete_button.innerHTML = "<input type='button' value='Verwijder deze relatie' onclick='this.parentNode.parentNode.removeChild(this.parentNode);'/>";
-            newdiv.innerHTML = document.getElementById(divName).innerHTML + delete_button.innerHTML;
-            document.getElementById(extra_fields).appendChild(newdiv);
+            new_div.innerHTML = document.getElementById(div_name).innerHTML + delete_button.innerHTML;
+            document.getElementById(extra_fields).appendChild(new_div);
 
 
     }
