@@ -52,7 +52,7 @@ include(SHARED_PATH . '/header.php');
 
  </form>
      <div class="buttons_bottom">
-                    <button class="volgende" form="form" type="submit">Volgende stap</button>
+                    <button class="volgende" form="form" type="submit">Volgende</button>
                     <button class="annuleren" onclick="window.location.href ='userlist';">Annuleren</button>
 </div>
 

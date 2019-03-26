@@ -181,8 +181,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="buttons_bottom">
             <input type="button" value="Voeg een relatie toe" onclick="add_input('dynamic_input', 'extra_fields');">
-            <button class="volgende" form="form" type="submit">Opslaan</button>
-            <button class="annuleren" onclick="window.location.href ='environmentlist';">Afbreken</button>
+            <button class="aanmaken" form="form" type="submit">Opslaan</button>
+            <button class="annuleren" onclick="window.location.href ='environmentlist';">Annuleren</button>
+            <button class="volgende" onclick="window.location.href ='environmentcreate';">Vorige</button>
+
         </div>
 
 
