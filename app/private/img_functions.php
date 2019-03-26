@@ -20,7 +20,7 @@ function upload_file($id, $file) {
 	}
 
 	// Check file size
-	if ($_FILES["fileToUpload"]["size"] > 500000) {
+	if ($_FILES["user_img"]["size"] > 500000) {
 		$errormsg = "File is too large.";
 	}
 

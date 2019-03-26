@@ -34,7 +34,12 @@ if(isset($_POST['user_id'])) {
 	
 	$edit_user = new User($id, $username, $password, $given_name, $family_name, $email, $role);
     if ($_FILES['user_img']['size'] > 0) {
-		upload_file($id, $_FILES['user_img']);
+		// Upload file
+		$img_filename = upload_file($id, $_FILES['user_img']);
+		// Add filename to user
+		$edit_user->set_img($img_filename);
+		// Edit in database
+		upload_img($edit_user);
 	}
     edit_user($edit_user, $repeat_password);
 } else if(isset($_GET['id'])) {
@@ -116,9 +121,12 @@ if(isset($_POST['user_id'])) {
                 </select>
             </div>
             <div class="form_block form_full_length">
-                <label for="user_img">Upload profielfoto:</label><br>
-				<input type="file" name="user_img" id="user_img">
-            </div>   			
+                <label>
+					Upload profielfoto:
+					<div id="button-input-img">Upload profielfoto</div>
+					<input id="input-img" style="width: 1px;" type="file" name="user_img" id="user_img">
+				</label>
+            </div>  
         </div>  
     </form>
     <form style="display:none;" method="post" action="userlist" id="form-delete">
@@ -147,6 +155,7 @@ if(isset($_POST['user_id'])) {
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
 <script type="text/javascript" src="private/js/user_crud.js"></script>
 <script type="text/javascript" src="private/js/modal.js"></script>
+<script type="text/javascript" src="private/js/check_for_input.js"></script>
 
 <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>
