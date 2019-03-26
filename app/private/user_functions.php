@@ -145,6 +145,27 @@ function update_user($user){
 	} catch(PDOException $e) {
 		echo "Oops er ging iets mis {$e->getMessage()}";
 	}
+
+function upload_img($user){
+	$pdo = new DatabasePDO();
+	$conn = $pdo->get();
+
+	$data = [
+		'user_id' => $user->get_user_id(),
+		'img' => $user->get_img()
+	];
+
+	$query = "UPDATE user SET `img` = :img, WHERE (`user_id` = :user_id);";
+
+	try{
+		$statement = $conn->prepare($query);
+		$statement->execute($data);
+	} catch(PDOException $e) {
+		echo "Oops er ging iets mis {$e->getMessage()}";
+	}
+}
+
+
 }
 
 ?>
