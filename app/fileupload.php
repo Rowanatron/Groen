@@ -16,9 +16,11 @@ is_logged_in();
 include(SHARED_PATH . '/header.php');
 
 if(isset($_POST["submit"])) {
+$current_user = $_SESSION["user"];
 $target_dir = "img/uploads/";
 $imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
-$target_file = $target_dir . $_SESSION["user"]->get_user_id() . "." . $imageFileType;
+$target_file_name = $current_user->get_user_id() . "." . $imageFileType;
+$target_file = $target_dir . $target_file_name;
 $uploadOk = 1;
 
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -58,6 +60,8 @@ if ($uploadOk == 0) {
     }
 }
 
+$current_user->set_img($target_file_name);
+upload_img($current_user);
 }
 ?>
 
