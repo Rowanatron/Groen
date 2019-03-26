@@ -29,25 +29,26 @@ include(SHARED_PATH . '/header.php');
     <div class="form_container">
     <form method="post" action="private/environment_insert.php" id="form" class="form_block form_full_length">
         <label for = "environment_name">Omgevingsnaam</label><br/>
-        <input id="test_environment_name" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
+        <input autofocus id="test_environment" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
+        <p id="error_environment" class="error_message"></p>
 
 
-        <br>
-        <p id="error_environment_name" class="error_message"></p>
-
+        <div class="form_block form_full_length">
             <label for="customer_id">Gekoppelde klant</label><br>
 
                 <?php $customerlist = get_customerlist() ?>
-			<?php foreach ($customerlist as $customer) : ?>
+
 
                 <select name="customer_id" id="customer_id" required>
                 <option value="" disabled selected hidden>Kies een klant</option>
+                    <?php foreach ($customerlist as $customer) : ?>
                 <option value="<?=$customer->customer_id; ?>"><?=$customer->customer_name; ?></option>
+                    <?php endforeach; ?>
             </select>
+        </div>
 
 
 
-<?php endforeach; ?>
 
  </form>
      <div class="buttons_bottom">
