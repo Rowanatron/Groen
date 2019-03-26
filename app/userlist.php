@@ -52,7 +52,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 			<?php $userlist = get_userlist() ?>
 			<?php foreach ($userlist as $user) : ?>
 			<tr>
-				<td><img src="img/uploads/<?= $user->img; ?>" /></td>
+				<td><img class="userimg" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" /></td>
 				<td><?= $user->username; ?></td>
 				<td><?= $user->given_name; ?></td>
 				<td><?= $user->family_name; ?></td>

@@ -33,10 +33,6 @@ if(isset($_POST['user_id'])) {
 	
 	$edit_user = new User($id, $username, $password, $given_name, $family_name, $email, $role);
     edit_user($edit_user, $repeat_password);
-    if ($_POST['img']){
-        $edit_user->set_img($_POST['img']);
-        update_img($edit_user);
-    }
 } else if(isset($_GET['id'])) {
 	$edit_user = get_user_by_id($_GET['id']);
 } else {
