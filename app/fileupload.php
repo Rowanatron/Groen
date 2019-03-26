@@ -1,14 +1,24 @@
-
-
 <?php
 
-include('../private/class/User.php');
-$user = new User(1, "username", "pass", "voornaam", "acgterbaam", "email", "rol");
+require_once('private/path_constants.php');
+require_once(PRIVATE_PATH . '/functions.php');
+require_once(PRIVATE_PATH . '/user_functions.php');
+require_once(PRIVATE_PATH . '/authorisation_functions.php');
+require_once(CLASS_PATH . '/User.php');
+
+$page_title = 'Upload profielfoto';
+
+session_start();
+
+session_expired();
+is_logged_in();
+
+include(SHARED_PATH . '/header.php');
 
 if(isset($_POST["submit"])) {
-$target_dir = "uploads/";
+$target_dir = "img/uploads/";
 $imageFileType = strtolower(pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION));
-$target_file = $target_dir . $user->get_user_id() . "." . $imageFileType;
+$target_file = $target_dir . $_SESSION["user"]->get_user_id() . "." . $imageFileType;
 $uploadOk = 1;
 
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -51,16 +61,15 @@ if ($uploadOk == 0) {
 }
 ?>
 
+<!-- Hier komt de content -->
+<div id="content" class="container">
 
-<!DOCTYPE html>
-<html>
-<body>
+	<form action="fileupload.php" method="post" enctype="multipart/form-data">
+		Select image to upload:
+		<input type="file" name="fileToUpload" id="fileToUpload">
+		<input type="submit" value="Upload Image" name="submit">
+	</form>
 
-<form action="index.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
+</div>
 
-</body>
-</html>
+<?php include(SHARED_PATH . '/footer.php'); ?>
