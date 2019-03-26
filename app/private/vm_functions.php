@@ -37,6 +37,7 @@ function vm_relation_add($environment_id, $vm_name_from, $vm_name_to, $relation_
     $pdo = new DatabasePDO();
     $conn = $pdo->get();
 
+    var_dump($relation_description);
 
     $data = [
         'environment_id' => $environment_id,

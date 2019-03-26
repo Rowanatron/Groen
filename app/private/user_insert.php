@@ -14,6 +14,7 @@ $family_name = $_POST['family_name'];
 $email = $_POST['email'];
 $role = $_POST['role'];
 
+
 // Checks
 if (empty($username) || empty($password) || empty($repeat_password) || empty($given_name) || empty($family_name) || empty($email) || empty($role)){
     $message = "Alle velden moeten worden ingevuld";

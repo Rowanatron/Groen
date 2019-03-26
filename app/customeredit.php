@@ -57,13 +57,13 @@ if (!isset($_GET['id'])) {
 	</div>
 
     <form method="post" action="customeredit.php" id="form-edit">
-        <input type=hidden name="customer_id" value="<?=$customer->customer_id; ?>"/>
-        <input type=hidden name="original_customer_name" value="<?=$customer->customer_name; ?>"/>
+        <input type=hidden name="customer_id" value="<?=$customer->get_customer_id(); ?>"/>
+        <input type=hidden name="original_customer_name" value="<?=$customer->get_customer_name(); ?>"/>
         <div class="form_container">
             <div class="form_block form_full_length">
                 <label>
                     Klantnaam<br>
-                    <input id="test_customer_name" name="customer_name" type="text" minlength="2" maxlength="45" onkeydown="setTimeout(error_customer_name, 1500)" value="<?=$customer->customer_name; ?>" required/>
+                    <input id="test_customer_name" name="customer_name" type="text" minlength="2" maxlength="45" onkeydown="setTimeout(error_customer_name, 1500)" value="<?=$customer->get_customer_name(); ?>" required/>
                 </label>
                 <br>
                 <p id="error_customer_name" class="error_message"></p>

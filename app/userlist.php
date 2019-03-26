@@ -23,9 +23,14 @@ include(SHARED_PATH . '/header.php');
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user')) {
 	$user_id = $_POST['user_id'];
 	$username = $_POST['username'];
+	if($_SESSION["user"]->get_user_id() == $user_id){
+		echo "<script type='text/javascript'>alert('Het is helaas niet mogelijk om jezelf te verwijderen.');</script>";
+	} else {
 	delete_user($user_id);
 	echo "<script type='text/javascript'>alert('Gebruiker " . $username . " verwijderd.');</script>";
+	}
 }
+
 
 ?>
 
@@ -39,6 +44,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 	<table>
 		<thead>
 			<tr>
+				<th></th>
 				<th>Gebruikersnaam</th>
 				<th>Voornaam</th>
 				<th>Achternaam</th>
@@ -51,13 +57,14 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 			<?php $userlist = get_userlist() ?>
 			<?php foreach ($userlist as $user) : ?>
 			<tr>
-				<td><?=$user->username; ?></td>
-				<td><?=$user->given_name; ?></td>
-				<td><?=$user->family_name; ?></td>
-				<td><?=$user->role; ?></td>
+				<td><img class="userimg" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" /></td>
+				<td><?= $user->username; ?></td>
+				<td><?= $user->given_name; ?></td>
+				<td><?= $user->family_name; ?></td>
+				<td><?= $user->role; ?></td>
 				<td>
 					<a href="useredit.php?id=<?= $user->get_user_id() ?>">
-						<i class="material-icons">mode_edit</i>
+						<i class="material-icons table-icons">mode_edit</i>
 					</a>
 				</td>
 				<td>
@@ -67,7 +74,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 						<input type="hidden" name="username" value="<?=$user->username; ?>" />
 					</form>
 					<a onclick="show_modal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')">
-						<i class="material-icons">delete</i>
+						<i class="material-icons table-icons">delete</i>
 					</a>
 				</td>
 			</tr>
