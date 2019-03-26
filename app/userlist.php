@@ -39,6 +39,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 	<table>
 		<thead>
 			<tr>
+				<th></th>
 				<th>Gebruikersnaam</th>
 				<th>Voornaam</th>
 				<th>Achternaam</th>
@@ -51,10 +52,11 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 			<?php $userlist = get_userlist() ?>
 			<?php foreach ($userlist as $user) : ?>
 			<tr>
-				<td><?=$user->username; ?></td>
-				<td><?=$user->given_name; ?></td>
-				<td><?=$user->family_name; ?></td>
-				<td><?=$user->role; ?></td>
+				<td><img src="img/uploads/<?= $user->img; ?>" /></td>
+				<td><?= $user->username; ?></td>
+				<td><?= $user->given_name; ?></td>
+				<td><?= $user->family_name; ?></td>
+				<td><?= $user->role; ?></td>
 				<td>
 					<a href="useredit.php?id=<?= $user->get_user_id() ?>">
 						<i class="material-icons">mode_edit</i>
