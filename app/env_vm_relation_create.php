@@ -8,6 +8,7 @@ require_once(PRIVATE_PATH . '/functions.php');
 require_once(CLASS_PATH . '/VirtualMachine.php');
 require_once(PRIVATE_PATH . '/vm_functions.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
+require_once (CLASS_PATH . '/DatabasePDO.php');
 
 session_start();
 
@@ -18,6 +19,22 @@ is_logged_in();
 session_expired();
 
 include(SHARED_PATH . '/header.php');
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+    $environment_id = "1";
+    $vm_name_from = $_POST['vm_name_from'];
+    $vm_name_to = $_POST['vm_name_to'];
+    $relation_description = $_POST['relation_description'];
+    $bidirectional = $_POST['bidirectional'];
+
+
+    vm_relation_add($environment_id, $vm_name_from, $vm_name_to, $relation_description, $bidirectional);
+
+}
+
+
 ?>
 
 
@@ -26,45 +43,56 @@ include(SHARED_PATH . '/header.php');
         <div class="table-header-container">
             <h2 class="tabel-header">Relaties</h2>
         </div>
-
-        <form method="post" action="private/environment_insert.php" id="form" class="form_block form_full_length">
-
+        <div class="form_container">
+        <form method="post" action="env_vm_relation_create.php" id="form" class="form_block form_full_length">
+        <div id="dynamic_input"
             <label for="vm_name_from">Machine 1</label><br>
 
-            <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+
 
                 <select name="vm_name_from" id="vm_name_from" required>
                     <option value="" disabled selected hidden>Kies een machine</option>
-                    <option value="<?=$vm->name; ?>"><?=$vm->name; ?></option>
-                </select>
+                    <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+                    <option value="<?=$vm->getName(); ?>"><?=$vm->getName(); ?></option>
+                    <?php endforeach; ?>
+        </select>
 
-            <?php endforeach; ?>
 
 
-            <label for="bidirectional">Relatie</label><br>
+
+            <br><label for="bidirectional">Relatie</label><br>
 
                 <select name="bidirectional" id="bidirectional" required>
                     <option value="" disabled selected hidden>Relatie</option>
-                    <option value="FALSE">enkelvoudig</option>
-                    <option value="TRUE">tweevoudig</option>
+                    <option value="0">enkelvoudig</option>
+                    <option value="1">tweevoudig</option>
                 </select>
 
 
-            <label for="vm_name_to">Machine 2</label><br>
-
-            <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+            <br><label for="vm_name_to">Machine 2</label><br>
 
                 <select name="vm_name_to" id="vm_name_to" required>
                     <option value="" disabled selected hidden>Kies een machine</option>
-                    <option value="<?=$vm->name; ?>"><?=$vm->name; ?></option>
+                    <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+                        <option value="<?=$vm->getName(); ?>"><?=$vm->getName(); ?></option>
+                    <?php endforeach; ?>
                 </select>
 
-            <?php endforeach; ?>
+
+            <br><label> Omschrijving<br>
+                <input id="test_description" name="relation_description" type="text" maxlength="255" onkeydown="setTimeout(error_description, 1500)"/>
+                <p id="error_description" class="error_message"></p>
+            </label>
+            <br>
+        </form>
+    </div>
+    </div>
 
         </form>
         <div class="buttons_bottom">
+            <input type="button" value="Voeg een relatie toe" onClick="add_input('dynamic_input');">
             <button class="volgende" form="form" type="submit">Opslaan</button>
-            <button class="annuleren" onclick="window.location.href ='userlist';">Annuleren</button>
+            <button class="annuleren" onclick="window.location.href ='environmentlist';">Afbreken</button>
         </div>
 
 
@@ -73,4 +101,4 @@ include(SHARED_PATH . '/header.php');
 
 
 
-<?php include(SHARED_PATH . '/footer.php')?>
+<?php include(SHARED_PATH . '/footer.php') ?>

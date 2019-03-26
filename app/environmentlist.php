@@ -33,7 +33,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 
 	 <div class="table-header-container">
 		<h2 class="tabel-header">Omgevingsoverzicht</h2>
-		<a href="environment_create.php">Nieuwe omgeving aanmaken</a>
+		<a href="environmentcreate.php">Nieuwe omgeving aanmaken</a>
 	</div>
 	<table>
 		<thead>
@@ -42,7 +42,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 				<th>Gekoppelde klant</th>
 				<th></th>
 				<th></th>
-				<!-- <th></th> -->
 			</tr>
 		</thead>
         <tbody>
@@ -52,18 +51,19 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 				<td><?=$environment->get_environment_name(); ?></td>
 				<td><?=(get_customer_by_id($environment->get_customer_id()))->get_customer_name(); ?></td>
 				<td>
-					<form action="environment_edit.php" method="post">
-						<input type="hidden" name="environment_id" value="<?=$environment->environment_id; ?>"/>
-						<input type="image" name="submit" src="img/edit_pencil.png" onmouseover="this.src='img/edit-hover.png';" onmouseout="this.src='img/edit_pencil.png';" border="0" alt="bewerk" style="width: 7%; height: 7%;" />
-					</form>
+					<a href="environmentedit.php?id=<?= $environment->get_environment_id() ?>">
+						<i class="material-icons">mode_edit</i>
+					</a>
 				</td>
 				<td>
-					<form id="environmentdelete-<?= $environment->environment_name; ?>" action="environmentlist" method="post">
+					<form id="delete-<?= $environment->get_environment_name(); ?>" action="environmentlist.php" method="post">
 						<input type="hidden" name="action" value="delete_environment" />
 						<input type="hidden" name="environment_id" value="<?=$environment->get_environment_id(); ?>" />
 						<input type="hidden" name="environment_name" value="<?=$environment->get_environment_name(); ?>" />
-						<img src="img/delete.png" onmouseover="this.src='img/delete-hover.png';" onmouseout="this.src='img/delete.png';"border="0" alt="delete" style="width: 5%; height: 5%;" onclick="show_modal('<?= $environment->get_environment_name(); ?>', 'environmentdelete-<?= $environment->get_environment_name(); ?>')" />
 					</form>
+					<a onclick="show_modal('<?= $environment->get_environment_name(); ?>', 'delete-<?= $environment->get_environment_name(); ?>')">
+						<i class="material-icons">delete</i>
+					</a>
 				</td>
 			</tr>
 			<?php endforeach; ?>
@@ -76,9 +76,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 	<div id="modal-content">
 
 		<div id="modal-title"><h1>Omgeving verwijderen</h1></div>
-		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-username"></span> wilt verwijderen?</p></div>
+		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-name"></span> wilt verwijderen?</p></div>
 		<div id="button-container">
-			<button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Omgeving verwijderen</button>
+			<button id="modal-delete-button" class="verwijderen" form="" type="submit">Omgeving verwijderen</button>
 			<button onClick="hide_modal()" class="annuleren">Annuleren</button>
 		</div>
 	</div>
@@ -87,5 +87,5 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 
 
 <!-- Default PHP footer -->
-<script type="text/javascript" src="../private/modal.js"></script>
+<script type="text/javascript" src="private/js/modal.js"></script>
 <?php include(SHARED_PATH . '/footer.php')?>
