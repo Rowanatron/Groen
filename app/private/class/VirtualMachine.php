@@ -12,6 +12,9 @@ class VirtualMachine {
     private $omgeving;
     private $vCPU;
 
+    private $relation_list;
+
+
     public function __construct($hostSystem, $customer, $diskSize, $environment, $latency, $memory, $name, $omgeving, $vCPU)
     {
         $this->hostSystem = $hostSystem;
@@ -115,4 +118,16 @@ class VirtualMachine {
     {
         $this->vCPU = $vCPU;
     }
+
+    public function getRelationList()
+    {
+        return $this->relation_list;
+    }
+
+
+    public function setRelationList($relation_list)
+    {
+        $this->relation_list = $relation_list;
+    }
+
 }
