@@ -9,15 +9,22 @@
 	</title>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- General styling -->
     <link rel="stylesheet" media="all" href="css/css-reset.css">
     <link rel="stylesheet" media="all" href="css/styles.css">
 	<?php if ($pagename == "usercreate.php" || $pagename == "useredit.php" || $pagename == "customercreate.php"
         || $pagename == "customeredit.php" || $pagename=="environmentcreate.php" || $pagename =="env_vm_relation_create.php"): ?>
 	<link rel="stylesheet" media="all" href="css/form.css">
 	<?php endif; ?>
+	<!-- System overview styling -->
 	<?php if ($pagename == "systemoverview.php"): ?>
 	<link rel="stylesheet" media="all" href="css/sys-overview.css">
 	<?php endif; ?>
+	<!-- Google Icons -->
+	<?php if ($pagename == "userlist.php" ||  $pagename == "customerlist.php" || $pagename == "environmentlist.php") : ?>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<?php endif; ?>
+
   </head>
 
   <body>

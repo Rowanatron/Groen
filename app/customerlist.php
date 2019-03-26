@@ -47,15 +47,19 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 			<tr>
 				<td><?=$customer->customer_name; ?></td>
 				<td>
-					<a href="customeredit.php?id=<?= $customer->get_customer_id() ?>" class="icon-link edit-icon" alt="bewerk"></a>
+					<a href="customeredit.php?id=<?= $customer->get_customer_id() ?>">
+						<i class="material-icons">mode_edit</i>
+					</a>
 				</td>
 				<td>
-					<form id="userdelete-<?= $customer->customer_name; ?>" action="customerlist.php" method="post">
+					<form id="delete-<?= $customer->customer_name; ?>" action="customerlist.php" method="post">
 						<input type="hidden" name="action" value="delete_customer" />
 						<input type="hidden" name="customer_id" value="<?=$customer->customer_id; ?>" />
 						<input type="hidden" name="customer_name" value="<?=$customer->customer_name; ?>" />
-						<a class="icon-link delete-icon" onclick="show_modal('<?= $customer->customer_name; ?>', 'userdelete-<?= $customer->customer_name; ?>')" alt="verwijder"></a>
 					</form>
+					<a onclick="show_modal('<?= $customer->customer_name; ?>', 'delete-<?= $customer->customer_name; ?>')">
+						<i class="material-icons">delete</i>
+					</a>
 				</td>
 				<!-- <td><a href="#edit-<? // =$user->username; ?>"></a><a href="#delete-<? // =$user->username; ?>"></a></td> -->
 			</tr>

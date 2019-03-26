@@ -45,7 +45,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<th>Rol</th>
 				<th></th>
 				<th></th>
-				<!-- <th></th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -57,19 +56,22 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<td><?=$user->family_name; ?></td>
 				<td><?=$user->role; ?></td>
 				<td>
-					<a href="useredit.php?id=<?= $user->get_user_id() ?>" class="icon-link edit-icon"></a>
+					<a href="useredit.php?id=<?= $user->get_user_id() ?>">
+						<i class="material-icons">mode_edit</i>
+					</a>
 				</td>
 				<td>
 					<form id="userdelete-<?= $user->username; ?>" action="userlist" method="post">
 						<input type="hidden" name="action" value="delete_user" />
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>" />
 						<input type="hidden" name="username" value="<?=$user->username; ?>" />
-						<a class="icon-link delete-icon" onclick="show_modal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')"></a>
 					</form>
+					<a onclick="show_modal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')">
+						<i class="material-icons">delete</i>
+					</a>
 				</td>
 			</tr>
-			<?php endforeach; ?>
-		
+			<?php endforeach; ?>		
 		</tbody>
 	</table>
 </div>
