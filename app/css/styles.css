@@ -250,14 +250,3 @@ tr {
     color: white;
     border-color: #99AFC6;
 }
-
-/********* ICON LINK *********/
-
-.material-icons {
-	width: 1em;
-	height: 1em;
-}
-
-.material-icons {
-	cursor: pointer;
-}

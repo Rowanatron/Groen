@@ -145,6 +145,7 @@ function update_user($user){
 	} catch(PDOException $e) {
 		echo "Oops er ging iets mis {$e->getMessage()}";
 	}
+}
 
 function upload_img($user){
 	$pdo = new DatabasePDO();
@@ -165,7 +166,5 @@ function upload_img($user){
 	}
 }
 
-
-}
 
 ?>
