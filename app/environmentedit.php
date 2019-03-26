@@ -26,21 +26,29 @@ if(isset($_GET['id'])) {
     $environment_name = $_POST['environment_name'];
     $customer_id = $_POST['customer_id'];
 
+    
     if ($original_environment_name != $environment_name) {
         $environment1 = get_environment_by_environment_name($environment_name);
 
         if(strtolower($environment1->get_environment_name()) == strtolower($environment_name)) {
-            $message = "Bewerken mislukt! Deze Omgevingsnaam bestaat al";
+            $message = "Bewerken mislukt! Deze omgevingsnaam bestaat al";
             echo "<script type='text/javascript'>alert('$message');</script>";
             ?>
             <meta http-equiv="refresh" content="0; environmentlist.php" />
             <?php
             exit();
         } else {
-            $update_environment = new Environment($environment_id, $environment_name, $customer_id);
-            update_environment($update_environment);
+            $updated_environment = new Environment($environment_id, $environment_name, $customer_id);
+            update_environment($updated_environment);
         }
+    } else {
+        $updated_environment = new Environment($environment_id, $environment_name, $customer_id);
+        update_environment($updated_environment);
     }
+    ?>
+        <meta http-equiv="refresh" content="0; environmentlist.php" />
+        <?php
+        exit();
 }
 if (!isset($_GET['id'])) {
 	header("Location: environmentlist.php");
@@ -59,21 +67,25 @@ if (!isset($_GET['id'])) {
             <div class="form_block form_full_length">
                 <label>
                     Omgevingsnaam<br>
-                    <input id="test_environment_name" name="customer_name" type="text" minlength="2" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" value="<?=$environment->get_environment_name(); ?>" required/>
+                    <input id="test_environment_name" name="environment_name" type="text" minlength="2" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" value="<?=$environment->get_environment_name(); ?>" required/>
                 </label>
                 <br>
                 <p id="error_environment_name" class="error_message"></p>
-                
+            </div>
+            <div class="form_block form_full_length">
                 <label for="customer">Gekoppelde klant</label><br>
                 <select name="customer_id" id="customer" required>
-                    <option selected value="<? $environment->get_customer_id() ?>"><?= (get_customer_by_id($environment->get_customer_id()))->get_customer_name() ?></option>
-                    <?php $environmentlist = get_environmentlist(); 
-                    foreach ($environmentlist as $environmentfromlist) :
-                    if ($environment->get_customer_id() !=$environmentfromlist->get_customer_id()){ ?>
-                    <option value="<? $environmentfromlist->get_customer_id()?>"><?= (get_customer_by_id($environmentfromlist->get_customer_id()))->get_customer_name() ?></option>
+                    
                     <?php
-                    }
-                    endforeach; ?>
+                    $customerlist = get_customerlist(); 
+                    
+                    foreach ($customerlist as $customer) :  ?>  
+
+                    <option <?php if ($environment->get_customer_id() == $customer->get_customer_id()) { echo "selected"; } ?> value="<?= $customer->get_customer_id()?>"><?= $customer->get_customer_name() ?></option>
+                        
+
+                    
+                    <?php endforeach; ?>
                     
 
                     
@@ -103,7 +115,7 @@ if (!isset($_GET['id'])) {
 </div>
 
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
-<script type="text/javascript" src="private/js/customer_crud.js"></script>
+<script type="text/javascript" src="private/js/environment_crud.js"></script>
 <script type="text/javascript" src="private/js/modal.js"></script>
 
 <!-- Default PHP footer -->

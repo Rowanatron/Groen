@@ -30,7 +30,7 @@ form {
   margin-right: 50%;
 }
 
-input[type=text], input[type=password], input[type=email], select#role{
+input[type=text], input[type=password], input[type=email], select#role, select#customer{
   width: 100%;
   padding: 12px 20px;
   margin-top: 0.8em;
@@ -44,7 +44,7 @@ input {
   color: #8e8e8e;
 }
 
-#role{
+#role, #customer{
   cursor: pointer;
   height: 40px;
   background-color: white;
