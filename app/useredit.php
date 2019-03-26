@@ -32,7 +32,9 @@ if(isset($_POST['user_id'])) {
 	$repeat_password = $_POST['repeat_password'];
 	
 	$edit_user = new User($id, $username, $password, $given_name, $family_name, $email, $role);
-	edit_user($edit_user, $repeat_password);
+    edit_user($edit_user, $repeat_password);
+    if ($_POST['img'])
+    update_img();
 } else if(isset($_GET['id'])) {
 	$edit_user = get_user_by_id($_GET['id']);
 } else {

@@ -20,7 +20,7 @@ function get_userlist() {
 	$userArray = array();
 	
 	while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-		$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role']);
+		$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role'], $row['img']);
 		array_push($userArray, $user);
 	}
 	
@@ -41,7 +41,7 @@ function get_user_by_username($username) {
 	
 	$row = $statement->fetch(PDO::FETCH_ASSOC);
 	
-	$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role']);
+	$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role'], $row['img']);
 	
 	return $user;
 }
@@ -80,7 +80,7 @@ function get_user_by_id($user_id) {
 	
 	$row = $statement->fetch(PDO::FETCH_ASSOC);
 	
-	$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role']);
+	$user = new User($row['user_id'], $row['username'], $row['password'], $row['given_name'], $row['family_name'], $row['email'], $row['role'], $row['img']);
 	
 	return $user;
 }
