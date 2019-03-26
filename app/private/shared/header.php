@@ -22,6 +22,7 @@
 	<?php endif; ?>
 	<!-- Google Icons -->
 	<?php if ($pagename == "userlist.php" ||  $pagename == "customerlist.php" || $pagename == "environmentlist.php") : ?>
+    <link rel="stylesheet" media="all" href="css/table.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<?php endif; ?>
 
