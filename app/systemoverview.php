@@ -45,23 +45,26 @@ if (isset($_SESSION['message'])) {
                     <select name="klant" onchange="this.form.submit();">
                         <?php foreach (get_customerlist() as $customer) {
 
+                            if (customer_has_environment($customer)) {
 
-                            $customer_name = $customer->get_customer_name();
+                                $customer_name = $customer->get_customer_name();
+                                $selected = '';
 
-                            $selected = '';
-
-                            if (isset($_POST['klant'])) {
-                                if ($_POST['klant'] == $customer_name) {
-                                    $selected = 'selected';
-                                } else {
-                                    $selected = '';
+                                if (isset($_POST['klant'])) {
+                                    if ($_POST['klant'] == $customer_name) {
+                                        $selected = 'selected';
+                                    } else {
+                                        $selected = '';
+                                    }
                                 }
-                            }
 
-                            ?>
+                                ?>
 
-                            <option value="<?= $customer_name ?>" <?= $selected ?>><?= $customer->get_customer_name() ?></option>
-                        <?php } ?>
+                                <option value="<?= $customer_name ?>" <?= $selected ?>><?= $customer->get_customer_name() ?></option>
+
+                            <?php }
+
+                        } ?>
                     </select>
                 </form>
             </div>
