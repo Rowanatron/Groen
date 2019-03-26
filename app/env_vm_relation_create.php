@@ -42,7 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-var_dump($_POST);
+
+    
     $environment_name = $_POST['environment_name'];
     $customer_id = $_POST['customer_id'];
 
@@ -72,7 +73,6 @@ var_dump($_POST);
             'relation_description' => $relation_description[$x],
         ];
 
-        var_dump($data);
 
         $query = "INSERT INTO `server_monitor`.`env_vm_relation` (`environment_id`, `vm_name_from`, `vm_name_to`, `description`) VALUES (:environment_id, :vm_name_from, :vm_name_to, :relation_description);";
 
@@ -109,7 +109,10 @@ var_dump($_POST);
 
 
     }
-
+    ?>
+    <meta http-equiv="refresh" content="0; environmentlist.php" />
+    <?php
+    exit();
 
 }
 
