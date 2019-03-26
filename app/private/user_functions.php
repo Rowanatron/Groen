@@ -148,7 +148,7 @@ function update_user($user){
 	}
 }
 
-function upload_img($user){
+function update_user_img($user){
 	$pdo = new DatabasePDO();
 	$conn = $pdo->get();
 
