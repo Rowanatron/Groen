@@ -52,12 +52,12 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 					</a>
 				</td>
 				<td>
-					<form id="delete-<?= $customer->customer_name; ?>" action="customerlist.php" method="post">
+					<form id="delete-<?= $customer->get_customer_name(); ?>" action="customerlist.php" method="post">
 						<input type="hidden" name="action" value="delete_customer" />
-						<input type="hidden" name="customer_id" value="<?=$customer->customer_id; ?>" />
-						<input type="hidden" name="customer_name" value="<?=$customer->customer_name; ?>" />
+						<input type="hidden" name="customer_id" value="<?=$customer->get_customer_id(); ?>" />
+						<input type="hidden" name="customer_name" value="<?=$customer->get_customer_name(); ?>" />
 					</form>
-					<a onclick="show_modal('<?= $customer->customer_name; ?>', 'delete-<?= $customer->customer_name; ?>')">
+					<a onclick="show_modal('<?= $customer->get_customer_name(); ?>', 'delete-<?= $customer->get_customer_name(); ?>')">
 						<i class="material-icons">delete</i>
 					</a>
 				</td>
@@ -80,8 +80,8 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 	</div>
 </div>
 
-<meta http-equiv="refresh" content="1801; login.php" />
+<!-- <meta http-equiv="refresh" content="1801; login.php" /> -->
 
 <!-- Default PHP footer -->
 <script type="text/javascript" src="private/js/modal.js"></script>
-<?php include('private/shared/footer.php')?>
+<?php include(SHARED_PATH . '/footer.php')?>
