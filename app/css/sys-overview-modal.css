@@ -1,0 +1,92 @@
+
+
+#modal-klanty-bps01-test {
+    visibility: visible;
+}
+
+
+#modal-content {
+    position: relative;
+    height: auto;
+    padding-bottom: 20px;
+    border-color: #b4c1cd;
+
+}
+
+#modal-title {
+    text-align: center;
+    background-color: #b4c1cd;
+}
+
+#modal-title p {
+    margin-bottom: 0;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+#modal-title h1 {
+    height: 30px;
+    line-height: 30px;
+}
+
+.arrow {
+    padding: 2px 0px 15px 0px;
+}
+
+#IN-left, #OUT-right {
+    box-sizing: border-box;
+    width: 49%;
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+}
+
+/*#IN-left {*/
+    /*background-color: red;*/
+/*}*/
+
+/*#OUT-right {*/
+    /*background-color: blue;*/
+/*}*/
+
+.item {
+    padding-bottom: 10px;
+}
+
+#close-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+
+
+/****** TOOLTIP *********/
+
+.tooltip {
+    position: relative;
+    display: block;
+    /*border-bottom: 1px dotted black;*/
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

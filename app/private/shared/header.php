@@ -22,6 +22,7 @@ $user = $_SESSION["user"];
 	<!-- System overview styling & JavaScript-->
 	<?php if ($pagename == "systemoverview.php"): ?>
 	<link rel="stylesheet" media="all" href="css/sys-overview.css">
+    <link rel="stylesheet" media="all" href="css/sys-overview-modal.css">
     <link rel="stylesheet" media="all" href="css/progressbar.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<?php endif; ?>
