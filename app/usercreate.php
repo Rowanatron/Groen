@@ -71,9 +71,9 @@ include(SHARED_PATH . '/header.php');
                 </label>
                 <p id="error_email" class="error_message"></p>
             </div>
-            <div class="form_block form_full_length">
+            <div class="form_block form_full_length"> 
                 <label for="role">Rol</label><br>
-                <select name="role" id="role" required>
+                <select name="role" id="role" required text-align="right">
                     <option value="" disabled selected hidden>Kies een rol</option>
                     <option value="admin">admin</option>
                     <option value="user">gebruiker</option>
@@ -88,6 +88,11 @@ include(SHARED_PATH . '/header.php');
 </div>
 
 <meta http-equiv="refresh" content="1801; login" />
+
+<!-- Nu staat Javascript niet achteraan. Probleem? -->
+<script type="text/javascript" src="private/js/user_crud.js"></script>
+<script type="text/javascript" src="private/js/modal.js"></script>
+<script type="text/javascript" src="private/js/check_for_input.js"></script>
 
 <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>

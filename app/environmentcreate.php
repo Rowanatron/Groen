@@ -35,10 +35,8 @@ include(SHARED_PATH . '/header.php');
             <div class="form_block form_full_length">
                 <label>
                     Omgevingsnaam<br>
-                    <input autofocus id="test_environment" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
-                    <p id="error_environment" class="error_message"></p>
+                    <input autofocus id="test_environment_name" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
                 </label>
-                
                 <p id="error_environment_name" class="error_message"></p>
             </div>
             <div class="form_block form_full_length">
@@ -67,10 +65,9 @@ include(SHARED_PATH . '/header.php');
                     <button class="annuleren" onclick="window.location.href ='userlist';">Annuleren</button>
 </div>
 
-
-
-
-
+<!-- Nu staat Javascript niet achteraan. Probleem? -->
+<script type="text/javascript" src="private/js/environment_crud.js"></script>
+<script type="text/javascript" src="private/js/modal.js"></script>
 
     <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>
