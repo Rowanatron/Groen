@@ -74,13 +74,18 @@ if (isset($_SESSION['message'])) {
                     <?php
                     foreach (get_environmentlist() as $environment) : ?>
 
-                        <?php
+                        <?php if (isset($_POST['klant'])) {
 
-                        if ($environment->get_customer_id() == get_customer_by_customer_name($_POST['klant'])->get_customer_id()) { ?>
+                            if ($environment->get_customer_id() == get_customer_by_customer_name($_POST['klant'])->get_customer_id()) { ?>
+
+                                <option value="<?= $environment->get_environment_name() ?>"> <?php echo $environment->get_environment_name() ?></option>
+
+                            <?php }
+                        } else { // TODO schrijf de else statement!!?>
 
                             <option value="<?= $environment->get_environment_name() ?>"> <?php echo $environment->get_environment_name() ?></option>
 
-                        <?php } ?>
+                       <?php } ?>
 
                     <?php endforeach; ?>
                 </select>
