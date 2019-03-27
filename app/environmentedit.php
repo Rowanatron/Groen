@@ -31,7 +31,7 @@ if(isset($_GET['id'])) {
         $environment1 = get_environment_by_environment_name($environment_name);
 
         if(strtolower($environment1->get_environment_name()) == strtolower($environment_name)) {
-            $message = "Bewerken mislukt! Deze omgevingsnaam bestaat al";
+            $message = "Bewerken mislukt! Deze naam is al in gebruik.";
             echo "<script type='text/javascript'>alert('$message');</script>";
             ?>
             <meta http-equiv="refresh" content="0; environmentlist.php" />

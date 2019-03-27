@@ -57,10 +57,13 @@ $user = $_SESSION["user"];
 		  </ul>
 		  <div class="dropdown">
 			<div>
-				<img class="user_img" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" />
-				<i class="material-icons size-icons">keyboard_arrow_down</i>
+				<a href="useredit">
+					<img class="user_img" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" />
+				</a>
+					<i class="material-icons size-icons">keyboard_arrow_down</i>
 			
 				<div class="dropdown-content">
+					<a href="useredit">Profiel</a>
 					<a href="logout">Uitloggen</a>
 				</div>
 				</div>

@@ -108,7 +108,7 @@ if (isset($_SESSION['message'])) {
                 <span class="progress-bar-fill" style="width: 0%"></span>
             </div>
             <div class="desc">
-                <span>Ververs elke 10 seconden</span>
+                <span>Ververst elke 10 seconden</span>
             </div>
 
             <?php foreach (get_sorted_virtualmachine_list_with_relations() as $vm) : ?>
@@ -167,31 +167,7 @@ if (isset($_SESSION['message'])) {
     </div>
 </div>
 
-
 <!--Auto-refresh van het virtual machine overzicht -->
-<script>
-
-    function reload_pbar() {
-        $(".progress-bar-fill").css({
-            "width": "100%",
-            "transition": "10s linear"
-        });
-    }
-
-    function reload_servers() {
-        $("#reload-content").load("./systemoverview.php #reload-content", reload_pbar);
-    }
-
-    reload_pbar();
-    setInterval(reload_servers, 10000);
-
-
-    var welkom = document.getElementById('message-area');
-
-    if (welkom.innerText == '') {
-        welkom.style.display = "none";
-    }
-
-</script>
+<script type="text/javascript" src="private/js/systemoverview.js"></script>
 
 <?php include(SHARED_PATH . '/footer.php') ?> 
