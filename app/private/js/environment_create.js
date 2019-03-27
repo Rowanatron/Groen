@@ -18,12 +18,3 @@ function error_description() {
     }
 }
 
-var counter = 1;
-
-function add_input(div_name){
-        var new_div = document.createElement('div');
-        new_div.innerHTML = 'Hallo';
-        document.getElementById(div_name).appendChild(new_div);
-        counter++;
-
-}
