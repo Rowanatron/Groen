@@ -71,7 +71,6 @@ if (!isset($_GET['id'])) {
 
     <form method="post" action="relationcreate.php" id="form-edit">
         <input type="hidden" name="customer_id" value="<?=$environment->get_customer_id()?>"/>
-        <input type="hidden" name="environment_id" value="<?=$environment_id?>"/>
         <input type="hidden" name="original_environment_name" value="<?=$environment->get_environment_name(); ?>"/>
         <input type="hidden" name="env_id" value="<?=$environment_id?>"/>
         <div class="form_container">
@@ -146,7 +145,7 @@ if (!isset($_GET['id'])) {
 
                 <?php } else { ?>
 
-                            <div class="form_block">
+                <div class="form_block">
                     <label for="bidirectional">Relatie</label><br>
                     <select name="bidirectional[]" id="bidirectional" required>
                         <option value="0" selected >enkelzijdig</option>
