@@ -160,7 +160,7 @@ if (isset($_SESSION['message'])) {
 <!--                        --><?php //endforeach; ?>
 <!--                    </div>-->
                     <div id="info-icon">
-                        <a onClick="show_modal("<?php echo $vm->getName(); ?>") class="close-modal"">
+                        <a onClick="show_modal('<?= $vm->getName(); ?>')" class="close-modal"">
                             <i class="material-icons table-icons">info_outline</i>
                         </a>
                     </div>
@@ -197,7 +197,7 @@ if (isset($_SESSION['message'])) {
                 <?php endforeach; ?>
             </div>
             <div id="close-modal">
-                <a onClick="hide_modal() class="close-modal"">
+                <a onClick="hide_modal('<?= $vm->getName(); ?>')" class="close-modal"">
                     <i class="material-icons table-icons">close</i>
                 </a>
             </div>
@@ -205,6 +205,22 @@ if (isset($_SESSION['message'])) {
     </div>
 <?php endforeach; ?>
 
+<!--getIncomingRelationList()-->
+<!--getOutgoingRelationList()-->
+
+
+<script>
+
+    function show_modal(server_name) {
+        document.getElementById("modal-" + server_name).style.visibility = "visible";
+
+    }
+
+    function hide_modal(server_name) {
+        document.getElementById("modal-" + server_name).style.visibility = "hidden";
+    }
+
+</script>
 
 <!--Auto-refresh van het virtual machine overzicht -->
 <script type="text/javascript" src="private/js/systemoverview.js"></script>
