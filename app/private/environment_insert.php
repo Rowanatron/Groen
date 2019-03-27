@@ -39,7 +39,7 @@ else {
     if (strtolower($test_environment_name->get_environment_name()) == strtolower($environment_name)){
         $message = "Deze omgevingsnaam bestaat al";
         echo "<script type='text/javascript'>alert('$message');</script>"; ?>
-        <meta http-equiv="refresh" content="0; ../environment_create.php" />
+        <meta http-equiv="refresh" content="0; ../environmentcreate.php" />
         <?php
         exit();
     }

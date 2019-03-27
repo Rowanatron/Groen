@@ -1,11 +1,11 @@
-function showModal(username, form) {
+function show_modal(name, form) {
 	document.getElementById("modal").style.visibility = "visible";
-	document.getElementById("modal-username").innerHTML = username;
+	document.getElementById("modal-name").innerHTML = name;
 	document.getElementById("modal-delete-button").setAttribute("form", form);
 } 
 
-function hideModal() {
+function hide_modal() {
 	document.getElementById("modal").style.visibility = "hidden";
-	document.getElementById("modal-username").innerHTML = null;
+	document.getElementById("modal-name").innerHTML = null;
 	document.getElementById("modal-delete-button").setAttribute("form", null);
 }

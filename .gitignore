@@ -6,3 +6,5 @@ dbconfig.php
 app/private/dbconfig.php
 apitest.php
 .idea/
+app/img/uploads/*
+!app/img/uploads/placeholder.png

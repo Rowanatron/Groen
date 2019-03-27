@@ -1,0 +1,91 @@
+/********* TABLE STYLING *********/
+
+.table-header-container {
+    padding: 15px;
+    border-top: 1px solid #E2E9F0;
+    border-left: 1px solid #E2E9F0;
+    border-right: 1px solid #E2E9F0;
+    height: 38px;
+    line-height: 38px;
+}
+
+.tabel-header {
+    font-size: 1.1em;
+    display: inline;
+}
+
+.table-header-container a {
+    float: right;
+    border-radius: 2px;
+    background-color: #99AFC6;
+    padding: 15px;
+    color: #fff;
+    font-size: .7em;
+    line-height: .7em;
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+.table-header-container a:hover {
+    background-color: #54ce54;
+    transition: background-color: 300ms, color: 300ms, border-color: 300ms;
+    -webkit-transition: background-color: 300ms, color: 300ms, border-color: 300ms; /* Safari */
+}
+
+table {
+    padding: 20px;
+    width: 100%;
+    table-layout: fixed;
+    text-align: left;
+    border: 1px solid #E2E9F0;
+}
+
+th {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: .65em;
+}
+
+th, td {
+    padding: 15px 20px;
+}
+
+td {
+    font-size: .7em;
+    vertical-align: middle;
+}
+
+thead tr {
+    background-color: #FAFCFD;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #FAFCFD;
+}
+
+tr {
+    border-bottom: 1px solid #E2E9F0;
+}
+
+.userimg {
+    height: 22px;
+    width: 22px;
+    border-radius: 15%;
+}
+
+td img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/********* ICON LINK *********/
+
+.table-icons {
+    font-size: 17px !important;
+}
+
+.material-icons {
+    cursor: pointer;
+}
+

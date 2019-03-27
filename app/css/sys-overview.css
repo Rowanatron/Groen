@@ -7,10 +7,27 @@
     height: 38px;
     line-height: 38px;
 }
+
 .system-overview-header-container h1 {
     color: #4a4a4a;
     font-size: 1.1em;
+    float: left;
 }
+
+
+#dropdown {
+    float: right;
+}
+
+.dropdown-element{
+    display: inline-block;
+    width: 200px;
+}
+
+.dropdown-element h1, h2, select {
+    display: inline-block;
+}
+
 
 .system-overview-servers-container {
     border: 1px solid #D9DCDF;
@@ -73,4 +90,13 @@
 
 .key-value {
     display: inline-block;
+}
+
+#message-area {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 20px;
 }

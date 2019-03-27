@@ -21,7 +21,7 @@ only_for_admins();
 
 include('private/shared/header.php');
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // <link rel="stylesheet" href="/stylesheet.css">
 
