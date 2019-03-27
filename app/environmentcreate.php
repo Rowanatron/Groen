@@ -23,16 +23,13 @@ include(SHARED_PATH . '/header.php');
 ?>
 
 
-    
-    
-
  
 <div id="content" class="container">
 	<div class="table-header-container">
 		<h2 class="tabel-header">Omgeving aanmaken - Stap 1</h2>
 	</div>
 
-    <form method="get" action="env_vm_relation_create.php" id="form">
+    <form method="get" action="relationcreate.php" id="form">
         
         <div class="form_container">
             <div class="form_block form_full_length">
