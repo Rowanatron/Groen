@@ -22,6 +22,7 @@ if (isset($_SESSION['message'])) {
     $message = $_SESSION['message'];
 }
 
+
 ?>
 
 <!-- Message aan gebruiker -->
@@ -40,9 +41,9 @@ if (isset($_SESSION['message'])) {
         <h1>Systeem overzicht</h1>
         <div id="dropdown">
             <div class="dropdown-element">
-                <form method="post">
+                <form method="get">
                     <h2>Klant</h2>
-                    <select name="klant" onchange="this.form.submit();">
+                    <select name="customer_name" onchange="this.form.submit();">
                         <?php foreach (get_customerlist() as $customer) {
 
                             if (customer_has_environment($customer)) {
@@ -50,8 +51,8 @@ if (isset($_SESSION['message'])) {
                                 $customer_name = $customer->get_customer_name();
                                 $selected = '';
 
-                                if (isset($_POST['klant'])) {
-                                    if ($_POST['klant'] == $customer_name) {
+                                if (isset($_GET['customer_name'])) {
+                                    if ($_GET['customer_name'] == $customer_name) {
                                         $selected = 'selected';
                                     } else {
                                         $selected = '';
@@ -62,6 +63,7 @@ if (isset($_SESSION['message'])) {
 
                                 <option value="<?= $customer_name ?>" <?= $selected ?>><?= $customer->get_customer_name() ?></option>
 
+
                             <?php }
 
                         } ?>
@@ -70,35 +72,34 @@ if (isset($_SESSION['message'])) {
             </div>
             <div class="dropdown-element">
                 <h2>Omgeving</h2>
-                <select name="omgeving" id="omgeving" required>
+                <select name="environment_name" required>
                     <?php
-                    foreach (get_environmentlist() as $environment) : ?>
 
-                        <?php if (isset($_POST['klant'])) {
+                    if (isset($_GET['customer_name'])) {
+                        $selected_customer = get_customer_by_customer_name($_GET['customer_name']);
+                    } else {
+                        foreach (get_customerlist() as $customer) {
+                            if (customer_has_environment($customer)) {
+                                $selected_customer = $customer;
+                                break;
+                            }
+                        }
 
-                            if ($environment->get_customer_id() == get_customer_by_customer_name($_POST['klant'])->get_customer_id()) { ?>
+                    }
 
-                                <option value="<?= $environment->get_environment_name() ?>"> <?php echo $environment->get_environment_name() ?></option>
-
-                            <?php }
-                        } else { // TODO schrijf de else statement!!?>
+                    foreach (get_environmentlist() as $environment) {
+                        if ($environment->get_customer_id() == $selected_customer->get_customer_id()) { ?>
 
                             <option value="<?= $environment->get_environment_name() ?>"> <?php echo $environment->get_environment_name() ?></option>
 
-                       <?php } ?>
-
-                    <?php endforeach; ?>
+                            <?php
+                        }
+                    }
+                    ?>
                 </select>
             </div>
         </div>
     </div>
-
-    <!--    <div>-->
-    <!--        --><?php
-    //        $selectOption = $_POST['klant'];
-    //        var_dump($selectOption);
-    //        ?>
-    <!--    </div>-->
 
     <div class="system-overview-servers-container">
         <div id="reload-content">
@@ -106,7 +107,7 @@ if (isset($_SESSION['message'])) {
                 <span class="progress-bar-fill" style="width: 0%"></span>
             </div>
             <div class="desc">
-                <span>Ververs elke 10 seconden</span>
+                <span>Ververst elke 10 seconden</span>
             </div>
 
             <?php foreach (get_sorted_virtualmachine_list_with_relations() as $vm) : ?>
@@ -150,14 +151,19 @@ if (isset($_SESSION['message'])) {
                             </div>
                         </div>
                     </div>
-                    <div id="relations">
-                        <?php foreach ($vm->getRelationList() as $relation): ?>
-                            <ul>
-                                <li><?php echo $relation->getVmNameFrom(); ?></li>
-                                <li><?php echo $relation->getVmNameTo(); ?></li>
-                                <li><?php echo $relation->getDescription(); ?></li>
-                            </ul>
-                        <?php endforeach; ?>
+<!--                    <div id="relations">-->
+<!--                        --><?php //foreach ($vm->getRelationList() as $relation): ?>
+<!--                            <ul>-->
+<!--                                <li>--><?php //echo $relation->getVmNameFrom(); ?><!--</li>-->
+<!--                                <li>--><?php //echo $relation->getVmNameTo(); ?><!--</li>-->
+<!--                                <li>--><?php //echo $relation->getDescription(); ?><!--</li>-->
+<!--                            </ul>-->
+<!--                        --><?php //endforeach; ?>
+<!--                    </div>-->
+                    <div id="info-icon">
+                        <a onClick="show_modal('<?= $vm->getName(); ?>')" class="close-modal"">
+                            <i class="material-icons table-icons">info_outline</i>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -166,30 +172,58 @@ if (isset($_SESSION['message'])) {
 </div>
 
 
-<!--Auto-refresh van het virtual machine overzicht -->
+<?php foreach (get_sorted_virtualmachine_list_with_relations() as $vm) : ?>
+    <div class="modal" id="modal-<?php echo $vm->getName(); ?>">
+        <div id="modal-content">
+
+            <div id="modal-title">
+                <p>Servernaam:</p>
+                <h1><?php echo $vm->getName(); ?></h1></div>
+            <div id="IN-left">
+                <i class="material-icons table-icons arrow">arrow_upward</i>
+                <?php foreach ($vm->getIncomingRelationList() as $relation): ?>
+                    <div class="tooltip item">
+                        <div><?php echo $relation->getVmNameTo(); ?></div>
+                        <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div id="OUT-right">
+                <i class="material-icons table-icons arrow">arrow_downward</i>
+                <?php foreach ($vm->getOutgoingRelationList() as $relation): ?>
+                    <div class="tooltip item">
+                        <div><?php echo $relation->getVmNameFrom();?></div>
+                        <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div id="close-modal">
+                <a onClick="hide_modal('<?= $vm->getName(); ?>')" class="close-modal"">
+                    <i class="material-icons table-icons">close</i>
+                </a>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<!--getIncomingRelationList()-->
+<!--getOutgoingRelationList()-->
+
+
 <script>
 
-    function reload_pbar() {
-        $(".progress-bar-fill").css({
-            "width": "100%",
-            "transition": "10s linear"
-        });
+    function show_modal(server_name) {
+        document.getElementById("modal-" + server_name).style.visibility = "visible";
+
     }
 
-    function reload_servers() {
-        $("#reload-content").load("./systemoverview.php #reload-content", reload_pbar);
-    }
-
-    reload_pbar();
-    setInterval(reload_servers, 10000);
-
-
-    var welkom = document.getElementById('message-area');
-
-    if (welkom.innerText == '') {
-        welkom.style.display = "none";
+    function hide_modal(server_name) {
+        document.getElementById("modal-" + server_name).style.visibility = "hidden";
     }
 
 </script>
+
+<!--Auto-refresh van het virtual machine overzicht -->
+<script type="text/javascript" src="private/js/systemoverview.js"></script>
 
 <?php include(SHARED_PATH . '/footer.php') ?> 

@@ -10,6 +10,7 @@ $user = $_SESSION["user"];
 <head>
     <title>Server Monitor<?= isset($page_title) ? ' - ' . $page_title : ''; ?>		
 	</title>
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
     <meta charset="utf-8">
 	<!-- General styling -->
     <link rel="stylesheet" media="all" href="css/css-reset.css">
@@ -22,6 +23,7 @@ $user = $_SESSION["user"];
 	<!-- System overview styling & JavaScript-->
 	<?php if ($pagename == "systemoverview.php"): ?>
 	<link rel="stylesheet" media="all" href="css/sys-overview.css">
+    <link rel="stylesheet" media="all" href="css/sys-overview-modal.css">
     <link rel="stylesheet" media="all" href="css/progressbar.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<?php endif; ?>
@@ -57,10 +59,13 @@ $user = $_SESSION["user"];
 		  </ul>
 		  <div class="dropdown">
 			<div>
-				<img class="user_img" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" />
-				<i class="material-icons size-icons">keyboard_arrow_down</i>
+				<a href="useredit">
+					<img class="user_img" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" />
+				</a>
+					<i class="material-icons size-icons">keyboard_arrow_down</i>
 			
 				<div class="dropdown-content">
+					<a href="useredit">Profiel</a>
 					<a href="logout">Uitloggen</a>
 				</div>
 				</div>
