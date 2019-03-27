@@ -160,7 +160,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div id="content" class="container">
     <div class="table-header-container">
-        <h2 class="tabel-header">Omgeving aanmaken - Stap 2<br>Voeg relaties toe voor omgeving <?= $_GET['environment_name'] ?><br></h2>
+        <h2 class="tabel-header">Omgeving aanmaken - Stap 2<br>Relaties</h2>
+            <p>In deze stap kan je voor de omgeving <?= $_GET['environment_name'] ?> relaties aangeven voor de machines.<br>
+            Kies eerst een machine uit lijst 1, de relatie met de andere machine (enkel- of tweezijdig) en tot slot de andere machine.<br>
+            Optioneel kan je een beschrijving toevoegen aan deze relatie.<br>
+            <br>Bij meerdere relaties kun je meerdere relaties opgeven.</p>
     </div> <!-- table-header-content-->
 
     <form method="post" action="relationcreate.php" id="form">
@@ -182,8 +186,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="bidirectional">Relatie</label><br>
                     <select name="bidirectional[]" id="bidirectional" required>
                         <option value="" disabled selected hidden>Relatie</option>
-                        <option value="0">enkelvoudig</option>
-                        <option value="1">tweevoudig</option>
+                        <option value="0">enkelzijdig</option>
+                        <option value="1">tweezijdig</option>
                     </select>
                 </div>
 
