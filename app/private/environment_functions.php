@@ -121,5 +121,14 @@ function update_environment($environment){
 	}
 }
 
+function customer_has_environment($customer){
+    $customer_has_environment = false;
+    foreach (get_environmentlist() as $environment){
+        if ($environment->get_customer_id() == $customer->get_customer_id()){
+            $customer_has_environment = true;
+        }
+    }
+    return $customer_has_environment;
+}
 
 
