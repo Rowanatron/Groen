@@ -28,9 +28,9 @@ include(SHARED_PATH . '/header.php');
 	<div class="table-header-container">
 		<h2 class="tabel-header">Omgeving aanmaken - Stap 1</h2>
 	</div>
-
     <form method="get" action="relationcreate.php" id="form">
-        
+        <h2 class="basisgegevens">Basisgegevens</h2>
+        <p class="uitleg">In deze stap kan je de omgeving een naam geven en koppelen aan een klant.</p>
         <div class="form_container">
             <div class="form_block form_full_length">
                 <label>

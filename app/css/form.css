@@ -166,7 +166,7 @@ label {
 	border: none;
 }
 
-/******* ENV_VM_RELATION_CREATE *******/
+/******* ENVIRONMENT CREATE *******/
 
 #dynamic_input, #extra_fields div {
     margin-top: 15px;
@@ -192,4 +192,19 @@ label {
     top: 0;
     right: 0;
 }
+
+h2.basisgegevens {
+  padding: 20px 30px 15px 30px;
+  font-size: 17.6px;
+}
+
+p.uitleg {
+  padding: 0 30px;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+
+
+
 

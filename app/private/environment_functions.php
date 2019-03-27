@@ -131,4 +131,33 @@ function customer_has_environment($customer){
     return $customer_has_environment;
 }
 
+function get_relations_by_environment_id($environment_id){
+
+    $pdo = new DatabasePDO();
+    $conn = $pdo->get();
+
+    $data = [
+        'environment_id' => $environment_id,
+    ];
+
+    $query = "SELECT * FROM `env_vm_relation` WHERE (`environment_id` = :environment_id);";
+
+    try{
+        $statement = $conn->prepare($query);
+        $statement->execute($data);
+    } catch(PDOException $e) {
+        echo "Oops er ging iets mis {$e->getMessage()}";
+    }
+
+    $relation_array = array();
+
+    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        $relation = new Relation($row['relation_id'], $row['environment_id'], $row['vm_name_from'], $row['vm_name_to'], $row['description']);
+        array_push($relation_array, $relation);
+    }
+
+    return $relation_array;
+
+}
+
 
