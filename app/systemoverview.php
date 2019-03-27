@@ -170,6 +170,7 @@ if (isset($_SESSION['message'])) {
     </div>
 </div>
 
+
 <?php foreach (get_sorted_virtualmachine_list_with_relations() as $vm) : ?>
     <div class="modal" id="modal-<?php echo $vm->getName(); ?>">
         <div id="modal-content">
@@ -203,6 +204,7 @@ if (isset($_SESSION['message'])) {
         </div>
     </div>
 <?php endforeach; ?>
+
 
 <!--Auto-refresh van het virtual machine overzicht -->
 <script type="text/javascript" src="private/js/systemoverview.js"></script>
