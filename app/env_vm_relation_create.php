@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div id="content" class="container">
         <div class="table-header-container">
-            <h2 class="tabel-header">Relaties</h2>
+            <h2 class="tabel-header">Omgeving aanmaken - Stap 2<br>Voeg relaties toe voor omgeving <?= $_GET['environment_name'] ?><br></h2>
         </div> <!-- table-header-content-->
 
             <form method="post" action="env_vm_relation_create.php" id="form">
@@ -158,8 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         <div class="form_block form_full_length">
                             <label> Omschrijving<br>
-                                <textarea id="test_description" rows = "5" cols = "50" name = "relation_description[]" onkeydown="setTimeout(error_description, 1500)">
-                                </textarea>
+                                <textarea id="test_description" rows = "5" cols = "50" name = "relation_description[]" onkeydown="setTimeout(error_description, 1500)"></textarea>
 <!--                                <input id="test_description" name="relation_description[]" type="text" maxlength="255"-->
 <!--                                       onkeydown="setTimeout(error_description, 1500)" value=" "/>-->
                                 <p id="error_description" class="error_message"></p>
@@ -172,7 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div> <!-- form_container -->
                 <div id="add-relationship-btn">
                     <a class="volgende" onclick="add_input('dynamic_input', 'extra_fields');">
-                        <i class="material-icons table-icons">add</i><span>Voeg een ralatie toe</span>
+                        <i class="material-icons table-icons">add</i><span>Voeg een relatie toe</span>
                     </a>
                 </div>
             </form>

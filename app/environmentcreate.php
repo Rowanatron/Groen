@@ -24,7 +24,7 @@ include(SHARED_PATH . '/header.php');
 
 <div id="content" class="container">
     <div class="table-header-container">
-        <h2 class="tabel-header">Omgeving aanmaken</h2>
+        <h2 class="tabel-header">Omgeving aanmaken - Stap 1</h2>
     </div>
     <div class="form_container">
     <form method="get" action="env_vm_relation_create.php" id="form" class="form_block form_full_length">
