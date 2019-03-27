@@ -37,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         <?php
         exit();
     }
-
 }
 
 
@@ -90,7 +89,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     for ($x = 0; $x < count($vm_name_to); $x++) {
 
-
         $data = [
             'environment_id' => $environment_id,
             'vm_name_from' => $vm_name_from[$x],
@@ -98,9 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'relation_description' => $relation_description[$x],
         ];
 
-
         $query = "INSERT INTO `server_monitor`.`env_vm_relation` (`environment_id`, `vm_name_from`, `vm_name_to`, `description`) VALUES (:environment_id, :vm_name_from, :vm_name_to, :relation_description);";
-
 
         try {
             $statement = $conn->prepare($query);
@@ -111,14 +107,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($bidirectional[$x] == 1) {
 
-
             $data = [
                 'environment_id' => $environment_id,
                 'vm_name_from' => $vm_name_to[$x],
                 'vm_name_to' => $vm_name_from[$x],
                 'relation_description' => $relation_description[$x],
             ];
-
 
             try {
                 $statement = $conn->prepare($query);
@@ -127,9 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Oops er ging iets mis {$e->getMessage()}";
             }
 
-
         }
-
 
     }
     ?>
@@ -160,17 +152,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div id="content" class="container">
     <div class="table-header-container">
-        <h2 class="tabel-header">Omgeving aanmaken - Stap 2<br>Relaties</h2>
-            <p>In deze stap kan je voor de omgeving <?= $_GET['environment_name'] ?> relaties aangeven voor de machines.<br>
-            Kies eerst een machine uit lijst 1, de relatie met de andere machine (enkel- of tweezijdig) en tot slot de andere machine.<br>
-            Optioneel kan je een beschrijving toevoegen aan deze relatie.<br>
-            <br>Bij meerdere relaties kun je meerdere relaties opgeven.</p>
+        <h2 class="tabel-header">Omgeving aanmaken - Stap 2</h2>
     </div> <!-- table-header-content-->
 
     <form method="post" action="relationcreate.php" id="form">
+        <div class="heading">
+            <h2>Relaties</h2>
+            <p>In deze stap kan je voor de omgeving <?= $_GET['environment_name'] ?> relaties aangeven voor de machines.<br>
+                Kies eerst een machine uit lijst 1, de relatie met de andere machine (enkel- of tweezijdig) en tot slot
+                de andere machine.<br>
+                Optioneel kan je een beschrijving toevoegen aan deze relatie.</p>
+            <p>Bij meerdere relaties kun je meerdere relaties opgeven.</p>
+        </div>
         <input type="hidden" name="environment_name" value="<?= $_GET['environment_name'] ?>"/>
         <input type="hidden" name="customer_id" value="<?= $_GET['customer_id'] ?>"/>
-        <div class="">
+        <div class="input-blocks">
             <div id="dynamic_input">
                 <div class="form_block">
                     <label for="vm_name_from">Machine 1</label><br>
@@ -209,15 +205,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <p id="error_description" class="error_message"></p>
                     </label>
                 </div>
-                <input id='del-relationship-btn' type='button' value='Verwijder deze relatie' onclick='this.parentNode.parentNode.removeChild(this.parentNode);'/>
+                <button id='del-relationship-btn' type='button' onclick='this.parentNode.parentNode.removeChild(this.parentNode);'><i class="material-icons">delete</i></button>
 
             </div> <!-- end dynamic input -->
             <div id="extra_fields">
             </div>
         </div> <!-- form_container -->
         <div id="add-relationship-btn">
+
+
             <a class="volgende" onclick="add_input('dynamic_input', 'extra_fields');">
-                <i class="material-icons table-icons">add</i><span>Voeg een relatie toe</span>
+                <p>Voeg een relatie toe</p>
+                <i class="material-icons table-icons">add</i>
             </a>
         </div>
     </form>
@@ -230,7 +229,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <button class="aanmaken" form="form" type="submit">Opslaan</button>
         <button class="annuleren" onclick="window.location.href ='environmentlist';">Annuleren</button>
-        <button class="volgende" onclick="window.location.href ='environmentcreate';">Vorige</button>
+        <button class="vorige" onclick="window.location.href ='environmentcreate';">Vorige</button>
 
     </div>
 
@@ -282,7 +281,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "                                <p id=\"error_description\" class=\"error_message\"></p>\n" +
             "                            </label>\n" +
             "                        </div>\n" +
-            "                    </div> <!-- end dynamic input --><input id='del-relationship-btn' type='button' value='Verwijder deze relatie' onclick='this.parentNode.parentNode.removeChild(this.parentNode);'/>";
+            "                    </div> <!-- end dynamic input --><button id='del-relationship-btn' type='button' onclick='this.parentNode.parentNode.removeChild(this.parentNode);'><i class=\"material-icons\">delete</i></button>";
 
         document.getElementById(extra_fields).appendChild(new_div);
     }
