@@ -162,6 +162,10 @@ label {
 	width: 100%;
 }
 
+.borderless_form {
+	border: none;
+}
+
 /******* ENV_VM_RELATION_CREATE *******/
 
 #dynamic_input, #extra_fields div {

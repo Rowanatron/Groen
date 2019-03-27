@@ -16,11 +16,22 @@ $user = $_SESSION["user"];
     <link rel="stylesheet" media="all" href="css/css-reset.css">
     <link rel="stylesheet" media="all" href="css/styles.css">
     <!-- Form styling -->
-	<?php if ($pagename == "usercreate.php" || $pagename == "useredit.php" || $pagename == "customercreate.php"
-        || $pagename == "customeredit.php" || $pagename=="environmentcreate.php" || $pagename =="env_vm_relation_create.php" || $pagename == "user.php" || $pagename == "environmentedit.php") || $pagename =="relationcreate.php": ?>
+	<?php if (
+		$pagename == "usercreate.php" ||
+		$pagename == "useredit.php" ||
+		$pagename == "customercreate.php" ||
+		$pagename == "customeredit.php" ||
+		$pagename=="environmentcreate.php" ||
+		$pagename =="env_vm_relation_create.php" ||
+		$pagename == "user.php" ||
+		$pagename == "environmentedit.php" ||
+		$pagename == "relationcreate.php") : ?>
 	<link rel="stylesheet" media="all" href="css/form.css">
 	<?php endif; ?>
 	<!-- System overview styling & JavaScript-->
+	<?php if ($pagename == "user.php"): ?>
+	<link rel="stylesheet" media="all" href="css/default_modal.css">
+	<?php endif; ?>
 	<?php if ($pagename == "systemoverview.php"): ?>
 	<link rel="stylesheet" media="all" href="css/sys-overview.css">
     <link rel="stylesheet" media="all" href="css/sys-overview-modal.css">

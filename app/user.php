@@ -76,9 +76,7 @@ if (!$is_admin) {
 ?>
 
 <?php
-
 //// POST REQUEST
-
 if ($is_post) {
 	
 	if ($post_id == $get_id) {
@@ -87,7 +85,7 @@ if ($is_post) {
 	
 	} else {
 		
-		array_push($page_errors, "Opgevraagde gebruiker komt niet overeen met verzonden data.");
+		array_push($page_errors, "Gebruiker en data komen niet overeen.");
 		
 	}
 
@@ -122,14 +120,26 @@ if ($is_edit == true) {
 	<!-- Header -->
 	<div class="table-header-container">
 		<h2 class="tabel-header"><?= $page_title ?></h2>
-		<a href="user" />User</a>
-		<?php if($is_edit) echo $form_user->get_user_id(); ?>
+	</div>
+	
+	<div>
+		<p>
+			<?= var_dump($_POST); ?>
+		</p>
+		<p>
+			<?php if($is_edit) echo $form_user->get_user_id(); ?>
+		</p>
+		<p>
+			<a href="user" />User</a>
+		</p>
 	</div>
 	
 	<!-- Form -->
     <form id="user-form" method="post" action="user-<?= ($is_edit) ? "edit-" . $get_id : "new" ?>" enctype="multipart/form-data">
 	
         <div class="form_container">
+		
+			<input name="id" type="hidden" value="<?php if($is_edit) echo $form_user->get_user_id(); ?>" required disabled />
 			
 			<div class="form_block form_full_length">
 				<label for="username">Gebruikersnaam</label>
@@ -192,7 +202,9 @@ if ($is_edit == true) {
 		<?php if ($is_edit && $is_admin && $session_user->get_user_id() != $get_id) : ?>
 			<button class="btn-user-delete" onclick="show_modal_edit_page('modal_delete')">Gebruiker verwijderen</button>
 		<?php endif; ?>
-        <button class="btn-user-cancel">Annuleren</button>
+		<form action="<?= (!$is_admin || !isset($_GET['id']) ) ? "systemoverview" : "userlist" ?>" method="get" class="borderless_form">
+            <button class="btn-user-cancel">Annuleren</button>
+		</form>
     </div>
     
 </div>
@@ -204,16 +216,27 @@ if ($is_edit == true) {
 		<div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
 		<div id="modal-p"><p>Weet u zeker dat u <?= $form_user->get_username() ?> wilt verwijderen?</p></div>
 		<div id="button-container">
-			<!-- <button id="modal-delete-button" class="verwijderen" form="" type="submit">Gebruiker verwijderen</button> -->
+			<form id="user-delete" action="userlist">
+				<input type="hidden" value="<?= $get_id ?>" />
+			</form>
+			<button id="modal-delete-button" class="verwijderen" form="user-delete" type="submit" name="action" value="delete_user">Gebruiker verwijderen</button>
 			<button onclick="hide_modal_edit_page('modal_delete')" class="annuleren">Annuleren</button>
 		</div>
 	</div>
 </div>
 <?php endif; ?>
 
-<!-- Page error -->
-<?php foreach ($page_errors as $error): ?>
-	<script>alert("<?= $error ?>");</script>
+<!-- Modal for error -->
+<?php foreach ($page_errors as $key => $error): ?>
+<div class="modal visible" id="modal_error_<?= $key ?>">
+	<div class="modal-content">
+		<div class="modal-title"><h1>Foutmelding</h1></div>
+		<div class="modal-p"><p><?= $error ?></p></div>
+		<div class="button-container">
+			<button onclick="hide_modal_edit_page('modal_error_<?= $key ?>')" class="annuleren">Annuleren</button>
+		</div>
+	</div>
+</div>
 <?php endforeach; ?>
 
 <!-- Footer -->
