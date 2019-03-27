@@ -29,7 +29,7 @@ include(SHARED_PATH . '/header.php');
  
 <div id="content" class="container">
 	<div class="table-header-container">
-		<h2 class="tabel-header">Omgeving aanmaken</h2>
+		<h2 class="tabel-header">Omgeving aanmaken - Stap 1</h2>
 	</div>
 
     <form method="get" action="env_vm_relation_create.php" id="form">
@@ -66,7 +66,7 @@ include(SHARED_PATH . '/header.php');
         </div> 
     </form>
      <div class="buttons_bottom">
-                    <button class="volgende aanmaken" form="form" type="submit">Volgende</button>
+                    <button class="volgende btn-user-cancel" form="form" type="submit">Volgende</button>
                     <button class="annuleren" onclick="window.location.href ='userlist';">Annuleren</button>
 </div>
 
