@@ -2,6 +2,7 @@ var counter = 1;
 var limit = 3;
 
 function addInput(divName){
+
     if (counter == limit)  {
         alert("You have reached the limit of adding " + counter + " inputs");
     }
@@ -11,4 +12,8 @@ function addInput(divName){
         document.getElementById(divName).appendChild(newdiv);
         counter++;
     }
+}
+
+function test() {
+    console.log("test");
 }
