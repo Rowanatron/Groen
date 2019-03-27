@@ -10,6 +10,7 @@ $user = $_SESSION["user"];
 <head>
     <title>Server Monitor<?= isset($page_title) ? ' - ' . $page_title : ''; ?>		
 	</title>
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
     <meta charset="utf-8">
 	<!-- General styling -->
     <link rel="stylesheet" media="all" href="css/css-reset.css">
