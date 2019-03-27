@@ -150,14 +150,19 @@ if (isset($_SESSION['message'])) {
                             </div>
                         </div>
                     </div>
-                    <div id="relations">
-                        <?php foreach ($vm->getRelationList() as $relation): ?>
-                            <ul>
-                                <li><?php echo $relation->getVmNameFrom(); ?></li>
-                                <li><?php echo $relation->getVmNameTo(); ?></li>
-                                <li><?php echo $relation->getDescription(); ?></li>
-                            </ul>
-                        <?php endforeach; ?>
+<!--                    <div id="relations">-->
+<!--                        --><?php //foreach ($vm->getRelationList() as $relation): ?>
+<!--                            <ul>-->
+<!--                                <li>--><?php //echo $relation->getVmNameFrom(); ?><!--</li>-->
+<!--                                <li>--><?php //echo $relation->getVmNameTo(); ?><!--</li>-->
+<!--                                <li>--><?php //echo $relation->getDescription(); ?><!--</li>-->
+<!--                            </ul>-->
+<!--                        --><?php //endforeach; ?>
+<!--                    </div>-->
+                    <div id="info-icon">
+                        <a onClick="show_modal("<?php echo $vm->getName(); ?>") class="close-modal"">
+                            <i class="material-icons table-icons">info_outline</i>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>
