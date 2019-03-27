@@ -43,6 +43,7 @@
     padding: 10px;
     min-width: 46%;
     display: inline-block;
+    position: relative;
 }
 
 .server-img {
