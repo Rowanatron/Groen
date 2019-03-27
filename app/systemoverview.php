@@ -87,7 +87,6 @@ if (isset($_SESSION['message'])) {
 
                     }
 
-
                     foreach (get_environmentlist() as $environment) {
                         if ($environment->get_customer_id() == $selected_customer->get_customer_id()) { ?>
 
