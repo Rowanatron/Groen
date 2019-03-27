@@ -10,6 +10,9 @@ require_once(CLASS_PATH . '/Customer.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 require_once(CLASS_PATH . '/Environment.php');
 require_once(PRIVATE_PATH . '/environment_functions.php');
+require_once(PRIVATE_PATH . '/vm_functions.php');
+require_once(CLASS_PATH . '/Relation.php');
+require_once(CLASS_PATH . '/VirtualMachine.php');
 
 session_start();
 is_logged_in();
@@ -19,7 +22,13 @@ only_for_admins();
 include(SHARED_PATH . '/header.php');
 
 if(isset($_GET['id'])) {
-    $environment = get_environment_by_id($_GET['id']);
+    $environment_id = $_GET['id'];
+    $environment = get_environment_by_id($environment_id);
+    $relation_array = get_relations_by_environment_id($environment_id);
+    $unidirectional_relations = count($relation_array);
+
+
+
 } else if (isset($_POST['environment_id'])){
     $original_environment_name = $_POST['original_environment_name'];
     $environment_id = $_POST['environment_id'];
@@ -60,9 +69,11 @@ if (!isset($_GET['id'])) {
 		<h2 class="tabel-header">Omgeving bewerken</h2>
 	</div>
 
-    <form method="post" action="environmentedit.php" id="form-edit">
-        <input type=hidden name="environment_id" value="<?=$environment->get_environment_id(); ?>"/>
-        <input type=hidden name="original_environment_name" value="<?=$environment->get_environment_name(); ?>"/>
+    <form method="post" action="relationcreate.php" id="form-edit">
+        <input type="hidden" name="customer_id" value="<?=$environment->get_customer_id()?>"/>
+        <input type="hidden" name="environment_id" value="<?=$environment_id?>"/>
+        <input type="hidden" name="original_environment_name" value="<?=$environment->get_environment_name(); ?>"/>
+        <input type="hidden" name="env_id" value="<?=$environment_id?>"/>
         <div class="form_container">
             <div class="form_block form_full_length">
                 <label>
@@ -90,8 +101,98 @@ if (!isset($_GET['id'])) {
 
                     
                 </select>
-            </div>      
-        </div>  
+            </div>
+
+                <?php
+
+
+                for ($x = 0; $x<$unidirectional_relations; $x++) { ?>
+            <div id="dynamic_input">
+                    <div id="extra_fields">
+
+                <div class="form_block">
+
+                <div class="form_block">
+                    <label for="vm_name_from">Machine 1</label><br>
+                    <select name="vm_name_from[]" id="vm_name_from" required>
+                        <option value="<?= $relation_array[$x]->get_vm_name_from(); ?>" selected ><?= $relation_array[$x]->get_vm_name_from(); ?></option>
+                        <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+                            <option value="<?= $vm->getName(); ?>"><?= $vm->getName(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+
+
+                <?php
+
+
+                       if ($x != $unidirectional_relations-1 && $relation_array[$x]->get_vm_name_from() == $relation_array[$x+1]->get_vm_name_to()
+                && $relation_array[$x+1]->get_vm_name_from() == $relation_array[$x]->get_vm_name_to()&&
+                    $relation_array[$x+1]->get_description() == $relation_array[$x]->get_description())
+                    {
+                            $x++;
+
+                    ?>
+
+                <div class="form_block">
+                    <label for="bidirectional">Relatie</label><br>
+                    <select name="bidirectional[]" id="bidirectional" required>
+                        <option value="1" selected >tweevoudig</option>
+                        <option value="0">enkelvoudig</option>
+                    </select>
+                </div>
+
+
+                <?php } else { ?>
+
+                            <div class="form_block">
+                    <label for="bidirectional">Relatie</label><br>
+                    <select name="bidirectional[]" id="bidirectional" required>
+                        <option value="0" selected >enkelvoudig</option>
+                        <option value="1">tweevoudig</option>
+                    </select>
+                </div>
+
+                 <?php } ?>
+
+                <div class="form_block">
+                    <label for="vm_name_to">Machine 2</label><br>
+                    <select name="vm_name_to[]" id="vm_name_to" required>
+                        <option value="<?= $relation_array[$x]->get_vm_name_to(); ?>"  selected ><?= $relation_array[$x]->get_vm_name_to(); ?></option>
+                        <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>
+                            <option value="<?= $vm->getName(); ?>"><?= $vm->getName(); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form_block form_full_length">
+                    <label> Omschrijving<br>
+                        <textarea id="test_description" rows = "5" cols = "50" name = "relation_description[]" onkeydown="setTimeout(error_description, 1500)"><?= $relation_array[$x]->get_description(); ?></textarea>
+                        <!--                                <input id="test_description" name="relation_description[]" type="text" maxlength="255"-->
+                        <!--                                       onkeydown="setTimeout(error_description, 1500)" value=" "/>-->
+                        <p id="error_description" class="error_message"></p>
+                    </label>
+                </div>
+
+                    <input id='del-relationship-btn' type='button' value='Verwijder deze relatie' onclick='this.parentNode.parentNode.removeChild(this.parentNode);'/>
+
+                </div>
+                    </div>
+            </div> <!-- end dynamic input -->
+                <?php } ?>
+
+
+
+
+            <div id="extra_fields">
+            </div>
+        </div> <!-- form_container -->
+        <div id="add-relationship-btn">
+            <a class="volgende" onclick="add_input('dynamic_input', 'extra_fields');">
+                <i class="material-icons table-icons">add</i><span>Voeg een relatie toe</span>
+            </a>
+        </div>
     </form>
     <form style="display:none;" method="post" action="environmentlist.php" id="form-delete">
 		<input type="hidden" name="action" value="delete_environment" />
@@ -117,6 +218,59 @@ if (!isset($_GET['id'])) {
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
 <script type="text/javascript" src="private/js/environment_crud.js"></script>
 <script type="text/javascript" src="private/js/modal.js"></script>
+<script type="text/javascript">
+
+
+    function add_input(div_name, extra_fields) {
+
+        var new_div = document.createElement('div');
+        new_div.innerHTML = "      <div id=\"dynamic_input\">\n" +
+            "                        <div class=\"form_block\">\n" +
+            "                            <label for=\"vm_name_from\">Machine 1</label><br>\n" +
+            "                            <select name=\"vm_name_from[]\" id=\"vm_name_from\" required>\n" +
+            "                                <option value=\"\" disabled selected hidden>Kies een machine</option>\n" +
+            "                                <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>\n" +
+            "                                    <option value=\"<?= $vm->getName(); ?>\"><?= $vm->getName(); ?></option>\n" +
+            "                                <?php endforeach; ?>\n" +
+            "                            </select>\n" +
+            "                        </div>\n" +
+            "\n" +
+            "                        <div class=\"form_block\">\n" +
+            "                            <label for=\"bidirectional\">Relatie</label><br>\n" +
+            "                            <select name=\"bidirectional[]\" id=\"bidirectional\" required>\n" +
+            "                                <option value=\"\" disabled selected hidden>Relatie</option>\n" +
+            "                                <option value=\"0\">enkelvoudig</option>\n" +
+            "                                <option value=\"1\">tweevoudig</option>\n" +
+            "                            </select>\n" +
+            "                        </div>\n" +
+            "\n" +
+            "                        <div class=\"form_block\">\n" +
+            "                            <label for=\"vm_name_to\">Machine 2</label><br>\n" +
+            "                            <select name=\"vm_name_to[]\" id=\"vm_name_to\" required>\n" +
+            "                                <option value=\"\" disabled selected hidden>Kies een machine</option>\n" +
+            "                                <?php foreach (get_sorted_virtualmachine_list() as $vm) : ?>\n" +
+            "                                    <option value=\"<?= $vm->getName(); ?>\"><?= $vm->getName(); ?></option>\n" +
+            "                                <?php endforeach; ?>\n" +
+            "                            </select>\n" +
+            "                        </div>\n" +
+            "\n" +
+            "                        <div class=\"form_block form_full_length\">\n" +
+            "                            <label> Omschrijving<br>\n" +
+            "                                <textarea id=\"test_description\" rows = \"5\" cols = \"50\" name = \"relation_description[]\" onkeydown=\"setTimeout(error_description, 1500)\"></textarea>\n" +
+            "<!--                                <input id=\"test_description\" name=\"relation_description[]\" type=\"text\" maxlength=\"255\"-->\n" +
+            "<!--                                       onkeydown=\"setTimeout(error_description, 1500)\" value=\" \"/>-->\n" +
+            "                                <p id=\"error_description\" class=\"error_message\"></p>\n" +
+            "                            </label>\n" +
+            "                        </div>\n" +
+            "                    </div> <!-- end dynamic input --><input id='del-relationship-btn' type='button' value='Verwijder deze relatie' onclick='this.parentNode.parentNode.removeChild(this.parentNode);'/>";
+
+        document.getElementById(extra_fields).appendChild(new_div);
+    }
+
+
+
+</script>
+
 
 <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>

@@ -35,7 +35,7 @@ class Relation
     /**
      * @return mixed
      */
-    public function getVmNameFrom()
+    public function get_vm_name_from()
     {
         return $this->vm_name_from;
     }
@@ -43,7 +43,7 @@ class Relation
     /**
      * @return mixed
      */
-    public function getVmNameTo()
+    public function get_vm_name_to()
     {
         return $this->vm_name_to;
     }
@@ -51,7 +51,7 @@ class Relation
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function get_description()
     {
         return $this->description;
     }
