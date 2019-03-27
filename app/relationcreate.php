@@ -47,6 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $environment_name = $_POST['environment_name'];
     $customer_id = $_POST['customer_id'];
 
+    $customer_name = get_customer_by_id($customer_id)->customer_name;
+
     $environment = new Environment(0, $environment_name, $customer_id);
     insert_environment($environment);
 
@@ -107,12 +109,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     }
     ?>
-    <meta http-equiv="refresh" content="0; environmentlist.php"/>
+    <form method="get" action="systemoverview.php" id="environment_created_form">
+        <input type="hidden" name="environment_name" value="<?=$environment_name?>"/>
+        <input type="hidden" name="customer_name" value="<?=$customer_name?>"/>
+    </form>
+
+    <script type="text/javascript">
+
+        function submit_environment_to_overview() {
+
+            var form = document.getElementById("environment_created_form");
+
+            form.submit();
+
+        }
+
+        window.onload = submit_environment_to_overview();
+
+    </script>
     <?php
-    exit();
 
 }
-
 
 ?>
 
@@ -122,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2 class="tabel-header">Omgeving aanmaken - Stap 2<br>Voeg relaties toe voor omgeving <?= $_GET['environment_name'] ?><br></h2>
         </div> <!-- table-header-content-->
 
-            <form method="post" action="env_vm_relation_create.php" id="form">
+            <form method="post" action="relationcreate.php" id="form">
                 <input type="hidden" name="environment_name" value="<?= $_GET['environment_name'] ?>"/>
                 <input type="hidden" name="customer_id" value="<?= $_GET['customer_id'] ?>"/>
                 <div class="">

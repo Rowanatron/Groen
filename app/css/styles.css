@@ -94,6 +94,7 @@ header a {
 }
 
 .user_img {
+    object-fit: cover;
     height: 35px;
     width: 35px;
     margin-top: 14px;

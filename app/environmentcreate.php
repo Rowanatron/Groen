@@ -22,44 +22,52 @@ session_expired();
 include(SHARED_PATH . '/header.php');
 ?>
 
+
+ 
 <div id="content" class="container">
-    <div class="table-header-container">
-        <h2 class="tabel-header">Omgeving aanmaken - Stap 1</h2>
-    </div>
-    <div class="form_container">
-    <form method="get" action="env_vm_relation_create.php" id="form" class="form_block form_full_length">
-        <label for = "environment_name">Omgevingsnaam</label><br/>
-        <input autofocus id="test_environment" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
-        <p id="error_environment" class="error_message"></p>
+	<div class="table-header-container">
+		<h2 class="tabel-header">Omgeving aanmaken - Stap 1</h2>
+	</div>
 
-
-        <div class="form_block form_full_length">
-            <label for="customer_id">Gekoppelde klant</label><br>
-
-                <?php $customerlist = get_customerlist() ?>
-
-
-                <select name="customer_id" id="customer_id" required>
+    <form method="get" action="relationcreate.php" id="form">
+        
+        <div class="form_container">
+            <div class="form_block form_full_length">
+                <label>
+                    Omgevingsnaam<br>
+                    <input autofocus id="test_environment_name" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
+                </label>
+                <p id="error_environment_name" class="error_message"></p>
+            </div>
+            <div class="form_block form_full_length">
+                <label for="customer">Gekoppelde klant</label><br>
+                <select name="customer_id" id="customer" required>
                 <option value="" disabled selected hidden>Kies een klant</option>
-                    <?php foreach ($customerlist as $customer) : ?>
-                <option value="<?=$customer->customer_id; ?>"><?=$customer->customer_name; ?></option>
+                    <?php
+                    $customerlist = get_customerlist(); 
+                    
+                    foreach ($customerlist as $customer) :  ?>  
+
+                    <option value="<?=$customer->customer_id; ?>"><?=$customer->customer_name; ?></option>
+                        
+
+                    
                     <?php endforeach; ?>
-            </select>
-        </div>
+                    
 
-
-
-
- </form>
+                    
+                </select>
+            </div>      
+        </div> 
+    </form>
      <div class="buttons_bottom">
-                    <button class="volgende" form="form" type="submit">Volgende</button>
+                    <button class="volgende btn-user-cancel" form="form" type="submit">Volgende</button>
                     <button class="annuleren" onclick="window.location.href ='userlist';">Annuleren</button>
 </div>
 
-
-    </div>
-
-
+<!-- Nu staat Javascript niet achteraan. Probleem? -->
+<script type="text/javascript" src="private/js/environment_crud.js"></script>
+<script type="text/javascript" src="private/js/modal.js"></script>
 
     <!-- Default PHP footer -->
 <?php include(SHARED_PATH . '/footer.php')?>
