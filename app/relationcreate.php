@@ -44,11 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $environment_name = $_POST['environment_name'];
-    $environment_id = $_POST['env_id'];
     $customer_id = $_POST['customer_id'];
 
     // als de request van de environmentedit pagina komt wordt de oude omgeving verwijderd voordat een nieuwe wordt aangemaakt
-    if ($environment_id != null) {
+    if (isset($_POST['env_id'])) {
+
+        $environment_id = $_POST['env_id'];
 
         if ($_POST['$original_environment_name'] != $environment_name) {
 
