@@ -1,6 +1,7 @@
 <?php
 
-class VirtualMachine {
+class VirtualMachine
+{
 
     private $hostSystem;
     private $customer;
@@ -12,8 +13,8 @@ class VirtualMachine {
     private $omgeving;
     private $vCPU;
 
-    private $relation_list;
-
+    private $incoming_relation_list;
+    private $outgoing_relation_list;
 
     public function __construct($hostSystem, $customer, $diskSize, $environment, $latency, $memory, $name, $omgeving, $vCPU)
     {
@@ -119,15 +120,24 @@ class VirtualMachine {
         $this->vCPU = $vCPU;
     }
 
-    public function getRelationList()
+    public function getIncomingRelationList()
     {
-        return $this->relation_list;
+        return $this->incoming_relation_list;
     }
 
-
-    public function setRelationList($relation_list)
+    public function setIncomingRelationList($incoming_relation_list)
     {
-        $this->relation_list = $relation_list;
+        $this->incoming_relation_list = $incoming_relation_list;
+    }
+
+    public function getOutgoingRelationList()
+    {
+        return $this->outgoing_relation_list;
+    }
+
+    public function setOutgoingRelationList($outgoing_relation_list)
+    {
+        $this->outgoing_relation_list = $outgoing_relation_list;
     }
 
 }

@@ -90,9 +90,11 @@ function get_sorted_virtualmachine_list_with_relations()
             $row->vCPU
         );
 
-        $relation_list = get_relation_list($virtual_machine->getName());
+        $incoming_relation_list = get_incoming_relation_list($virtual_machine->getName());
+        $outgoing_relation_list = get_outgoing_relation_list($virtual_machine->getName());
 
-        $virtual_machine->setRelationList($relation_list);
+        $virtual_machine->setIncomingRelationList($outgoing_relation_list);
+        $virtual_machine->setOutgoingRelationList($incoming_relation_list);
 
         $virtual_machine_list[$row->name] = $virtual_machine;
     }
@@ -102,14 +104,41 @@ function get_sorted_virtualmachine_list_with_relations()
     return $virtual_machine_list;
 }
 
-function get_relation_list($vm_name){
+function get_incoming_relation_list($vm_name){
 
     include_once(CLASS_PATH . '/Relation.php');
     require_once(CLASS_PATH . '/DatabasePDO.php');
 
     $pdo = new DatabasePDO();
     $conn = $pdo->get();
-    $query = "SELECT * FROM env_vm_relation WHERE vm_name_from = :vm_name OR vm_name_to = :vm_name";
+    $query = "SELECT * FROM env_vm_relation WHERE vm_name_to = :vm_name";
+
+    try {
+        $statement = $conn->prepare($query);
+        $statement->execute(array('vm_name' => $vm_name));
+    } catch (PDOException $e) {
+        echo "Connection failed: {$e->getMessage()}";
+    }
+
+    $relation_list = array();
+
+    while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+        $relation = new Relation($row['relation_id'], $row['environment_id'], $row['vm_name_from'], $row['vm_name_to'], $row['description']);
+        array_push($relation_list, $relation);
+    }
+
+    return $relation_list;
+
+}
+
+function get_outgoing_relation_list($vm_name){
+
+    include_once(CLASS_PATH . '/Relation.php');
+    require_once(CLASS_PATH . '/DatabasePDO.php');
+
+    $pdo = new DatabasePDO();
+    $conn = $pdo->get();
+    $query = "SELECT * FROM env_vm_relation WHERE vm_name_from = :vm_name";
 
 
     try {
