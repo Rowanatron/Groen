@@ -47,6 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $environment_name = $_POST['environment_name'];
     $customer_id = $_POST['customer_id'];
 
+    $customer_name = get_customer_by_id($customer_id)->customer_name;
+
     $environment = new Environment(0, $environment_name, $customer_id);
     insert_environment($environment);
 
@@ -107,12 +109,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     }
     ?>
-    <meta http-equiv="refresh" content="0; environmentlist.php"/>
+    <form method="get" action="systemoverview.php" id="environment_created_form">
+        <input type="hidden" name="environment_name" value="<?=$environment_name?>"/>
+        <input type="hidden" name="customer_name" value="<?=$customer_name?>"/>
+    </form>
+
+    <script type="text/javascript">
+
+        function submit_environment_to_overview() {
+
+            var form = document.getElementById("environment_created_form");
+
+            form.submit();
+
+        }
+
+        window.onload = submit_environment_to_overview();
+
+    </script>
     <?php
-    exit();
 
 }
-
 
 ?>
 
