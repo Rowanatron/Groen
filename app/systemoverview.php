@@ -22,6 +22,7 @@ if (isset($_SESSION['message'])) {
     $message = $_SESSION['message'];
 }
 
+
 ?>
 
 <!-- Message aan gebruiker -->
@@ -40,9 +41,9 @@ if (isset($_SESSION['message'])) {
         <h1>Systeem overzicht</h1>
         <div id="dropdown">
             <div class="dropdown-element">
-                <form method="post">
+                <form method="get">
                     <h2>Klant</h2>
-                    <select name="klant" onchange="this.form.submit();">
+                    <select name="customer_name" onchange="this.form.submit();">
                         <?php foreach (get_customerlist() as $customer) {
 
                             if (customer_has_environment($customer)) {
@@ -50,8 +51,8 @@ if (isset($_SESSION['message'])) {
                                 $customer_name = $customer->get_customer_name();
                                 $selected = '';
 
-                                if (isset($_POST['klant'])) {
-                                    if ($_POST['klant'] == $customer_name) {
+                                if (isset($_GET['customer_name'])) {
+                                    if ($_GET['customer_name'] == $customer_name) {
                                         $selected = 'selected';
                                     } else {
                                         $selected = '';
@@ -62,6 +63,7 @@ if (isset($_SESSION['message'])) {
 
                                 <option value="<?= $customer_name ?>" <?= $selected ?>><?= $customer->get_customer_name() ?></option>
 
+
                             <?php }
 
                         } ?>
@@ -70,35 +72,35 @@ if (isset($_SESSION['message'])) {
             </div>
             <div class="dropdown-element">
                 <h2>Omgeving</h2>
-                <select name="omgeving" id="omgeving" required>
+                <select name="environment_name" required>
                     <?php
-                    foreach (get_environmentlist() as $environment) : ?>
 
-                        <?php if (isset($_POST['klant'])) {
+                    if (isset($_GET['customer_name'])) {
+                        $selected_customer = get_customer_by_customer_name($_GET['customer_name']);
+                    } else {
+                        foreach (get_customerlist() as $customer) {
+                            if (customer_has_environment($customer)) {
+                                $selected_customer = $customer;
+                                break;
+                            }
+                        }
 
-                            if ($environment->get_customer_id() == get_customer_by_customer_name($_POST['klant'])->get_customer_id()) { ?>
+                    }
 
-                                <option value="<?= $environment->get_environment_name() ?>"> <?php echo $environment->get_environment_name() ?></option>
 
-                            <?php }
-                        } else { // TODO schrijf de else statement!!?>
+                    foreach (get_environmentlist() as $environment) {
+                        if ($environment->get_customer_id() == $selected_customer->get_customer_id()) { ?>
 
                             <option value="<?= $environment->get_environment_name() ?>"> <?php echo $environment->get_environment_name() ?></option>
 
-                       <?php } ?>
-
-                    <?php endforeach; ?>
+                            <?php
+                        }
+                    }
+                    ?>
                 </select>
             </div>
         </div>
     </div>
-
-    <!--    <div>-->
-    <!--        --><?php
-    //        $selectOption = $_POST['klant'];
-    //        var_dump($selectOption);
-    //        ?>
-    <!--    </div>-->
 
     <div class="system-overview-servers-container">
         <div id="reload-content">
