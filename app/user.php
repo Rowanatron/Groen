@@ -14,14 +14,24 @@ session_start();
 is_logged_in();
 session_expired();
 
+// Initialize
+$page_errors = array();
+
 // Current user
 $session_user = get_user_by_id($_SESSION["user"]->get_user_id());
 
-//// GET REQUEST
+if ($session_user->get_role() == "admin") {
+	$is_admin = true;
+} else {
+	$is_admin = false;
+}
+
+//// CHECK REQUEST
 
 // Check method
 if (isset($_POST['id'])) {
 	$is_post = true;
+	$post_id = $_POST['id'];
 } else {
 	$is_post = false;
 }
@@ -29,7 +39,7 @@ if (isset($_POST['id'])) {
 // Check action
 if (isset($_GET['action']) && $_GET['action'] == "new") {
 	
-	$get_action = "new";
+	$is_edit = false;
 	$page_title = "Nieuwe gebruiker";
 	
 } else if (isset($_GET['action']) && $_GET['action'] != "edit") {
@@ -38,7 +48,7 @@ if (isset($_GET['action']) && $_GET['action'] == "new") {
 
 } else {
 	
-	$get_action = "edit";
+	$is_edit = true;
 	$page_title = "Gebruiker bewerken";
 
 }
@@ -55,89 +65,119 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 }
 
 // Check if user rights are ok
-if ($session_user->get_role() != "admin") {
+if (!$is_admin) {
 	
-	if ($get_action == "new" || $get_id != $session_user->get_user_id()) {
+	if ($is_edit == false || $get_id != $session_user->get_user_id()) {
 		header("Location: user-edit");
 	}
 	
 }
 
+?>
+
+<?php
+
 //// POST REQUEST
+
+if ($is_post) {
+	
+	if ($post_id == $get_id) {
+		
+		echo "Gelukt.";
+	
+	} else {
+		
+		array_push($page_errors, "Opgevraagde gebruiker komt niet overeen met verzonden data.");
+		
+	}
+
+}
 
 ?>
 
-<?php if ($is_post) : ?>
-	<script>alert("POST");</script>
-<?php endif; ?>
+<?php
 
+//// GET FORM-USER
+
+if ($is_edit == true) {
+
+	$form_user = get_user_by_id($get_id);
+
+	if ($form_user->get_user_id() == null) {
+		
+		header("Location: user-edit");
+
+	}
+
+}
+
+?>
+
+<!-- Header -->
 <?php include(SHARED_PATH . '/header.php'); ?>
 
+<!-- Content -->
 <div id="content" class="container">
+
+	<!-- Header -->
 	<div class="table-header-container">
 		<h2 class="tabel-header"><?= $page_title ?></h2>
-		<?= $post ? "post" : "get" ?>
-		<?= $get_action ?>
-		<?= $get_id ?>
 		<a href="user" />User</a>
+		<?php if($is_edit) echo $form_user->get_user_id(); ?>
 	</div>
-
-    <form id="user-form" method="post" action="user-<?= $get_action ?><?= $get_action == "edit" ? "-" . $get_id : "" ?>" enctype="multipart/form-data">
+	
+	<!-- Form -->
+    <form id="user-form" method="post" action="user-<?= ($is_edit) ? "edit-" . $get_id : "new" ?>" enctype="multipart/form-data">
 	
         <div class="form_container">
-		
-			<div class="form_block form_full_length">
-				<label for="id">Id</label>
-				<input name="id" type="text" value="1" required />
-			</div> 
 			
 			<div class="form_block form_full_length">
 				<label for="username">Gebruikersnaam</label>
-				<input name="username" type="text" minlength="5" maxlength="45" value="123456" required />
+				<input name="username" type="text" minlength="5" maxlength="45" value="<?php if($is_edit) echo $form_user->get_username(); ?>" required <?php if (!$is_admin) echo "disabled"; ?> />
                 <p id="error_username" class="error_message"></p>
 			</div> 
 			
             <div class="form_block">
                 <label for="password">Wachtwoord</label>
-                <input name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="Minimal1!" />
+                <input name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" />
                 <p id="error_password" class="error_message"></p>
             </div>
 			
             <div class="form_block">
                 <label for="password_repeat">Herhaal wachtwoord</label>
-                <input id="password_repeat" name="password_repeat" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="Minimal1!" />
+                <input id="password_repeat" name="password_repeat" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" />
                 <p id="error_password_repeat" class="error_message"></p>
             </div>
    			
             <div class="form_block">
                 <label for="given_name">Voornaam</label>
-                <input name="given_name" type="text" minlength="2" maxlenght="45" required value="Minimal1!" />
+                <input name="given_name" type="text" minlength="2" maxlenght="45" required value="<?php if($is_edit) echo $form_user->get_given_name(); ?>" />
                 <p id="error_given_name" class="error_message"></p>
             </div>
 			
             <div class="form_block">
                 <label for="family_name">Achternaam</label>
-				<input id="family_name" name="family_name" type="text" minlength="2" maxlenght="45" required value="Minimal1!" />
+				<input id="family_name" name="family_name" type="text" minlength="2" maxlenght="45" required value="<?php if($is_edit) echo $form_user->get_family_name(); ?>" />
                 <p id="error_family_name" class="error_message"></p>
             </div>
 			
             <div class="form_block form_full_length">
                 <label for="email">Emailadres</label>
-				<input id="email" name="email" type="email" maxlength="45" required value="Minimal1@gmail.com" />
+				<input id="email" name="email" type="email" maxlength="45" required value="<?php if($is_edit) echo $form_user->get_email(); ?>" />
                 <p id="error_email" class="error_message"></p>
             </div>
 			
             <div class="form_block form_full_length">
-                <label for="role">Selecteer rol:</label>
-                <select name="role" id="role" required>
-					<option value="user" selected>gebruiker</option>
-                    <option value="admin">admin</option>
+                <label for="role">Selecteer rol</label>
+                <select name="role" id="role" <?php if (!$is_admin) echo "disabled"; ?>>
+					<option value="user" <?php if($is_edit && $form_user->get_role() == "user") echo "selected"; ?>>gebruiker</option>
+                    <option value="admin" <?php if($is_edit && $form_user->get_role() == "admin") echo "selected"; ?>>admin</option>
 				</select>
             </div>
 			
             <div class="form_block form_full_length">
                 <label for="photo">Upload profielfoto
-					<div id="button-input-photo">Bladeren...</div>
+					<div id="photo-button">Bladeren...</div>
 				</label>
 				<input id="photo" name="photo" type="file">
 		    </div> 
@@ -146,12 +186,35 @@ if ($session_user->get_role() != "admin") {
 		
     </form>
 	
+	<!-- Buttons -->
     <div class="buttons_bottom">
         <button class="btn-user-save" form="user-form" type="submit">Gebruiker opslaan</button>
-		<button class="btn-user-delete">Gebruiker verwijderen</button>
+		<?php if ($is_edit && $is_admin && $session_user->get_user_id() != $get_id) : ?>
+			<button class="btn-user-delete" onclick="show_modal_edit_page('modal_delete')">Gebruiker verwijderen</button>
+		<?php endif; ?>
         <button class="btn-user-cancel">Annuleren</button>
-    </div>   
+    </div>
     
 </div>
 
+<!-- Modal for delete -->
+<?php if ($is_edit && $is_admin && $session_user->get_user_id() != $get_id) : ?>
+<div class="modal" id="modal_delete">
+	<div id="modal-content">
+		<div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
+		<div id="modal-p"><p>Weet u zeker dat u <?= $form_user->get_username() ?> wilt verwijderen?</p></div>
+		<div id="button-container">
+			<!-- <button id="modal-delete-button" class="verwijderen" form="" type="submit">Gebruiker verwijderen</button> -->
+			<button onclick="hide_modal_edit_page('modal_delete')" class="annuleren">Annuleren</button>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
+
+<!-- Page error -->
+<?php foreach ($page_errors as $error): ?>
+	<script>alert("<?= $error ?>");</script>
+<?php endforeach; ?>
+
+<!-- Footer -->
 <?php include(SHARED_PATH . '/footer.php'); ?>

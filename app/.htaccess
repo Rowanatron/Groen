@@ -4,10 +4,6 @@ Options +FollowSymLinks
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^user/?$ user.php [L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^user-new/?$ user.php?action=new [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f

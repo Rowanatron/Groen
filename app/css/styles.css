@@ -17,6 +17,10 @@ body {
     position: relative;
 }
 
+html {
+	overflow-y: scroll;
+}
+
 a {
     color: #4A4A4A;
     text-decoration: none; 
