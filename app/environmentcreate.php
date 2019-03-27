@@ -27,7 +27,7 @@ include(SHARED_PATH . '/header.php');
         <h2 class="tabel-header">Omgeving aanmaken - Stap 1</h2>
     </div>
     <div class="form_container">
-    <form method="get" action="env_vm_relation_create.php" id="form" class="form_block form_full_length">
+    <form method="get" action="relationcreate.php" id="form" class="form_block form_full_length">
         <label for = "environment_name">Omgevingsnaam</label><br/>
         <input autofocus id="test_environment" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
         <p id="error_environment" class="error_message"></p>
