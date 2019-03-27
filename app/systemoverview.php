@@ -181,18 +181,18 @@ if (isset($_SESSION['message'])) {
                 <h1><?php echo $vm->getName(); ?></h1></div>
             <div id="IN-left">
                 <i class="material-icons table-icons arrow">arrow_upward</i>
-                <?php foreach ($vm->getRelationList() as $relation): ?>
+                <?php foreach ($vm->getIncomingRelationList() as $relation): ?>
                     <div class="tooltip item">
-                        <div><?php echo $relation->getVmNameFrom(); ?></div>
+                        <div><?php echo $relation->getVmNameTo(); ?></div>
                         <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
                     </div>
                 <?php endforeach; ?>
             </div>
             <div id="OUT-right">
                 <i class="material-icons table-icons arrow">arrow_downward</i>
-                <?php foreach ($vm->getRelationList() as $relation): ?>
+                <?php foreach ($vm->getOutgoingRelationList() as $relation): ?>
                     <div class="tooltip item">
-                        <div><?php echo $relation->getVmNameTo();?></div>
+                        <div><?php echo $relation->getVmNameFrom();?></div>
                         <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
                     </div>
                 <?php endforeach; ?>
