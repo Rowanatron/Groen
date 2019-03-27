@@ -35,7 +35,7 @@ include(SHARED_PATH . '/header.php');
             <div class="form_block form_full_length">
                 <label>
                     Omgevingsnaam<br>
-                    <input autofocus id="test_environment" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
+                    <input autofocus id="test_environment_name" name="environment_name" type="text" minlength="3" maxlength="45" onkeydown="setTimeout(error_environment_name, 1500)" required/>
                     <p id="error_environment" class="error_message"></p>
                 </label>
                 
