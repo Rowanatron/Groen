@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2 class="tabel-header">Omgeving aanmaken - Stap 2<br>Voeg relaties toe voor omgeving <?= $_GET['environment_name'] ?><br></h2>
         </div> <!-- table-header-content-->
 
-            <form method="post" action="env_vm_relation_create.php" id="form">
+            <form method="post" action="relationcreate.php" id="form">
                 <input type="hidden" name="environment_name" value="<?= $_GET['environment_name'] ?>"/>
                 <input type="hidden" name="customer_id" value="<?= $_GET['customer_id'] ?>"/>
                 <div class="">

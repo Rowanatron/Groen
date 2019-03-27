@@ -16,7 +16,7 @@ $user = $_SESSION["user"];
     <link rel="stylesheet" media="all" href="css/styles.css">
     <!-- Form styling -->
 	<?php if ($pagename == "usercreate.php" || $pagename == "useredit.php" || $pagename == "customercreate.php"
-        || $pagename == "customeredit.php" || $pagename=="environmentcreate.php" || $pagename =="env_vm_relation_create.php" || $pagename == "environmentedit.php"): ?>
+        || $pagename == "customeredit.php" || $pagename=="environmentcreate.php" || $pagename =="relationcreate.php" || $pagename == "environmentedit.php"): ?>
 	<link rel="stylesheet" media="all" href="css/form.css">
 	<?php endif; ?>
 	<!-- System overview styling & JavaScript-->
