@@ -138,8 +138,8 @@ if (!isset($_GET['id'])) {
                 <div class="form_block">
                     <label for="bidirectional">Relatie</label><br>
                     <select name="bidirectional[]" id="bidirectional" required>
-                        <option value="1" selected >tweevoudig</option>
-                        <option value="0">enkelvoudig</option>
+                        <option value="1" selected >tweezijdig</option>
+                        <option value="0">enkelzijdig</option>
                     </select>
                 </div>
 
@@ -149,8 +149,8 @@ if (!isset($_GET['id'])) {
                             <div class="form_block">
                     <label for="bidirectional">Relatie</label><br>
                     <select name="bidirectional[]" id="bidirectional" required>
-                        <option value="0" selected >enkelvoudig</option>
-                        <option value="1">tweevoudig</option>
+                        <option value="0" selected >enkelzijdig</option>
+                        <option value="1">tweezijdig</option>
                     </select>
                 </div>
 
