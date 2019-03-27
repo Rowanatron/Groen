@@ -151,20 +151,77 @@ if (isset($_SESSION['message'])) {
                             </div>
                         </div>
                     </div>
-                    <div id="relations">
-                        <?php foreach ($vm->getRelationList() as $relation): ?>
-                            <ul>
-                                <li><?php echo $relation->getVmNameFrom(); ?></li>
-                                <li><?php echo $relation->getVmNameTo(); ?></li>
-                                <li><?php echo $relation->getDescription(); ?></li>
-                            </ul>
-                        <?php endforeach; ?>
+<!--                    <div id="relations">-->
+<!--                        --><?php //foreach ($vm->getRelationList() as $relation): ?>
+<!--                            <ul>-->
+<!--                                <li>--><?php //echo $relation->getVmNameFrom(); ?><!--</li>-->
+<!--                                <li>--><?php //echo $relation->getVmNameTo(); ?><!--</li>-->
+<!--                                <li>--><?php //echo $relation->getDescription(); ?><!--</li>-->
+<!--                            </ul>-->
+<!--                        --><?php //endforeach; ?>
+<!--                    </div>-->
+                    <div id="info-icon">
+                        <a onClick="show_modal('<?= $vm->getName(); ?>')" class="close-modal"">
+                            <i class="material-icons table-icons">info_outline</i>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
 </div>
+
+
+<?php foreach (get_sorted_virtualmachine_list_with_relations() as $vm) : ?>
+    <div class="modal" id="modal-<?php echo $vm->getName(); ?>">
+        <div id="modal-content">
+
+            <div id="modal-title">
+                <p>Servernaam:</p>
+                <h1><?php echo $vm->getName(); ?></h1></div>
+            <div id="IN-left">
+                <i class="material-icons table-icons arrow">arrow_upward</i>
+                <?php foreach ($vm->getIncomingRelationList() as $relation): ?>
+                    <div class="tooltip item">
+                        <div><?php echo $relation->getVmNameTo(); ?></div>
+                        <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div id="OUT-right">
+                <i class="material-icons table-icons arrow">arrow_downward</i>
+                <?php foreach ($vm->getOutgoingRelationList() as $relation): ?>
+                    <div class="tooltip item">
+                        <div><?php echo $relation->getVmNameFrom();?></div>
+                        <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div id="close-modal">
+                <a onClick="hide_modal('<?= $vm->getName(); ?>')" class="close-modal"">
+                    <i class="material-icons table-icons">close</i>
+                </a>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<!--getIncomingRelationList()-->
+<!--getOutgoingRelationList()-->
+
+
+<script>
+
+    function show_modal(server_name) {
+        document.getElementById("modal-" + server_name).style.visibility = "visible";
+
+    }
+
+    function hide_modal(server_name) {
+        document.getElementById("modal-" + server_name).style.visibility = "hidden";
+    }
+
+</script>
 
 <!--Auto-refresh van het virtual machine overzicht -->
 <script type="text/javascript" src="private/js/systemoverview.js"></script>
