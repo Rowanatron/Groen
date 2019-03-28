@@ -44,25 +44,33 @@ if (isset($_SESSION['message'])) {
                 <form class="so-form" method="get">
                     <label class="so-label" for="customer_name">Klant</label>
                     <select id="sys-overview" name="customer_name" onchange="this.form.submit();">
-                        <?php foreach (get_customerlist() as $customer) {
+                        <?php
+
+                        $selected_customer ='';
+                        $selected_environment ='';
+
+                        foreach (get_customerlist() as $customer) {
 
                             if (customer_has_environment($customer)) {
 
                                 $customer_name = $customer->get_customer_name();
                                 $selected = '';
 
+                                /** Als de customer_name in de get zit wordt deze in een session gezet en selected. Als de customer_name in de session zit deze selected*/
                                 if (isset($_GET['customer_name'])) {
                                     if ($_GET['customer_name'] == $customer_name) {
                                         $_SESSION['customer_name'] = $_GET['customer_name'];
+                                        $selected = 'selected';
+
+                                        /** Deze logica hoort hier volgens mij niet thuis.. Of toch wel? */
                                         $environment_list = get_environmentlist();
                                         foreach ($environment_list as $environment) {
                                             if ($environment->get_customer_id() ==  get_customer_by_customer_name($customer_name)->get_customer_id()){
-                                                $selected_environment = $environment;
+                                                $selected_environment = $environment;            // wat doet dit hier?
                                                 break;
                                             }
                                         }
 
-                                        $selected = 'selected';
                                     }
                                 } else if (isset($_SESSION['customer_name'])) {
                                     if ($_SESSION['customer_name'] == $customer_name) {
@@ -87,53 +95,53 @@ if (isset($_SESSION['message'])) {
                     <select id="sys-overview" name="environment_name" onchange="this.form.submit();">
                         <?php
 
+                        /** Bepaal de geselecteerde customer */
+
                         if (isset($_GET['customer_name'])) {
                             $selected_customer = get_customer_by_customer_name($_GET['customer_name']);
                         } else if (isset($_SESSION['customer_name'])) {
                             $selected_customer = get_customer_by_customer_name($_SESSION['customer_name']);
                         } else {
-                            foreach (get_customerlist() as $customer) {
-                                if (customer_has_environment($customer)) {
-                                    $selected_customer = $customer;
-                                    ?><input type="hidden" name="environment_name" value="<?= get_environment_name_from_customer_id(get_customer_by_customer_name($customer_name)->get_customer_id()); ?>"/><?php
-
-                                    break;
-                                }
-                            }
-
+                            $customer_list = get_customerlist();
+                            $selected_customer = $customer_list[0];
                         }
 
 
-
+                        /** Bepaalt de geselecteerde omgeving en geeft de juiste opties weer in de browse balk */
                         foreach (get_environmentlist() as $environment) {
-
-
 
                             $environment_name = $environment->get_environment_name();
                             $selected = '';
 
                             if ($environment->get_customer_id() == $selected_customer->get_customer_id()) {
 
-
                                 if (isset($_GET['environment_name'])) {
                                     if ($_GET['environment_name'] == $environment_name) {
-                                        $_SESSION['environment_name'] = $_GET['environment_name'];
+                                        $_SESSION['environment_name'] = $_GET['environment_name']; // dit is nu volgens mij overbodig
+                                        $selected_environment = get_environment_by_environment_name($_GET['environment_name']);
                                         $selected = 'selected';
                                     }
-                                } else if (isset($_SESSION['environment_name'])) {
+                                } else if (isset($_SESSION['environment_name'])) {                  // is dit hele blokje dan ook niet overbodig? Kan dan vervangen worden door $selected_environment
                                     if ($_SESSION['environment_name'] == $environment_name) {
+                                        $selected_environment = get_environment_by_environment_name($_SESSION['environment_name']);
                                         $selected = 'selected';
                                     }
                                 }
-//                                else {
-//                                    $environment_list = get_environmentlist();
-//                                    $selected_environment = $environment_list[0];
-//                                }
+                                else {
+                                    // De eerste omgeving van de selected customer pakken
+                                    $selected_environment_array = [];
+                                    foreach (get_environmentlist() as $env){
+                                        if ($env->get_customer_id() == $selected_customer->get_customer_id()){
+                                            array_push($selected_environment_array, $env);
+                                        }
+                                    }
+                                    $selected_environment = $selected_environment_array[0];
+                                }
 
 
                                 ?>
 
-                                <option value="<?= $environment->get_environment_name() ?>" <?= $selected ?>> <?php echo $environment->get_environment_name() ?></option>
+                                <option value="<?= $environment_name ?>" <?= $selected ?>> <?= $environment_name ?></option>
 
                                 <?php
                             }
@@ -147,18 +155,9 @@ if (isset($_SESSION['message'])) {
 
 
     <?php
-
-    if (isset($_GET['environment_name'])) {
-        $selected_environment = get_environment_by_environment_name($_GET['environment_name']);
-    } else if (isset($_SESSION['environment_name'])){
-        $selected_environment = get_environment_by_environment_name($_SESSION['environment_name']);
-    }
-//    else
-//        {
-//        $environment_list = get_environmentlist();
-//        $selected_environment = $environment_list[0];
-//    }
-
+    var_dump($selected_customer);
+    echo '<br>';
+    var_dump($selected_environment);
     ?>
 
     <div class="system-overview-servers-container">
