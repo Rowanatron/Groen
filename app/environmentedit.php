@@ -25,7 +25,6 @@ if (isset($_GET['id'])) {
     $environment_id = $_GET['id'];
     $environment = get_environment_by_id($environment_id);
     $original_environment_name = $environment->environment_name;
-    var_dump($original_environment_name);
     $relation_array = get_relations_by_environment_id($environment_id);
     $unidirectional_relations = count($relation_array);
 

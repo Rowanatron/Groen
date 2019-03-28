@@ -54,11 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($_POST['environment_name'] != $_POST['dummy_input']) {
 
+            
+            if (get_environment_by_environment_name($environment_name)->environment_name != null) {
 
-            var_dump($_POST['$dummy_input'], $_POST['environment_name']);
-
-
-            if (get_environment_by_environment_name($environment_name) != null) {
 
                 $environment_name = $environment_name . $environment_id;
 
