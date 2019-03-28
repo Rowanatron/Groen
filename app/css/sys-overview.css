@@ -14,29 +14,6 @@
     float: left;
 }
 
-#dropdown {
-    float: right;
-}
-
-.dropdown-element{
-    display: inline-block;
-    padding-left: 1em;
-}
-
-select{
-    height: 3em;
-    width: 10em;
-    background-color:  white;
-    cursor: pointer;
-    border: 1px solid #E2E9F0;
-    border-radius: 2px !important;
-}
-
-.dropdown-element h1, h2, select {
-    display: inline-block;
-}
-
-
 .system-overview-servers-container {
     border: 1px solid #D9DCDF;
     padding-bottom: 20px;
