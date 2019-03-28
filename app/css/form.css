@@ -169,9 +169,9 @@ label {
 /******* ENVIRONMENT CREATE *******/
 
 #dynamic_input, #extra_fields div {
-    margin-top: 15px;
+    margin-top: 30px;
     background-color: #FAFBFD;
-    margin-right: 10%;
+
     position: relative;
 }
 
@@ -200,9 +200,60 @@ h2.basisgegevens {
 
 p.uitleg {
   padding: 0 30px;
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 20px;
 }
+
+/******* ENVIRONMENT CREATE RELATIONS *******/
+
+.heading {
+  padding: 16px 16px 0 16px;
+}
+
+.heading h2 {
+  margin-bottom: 15px;
+  font-size: 17.6px;
+}
+
+.heading p {
+  line-height: 20px;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.vorige {
+  float: left;
+}
+
+.vorige:hover {
+  color: #fff;
+  background-color: #99AFC6;
+}
+
+#del-relationship-btn {
+  margin-top: 10px;
+  margin-right: 10px;
+  border: none;
+  background-color: rgba(0,0,0,0);
+}
+
+#del-relationship-btn:hover {
+  color: #EF121F;
+}
+
+#add-relationship-btn {
+  height: 70px;
+  text-align: center;
+}
+
+.volgende p {
+  cursor: pointer;
+}
+
+.input-blocks {
+  margin: 0 30px;
+}
+
 
 
 
