@@ -29,6 +29,7 @@ form {
   grid-column-end: 3;
   margin-right: 50%;
 }
+select {color: #8e8e8e}
 
 input[type=text], input[type=password],
 input[type=email], select#role, select#customer,
@@ -157,7 +158,6 @@ label {
 #dynamic_input, #extra_fields div {
     margin-top: 30px;
     background-color: #FAFBFD;
-
     position: relative;
 }
 
@@ -194,6 +194,7 @@ p.uitleg {
 
 .heading {
   padding: 16px 16px 0 16px;
+  width: 70%;
 }
 
 .heading h2 {
@@ -239,6 +240,23 @@ p.uitleg {
 .input-blocks {
   margin: 0 30px;
 }
+
+/******* ENVIRONMENT EDIT *******/
+
+.env-edit-heading {
+  width: 60%;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /******* SYSTEM OVERVIEW *******/
 
