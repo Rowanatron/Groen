@@ -40,10 +40,10 @@ if (isset($_SESSION['message'])) {
     <div class="system-overview-header-container">
         <h1>Systeem overzicht</h1>
         <div id="dropdown">
-            <div class="dropdown-element">
-                <form method="get">
-                    <h2>Klant</h2>
-                    <select name="customer_name" onchange="this.form.submit();">
+            <div class="so-dropdown-element">
+                <form class="so-form" method="get">
+                    <label class="so-label" for="customer_name">Klant</label>
+                    <select id="sys-overview" name="customer_name" onchange="this.form.submit();">
                         <?php foreach (get_customerlist() as $customer) {
 
                             if (customer_has_environment($customer)) {
@@ -70,33 +70,33 @@ if (isset($_SESSION['message'])) {
                     </select>
                 </form>
             </div>
-            <div class="dropdown-element">
-                <h2>Omgeving</h2>
-                <select name="environment_name" required>
-                    <?php
+            <div class="so-dropdown-element">
+                <form class="so-form"><label class="so-label" for="environment_name">Omgeving</label>
+                    <select id="sys-overview" name="environment_name" required>
+                        <?php
 
-                    if (isset($_GET['customer_name'])) {
-                        $selected_customer = get_customer_by_customer_name($_GET['customer_name']);
-                    } else {
-                        foreach (get_customerlist() as $customer) {
-                            if (customer_has_environment($customer)) {
-                                $selected_customer = $customer;
-                                break;
+                        if (isset($_GET['customer_name'])) {
+                            $selected_customer = get_customer_by_customer_name($_GET['customer_name']);
+                        } else {
+                            foreach (get_customerlist() as $customer) {
+                                if (customer_has_environment($customer)) {
+                                    $selected_customer = $customer;
+                                    break;
+                                }
+                            }
+
+                        }
+
+                        foreach (get_environmentlist() as $environment) {
+                            if ($environment->get_customer_id() == $selected_customer->get_customer_id()) { ?>
+
+                                <option value="<?= $environment->get_environment_name() ?>"> <?php echo $environment->get_environment_name() ?></option>
+
+                                <?php
                             }
                         }
-
-                    }
-
-                    foreach (get_environmentlist() as $environment) {
-                        if ($environment->get_customer_id() == $selected_customer->get_customer_id()) { ?>
-
-                            <option value="<?= $environment->get_environment_name() ?>"> <?php echo $environment->get_environment_name() ?></option>
-
-                            <?php
-                        }
-                    }
-                    ?>
-                </select>
+                        ?>
+                    </select></form>
             </div>
         </div>
     </div>
