@@ -32,7 +32,7 @@ form {
 
 input[type=text], input[type=password],
 input[type=email], select#role, select#customer,
-select#vm_name_from, select#bidirectional, select#vm_name_to, #test_description {
+select#vm_name_from, select#bidirectional, select#vm_name_to, #test_description, select#sys-overview {
   width: 100%;
   padding: 12px 20px;
   margin-top: 0.8em;
@@ -46,7 +46,11 @@ input {
   color: #8e8e8e;
 }
 
+<<<<<<< HEAD
 #customer, #vm_name_from, #bidirectional, #vm_name_to {
+=======
+#role, #customer, #vm_name_from, #bidirectional, #vm_name_to, #sys-overview {
+>>>>>>> 44094064b582fe5dfb4606fd9ec04e6c9e1d847d
   cursor: pointer;
   height: 40px;
   background-color: white;
@@ -253,6 +257,45 @@ p.uitleg {
 .input-blocks {
   margin: 0 30px;
 }
+
+/******* SYSTEM OVERVIEW *******/
+
+#dropdown {
+  float: right;
+  width: 65%;
+  box-sizing: border-box;
+  height: 40px;
+  padding-top: 0;
+}
+
+.so-dropdown-element{
+  box-sizing: border-box;
+  float: left;
+  padding-left: 1em;
+  width: 50%;
+}
+
+.so-form {
+  border: none;
+}
+
+form.so-form select {
+  box-sizing: border-box;
+  display: inline-block !important;
+  max-width: 65%;
+  margin-left: 10px;
+  margin-top: 0px !important;
+  color: #969696;
+}
+
+form.so-form label {
+  box-sizing: border-box;
+  display: inline-block !important;
+  max-width: 25%;
+  text-align: right;
+  font-size: 14px;
+}
+
 
 
 
