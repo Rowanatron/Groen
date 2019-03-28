@@ -62,7 +62,7 @@ if (isset($_SESSION['message'])) {
                                         $_SESSION['customer_name'] = $_GET['customer_name'];
                                         $selected = 'selected';
 
-                                        /** Deze logica hoort hier volgens mij niet thuis.. Of toch wel? */
+                                        /** Deze logica hoort hier volgens mij niet thuis.. Of toch wel...*/
                                         $environment_list = get_environmentlist();
                                         foreach ($environment_list as $environment) {
                                             if ($environment->get_customer_id() ==  get_customer_by_customer_name($customer_name)->get_customer_id()){
@@ -172,6 +172,7 @@ if (isset($_SESSION['message'])) {
             <?php foreach (get_sorted_virtualmachine_list_with_relations($selected_environment->get_environment_id()) as $vm) : ?>
 
                 <?php
+
                 if ($vm->getLatency() > 1.45) {
                     $image = "vm_red.png";
                 } else if ($vm->getLatency() < 1.2) {
@@ -182,6 +183,7 @@ if (isset($_SESSION['message'])) {
                 ?>
 
                 <div id="server">
+<!--                    --><?php //var_dump($vm); ?>
                     <div class="server-img">
                         <img src="<?php echo "img/" . $image ?>" alt="logo van virtuele machine">
                     </div>
@@ -242,8 +244,8 @@ if (isset($_SESSION['message'])) {
                 <i class="material-icons table-icons arrow">arrow_upward</i>
                 <?php foreach ($vm->getOutgoingRelationList() as $relation): ?>
                     <div class="tooltip item">
-                        <div><?php echo $relation->getVmNameFrom(); ?></div>
-                        <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
+                        <div><?php echo $relation->get_vm_name_from(); ?></div>
+                        <span class="tooltiptext"><?php echo $relation->get_description(); ?></span>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -251,8 +253,8 @@ if (isset($_SESSION['message'])) {
                 <i class="material-icons table-icons arrow">arrow_downward</i>
                 <?php foreach ($vm->getIncomingRelationList() as $relation): ?>
                     <div class="tooltip item">
-                        <div><?php echo $relation->getVmNameTo(); ?></div>
-                        <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
+                        <div><?php echo $relation->get_vm_name_to(); ?></div>
+                        <span class="tooltiptext"><?php echo $relation->get_description(); ?></span>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -265,12 +267,25 @@ if (isset($_SESSION['message'])) {
     </div>
 <?php endforeach; ?>
 
-<!--getIncomingRelationList()-->
-<!--getOutgoingRelationList()-->
-
-
 <script>
 
+    /** Reload scripts */
+    function reload_pbar() {
+        $(".progress-bar-fill").css({
+            "width": "100%",
+            "transition": "2s linear"
+        });
+    }
+
+    function reload_servers() {
+        $("#reload-content").load("./systemoverview.php #reload-content", reload_pbar);
+    }
+
+    reload_pbar();
+    setInterval(reload_servers, 2000);
+
+
+    /** Modal script **/
     function show_modal(server_name) {
         document.getElementById("modal-" + server_name).style.visibility = "visible";
 
@@ -283,6 +298,7 @@ if (isset($_SESSION['message'])) {
 </script>
 
 <!--Auto-refresh van het virtual machine overzicht -->
-<script type="text/javascript" src="private/js/systemoverview.js"></script>
 
-<?php include(SHARED_PATH . '/footer.php') ?> 
+<!--<script type="text/javascript" src="private/js/systemoverview.js"></script>-->
+
+<?php //include(SHARED_PATH . '/footer.php') ?><!-- -->
