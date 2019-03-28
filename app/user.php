@@ -6,6 +6,7 @@ require_once('private/path_constants.php');
 require_once(PRIVATE_PATH . '/authorisation_functions.php');
 // Page specific functions
 require_once(PRIVATE_PATH . '/user_functions.php');
+require_once(PRIVATE_PATH . '/img_functions.php');
 // Class
 require_once(CLASS_PATH . '/User.php');
 
@@ -29,9 +30,8 @@ if ($session_user->get_role() == "admin") {
 //// CHECK REQUEST
 
 // Check method
-if (isset($_POST['id'])) {
+if (isset($_POST['username'])) {
 	$is_post = true;
-	$post_id = $_POST['id'];
 } else {
 	$is_post = false;
 }
@@ -67,7 +67,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 // Check if user rights are ok
 if (!$is_admin) {
 	
-	if ($is_edit == false || $get_id != $session_user->get_user_id()) {
+	if (!$is_edit || $get_id != $session_user->get_user_id()) {
 		header("Location: user-edit");
 	}
 	
@@ -79,15 +79,127 @@ if (!$is_admin) {
 //// POST REQUEST
 if ($is_post) {
 	
-	if ($post_id == $get_id) {
-		
-		echo "Gelukt.";
-	
+	// Check ingevulde gegevens compleet
+	if (isset($_POST['username'])) {
+		$post_username = $_POST['username'];
 	} else {
+		array_push($page_errors, "Gebruikersnaam is leeg.");
+		$empty_value = true;
+	}
+	if (isset($_POST['given_name'])) {
+		$post_given_name = $_POST['given_name'];
+	} else {
+		array_push($page_errors, "Voornaam is leeg.");
+		$empty_value = true;
+	}
+	if (isset($_POST['family_name'])) {
+		$post_family_name = $_POST['family_name'];
+	} else {
+		array_push($page_errors, "Achternaam is leeg.");
+		$empty_value = true;
+	}
+	if (isset($_POST['email'])) {
+		$post_email = $_POST['email'];
+	} else {
+		array_push($page_errors, "E-mail is leeg.");
+		$empty_value = true;
+	}
+	if (isset($_POST['role'])) {
+		$post_role = $_POST['role'];
+	} else {
+		array_push($page_errors, "Rol is leeg.");
+		$empty_value = true;
+	}
+	
+	// Check wachtwoord
+	if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
+		
+		if($_POST['password'] == $_POST['password_repeat']) {
+			
+			$hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+			
+		} else {
+			
+			array_push($page_errors, "Wachtwoorden komen niet overeen.");
+			$empty_value = true;
+			
+		}
+		
+	} else if (!$is_edit) {
+		array_push($page_errors, "Wachtwoord is leeg.");
+		$empty_value = true;
+	}
+	
+	// Check id
+	if ($is_edit && isset($_POST['id']) && $_POST['id'] == $get_id) {
+		
+		$post_id = $_POST['id'];
+	
+	} else if ($is_edit) {
 		
 		array_push($page_errors, "Gebruiker en data komen niet overeen.");
+		$empty_value = true;
 		
 	}
+	
+	// Create user object to input in database
+	$post_user = new User(null, $post_username, null, $post_given_name, $post_family_name, $post_email, $post_role);
+	
+	if (!isset($empty_value)) {
+		
+		if (isset($hashed_password)) {
+			$post_user->set_password($hashed_password);
+		}
+		if (isset($post_id)) {
+			$post_user->set_user_id($post_id);
+		}
+		if (isset($img_filename)) {
+			$post_user->set_img($img_filename);
+		}
+		
+		// Put in database
+		if (!$is_edit) {
+			$result = insert_user($post_user);
+
+		} else {
+			$result = custom_update_user($post_user);
+		}
+		
+		// Check for errors, if succeeded continue to upload image
+		if (empty($result)) {
+			$new_id = get_user_id_by_username($post_user->get_username());
+			$post_user->set_user_id($new_id);
+			
+			// Check for image
+			if ($_FILES['img']['size'] > 0) {
+				// Upload file
+				$img_filename = upload_img('img', $post_user->get_user_id());
+				// Check if upload succeeded
+				if ($img_filename == false) {
+					array_push($page_errors, "Uploaden is mislukt.");
+				} else {
+					$post_user->set_img($img_filename);
+					$result = update_user_img($post_user);
+					if (isset($result)) {
+						array_push($page_errors, $result);
+					}
+				}
+			}
+			
+		} else {
+			
+			array_push($page_errors, $result);	
+			
+		}
+		
+		if (sizeof($page_errors) == 0) {
+			header("Location: " . ($is_admin? userlist : systemoverview));
+		} else if (!$is_edit) {
+			echo "create";
+		}
+	}
+	
+	$form_user = $post_user;
 
 }
 
@@ -122,40 +234,28 @@ if ($is_edit == true) {
 		<h2 class="tabel-header"><?= $page_title ?></h2>
 	</div>
 	
-	<div>
-		<p>
-			<?= var_dump($_POST); ?>
-		</p>
-		<p>
-			<?php if($is_edit) echo $form_user->get_user_id(); ?>
-		</p>
-		<p>
-			<a href="user" />User</a>
-		</p>
-	</div>
-	
 	<!-- Form -->
     <form id="user-form" method="post" action="user-<?= ($is_edit) ? "edit-" . $get_id : "new" ?>" enctype="multipart/form-data">
 	
         <div class="form_container">
 		
-			<input name="id" type="hidden" value="<?php if($is_edit) echo $form_user->get_user_id(); ?>" required disabled />
+			<input name="id" type="hidden" value="<?php if($is_edit) echo $form_user->get_user_id(); ?>" required />
 			
 			<div class="form_block form_full_length">
 				<label for="username">Gebruikersnaam</label>
-				<input name="username" type="text" minlength="5" maxlength="45" value="<?php if($is_edit) echo $form_user->get_username(); ?>" required <?php if (!$is_admin) echo "disabled"; ?> />
+				<input name="username" type="text" minlength="5" maxlength="45" value="<?php if (isset($form_user)) echo $form_user->get_username(); ?>" required <?php if (!$is_admin) echo "disabled"; ?> />
                 <p id="error_username" class="error_message"></p>
 			</div> 
 			
             <div class="form_block">
                 <label for="password">Wachtwoord</label>
-                <input name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" />
+                <input name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" <?php if(!$is_edit) echo "required"; ?> />
                 <p id="error_password" class="error_message"></p>
             </div>
 			
             <div class="form_block">
                 <label for="password_repeat">Herhaal wachtwoord</label>
-                <input id="password_repeat" name="password_repeat" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" />
+                <input id="password_repeat" name="password_repeat" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" <?php if(!$is_edit) echo "required"; ?>  />
                 <p id="error_password_repeat" class="error_message"></p>
             </div>
    			
@@ -179,17 +279,21 @@ if ($is_edit == true) {
 			
             <div class="form_block form_full_length">
                 <label for="role">Selecteer rol</label>
-                <select name="role" id="role" <?php if (!$is_admin) echo "disabled"; ?>>
+                <select name="role" id="role" <?php if (!$is_admin) echo "disabled"; ?> required>
+					<?php if(!$is_edit) : ?>
+						<option disabled selected hidden>Kies een rol</option>
+					<?php endif; ?>
 					<option value="user" <?php if($is_edit && $form_user->get_role() == "user") echo "selected"; ?>>gebruiker</option>
                     <option value="admin" <?php if($is_edit && $form_user->get_role() == "admin") echo "selected"; ?>>admin</option>
 				</select>
             </div>
 			
             <div class="form_block form_full_length">
-                <label for="photo">Upload profielfoto
-					<div id="photo-button">Bladeren...</div>
+                <label for="img">
+					Upload profielfoto
+					<div id="img-button">Bladeren...</div>
 				</label>
-				<input id="photo" name="photo" type="file">
+				<input id="img" name="img" type="file">
 		    </div> 
 			
         </div>

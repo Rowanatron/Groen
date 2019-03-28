@@ -1,5 +1,5 @@
-var image_input = document.getElementById('photo');
-var image_input_button = document.getElementById('photo-button');
+var image_input = document.getElementById('img');
+var image_input_button = document.getElementById('img-button');
 var image_input_button_text = image_input_button.textContent;
 
 image_input.addEventListener('change', display_filename);

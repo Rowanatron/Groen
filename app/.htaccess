@@ -2,6 +2,8 @@
 RewriteEngine On
 Options +FollowSymLinks
 
+# Rewrite user pages
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^user-new/?$ user.php?action=new [L]
@@ -12,17 +14,12 @@ RewriteRule ^user-edit/?$ user.php?action=edit [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^user-edit-(.*)/?$ user.php?action=edit&id=$1 [L]
+RewriteRule ^user-edit-([^\.]+)/?$ user.php?action=edit&id=$1 [L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
+# Rewrite other urls
+
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ $1.php [L]
-
-# Deny access to htaccess
-<Files .htaccess>
-order allow,deny
-deny from all
-</Files>
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 # Make login default landing page for this dir
 DirectoryIndex login.php
