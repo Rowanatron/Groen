@@ -40,10 +40,10 @@ if (isset($_SESSION['message'])) {
     <div class="system-overview-header-container">
         <h1>Systeem overzicht</h1>
         <div id="dropdown">
-            <div class="dropdown-element">
-                <form method="get">
-                    <h2>Klant</h2>
-                    <select name="customer_name" onchange="this.form.submit();">
+            <div class="so-dropdown-element">
+                <form class="so-form" method="get">
+                    <label class="so-label" for="customer_name">Klant</label>
+                    <select id="sys-overview" name="customer_name" onchange="this.form.submit();">
                         <?php foreach (get_customerlist() as $customer) {
 
                             if (customer_has_environment($customer)) {
@@ -70,26 +70,21 @@ if (isset($_SESSION['message'])) {
                                     }
                                 }
 
-
                                 ?>
 
-
-                                <option name="customer_name" value="<?= $customer_name ?>" <?= $selected ?>><?= $customer->get_customer_name() ?></option>
+                                <option value="<?= $customer_name ?>" <?= $selected ?>><?= $customer->get_customer_name() ?></option>
 
 
                             <?php }
 
-                        }
-
-
-                        ?>
+                        } ?>
                     </select>
                 </form>
             </div>
-            <div class="dropdown-element">
-                <form method="get">
-                    <label for="environment-dropdown">Omgeving</label>
-                    <select id="environment-dropdown" name="environment_name" onchange="this.form.submit();">
+            <div class="so-dropdown-element">
+                <form method="get" class="so-form">
+                    <label class="so-label" for="sys-overview">Omgeving</label>
+                    <select id="sys-overview" name="environment_name" onchange="this.form.submit();">
                         <?php
 
                         if (isset($_GET['customer_name'])) {
@@ -227,7 +222,7 @@ if (isset($_SESSION['message'])) {
                     <!--                    </div>-->
                     <div id="info-icon">
                         <a onClick="show_modal('<?= $vm->getName(); ?>')" class="close-modal"">
-                        <i class="material-icons table-icons">info_outline</i>
+                            <i class="material-icons table-icons">info_outline</i>
                         </a>
                     </div>
                 </div>
@@ -264,7 +259,7 @@ if (isset($_SESSION['message'])) {
             </div>
             <div id="close-modal">
                 <a onClick="hide_modal('<?= $vm->getName(); ?>')" class="close-modal"">
-                <i class="material-icons table-icons">close</i>
+                    <i class="material-icons table-icons">close</i>
                 </a>
             </div>
         </div>

@@ -23,6 +23,7 @@ function edit_user($new_user, $repeat_password) {
 	if ($new_user->get_password() == null) {
 		$new_user->set_password($current_user->get_password());
 		update_user($new_user);
+		$_SESSION["user"] = $new_user;
 		header('Location: userlist');
 	}
 
@@ -44,7 +45,7 @@ function edit_user($new_user, $repeat_password) {
 		$hashed_password = password_hash($new_user->get_password(), PASSWORD_DEFAULT);
 		$new_user->set_password($hashed_password);
 		update_user($new_user);
-		header('Location: userlist');
+		$_SESSION["user"] = $new_user;
 	}
 
 }
