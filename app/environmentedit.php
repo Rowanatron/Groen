@@ -21,29 +21,30 @@ only_for_admins();
 
 include(SHARED_PATH . '/header.php');
 
-if(isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $environment_id = $_GET['id'];
     $environment = get_environment_by_id($environment_id);
+    $original_environment_name = $environment->environment_name;
+    var_dump($original_environment_name);
     $relation_array = get_relations_by_environment_id($environment_id);
     $unidirectional_relations = count($relation_array);
 
 
-
-} else if (isset($_POST['environment_id'])){
+} else if (isset($_POST['environment_id'])) {
     $original_environment_name = $_POST['original_environment_name'];
     $environment_id = $_POST['environment_id'];
     $environment_name = $_POST['environment_name'];
     $customer_id = $_POST['customer_id'];
 
-    
+
     if ($original_environment_name != $environment_name) {
         $environment1 = get_environment_by_environment_name($environment_name);
 
-        if(strtolower($environment1->get_environment_name()) == strtolower($environment_name)) {
+        if (strtolower($environment1->get_environment_name()) == strtolower($environment_name)) {
             $message = "Bewerken mislukt! Deze naam is al in gebruik.";
             echo "<script type='text/javascript'>alert('$message');</script>";
             ?>
-            <meta http-equiv="refresh" content="0; environmentlist.php" />
+            <meta http-equiv="refresh" content="0; environmentlist.php"/>
             <?php
             exit();
         } else {
@@ -55,14 +56,15 @@ if(isset($_GET['id'])) {
         update_environment($updated_environment);
     }
     ?>
-        <meta http-equiv="refresh" content="0; environmentlist.php" />
-        <?php
-        exit();
+    <meta http-equiv="refresh" content="0; environmentlist.php"/>
+    <?php
+    exit();
 }
 if (!isset($_GET['id'])) {
-	header("Location: environmentlist.php");
+    header("Location: environmentlist.php");
 }
 ?>
+
 
 <div id="content" class="container">
 	<div class="table-header-container">
@@ -73,9 +75,9 @@ if (!isset($_GET['id'])) {
         <div class="heading env-edit-heading">
             <p>Via onderstaand formulier kun je de eigenschappen van een omgeving aanpassen en relaties tussen machines aanpassen, verwijderen of toevoegen.</p>
         </div>
-        <input type="hidden" name="customer_id" value="<?=$environment->get_customer_id()?>"/>
-        <input type="hidden" name="original_environment_name" value="<?=$environment->get_environment_name(); ?>"/>
-        <input type="hidden" name="env_id" value="<?=$environment_id?>"/>
+        <input type="hidden" name="customer_id" value="<?= $environment->get_customer_id() ?>">
+            <input type="hidden" name="dummy_input" value="<?= $environment->environment_name; ?>">
+            <input type="hidden" name="env_id" value="<?= $environment_id ?>">
         <div class="env-general-info">
             <div class="heading env-edit-heading">
                 <label>
@@ -158,13 +160,13 @@ if (!isset($_GET['id'])) {
             </div> <!-- end dynamic input -->
                 <?php } ?>
             <div id="extra_fields">
-            </div>
-        </div> <!-- form_container -->
-        <div id="add-relationship-btn">
-            <a class="volgende" onclick="add_input('dynamic_input', 'extra_fields');">
-                <i class="material-icons table-icons">add</i><span>Voeg een relatie toe</span>
-            </a>
-        </div>
+                </div>
+            </div> <!-- form_container -->
+            <div id="add-relationship-btn">
+                <a class="volgende" onclick="add_input('dynamic_input', 'extra_fields');">
+                    <i class="material-icons table-icons">add</i><span>Voeg een relatie toe</span>
+                </a>
+
     </form>
     <form style="display:none;" method="post" action="environmentlist.php" id="form-delete">
 		<input type="hidden" name="action" value="delete_environment" />
@@ -238,11 +240,8 @@ if (!isset($_GET['id'])) {
 
         document.getElementById(extra_fields).appendChild(new_div);
     }
+    </script>
 
 
-
-</script>
-
-
-<!-- Default PHP footer -->
-<?php include(SHARED_PATH . '/footer.php')?>
+    <!-- Default PHP footer -->
+<?php include(SHARED_PATH . '/footer.php') ?>
