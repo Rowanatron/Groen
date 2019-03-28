@@ -24,6 +24,8 @@ include(SHARED_PATH . '/header.php');
 if (isset($_GET['id'])) {
     $environment_id = $_GET['id'];
     $environment = get_environment_by_id($environment_id);
+    $original_environment_name = $environment->environment_name;
+    var_dump($original_environment_name);
     $relation_array = get_relations_by_environment_id($environment_id);
     $unidirectional_relations = count($relation_array);
 
@@ -69,9 +71,9 @@ if (!isset($_GET['id'])) {
         </div>
 
         <form method="post" action="relationcreate.php" id="form-edit">
-            <input type="hidden" name="customer_id" value="<?= $environment->get_customer_id() ?>"/>
-            <input type="hidden" name="original_environment_name" value="<?= $environment->get_environment_name(); ?>"/>
-            <input type="hidden" name="env_id" value="<?= $environment_id ?>"/>
+            <input type="hidden" name="customer_id" value="<?= $environment->get_customer_id() ?>">
+            <input type="hidden" name="dummy_input" value="<?= $environment->environment_name; ?>">
+            <input type="hidden" name="env_id" value="<?= $environment_id ?>">
             <div class="form_container">
                 <div class="form_block form_full_length">
                     <label>
