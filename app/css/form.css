@@ -47,10 +47,17 @@ input {
   color: #8e8e8e;
 }
 
+
 #role, #customer, #vm_name_from, #bidirectional, #vm_name_to, #sys-overview {
   cursor: pointer;
   height: 40px;
   background-color: white;
+}
+
+#role, #role option {
+  cursor: pointer;
+  background-color: white;
+  color: #8e8e8e;
 }
 
 .error_message{
@@ -149,8 +156,16 @@ label div {
 	padding-right: 2em;
 }
 
+label div:hover {
+	cursor: pointer;
+}
+
 label {
 	width: 100%;
+}
+
+.borderless_form {
+	border: none;
 }
 
 /******* ENVIRONMENT CREATE *******/

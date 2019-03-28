@@ -33,19 +33,20 @@ if(isset($_POST['user_id'])) {
 	$repeat_password = $_POST['repeat_password'];
 	
 	$edit_user = new User($id, $username, $password, $given_name, $family_name, $email, $role);
+	$imgerror = false;
     if ($_FILES['user_img']['size'] > 0) {
 		// Upload file
-		$img_filename = upload_file($id, $_FILES['user_img']);
+		$img_filename = upload_file($id);
 		// Add filename to user
 		$edit_user->set_img($img_filename);
 		// Edit in database
-		upload_img($edit_user);
+		update_user_img($edit_user);
 	}
-    edit_user($edit_user, $repeat_password);
+	edit_user($edit_user, $repeat_password);
 } else if(isset($_GET['id'])) {
 	$edit_user = get_user_by_id($_GET['id']);
 } else {
-	// header("Location: userlist");
+	header("Location: userlist");
 }
 
 ?>
