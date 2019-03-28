@@ -25,7 +25,8 @@ $user = $_SESSION["user"];
 		$pagename =="env_vm_relation_create.php" ||
 		$pagename == "user.php" ||
 		$pagename == "environmentedit.php" ||
-		$pagename == "relationcreate.php") : ?>
+		$pagename == "relationcreate.php" ||
+		$pagename == "systemoverview.php") : ?>
 	<link rel="stylesheet" media="all" href="css/form.css">
 	<?php endif; ?>
 	<!-- System overview styling & JavaScript-->
