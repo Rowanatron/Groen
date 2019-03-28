@@ -79,7 +79,7 @@ header li, header a {
 
 header li:hover, header a.uitloggen-link-header:hover, li.active {
     color: #EB1114;
-    border-bottom: 2px solid #EB1114;
+    border-bottom: 2px solid #EB1114;border-bottom: 2px solid #EB1114;
 }
 
 li.active a {
@@ -90,7 +90,6 @@ header a {
     display: inline-block;
     height: 63px;
     line-height: 63px;
-    float: right;
 }
 
 .user_img {
@@ -108,30 +107,71 @@ header a {
 .dropdown {
     position: relative;
     display: inline-block;
-    height: 63px;
-    line-height: 63px;
-    vertical-align: middle;
-    margin-right: 20px;
     float: right; 
   }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ffffff;
-    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
-    border-left: 1px solid #D9DCDF;
-    border-right: 1px solid #D9DCDF;
-    border-bottom: 1px solid #D9DCDF;
-    border-top: 1px solid #D9DCDF;
-    padding: 1px 40px;
-    z-index: 1;
-    right: 0;
-  }
   
-  .dropdown:hover .dropdown-content {
-    display: block;
+.dropdown-container {
+	display: none;
+    position: absolute;
+	z-index: 1;
+    right: 0;
+	top: 0;		
+	padding: 4em 0.5em 0.5em 0.5em;
   }
+
+.dropdown-content {
+	display: block;
+    background-color: #FAFCFD;
+    box-shadow: 0px 3px 8px 0px rgba(0,0,0,0.3);
+    border: 1px solid #D9DCDF;
+	position: relative;
+	border-radius: 3px;
+	margin-top: 0.3em;
+}
+  
+.dropdown-content li, .dropdown-content li:hover {
+	height: auto;
+	display: block;
+	border-bottom: 1px solid #D9DCDF;
+}
+
+.dropdown-content li:last-child {
+	border-bottom: none;
+}
+
+.dropdown-list a {
+	display: block;
+	width: 100%;
+	padding: 1em 2em;
+}
+
+.dropdown-list a:hover {
+	background-color: #99AFC6;
+	background-color: rgba(153, 175, 198, 0.2);
+	color: black;
+}
+  
+.dropdown:hover .dropdown-container {
+    display: block;
+}
+
+.dropdown-list {
+	float: none;
+}
+
+.dropdown-list li {
+	width: 100%;
+}
+
+.dropdown-list li, .dropdown-list li a {
+	height: auto;
+	line-height: 1em;
+}
+  
+nav ul, nav li {
+	margin: 0;
+	padding: 0;
+}
 
 
 /********* CONTENT STYLING *********/

@@ -29,100 +29,114 @@ if ($session_user->get_role() == "admin") {
 
 //// CHECK REQUEST
 
-// Check method
-if (isset($_POST['username'])) {
-	$is_post = true;
-} else {
-	$is_post = false;
-}
-
 // Check action
 if (isset($_GET['action']) && $_GET['action'] == "new") {
-	
 	$is_edit = false;
 	$page_title = "Nieuwe gebruiker";
-	
 } else if (isset($_GET['action']) && $_GET['action'] != "edit") {
-	
 	header("Location: user-edit");
-
 } else {
-	
 	$is_edit = true;
 	$page_title = "Gebruiker bewerken";
-
 }
 
 // Check id
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-	
 	$get_id = $_GET['id'];
-	
 } else {
-	
 	$get_id = $session_user->get_user_id();
-	
 }
 
 // Check if user rights are ok
 if (!$is_admin) {
-	
 	if (!$is_edit || $get_id != $session_user->get_user_id()) {
 		header("Location: user-edit");
 	}
-	
 }
 
 ?>
 
 <?php
 //// POST REQUEST
-if ($is_post) {
+if (isset($_POST['username'])) {
 	
 	// Check ingevulde gegevens compleet
-	if (isset($_POST['username'])) {
-		$post_username = $_POST['username'];
-	} else {
+	
+	// Username
+	if (!isset($_POST['username'])) {
 		array_push($page_errors, "Gebruikersnaam is leeg.");
 		$empty_value = true;
-	}
-	if (isset($_POST['given_name'])) {
-		$post_given_name = $_POST['given_name'];
+	} else if (strlen($_POST['username']) < 5) {
+		array_push($page_errors, "De gebruikersnaam moet minimaal 5 karakters bevatten");
+		$empty_value = true;
+	} else if (strlen($_POST['username']) > 45) {
+		array_push($page_errors, "De gebruikersnaam mag maximaal 45 karakters bevatten");
+		$empty_value = true;
 	} else {
+		$post_username = $_POST['username'];
+	}
+	
+	// Voornaam
+	if (!isset($_POST['given_name'])) {
 		array_push($page_errors, "Voornaam is leeg.");
 		$empty_value = true;
-	}
-	if (isset($_POST['family_name'])) {
-		$post_family_name = $_POST['family_name'];
+	} else if (strlen($_POST['given_name']) < 2) {
+		array_push($page_errors, "De voornaam moet minimaal 2 karakters bevatten");
+		$empty_value = true;
+	} else if (strlen($_POST['given_name']) > 45) {
+		array_push($page_errors, "De voornaam mag maximaal 45 karakters bevatten");
+		$empty_value = true;
 	} else {
+		$post_given_name = $_POST['given_name'];
+	}
+	
+	// Achternaam
+	if (!isset($_POST['family_name'])) {
 		array_push($page_errors, "Achternaam is leeg.");
 		$empty_value = true;
-	}
-	if (isset($_POST['email'])) {
-		$post_email = $_POST['email'];
-	} else {
-		array_push($page_errors, "E-mail is leeg.");
+	} else if (strlen($_POST['given_name']) < 2) {
+		array_push($page_errors, "De achternaam moet minimaal 2 karakters bevatten");
 		$empty_value = true;
-	}
-	if (isset($_POST['role'])) {
-		$post_role = $_POST['role'];
+	} else if (strlen($_POST['given_name']) > 45) {
+		array_push($page_errors, "De achternaam mag maximaal 45 karakters bevatten");
+		$empty_value = true;
 	} else {
+		$post_family_name = $_POST['family_name'];
+	}
+	
+	// Email
+	if (!isset($_POST['email'])) {
+		array_push($page_errors, "E-mail is leeg.");
+		$empty_value = true;		
+	} else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+		array_push($page_errors, "Dit is geen geldig emailadres");
+		$empty_value = true;
+	} else {
+		$post_email = $_POST['email'];
+	}
+	
+	// Rol
+	if (!isset($_POST['role'])) {
 		array_push($page_errors, "Rol is leeg.");
 		$empty_value = true;
+	} else if ($_POST['role'] != "admin" && $_POST['role'] != "user") {
+		array_push($page_errors, "Dit is geen geldige rol.");
+		$empty_value = true;
+	} else {
+		$post_role = $_POST['role'];
 	}
 	
 	// Check wachtwoord
-	if (isset($_POST['password']) && isset($_POST['password_repeat'])) {
+	if (isset($_POST['password'])) {
 		
-		if($_POST['password'] == $_POST['password_repeat']) {
-			
-			$hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-			
-		} else {
-			
+		if($_POST['password'] != $_POST['password_repeat']) {
 			array_push($page_errors, "Wachtwoorden komen niet overeen.");
 			$empty_value = true;
-			
+		} else if (strlen($_POST['password']) < 8 || preg_match('~[A-Z]~', $_POST['password']) == 0 || preg_match('~[0-9]~', $_POST['password']) == 0 || preg_match('~[a-z]~', $_POST['password']) == 0) {
+			array_push($page_errors, "Het wachtwoord moet minimaal 8 karakters bevatten waarvan 1 hoofdletter, 1 kleine letter en 1 getal.");
+			$empty_value = true;
+		} else {
+			$hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 		}
 		
 	} else if (!$is_edit) {
@@ -143,7 +157,7 @@ if ($is_post) {
 	}
 	
 	// Create user object to input in database
-	$post_user = new User(null, $post_username, null, $post_given_name, $post_family_name, $post_email, $post_role);
+	$post_user = new User(null, (isset($post_username) ? $post_username : null), null, (isset($post_given_name) ? $post_given_name : null), (isset($post_family_name) ? $post_family_name : null), (isset($post_email) ? $post_email : null), (isset($post_role) ? $post_role : null));
 	
 	if (!isset($empty_value)) {
 		
@@ -185,11 +199,8 @@ if ($is_post) {
 					}
 				}
 			}
-			
 		} else {
-			
 			array_push($page_errors, $result);	
-			
 		}
 		
 		if (sizeof($page_errors) == 0) {
@@ -198,8 +209,6 @@ if ($is_post) {
 			echo "create";
 		}
 	}
-	
-	$form_user = $post_user;
 
 }
 
@@ -208,17 +217,13 @@ if ($is_post) {
 <?php
 
 //// GET FORM-USER
-
-if ($is_edit == true) {
-
+if (isset($form_user)) {
+	$form_user = $post_user;
+} else if ($is_edit == true) {
 	$form_user = get_user_by_id($get_id);
-
-	if ($form_user->get_user_id() == null) {
-		
-		header("Location: user-edit");
-
+	if ($form_user->get_user_id() == null) {	
+	header("Location: user-edit");
 	}
-
 }
 
 ?>
@@ -238,8 +243,10 @@ if ($is_edit == true) {
     <form id="user-form" method="post" action="user-<?= ($is_edit) ? "edit-" . $get_id : "new" ?>" enctype="multipart/form-data">
 	
         <div class="form_container">
-		
-			<input name="id" type="hidden" value="<?php if($is_edit) echo $form_user->get_user_id(); ?>" required />
+			
+			<?php if($is_edit) : ?>
+				<input name="id" type="hidden" value="<?= isset($form_user) ? $form_user->get_user_id() : "0" ; ?>" required />
+			<?php endif; ?>
 			
 			<div class="form_block form_full_length">
 				<label for="username">Gebruikersnaam</label>
@@ -249,13 +256,13 @@ if ($is_edit == true) {
 			
             <div class="form_block">
                 <label for="password">Wachtwoord</label>
-                <input name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" <?php if(!$is_edit) echo "required"; ?> />
+                <input name="password" type="password" <?php if(!$is_edit) echo "required"; ?> />
                 <p id="error_password" class="error_message"></p>
             </div>
 			
             <div class="form_block">
                 <label for="password_repeat">Herhaal wachtwoord</label>
-                <input id="password_repeat" name="password_repeat" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" <?php if(!$is_edit) echo "required"; ?>  />
+                <input id="password_repeat" name="password_repeat" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" <?php if(!$is_edit) echo "required"; ?>  />
                 <p id="error_password_repeat" class="error_message"></p>
             </div>
    			

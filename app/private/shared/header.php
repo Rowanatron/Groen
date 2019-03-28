@@ -48,38 +48,52 @@ $user = $_SESSION["user"];
   <body>
   	<header>
 	  	<div class="container">
-          <a class="logo" href="systemoverview"> <img class="logo" src="img/logo.jpg" alt="Logo"> </a>
+			<a class="logo" href="systemoverview">
+				<img class="logo" src="img/logo.jpg" alt="Logo">
+			</a>
           
-		  <ul>
+			<ul>
 		  
-			<li <?php if($pagename == "systemoverview.php") : ?>class="active"<?php endif; ?>>
-				<a href="systemoverview">Monitor</a>
-			</li>
-
-			<?php if ($_SESSION["user"]->get_role() === "admin") { ?>
-				<li <?php if($pagename == "userlist.php" || $pagename == "usercreate.php" || $pagename == "useredit.php") : ?>class="active"<?php endif; ?>>
-					<a href="userlist">Gebruikers</a>
+				<li <?= ($pagename == "systemoverview.php") ? "class='active'" : ""?>>
+					<a href="systemoverview">Monitor</a>
 				</li>
-				<li <?php if($pagename == "customerlist.php" || $pagename == "customercreate.php" || $pagename == "customeredit.php") : ?>class="active"<?php endif; ?>>
-					<a href="customerlist">Klanten</a>
-				</li>
-				<li <?php if($pagename == "environmentlist.php") : ?>class="active"<?php endif; ?>>
-					<a href="environmentlist">Omgevingen</a>
-				</li>
-			<?php } ?>
-		  </ul>
-		  <div class="dropdown">
-			<div>
-				<a href="useredit">
-					<img class="user_img" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" />
-				</a>
+				
+				<?php if ($_SESSION["user"]->get_role() === "admin") : ?>
+					<li <?= ($pagename == "userlist.php" || $pagename == "user.php") ? "class='active'" : ""?>">
+						<a href="userlist">Gebruikers</a>
+					</li>
+					<li <?= ($pagename == "customerlist.php" || $pagename == "customercreate.php" || $pagename == "customeredit.php") ? "class='active'" : "" ?>">
+						<a href="customerlist">Klanten</a>
+					</li>
+					<li <?= ($pagename == "environmentlist.php") ? "class='active'" : "" ?>>
+						<a href="environmentlist">Omgevingen</a>
+					</li>
+				<?php endif; ?>
+			
+			</ul>
+			
+			<div class="dropdown">
+				<div>
+					<a href="useredit">
+						<img class="user_img" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" />
+					</a>
 					<i class="material-icons size-icons">keyboard_arrow_down</i>
 			
-				<div class="dropdown-content">
-					<a href="useredit">Profiel</a>
-					<a href="logout">Uitloggen</a>
-				</div>
+					<div class="dropdown-container">
+						<nav class="dropdown-content">
+							<ul class="dropdown-list">
+								<li>
+									<a href="user-edit">Profiel</a>
+								</li>
+								<li>
+									<a href="logout">Uitloggen</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					
 				</div>
 			</div>
+			
         </div>
     </header> 
