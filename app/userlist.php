@@ -39,7 +39,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 
 	 <div class="table-header-container">
 		<h2 class="tabel-header">Gebruikersoverzicht</h2>
-		<a href="user-new">Nieuwe gebruiker aanmaken</a>
+		<a href="usercreate">Nieuwe gebruiker aanmaken</a>
 	</div>
 	<table>
 		<thead>
@@ -63,7 +63,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 				<td><?= $user->family_name; ?></td>
 				<td><?= $user->role; ?></td>
 				<td>
-					<a href="user-edit-<?= $user->get_user_id() ?>">
+					<a href="useredit.php?id=<?= $user->get_user_id() ?>">
 						<i class="material-icons table-icons">mode_edit</i>
 					</a>
 				</td>
