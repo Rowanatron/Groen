@@ -57,7 +57,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 						<input type="hidden" name="customer_id" value="<?=$customer->get_customer_id(); ?>" />
 						<input type="hidden" name="customer_name" value="<?=$customer->get_customer_name(); ?>" />
 					</form>
-					<a onclick="show_modal('<?= $customer->get_customer_name(); ?>', 'delete-<?= $customer->get_customer_name(); ?>')">
+					<a onclick="show_modal_two_param('<?= $customer->get_customer_name(); ?>', 'delete-<?= $customer->get_customer_name(); ?>')">
 						<i class="material-icons table-icons">delete</i>
 					</a>
 				</td>
