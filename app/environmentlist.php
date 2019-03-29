@@ -56,12 +56,12 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_envir
 					</a>
 				</td>
 				<td>
-					<form id="delete-<?= $environment->get_environment_name(); ?>" action="environmentlist.php" method="post">
+					<form id="delete-<?= $environment->get_environment_name(); ?>" action="environmentlist" method="post">
 						<input type="hidden" name="action" value="delete_environment" />
 						<input type="hidden" name="environment_id" value="<?=$environment->get_environment_id(); ?>" />
 						<input type="hidden" name="environment_name" value="<?=$environment->get_environment_name(); ?>" />
 					</form>
-					<a onclick="show_modal('<?= $environment->get_environment_name(); ?>', 'delete-<?= $environment->get_environment_name(); ?>')">
+					<a onclick="show_modal_two_param('<?= $environment->get_environment_name(); ?>', 'delete-<?= $environment->get_environment_name(); ?>')">
 						<i class="material-icons table-icons">delete</i>
 					</a>
 				</td>
