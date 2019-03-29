@@ -1,22 +1,36 @@
+var username = document.getElementById("username");
+var error_username = document.getElementById("error_username");
+username.onchange = username_invalid;
+username.onkeyup = username_valid;
+
+var password = document.getElementById("password");
+var error_password = document.getElementById("error_password");
+password.onchange = password_invalid;
+password.onkeyup = password_valid;
 
 
-function error_username() {
-    var testable = document.getElementById("test_username");
-    if (!testable.checkValidity()) {
-        document.getElementById("error_username").innerHTML = "De gebruikersnaam moet minimaal 5 karakters bevatten";
-    } else {
-        document.getElementById("error_username").innerHTML = "";
+function username_invalid() {
+    if (!username.checkValidity()) {
+        error_username.innerHTML = "De gebruikersnaam moet minimaal 5 karakters bevatten";
     }
 }
 
-function error_password() {
-    var testable = document.getElementById("test_password");
-    if (!testable.checkValidity()) {
-        document.getElementById("error_pass").innerHTML = "Het wachtwoord moet minimaal 8 karakters bevatten waarvan 1 hoofdletter, 1 kleine letter en 1 getal";
-    } else {
-        document.getElementById("error_pass").innerHTML = "";
+function username_valid() {
+    if (username.checkValidity()) {
+		error_username.innerHTML = "";
     }
+}
 
+function password_invalid() {
+    if (!password.checkValidity()) {
+        error_password.innerHTML = "Het wachtwoord moet minimaal 8 karakters bevatten waarvan 1 hoofdletter, 1 kleine letter en 1 getal";
+    }
+}
+
+function password_valid() {
+    if (password.checkValidity()) {
+        error_password.innerHTML = "";
+    }
 }
 
 function error_password_repeat() {
