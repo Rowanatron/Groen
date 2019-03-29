@@ -1,5 +1,8 @@
 <?php
 //// POST REQUEST
+var_dump($_POST);
+echo "hoi";
+
 if (isset($_POST['username'])) {
 	
 	// Check ingevulde gegevens compleet
@@ -8,8 +11,8 @@ if (isset($_POST['username'])) {
 	if (empty($_POST['username'])) {
 		array_push($page_errors, "Gebruikersnaam is leeg.");
 		$empty_value = true;
-	} else if (username_exists($_POST['username'])) {
-		array_push($page_errors, "Deze gebruikersnaam bestaat al.");
+	} else if (username_exists($_POST['username']) && (!$is_edit || (isset($_POST['id']) && $_POST['username'] != get_username_by_user_id($_POST['id']))) {
+		array_push($page_errors, "Deze gebruikersnaam bestaat al.");	
 	} else if (!$is_admin && $_POST['username'] != $session_user->get_username()) {
 		array_push($page_errors, "Als gebruiker mag je de gebruikersnaam niet wijzigen.");
 		$empty_value = true;

@@ -56,6 +56,7 @@ if (!$is_admin) {
 
 ?>
 
+<?php var_dump($_POST); ?>
 <?php if (isset($_POST['username'])) include(PRIVATE_PATH . '/user_post.php'); ?>
 
 <?php
@@ -94,7 +95,7 @@ if ($is_edit == true) {
 			
 			<div class="form_block form_full_length">
 				<label for="username">Gebruikersnaam</label>
-				<input id="username" name="username" type="text" minlength="5" maxlength="45" value="<?php if (isset($form_user)) echo $form_user->get_username(); ?>" required <?php if (!$is_admin) echo "disabled"; ?> />
+				<input id="username" name="username" type="text" minlength="5" maxlength="45" value="<?php if (isset($form_user)) echo $form_user->get_username(); ?>" required <?php // if (!$is_admin) echo "disabled"; ?> />
                 <p id="error_username" class="error_message"></p>
 			</div> 
 			
@@ -112,7 +113,7 @@ if ($is_edit == true) {
    			
             <div class="form_block">
                 <label for="given_name">Voornaam</label>
-                <input name="given_name" type="text" minlength="2" maxlenght="45" required value="<?php if (isset($form_user)) echo $form_user->get_given_name(); ?>" />
+                <input id="given_name" name="given_name" type="text" minlength="2" maxlenght="45" required value="<?php if (isset($form_user)) echo $form_user->get_given_name(); ?>" />
                 <p id="error_given_name" class="error_message"></p>
             </div>
 			

@@ -104,6 +104,24 @@ function get_user_id_by_username($username) {
 	return $row['user_id'];
 }
 
+function get_username_by_user_id($user_id) {
+	$pdo = new DatabasePDO();
+	$conn = $pdo->get();
+	
+	$query = "SELECT username FROM user WHERE user_id = :user_id";
+	
+	try {
+		$statement = $conn->prepare($query);
+		$statement->execute(array('user_id' => $user_id));
+	} catch (PDOException $e) {
+		return false;
+	}
+	
+	$row = $statement->fetch(PDO::FETCH_ASSOC);
+		
+	return $row['username'];
+}
+
 function delete_user($user_id) {
 	$pdo = new DatabasePDO();
 	$conn = $pdo->get();
