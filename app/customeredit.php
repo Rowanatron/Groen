@@ -84,9 +84,9 @@ if (!isset($_GET['id'])) {
 <div class="modal" id="modal">
 	<div id="modal-content">
 		<h1 id="modal-title">Klant verwijderen</h1>
-		<p id="modal-p">Weet u zeker dat u klant '<span id="modal-name"></span>' wilt verwijderen</p>
+		<p id="modal-p">Wanneer u klant '<span id="modal-name"></span>' verwijdert, worden de gekoppelde omgevingen ook verwijderd. Weet u zeker dat u  door wilt gaan?</p>
         <div id="button-container">
-            <button id="modal-delete-button" form="form-delete" type="submit">Klant verwijderen</button>
+            <button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Klant verwijderen</button>
             <button onClick="hide_modal()" class="annuleren">Annuleren</button>
 	    <div/>
     </div>

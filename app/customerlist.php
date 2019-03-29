@@ -72,9 +72,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_custo
 <div class="modal" id="modal">
 	<div id="modal-content">
 		<div id="modal-title"><h1>Klant verwijderen</h1></div>
-		<div id="modal-p"><p>Wanneer u klant '<span id="modal-name"></span>' verwijderd, worden de gekoppelde omgevingen ook verwijderd. Weet u zeker dat u  door wilt gaan?</p></div>
+		<div id="modal-p"><p>Wanneer u klant '<span id="modal-name"></span>' verwijdert, worden de gekoppelde omgevingen ook verwijderd. Weet u zeker dat u  door wilt gaan?</p></div>
 		<div id="button-container">
-			<button id="modal-delete-button" class="verwijderen" form="" type="submit">Klant verwijderen</button>
+			<button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Klant verwijderen</button>
 			<button onClick="hide_modal()" class="annuleren">Annuleren</button>
 		</div>
 	</div>
