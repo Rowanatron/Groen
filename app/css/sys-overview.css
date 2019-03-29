@@ -88,3 +88,16 @@
     background-color: #fff;
     padding: 20px;
 }
+
+#no_environments {
+    width: 300px;
+    margin: 200px auto;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 40px 10px;
+    color: #707070;
+    vertical-align: center;
+    -webkit-box-shadow: -3px 2px 110px 4px rgba(214,214,214,1);
+    -moz-box-shadow: -3px 2px 110px 4px rgba(214,214,214,1);
+    box-shadow: -3px 2px 110px 4px rgba(214,214,214,1);
+}
