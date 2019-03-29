@@ -71,6 +71,12 @@ function delete_customer($customer_id) {
 	try {
 		$statement = $conn->prepare($query);
 		$statement->execute(array('customer_id' => $customer_id));
+		if (isset($_SESSION['customer_name'])){
+			unset($_SESSION['customer_name']);
+		}
+		if (isset($_SESSION['environment_name'])){
+			unset($_SESSION['environment_name']);
+		}
 	} catch (PDOException $e) {
 		echo "Connection failed: {$e->getMessage()}";
 	}
@@ -90,6 +96,8 @@ function insert_customer($customer){
 	try{
 		$statement = $conn->prepare($query);
 		$statement->execute($data);
+		
+		
 	} catch(PDOException $e) {
 		echo "Oops er ging iets mis {$e->getMessage()}";
 	}
@@ -110,6 +118,7 @@ function update_customer($customer){
 	try{
 		$statement = $conn->prepare($query);
 		$statement->execute($data);
+		$_SESSION['customer_name'] = $customer->get_customer_name();
 	} catch(PDOException $e) {
 		echo "Oops er ging iets mis {$e->getMessage()}";
 	}
