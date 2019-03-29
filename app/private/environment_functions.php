@@ -102,6 +102,12 @@ function delete_environment($environment_id) {
 	try {
 		$statement = $conn->prepare($query);
 		$statement->execute(array('environment_id' => $environment_id));
+		if (isset($_SESSION['customer_name'])){
+			unset($_SESSION['customer_name']);
+		}
+		if (isset($_SESSION['environment_name'])){
+			unset($_SESSION['environment_name']);
+		}
 	} catch (PDOException $e) {
 		echo "Connection failed: {$e->getMessage()}";
 	}
