@@ -23,6 +23,17 @@ if (isset($_SESSION['message'])) {
 }
 
 
+$er_is_tenminste_een_klant_met_een_relatie = false;
+
+foreach (get_customerlist() as $customer) {
+    if (customer_has_environment($customer)) {
+        $er_is_tenminste_een_klant_met_een_relatie = true;
+    }
+}
+
+if ($er_is_tenminste_een_klant_met_een_relatie) {
+
+
 ?>
 
 <!-- Message aan gebruiker -->
@@ -299,7 +310,17 @@ if (isset($_SESSION['message'])) {
             </div>
         </div>
     </div>
-<?php endforeach; ?>
+<?php endforeach;
+
+
+    } else { ?>
+
+
+    <div id="no_environments">
+        <h2>Er zijn nog geen omgevingen.</h2>
+    </div>
+
+    <?php } ?>
 
 <script>
 
