@@ -1,8 +1,12 @@
 <?php 
-$pagename = basename($_SERVER['PHP_SELF']); 
-$user = $_SESSION["user"];
-?>
 
+require_once(CLASS_PATH . '/User.php');
+require_once(PRIVATE_PATH . '/user_functions.php');
+$pagename = basename($_SERVER['PHP_SELF']); 
+$user_from_session = $_SESSION["user"];
+$user = get_user_by_id($user_from_session->get_user_id()); 
+
+?>
 <!doctype html>
 
 <html lang="en">
@@ -76,7 +80,7 @@ $user = $_SESSION["user"];
 			<div class="dropdown">
 				<div>
 					<a href="useredit">
-						<img class="user_img" src="img/uploads/<?= ($user->get_img() !== null) ? $user->img : "placeholder.png" ?>" />
+						<img class="user_img" src="img/uploads/<?= ($user->get_img() != null) ? $user->get_img() : "placeholder.png" ?>" />
 					</a>
 					<i class="material-icons size-icons">keyboard_arrow_down</i>
 			
