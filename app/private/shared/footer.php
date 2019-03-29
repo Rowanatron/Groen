@@ -6,8 +6,10 @@
     <?php if ($pagename == "createuser"): ?>
 	<script type="text/javascript" src="private/js/user_crud.js"></script>
 	<?php endif; ?>
-	
+
+    <?php if (!($pagename == "systemoverview.php")) : ?>
 	<script type="text/javascript" src="private/js/modal.js"></script>
+    <?php endif; ?>
 	
 	<?php if ($pagename == "user.php"): ?>
 		<script type="text/javascript" src="private/js/file_upload_input.js"></script>

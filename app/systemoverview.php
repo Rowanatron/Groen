@@ -56,17 +56,20 @@ if (isset($_SESSION['message'])) {
                                 $customer_name = $customer->get_customer_name();
                                 $selected = '';
 
-                                /** Als de customer_name in de get zit wordt deze in een session gezet en selected. Als de customer_name in de session zit deze selected*/
+                                /**
+                                 * Als de customer_name in de get zit wordt deze in een session gezet en selected.
+                                 * Als de customer_name in de session zit wordt deze selected.
+                                 */
                                 if (isset($_GET['customer_name'])) {
                                     if ($_GET['customer_name'] == $customer_name) {
                                         $_SESSION['customer_name'] = $_GET['customer_name'];
                                         $selected = 'selected';
 
-                                        /** Deze logica hoort hier volgens mij niet thuis.. Of toch wel...*/
+                                        /** Selecteert de juiste environment bij de selectie van de customer*/
                                         $environment_list = get_environmentlist();
                                         foreach ($environment_list as $environment) {
                                             if ($environment->get_customer_id() ==  get_customer_by_customer_name($customer_name)->get_customer_id()){
-                                                $selected_environment = $environment;            // wat doet dit hier?
+                                                $selected_environment = $environment;
                                                 break;
                                             }
                                         }
@@ -75,6 +78,15 @@ if (isset($_SESSION['message'])) {
                                 } else if (isset($_SESSION['customer_name'])) {
                                     if ($_SESSION['customer_name'] == $customer_name) {
                                         $selected = 'selected';
+
+                                        /** Selecteert de juiste environment bij de selectie van de customer.*/
+                                        $environment_list = get_environmentlist();
+                                        foreach ($environment_list as $environment) {
+                                            if ($environment->get_customer_id() ==  get_customer_by_customer_name($customer_name)->get_customer_id()){
+                                                $selected_environment = $environment;
+                                                break;
+                                            }
+                                        }
                                     }
                                 }
 
@@ -117,11 +129,11 @@ if (isset($_SESSION['message'])) {
 
                                 if (isset($_GET['environment_name'])) {
                                     if ($_GET['environment_name'] == $environment_name) {
-                                        $_SESSION['environment_name'] = $_GET['environment_name']; // dit is nu volgens mij overbodig
+                                        $_SESSION['environment_name'] = $_GET['environment_name']; // dit kan anders
                                         $selected_environment = get_environment_by_environment_name($_GET['environment_name']);
                                         $selected = 'selected';
                                     }
-                                } else if (isset($_SESSION['environment_name'])) {                  // is dit hele blokje dan ook niet overbodig? Kan dan vervangen worden door $selected_environment
+                                } else if (isset($_SESSION['environment_name'])) {                  // dit kan anders
                                     if ($_SESSION['environment_name'] == $environment_name) {
                                         $selected_environment = get_environment_by_environment_name($_SESSION['environment_name']);
                                         $selected = 'selected';
@@ -154,11 +166,11 @@ if (isset($_SESSION['message'])) {
     </div>
 
 
-    <?php
-    var_dump($selected_customer);
-    echo '<br>';
-    var_dump($selected_environment);
-    ?>
+<!--    --><?php
+//    var_dump($selected_customer);
+//    echo '<br>';
+//    var_dump($selected_environment);
+//    ?>
 
     <div class="system-overview-servers-container">
         <div id="reload-content">
@@ -168,6 +180,12 @@ if (isset($_SESSION['message'])) {
             <div class="desc">
                 <span>Ververst elke 10 seconden</span>
             </div>
+
+<!--            --><?php
+//            var_dump($selected_customer);
+//            echo '<br>';
+//            var_dump($selected_environment);
+//            ?>
 
             <?php foreach (get_sorted_virtualmachine_list_with_relations($selected_environment->get_environment_id()) as $vm) : ?>
 
@@ -273,7 +291,7 @@ if (isset($_SESSION['message'])) {
     function reload_pbar() {
         $(".progress-bar-fill").css({
             "width": "100%",
-            "transition": "2s linear"
+            "transition": "10s linear"
         });
     }
 
@@ -282,8 +300,7 @@ if (isset($_SESSION['message'])) {
     }
 
     reload_pbar();
-    setInterval(reload_servers, 2000);
-
+    setInterval(reload_servers, 10000);
 
     /** Modal script **/
     function show_modal(server_name) {
@@ -301,4 +318,4 @@ if (isset($_SESSION['message'])) {
 
 <!--<script type="text/javascript" src="private/js/systemoverview.js"></script>-->
 
-<?php //include(SHARED_PATH . '/footer.php') ?><!-- -->
+<?php include(SHARED_PATH . '/footer.php') ?>
