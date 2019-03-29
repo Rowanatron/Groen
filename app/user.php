@@ -56,7 +56,6 @@ if (!$is_admin) {
 
 ?>
 
-<?php var_dump($_POST); ?>
 <?php if (isset($_POST['username'])) include(PRIVATE_PATH . '/user_post.php'); ?>
 
 <?php
@@ -95,7 +94,7 @@ if ($is_edit == true) {
 			
 			<div class="form_block form_full_length">
 				<label for="username">Gebruikersnaam</label>
-				<input id="username" name="username" type="text" minlength="5" maxlength="45" value="<?php if (isset($form_user)) echo $form_user->get_username(); ?>" required <?php // if (!$is_admin) echo "disabled"; ?> />
+				<input id="username" name="username" type="text" minlength="5" maxlength="45" value="<?php if (isset($form_user)) echo $form_user->get_username(); ?>" required <?php if (!$is_admin) echo 'readonly="readonly"'; ?> />
                 <p id="error_username" class="error_message"></p>
 			</div> 
 			
@@ -129,15 +128,20 @@ if ($is_edit == true) {
                 <p id="error_email" class="error_message"></p>
             </div>
 			
-            <div class="form_block form_full_length">
+            
+			<div class="form_block form_full_length">
                 <label for="role">Selecteer rol</label>
-                <select name="role" id="role" <?php if (!$is_admin) echo "disabled"; ?> required>
+			<?php if ($is_admin) : ?>
+                <select name="role" id="role" <?php if (!$is_admin) echo 'readonly="readonly"'; ?> required>
 					<?php if(!$is_edit) : ?>
 						<option hidden selected disabled>Kies een rol</option>
 					<?php endif; ?>
 					<option value="user" <?= (isset($form_user) && $form_user->get_role() == "user") ? "selected" : ""; ?>>gebruiker</option>
                     <option value="admin" <?= (isset($form_user) && $form_user->get_role() == "admin") ? "selected" : ""; ?>>admin</option>
 				</select>
+			<?php else : ?>
+				<input name="role" id="role" type="text" value="<?php if (isset($form_user)) echo $form_user->get_role(); ?>" required readonly="readonly" />
+			<?php endif; ?>
             </div>
 			
             <div class="form_block form_full_length">
