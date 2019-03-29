@@ -56,174 +56,18 @@ if (!$is_admin) {
 
 ?>
 
-<?php
-//// POST REQUEST
-if (isset($_POST['username'])) {
-	
-	// Check ingevulde gegevens compleet
-	
-	// Username
-	if (!isset($_POST['username'])) {
-		array_push($page_errors, "Gebruikersnaam is leeg.");
-		$empty_value = true;
-	} else if (strlen($_POST['username']) < 5) {
-		array_push($page_errors, "De gebruikersnaam moet minimaal 5 karakters bevatten");
-		$empty_value = true;
-	} else if (strlen($_POST['username']) > 45) {
-		array_push($page_errors, "De gebruikersnaam mag maximaal 45 karakters bevatten");
-		$empty_value = true;
-	} else {
-		$post_username = $_POST['username'];
-	}
-	
-	// Voornaam
-	if (!isset($_POST['given_name'])) {
-		array_push($page_errors, "Voornaam is leeg.");
-		$empty_value = true;
-	} else if (strlen($_POST['given_name']) < 2) {
-		array_push($page_errors, "De voornaam moet minimaal 2 karakters bevatten");
-		$empty_value = true;
-	} else if (strlen($_POST['given_name']) > 45) {
-		array_push($page_errors, "De voornaam mag maximaal 45 karakters bevatten");
-		$empty_value = true;
-	} else {
-		$post_given_name = $_POST['given_name'];
-	}
-	
-	// Achternaam
-	if (!isset($_POST['family_name'])) {
-		array_push($page_errors, "Achternaam is leeg.");
-		$empty_value = true;
-	} else if (strlen($_POST['given_name']) < 2) {
-		array_push($page_errors, "De achternaam moet minimaal 2 karakters bevatten");
-		$empty_value = true;
-	} else if (strlen($_POST['given_name']) > 45) {
-		array_push($page_errors, "De achternaam mag maximaal 45 karakters bevatten");
-		$empty_value = true;
-	} else {
-		$post_family_name = $_POST['family_name'];
-	}
-	
-	// Email
-	if (!isset($_POST['email'])) {
-		array_push($page_errors, "E-mail is leeg.");
-		$empty_value = true;		
-	} else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-		array_push($page_errors, "Dit is geen geldig emailadres");
-		$empty_value = true;
-	} else {
-		$post_email = $_POST['email'];
-	}
-	
-	// Rol
-	if (!isset($_POST['role'])) {
-		array_push($page_errors, "Rol is leeg.");
-		$empty_value = true;
-	} else if ($_POST['role'] != "admin" && $_POST['role'] != "user") {
-		array_push($page_errors, "Dit is geen geldige rol.");
-		$empty_value = true;
-	} else {
-		$post_role = $_POST['role'];
-	}
-	
-	// Check wachtwoord
-	if (isset($_POST['password'])) {
-		
-		if($_POST['password'] != $_POST['password_repeat']) {
-			array_push($page_errors, "Wachtwoorden komen niet overeen.");
-			$empty_value = true;
-		} else if (strlen($_POST['password']) < 8 || preg_match('~[A-Z]~', $_POST['password']) == 0 || preg_match('~[0-9]~', $_POST['password']) == 0 || preg_match('~[a-z]~', $_POST['password']) == 0) {
-			array_push($page_errors, "Het wachtwoord moet minimaal 8 karakters bevatten waarvan 1 hoofdletter, 1 kleine letter en 1 getal.");
-			$empty_value = true;
-		} else {
-			$hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-		}
-		
-	} else if (!$is_edit) {
-		array_push($page_errors, "Wachtwoord is leeg.");
-		$empty_value = true;
-	}
-	
-	// Check id
-	if ($is_edit && isset($_POST['id']) && $_POST['id'] == $get_id) {
-		
-		$post_id = $_POST['id'];
-	
-	} else if ($is_edit) {
-		
-		array_push($page_errors, "Gebruiker en data komen niet overeen.");
-		$empty_value = true;
-		
-	}
-	
-	// Create user object to input in database
-	$post_user = new User(null, (isset($post_username) ? $post_username : null), null, (isset($post_given_name) ? $post_given_name : null), (isset($post_family_name) ? $post_family_name : null), (isset($post_email) ? $post_email : null), (isset($post_role) ? $post_role : null));
-	
-	if (!isset($empty_value)) {
-		
-		if (isset($hashed_password)) {
-			$post_user->set_password($hashed_password);
-		}
-		if (isset($post_id)) {
-			$post_user->set_user_id($post_id);
-		}
-		if (isset($img_filename)) {
-			$post_user->set_img($img_filename);
-		}
-		
-		// Put in database
-		if (!$is_edit) {
-			$result = insert_user($post_user);
-
-		} else {
-			$result = custom_update_user($post_user);
-		}
-		
-		// Check for errors, if succeeded continue to upload image
-		if (empty($result)) {
-			$new_id = get_user_id_by_username($post_user->get_username());
-			$post_user->set_user_id($new_id);
-			
-			// Check for image
-			if ($_FILES['img']['size'] > 0) {
-				// Upload file
-				$img_filename = upload_img('img', $post_user->get_user_id());
-				// Check if upload succeeded
-				if ($img_filename == false) {
-					array_push($page_errors, "Uploaden is mislukt.");
-				} else {
-					$post_user->set_img($img_filename);
-					$result = update_user_img($post_user);
-					if (isset($result)) {
-						array_push($page_errors, $result);
-					}
-				}
-			}
-		} else {
-			array_push($page_errors, $result);	
-		}
-		
-		if (sizeof($page_errors) == 0) {
-			header("Location: " . ($is_admin? userlist : systemoverview));
-		} else if (!$is_edit) {
-			echo "create";
-		}
-	}
-
-}
-
-?>
+<?php if (isset($_POST['username'])) include(PRIVATE_PATH . '/user_post.php'); ?>
 
 <?php
 
 //// GET FORM-USER
-if (isset($form_user)) {
-	$form_user = $post_user;
-} else if ($is_edit == true) {
+if ($is_edit == true) {
 	$form_user = get_user_by_id($get_id);
 	if ($form_user->get_user_id() == null) {	
 	header("Location: user-edit");
 	}
+} else if (isset($post_user)) {
+	$form_user = $post_user;
 }
 
 ?>
@@ -245,18 +89,18 @@ if (isset($form_user)) {
         <div class="form_container">
 			
 			<?php if($is_edit) : ?>
-				<input name="id" type="hidden" value="<?= isset($form_user) ? $form_user->get_user_id() : "0" ; ?>" required />
+				<input name="id" type="hidden" value="<?= isset($form_user) ? $form_user->get_user_id() : "" ; ?>" required />
 			<?php endif; ?>
 			
 			<div class="form_block form_full_length">
 				<label for="username">Gebruikersnaam</label>
-				<input name="username" type="text" minlength="5" maxlength="45" value="<?php if (isset($form_user)) echo $form_user->get_username(); ?>" required <?php if (!$is_admin) echo "disabled"; ?> />
+				<input id="username" name="username" type="text" minlength="5" maxlength="45" value="<?php if (isset($form_user)) echo $form_user->get_username(); ?>" required <?php if (!$is_admin) echo "disabled"; ?> />
                 <p id="error_username" class="error_message"></p>
 			</div> 
 			
             <div class="form_block">
                 <label for="password">Wachtwoord</label>
-                <input name="password" type="password" <?php if(!$is_edit) echo "required"; ?> />
+                <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" <?php if(!$is_edit) echo "required"; ?> />
                 <p id="error_password" class="error_message"></p>
             </div>
 			
@@ -268,19 +112,19 @@ if (isset($form_user)) {
    			
             <div class="form_block">
                 <label for="given_name">Voornaam</label>
-                <input name="given_name" type="text" minlength="2" maxlenght="45" required value="<?php if($is_edit) echo $form_user->get_given_name(); ?>" />
+                <input name="given_name" type="text" minlength="2" maxlenght="45" required value="<?php if (isset($form_user)) echo $form_user->get_given_name(); ?>" />
                 <p id="error_given_name" class="error_message"></p>
             </div>
 			
             <div class="form_block">
                 <label for="family_name">Achternaam</label>
-				<input id="family_name" name="family_name" type="text" minlength="2" maxlenght="45" required value="<?php if($is_edit) echo $form_user->get_family_name(); ?>" />
+				<input id="family_name" name="family_name" type="text" minlength="2" maxlenght="45" required value="<?php if (isset($form_user)) echo $form_user->get_family_name(); ?>" />
                 <p id="error_family_name" class="error_message"></p>
             </div>
 			
             <div class="form_block form_full_length">
                 <label for="email">Emailadres</label>
-				<input id="email" name="email" type="email" maxlength="45" required value="<?php if($is_edit) echo $form_user->get_email(); ?>" />
+				<input id="email" name="email" type="email" maxlength="45" required value="<?php if (isset($form_user)) echo $form_user->get_email(); ?>" />
                 <p id="error_email" class="error_message"></p>
             </div>
 			
@@ -288,10 +132,10 @@ if (isset($form_user)) {
                 <label for="role">Selecteer rol</label>
                 <select name="role" id="role" <?php if (!$is_admin) echo "disabled"; ?> required>
 					<?php if(!$is_edit) : ?>
-						<option disabled selected hidden>Kies een rol</option>
+						<option hidden selected disabled>Kies een rol</option>
 					<?php endif; ?>
-					<option value="user" <?php if($is_edit && $form_user->get_role() == "user") echo "selected"; ?>>gebruiker</option>
-                    <option value="admin" <?php if($is_edit && $form_user->get_role() == "admin") echo "selected"; ?>>admin</option>
+					<option value="user" <?= (isset($form_user) && $form_user->get_role() == "user") ? "selected" : ""; ?>>gebruiker</option>
+                    <option value="admin" <?= (isset($form_user) && $form_user->get_role() == "admin") ? "selected" : ""; ?>>admin</option>
 				</select>
             </div>
 			
@@ -344,7 +188,7 @@ if (isset($form_user)) {
 		<div class="modal-title"><h1>Foutmelding</h1></div>
 		<div class="modal-p"><p><?= $error ?></p></div>
 		<div class="button-container">
-			<button onclick="hide_modal_edit_page('modal_error_<?= $key ?>')" class="annuleren">Annuleren</button>
+			<button onclick="hide_modal_edit_page('modal_error_<?= $key ?>')" class="annuleren">Ok</button>
 		</div>
 	</div>
 </div>
