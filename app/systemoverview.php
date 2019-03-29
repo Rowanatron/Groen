@@ -26,13 +26,13 @@ if (isset($_SESSION['message'])) {
 ?>
 
 <!-- Message aan gebruiker -->
-<div id="message-area" class='container'>
-    <?php
-    // echo $welkom;
-    echo isset($message) ? $message : '';
-    unset($_SESSION['message']);
-    ?>
-</div>
+<!--<div id="message-area" class='container'>-->
+<!--    --><?php
+//    // echo $welkom;
+//    echo isset($message) ? $message : '';
+//    unset($_SESSION['message']);
+//    ?>
+<!--</div>-->
 
 <!-- Hier komt de content -->
 <div id="content" class="container">
@@ -44,18 +44,49 @@ if (isset($_SESSION['message'])) {
                 <form class="so-form" method="get">
                     <label class="so-label" for="customer_name">Klant</label>
                     <select id="sys-overview" name="customer_name" onchange="this.form.submit();">
-                        <?php foreach (get_customerlist() as $customer) {
+                        <?php
+
+                        $selected_customer ='';
+                        $selected_environment ='';
+
+                        foreach (get_customerlist() as $customer) {
 
                             if (customer_has_environment($customer)) {
 
                                 $customer_name = $customer->get_customer_name();
                                 $selected = '';
 
+                                /**
+                                 * Als de customer_name in de get zit wordt deze in een session gezet en selected.
+                                 * Als de customer_name in de session zit wordt deze selected.
+                                 */
                                 if (isset($_GET['customer_name'])) {
                                     if ($_GET['customer_name'] == $customer_name) {
+                                        $_SESSION['customer_name'] = $_GET['customer_name'];
                                         $selected = 'selected';
-                                    } else {
-                                        $selected = '';
+
+                                        /** Selecteert de juiste environment bij de selectie van de customer*/
+                                        $environment_list = get_environmentlist();
+                                        foreach ($environment_list as $environment) {
+                                            if ($environment->get_customer_id() ==  get_customer_by_customer_name($customer_name)->get_customer_id()){
+                                                $selected_environment = $environment;
+                                                break;
+                                            }
+                                        }
+
+                                    }
+                                } else if (isset($_SESSION['customer_name'])) {
+                                    if ($_SESSION['customer_name'] == $customer_name) {
+                                        $selected = 'selected';
+
+                                        /** Selecteert de juiste environment bij de selectie van de customer.*/
+                                        $environment_list = get_environmentlist();
+                                        foreach ($environment_list as $environment) {
+                                            if ($environment->get_customer_id() ==  get_customer_by_customer_name($customer_name)->get_customer_id()){
+                                                $selected_environment = $environment;
+                                                break;
+                                            }
+                                        }
                                     }
                                 }
 
@@ -71,35 +102,75 @@ if (isset($_SESSION['message'])) {
                 </form>
             </div>
             <div class="so-dropdown-element">
-                <form class="so-form"><label class="so-label" for="environment_name">Omgeving</label>
-                    <select id="sys-overview" name="environment_name" required>
+                <form method="get" class="so-form">
+                    <label class="so-label" for="sys-overview">Omgeving</label>
+                    <select id="sys-overview" name="environment_name" onchange="this.form.submit();">
                         <?php
+
+                        /** Bepaal de geselecteerde customer */
 
                         if (isset($_GET['customer_name'])) {
                             $selected_customer = get_customer_by_customer_name($_GET['customer_name']);
+                        } else if (isset($_SESSION['customer_name'])) {
+                            $selected_customer = get_customer_by_customer_name($_SESSION['customer_name']);
                         } else {
-                            foreach (get_customerlist() as $customer) {
-                                if (customer_has_environment($customer)) {
-                                    $selected_customer = $customer;
-                                    break;
-                                }
-                            }
-
+                            $customer_list = get_customerlist();
+                            $selected_customer = $customer_list[0];
                         }
 
-                        foreach (get_environmentlist() as $environment) {
-                            if ($environment->get_customer_id() == $selected_customer->get_customer_id()) { ?>
 
-                                <option value="<?= $environment->get_environment_name() ?>"> <?php echo $environment->get_environment_name() ?></option>
+                        /** Bepaalt de geselecteerde omgeving en geeft de juiste opties weer in de browse balk */
+                        foreach (get_environmentlist() as $environment) {
+
+                            $environment_name = $environment->get_environment_name();
+                            $selected = '';
+
+                            if ($environment->get_customer_id() == $selected_customer->get_customer_id()) {
+
+                                if (isset($_GET['environment_name'])) {
+                                    if ($_GET['environment_name'] == $environment_name) {
+                                        $_SESSION['environment_name'] = $_GET['environment_name']; // dit kan anders
+                                        $selected_environment = get_environment_by_environment_name($_GET['environment_name']);
+                                        $selected = 'selected';
+                                    }
+                                } else if (isset($_SESSION['environment_name'])) {                  // dit kan anders
+                                    if ($_SESSION['environment_name'] == $environment_name) {
+                                        $selected_environment = get_environment_by_environment_name($_SESSION['environment_name']);
+                                        $selected = 'selected';
+                                    }
+                                }
+                                else {
+                                    // De eerste omgeving van de selected customer pakken
+                                    $selected_environment_array = [];
+                                    foreach (get_environmentlist() as $env){
+                                        if ($env->get_customer_id() == $selected_customer->get_customer_id()){
+                                            array_push($selected_environment_array, $env);
+                                        }
+                                    }
+                                    $selected_environment = $selected_environment_array[0];
+                                }
+
+
+                                ?>
+
+                                <option value="<?= $environment_name ?>" <?= $selected ?>> <?= $environment_name ?></option>
 
                                 <?php
                             }
                         }
                         ?>
-                    </select></form>
+                    </select>
+                </form>
             </div>
         </div>
     </div>
+
+
+<!--    --><?php
+//    var_dump($selected_customer);
+//    echo '<br>';
+//    var_dump($selected_environment);
+//    ?>
 
     <div class="system-overview-servers-container">
         <div id="reload-content">
@@ -110,9 +181,16 @@ if (isset($_SESSION['message'])) {
                 <span>Ververst elke 10 seconden</span>
             </div>
 
-            <?php foreach (get_sorted_virtualmachine_list_with_relations() as $vm) : ?>
+<!--            --><?php
+//            var_dump($selected_customer);
+//            echo '<br>';
+//            var_dump($selected_environment);
+//            ?>
+
+            <?php foreach (get_sorted_virtualmachine_list_with_relations($selected_environment->get_environment_id()) as $vm) : ?>
 
                 <?php
+
                 if ($vm->getLatency() > 1.45) {
                     $image = "vm_red.png";
                 } else if ($vm->getLatency() < 1.2) {
@@ -123,6 +201,7 @@ if (isset($_SESSION['message'])) {
                 ?>
 
                 <div id="server">
+<!--                    --><?php //var_dump($vm); ?>
                     <div class="server-img">
                         <img src="<?php echo "img/" . $image ?>" alt="logo van virtuele machine">
                     </div>
@@ -151,15 +230,15 @@ if (isset($_SESSION['message'])) {
                             </div>
                         </div>
                     </div>
-<!--                    <div id="relations">-->
-<!--                        --><?php //foreach ($vm->getRelationList() as $relation): ?>
-<!--                            <ul>-->
-<!--                                <li>--><?php //echo $relation->getVmNameFrom(); ?><!--</li>-->
-<!--                                <li>--><?php //echo $relation->getVmNameTo(); ?><!--</li>-->
-<!--                                <li>--><?php //echo $relation->getDescription(); ?><!--</li>-->
-<!--                            </ul>-->
-<!--                        --><?php //endforeach; ?>
-<!--                    </div>-->
+                    <!--                    <div id="relations">-->
+                    <!--                        --><?php //foreach ($vm->getRelationList() as $relation): ?>
+                    <!--                            <ul>-->
+                    <!--                                <li>--><?php //echo $relation->getVmNameFrom(); ?><!--</li>-->
+                    <!--                                <li>--><?php //echo $relation->getVmNameTo(); ?><!--</li>-->
+                    <!--                                <li>--><?php //echo $relation->getDescription(); ?><!--</li>-->
+                    <!--                            </ul>-->
+                    <!--                        --><?php //endforeach; ?>
+                    <!--                    </div>-->
                     <div id="info-icon">
                         <a onClick="show_modal('<?= $vm->getName(); ?>')" class="close-modal"">
                             <i class="material-icons table-icons">info_outline</i>
@@ -172,7 +251,7 @@ if (isset($_SESSION['message'])) {
 </div>
 
 
-<?php foreach (get_sorted_virtualmachine_list_with_relations() as $vm) : ?>
+<?php foreach (get_sorted_virtualmachine_list_with_relations($selected_environment->get_environment_id()) as $vm) : ?>
     <div class="modal" id="modal-<?php echo $vm->getName(); ?>">
         <div id="modal-content">
 
@@ -181,19 +260,19 @@ if (isset($_SESSION['message'])) {
                 <h1><?php echo $vm->getName(); ?></h1></div>
             <div id="IN-left">
                 <i class="material-icons table-icons arrow">arrow_upward</i>
-                <?php foreach ($vm->getIncomingRelationList() as $relation): ?>
+                <?php foreach ($vm->getOutgoingRelationList() as $relation): ?>
                     <div class="tooltip item">
-                        <div><?php echo $relation->getVmNameTo(); ?></div>
-                        <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
+                        <div><?php echo $relation->get_vm_name_from(); ?></div>
+                        <span class="tooltiptext"><?php echo $relation->get_description(); ?></span>
                     </div>
                 <?php endforeach; ?>
             </div>
             <div id="OUT-right">
                 <i class="material-icons table-icons arrow">arrow_downward</i>
-                <?php foreach ($vm->getOutgoingRelationList() as $relation): ?>
+                <?php foreach ($vm->getIncomingRelationList() as $relation): ?>
                     <div class="tooltip item">
-                        <div><?php echo $relation->getVmNameFrom();?></div>
-                        <span class="tooltiptext"><?php echo $relation->getDescription(); ?></span>
+                        <div><?php echo $relation->get_vm_name_to(); ?></div>
+                        <span class="tooltiptext"><?php echo $relation->get_description(); ?></span>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -206,12 +285,24 @@ if (isset($_SESSION['message'])) {
     </div>
 <?php endforeach; ?>
 
-<!--getIncomingRelationList()-->
-<!--getOutgoingRelationList()-->
-
-
 <script>
 
+    /** Reload scripts */
+    function reload_pbar() {
+        $(".progress-bar-fill").css({
+            "width": "100%",
+            "transition": "10s linear"
+        });
+    }
+
+    function reload_servers() {
+        $("#reload-content").load("./systemoverview.php #reload-content", reload_pbar);
+    }
+
+    reload_pbar();
+    setInterval(reload_servers, 10000);
+
+    /** Modal script **/
     function show_modal(server_name) {
         document.getElementById("modal-" + server_name).style.visibility = "visible";
 
@@ -224,6 +315,7 @@ if (isset($_SESSION['message'])) {
 </script>
 
 <!--Auto-refresh van het virtual machine overzicht -->
-<script type="text/javascript" src="private/js/systemoverview.js"></script>
 
-<?php include(SHARED_PATH . '/footer.php') ?> 
+<!--<script type="text/javascript" src="private/js/systemoverview.js"></script>-->
+
+<?php include(SHARED_PATH . '/footer.php') ?>
