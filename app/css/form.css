@@ -61,6 +61,7 @@ input {
 .error_message{
   display: inline-block;
   width: 100%;
+  height: 1em;
   font-family: Helvetica, Arial;
   font-size: 90%;
   font-style: italic;

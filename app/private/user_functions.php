@@ -173,12 +173,15 @@ function custom_update_user($user){
 	$data = [
 		'user_id' => $user->get_user_id(),
 		'username' => $user->get_username(),
-		'password' => $user->get_password(),
 		'given_name' => $user->get_given_name(),
 		'family_name' => $user->get_family_name(),
 		'email' => $user->get_email(),
 		'role' => $user->get_role()
 	];
+	
+	if ($user->get_password() != null) {
+		$data['password'] = $user->get_password();
+	}
 	
 	$query = "UPDATE user SET `username` = :username, " . (empty($user->get_password()) ? "" : "`password` = :password, ") . "`given_name` = :given_name, `family_name` = :family_name, `email` = :email, `role` = :role 
 	WHERE (`user_id` = :user_id);";

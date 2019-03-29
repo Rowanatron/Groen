@@ -217,6 +217,10 @@ nav ul, nav li {
     padding: 20px;
 }
 
+#button-container form {
+	border: none;
+}
+
 #modal-content button {
     float: right;
     margin-left: 10px;
