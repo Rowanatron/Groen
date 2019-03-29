@@ -202,9 +202,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="form_block form_full_length">
                     <label> Omschrijving<br>
-                        <textarea id="test_description" rows = "5" cols = "50" name = "relation_description[]" onkeydown="setTimeout(error_description, 1500)"></textarea>
-                        <!--                                <input id="test_description" name="relation_description[]" type="text" maxlength="255"-->
-                        <!--                                       onkeydown="setTimeout(error_description, 1500)" value=" "/>-->
+                        <textarea id="test_description" rows = "5" cols = "50" maxlength="255" name = "relation_description[]" onkeydown="setTimeout(error_description, 1500)"></textarea>
                         <p id="error_description" class="error_message"></p>
                     </label>
                 </div>
