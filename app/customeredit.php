@@ -83,13 +83,14 @@ if (!isset($_GET['id'])) {
 </div>
 <div class="modal" id="modal">
 	<div id="modal-content">
-		<h1>Klant verwijderen</h1>
-		<p>Wanneer u klant '<span id="modal-name"></span>' verwijdert, worden de gekoppelde omgevingen ook verwijderd. Weet u zeker dat u  door wilt gaan?</p>
-		<button id="modal-delete-button" form="form-delete" type="submit">Klant verwijderen</button>
-		<button onClick="hide_modal()">Annuleren</button>
-	</div>
+		<h1 id="modal-title">Klant verwijderen</h1>
+		<p id="modal-p">Wanneer u klant '<span id="modal-name"></span>' verwijdert, worden de gekoppelde omgevingen ook verwijderd. Weet u zeker dat u  door wilt gaan?</p>
+        <div id="button-container">
+            <button id="modal-delete-button" class="verwijderen" form="form-delete" type="submit">Klant verwijderen</button>
+            <button onClick="hide_modal()" class="annuleren">Annuleren</button>
+	    <div/>
+    </div>
 </div>
-
 <!-- Nu staat Javascript niet achteraan. Probleem? -->
 <script type="text/javascript" src="private/js/customer_crud.js"></script>
 <script type="text/javascript" src="private/js/modal.js"></script>
