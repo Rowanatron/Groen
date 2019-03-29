@@ -50,11 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $environment_id = $_POST['env_id'];
 
-        if ($_POST['$original_environment_name'] != $environment_name) {
+        // Er gebeuren vreemde dingen op deze post soms worden waardes niet door gegeven maar met stomme naamen lukt het wel :-)
 
+        if ($_POST['environment_name'] != $_POST['dummy_input']) {
 
+            
+            if (get_environment_by_environment_name($environment_name)->environment_name != null) {
 
-            if (get_environment_by_environment_name($environment_name) != null) {
 
                 $environment_name = $environment_name . $environment_id;
 
