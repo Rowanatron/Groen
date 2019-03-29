@@ -15,7 +15,9 @@
 }
 
 .system-overview-servers-container {
-    border: 1px solid #D9DCDF;
+    border-left: 1px solid #D9DCDF;
+    border-right: 1px solid #D9DCDF;
+    border-down: 1px solid #D9DCDF;
     padding-bottom: 20px;
 }
 

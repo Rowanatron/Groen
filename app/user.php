@@ -176,8 +176,9 @@ if ($is_edit == true) {
 		<div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
 		<div id="modal-p"><p>Weet u zeker dat u <?= $form_user->get_username() ?> wilt verwijderen?</p></div>
 		<div id="button-container">
-			<form id="user-delete" action="userlist">
-				<input type="hidden" value="<?= $get_id ?>" />
+			<form id="user-delete" action="userlist" method="post">
+				<input type="hidden" name="user_id" value="<?= $form_user->get_user_id() ?>" />
+				<input type="hidden" name="username" value="<?=$form_user->get_username(); ?>" />
 			</form>
 			<button id="modal-delete-button" class="verwijderen" form="user-delete" type="submit" name="action" value="delete_user">Gebruiker verwijderen</button>
 			<button onclick="hide_modal_edit_page('modal_delete')" class="annuleren">Annuleren</button>
