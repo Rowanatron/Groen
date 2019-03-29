@@ -159,7 +159,8 @@ if (!isset($_GET['id'])) {
             </div> <!-- form_container -->
             <div id="add-relationship-btn">
                 <a class="volgende" onclick="add_input('dynamic_input', 'extra_fields');">
-                    <i class="material-icons table-icons">add</i><span>Voeg een relatie toe</span>
+                    <p>Voeg een relatie toe</p>
+                    <i class="material-icons table-icons">add</i>
                 </a>
 
     </form>
