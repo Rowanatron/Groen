@@ -88,6 +88,16 @@ if (isset($_SESSION['message'])) {
                                             }
                                         }
                                     }
+                                } else {
+                                    /** Selecteert de juiste environment bij de selectie van de customer.*/
+                                    $environment_list = get_environmentlist();
+                                    foreach ($environment_list as $environment) {
+                                        if ($environment->get_customer_id() ==  get_customer_by_customer_name('Yvette')->get_customer_id()){
+                                                $selected_environment = $environment;
+                                            break;
+                                        }
+                                    }
+
                                 }
 
                                 ?>
