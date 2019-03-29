@@ -67,6 +67,11 @@ if (isset($_POST['username'])) {
 	if (empty($_POST['role'])) {
 		array_push($page_errors, "Rol is leeg.");
 		$empty_value = true;
+	} else if (!$is_admin && $_POST['role'] == "admin") {
+		array_push($page_errors, "Je bent niet bevoegd je rol te veranderen.");
+		$empty_value = true;		
+	} else if (!$is_admin) {
+		$post_role = "user";
 	} else if ($_POST['role'] != "admin" && $_POST['role'] != "user") {
 		array_push($page_errors, "Dit is geen geldige rol.");
 		$empty_value = true;

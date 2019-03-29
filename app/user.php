@@ -128,8 +128,10 @@ if ($is_edit == true) {
                 <p id="error_email" class="error_message"></p>
             </div>
 			
-            <div class="form_block form_full_length">
+            
+			<div class="form_block form_full_length">
                 <label for="role">Selecteer rol</label>
+			<?php if ($is_admin) : ?>
                 <select name="role" id="role" <?php if (!$is_admin) echo 'readonly="readonly"'; ?> required>
 					<?php if(!$is_edit) : ?>
 						<option hidden selected disabled>Kies een rol</option>
@@ -137,6 +139,9 @@ if ($is_edit == true) {
 					<option value="user" <?= (isset($form_user) && $form_user->get_role() == "user") ? "selected" : ""; ?>>gebruiker</option>
                     <option value="admin" <?= (isset($form_user) && $form_user->get_role() == "admin") ? "selected" : ""; ?>>admin</option>
 				</select>
+			<?php else : ?>
+				<input name="role" id="role" type="text" value="<?php if (isset($form_user)) echo $form_user->get_role(); ?>" required readonly="readonly" />
+			<?php endif; ?>
             </div>
 			
             <div class="form_block form_full_length">
