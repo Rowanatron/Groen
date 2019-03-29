@@ -242,10 +242,10 @@ if (isset($_SESSION['message'])) {
                     <?php 
                     $check_ingoing_relation = $vm->getIncomingRelationList();
                     $check_outgoing_relation = $vm->getOutgoingRelationList();
-                    if (!empty($checkrelation) || !empty($check_outgoing_relation)) {
+                    if (!empty($check_ingoing_relation) || !empty($check_outgoing_relation)){
                     ?>
                     <div id="info-icon">
-                        <a onClick="show_modal('<?= $vm->getName(); ?>')" class="close-modal"">
+                        <a onClick="show_modal('<?= $vm->getName(); ?>')" class="close-modal">
                             <i class="material-icons table-icons">info_outline</i>
                         </a>
                     </div>
