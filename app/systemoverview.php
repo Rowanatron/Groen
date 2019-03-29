@@ -275,7 +275,9 @@ if (isset($_SESSION['message'])) {
                 <?php foreach ($vm->getOutgoingRelationList() as $relation): ?>
                     <div class="tooltip item">
                         <div><?php echo $relation->get_vm_name_from(); ?></div>
-                        <span class="tooltiptext"><?php echo $relation->get_description(); ?></span>
+                        <?php if (!empty($relation->get_description())) { ?>
+                            <span class="tooltiptext"><?php echo $relation->get_description(); ?></span>
+                        <?php } ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -284,7 +286,9 @@ if (isset($_SESSION['message'])) {
                 <?php foreach ($vm->getIncomingRelationList() as $relation): ?>
                     <div class="tooltip item">
                         <div><?php echo $relation->get_vm_name_to(); ?></div>
-                        <span class="tooltiptext"><?php echo $relation->get_description(); ?></span>
+                        <?php if (!empty($relation->get_description())) { ?>
+                            <span class="tooltiptext"><?php echo $relation->get_description(); ?></span>
+                        <?php } ?>
                     </div>
                 <?php endforeach; ?>
             </div>
