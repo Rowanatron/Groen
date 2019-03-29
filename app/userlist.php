@@ -73,7 +73,17 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 						<input type="hidden" name="user_id" value="<?=$user->user_id; ?>" />
 						<input type="hidden" name="username" value="<?=$user->username; ?>" />
 					</form>
-					<a onclick="show_modal('<?= $user->username; ?>', 'userdelete-<?= $user->username; ?>')">
+                    <?php
+
+                    if ($user->role == 'user') {
+                        $user_role = "gebruiker";
+                    } else {
+                        $user_role = "admin";
+                    }
+
+                    ?>
+
+					<a onclick="show_modal('<?= $user->username; ?>', '<?= $user_role; ?>', 'userdelete-<?= $user->username; ?>' )">
 						<i class="material-icons table-icons">delete</i>
 					</a>
 				</td>
@@ -86,7 +96,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['action'] == 'delete_user'
 <div class="modal" id="modal">
 	<div id="modal-content">
 		<div id="modal-title"><h1>Gebruiker verwijderen</h1></div>
-		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-name"></span> wilt verwijderen?</p></div>
+		<div id="modal-p"><p>Weet u zeker dat u <span id="modal-role"></span> '<span id="modal-name"></span>' wilt verwijderen?</p></div>
 		<div id="button-container">
 			<button id="modal-delete-button" class="verwijderen" form="" type="submit">Gebruiker verwijderen</button>
 			<button onClick="hide_modal()" class="annuleren">Annuleren</button>

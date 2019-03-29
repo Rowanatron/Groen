@@ -1,6 +1,7 @@
-function show_modal(name, form) {
+function show_modal(name, role, form) {
 	document.getElementById("modal").style.visibility = "visible";
 	document.getElementById("modal-name").innerHTML = name;
+	document.getElementById("modal-role").innerHTML = role;
 	document.getElementById("modal-delete-button").setAttribute("form", form);
 } 
 
