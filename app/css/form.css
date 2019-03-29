@@ -43,6 +43,10 @@ select#vm_name_from, select#bidirectional, select#vm_name_to, #test_description,
   box-sizing: border-box;
 }
 
+input[readonly=readonly]#role:hover, input[readonly=readonly]:hover {
+  cursor: not-allowed;
+}
+
 input {
   color: #8e8e8e;
 }
@@ -262,17 +266,6 @@ p.uitleg {
 .env-edit-heading {
   width: 60%;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /******* SYSTEM OVERVIEW *******/
 

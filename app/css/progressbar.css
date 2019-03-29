@@ -1,7 +1,7 @@
 .progress-bar {
     width: calc(100%);
     height: 3px;
-    background: #8e8e8e;
+    background: #bfbfbf;
     /* padding: 3px; */
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
 
@@ -15,7 +15,7 @@
 .progress-bar-fill {
     display: block;
     height: 3px;
-    background: lightgrey;
+    background: #D9DCDF;
     /* border-radius: 3px; */
     /*transition: width 250ms ease-in-out;*/
     /* transition: width 5s ease-in-out; */
