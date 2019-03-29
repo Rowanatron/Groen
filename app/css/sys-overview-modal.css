@@ -10,12 +10,14 @@
     height: auto;
     padding-bottom: 20px;
     border-color: #b4c1cd;
+    border-radius: 10px;
 
 }
 
 #modal-title {
     text-align: center;
-    background-color: #b4c1cd;
+    background-color: #f2f6fa;
+    border-radius: 10px;
 }
 
 #modal-title p {
@@ -35,11 +37,14 @@
 }
 
 #IN-left, #OUT-right {
+    vertical-align: top;
     box-sizing: border-box;
     width: 49%;
     display: inline-block;
+    top: 0;
     padding: 10px;
     text-align: center;
+
 }
 
 /*#IN-left {*/
