@@ -115,7 +115,13 @@ if (isset($_SESSION['message'])) {
                             $selected_customer = get_customer_by_customer_name($_SESSION['customer_name']);
                         } else {
                             $customer_list = get_customerlist();
-                            $selected_customer = $customer_list[0];
+                            foreach($customer_list as $cust){
+                                if(customer_has_environment($cust)){
+                                    $selected_customer = $cust;
+                                    break;
+                                }
+                            }
+                            
                         }
 
 
