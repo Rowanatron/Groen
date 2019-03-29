@@ -2,6 +2,7 @@
 
 include_once 'class/DatabasePDO.php';
 include_once 'class/Customer.php';
+include_once 'environment_functions.php';
 
 function get_customerlist() {
 	$pdo = new DatabasePDO();
@@ -118,7 +119,10 @@ function update_customer($customer){
 	try{
 		$statement = $conn->prepare($query);
 		$statement->execute($data);
-		$_SESSION['customer_name'] = $customer->get_customer_name();
+		if(customer_has_environment($customer)){
+			$_SESSION['customer_name'] = $customer->get_customer_name();
+		}
+		
 	} catch(PDOException $e) {
 		echo "Oops er ging iets mis {$e->getMessage()}";
 	}
