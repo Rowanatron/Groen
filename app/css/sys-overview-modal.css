@@ -1,10 +1,4 @@
 
-
-/*#modal-klanty-bps01-test {*/
-    /*visibility: hidden;*/
-/*}*/
-
-
 #modal-content {
     position: relative;
     height: auto;
@@ -44,16 +38,7 @@
     top: 0;
     padding: 10px;
     text-align: center;
-
 }
-
-/*#IN-left {*/
-    /*background-color: red;*/
-/*}*/
-
-/*#OUT-right {*/
-    /*background-color: blue;*/
-/*}*/
 
 .item {
     padding-bottom: 10px;
@@ -73,23 +58,23 @@
 }
 
 
-
 /****** TOOLTIP *********/
 
 .tooltip {
     position: relative;
     display: block;
-    /*border-bottom: 1px dotted black;*/
 }
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
+    width: 200px;
+    height: auto;
+    background-color: #f2f6fa;
+    box-shadow: 2px 2px 5px -1px rgba(0,0,0,0.75);
     text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
+    border-radius: 3px;
+    padding: 10px 7px 10px 7px;
+    border: 1px solid #E2E9F0;
 
     /* Position the tooltip */
     position: absolute;

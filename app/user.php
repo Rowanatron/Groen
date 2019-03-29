@@ -94,37 +94,37 @@ if ($is_edit == true) {
 			
 			<div class="form_block form_full_length">
 				<label for="username">Gebruikersnaam</label>
-				<input id="username" name="username" type="text" minlength="5" maxlength="45" value="<?php if (isset($form_user)) echo $form_user->get_username(); ?>" required <?php if (!$is_admin) echo 'readonly="readonly"'; ?> />
+				<input id="username" name="username" type="text" minlength="5" maxlength="45" onkeydown="setTimeout(error_username, 1500)" value="<?php if (isset($form_user)) echo $form_user->get_username(); ?>" required <?php if (!$is_admin) echo 'readonly="readonly"'; ?> />
                 <p id="error_username" class="error_message"></p>
 			</div> 
 			
             <div class="form_block">
                 <label for="password">Wachtwoord</label>
-                <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" <?php if(!$is_edit) echo "required"; ?> />
+                <input id="password" name="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(error_password, 1500)" <?php if(!$is_edit) echo "required"; ?> />
                 <p id="error_password" class="error_message"></p>
             </div>
 			
             <div class="form_block">
                 <label for="password_repeat">Herhaal wachtwoord</label>
-                <input id="password_repeat" name="password_repeat" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" <?php if(!$is_edit) echo "required"; ?>  />
+                <input id="password_repeat" name="password_repeat" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeydown="setTimeout(error_password_repeat, 1500)" <?php if(!$is_edit) echo "required"; ?>  />
                 <p id="error_password_repeat" class="error_message"></p>
             </div>
    			
             <div class="form_block">
                 <label for="given_name">Voornaam</label>
-                <input id="given_name" name="given_name" type="text" minlength="2" maxlenght="45" required value="<?php if (isset($form_user)) echo $form_user->get_given_name(); ?>" />
+                <input id="given_name" name="given_name" type="text" minlength="2" maxlenght="45" onkeydown="setTimeout(error_given_name, 1500)" required value="<?php if (isset($form_user)) echo $form_user->get_given_name(); ?>" />
                 <p id="error_given_name" class="error_message"></p>
             </div>
 			
             <div class="form_block">
                 <label for="family_name">Achternaam</label>
-				<input id="family_name" name="family_name" type="text" minlength="2" maxlenght="45" required value="<?php if (isset($form_user)) echo $form_user->get_family_name(); ?>" />
+				<input id="family_name" name="family_name" type="text" minlength="2" maxlenght="45" onkeydown="setTimeout(error_family_name, 1500)" required value="<?php if (isset($form_user)) echo $form_user->get_family_name(); ?>" />
                 <p id="error_family_name" class="error_message"></p>
             </div>
 			
             <div class="form_block form_full_length">
                 <label for="email">Emailadres</label>
-				<input id="email" name="email" type="email" maxlength="45" required value="<?php if (isset($form_user)) echo $form_user->get_email(); ?>" />
+				<input id="email" name="email" type="email" maxlength="45" onkeydown="setTimeout(error_email, 1500)" required value="<?php if (isset($form_user)) echo $form_user->get_email(); ?>" />
                 <p id="error_email" class="error_message"></p>
             </div>
 			

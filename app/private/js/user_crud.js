@@ -1,74 +1,62 @@
 var username = document.getElementById("username");
-var error_username = document.getElementById("error_username");
-username.onchange = username_invalid;
-username.onkeyup = username_valid;
-
 var password = document.getElementById("password");
-var error_password = document.getElementById("error_password");
-password.onchange = password_invalid;
-password.onkeyup = password_valid;
+var password_repeat = document.getElementById("password_repeat");
+var given_name = document.getElementById("given_name");
+var family_name = document.getElementById("family_name");
+var email = document.getElementById("email");
 
+//check input after typing
+username.onchange = error_username;
+password.onchange = error_password;
+password_repeat.onchange = error_password_repeat;
+given_name.onchange = error_given_name;
+family_name.onchange = error_family_name;
+email.onchange = error_email;
 
-function username_invalid() {
-    if (!username.checkValidity()) {
-        error_username.innerHTML = "De gebruikersnaam moet minimaal 5 karakters bevatten";
-    }
+function error_username(){
+if(!username.checkValidity()){
+document.getElementById("error_username").innerHTML = "De gebruikersnaam moet minimaal 5 karakters bevatten";
+} else{
+document.getElementById("error_username").innerHTML = "";
+}
 }
 
-function username_valid() {
-    if (username.checkValidity()) {
-		error_username.innerHTML = "";
-    }
+function error_password() {
+if (!password.checkValidity()) {
+document.getElementById("error_password").innerHTML = "Het wachtwoord moet minimaal 8 karakters bevatten waarvan 1 hoofdletter, 1 kleine letter en 1 getal";
+} else{
+document.getElementById("error_password").innerHTML = "";
 }
-
-function password_invalid() {
-    if (!password.checkValidity()) {
-        error_password.innerHTML = "Het wachtwoord moet minimaal 8 karakters bevatten waarvan 1 hoofdletter, 1 kleine letter en 1 getal";
-    }
-}
-
-function password_valid() {
-    if (password.checkValidity()) {
-        error_password.innerHTML = "";
-    }
 }
 
 function error_password_repeat() {
-    var testable = document.getElementById("test_password_repeat");
-    if (testable.value != document.getElementById("test_password").value) {
-        document.getElementById("error_pass_repeat").innerHTML = "De wachtwoorden komen niet overeen";
-    } else {
-        document.getElementById("error_pass_repeat").innerHTML = "";
-    }
-
+if (!password_repeat.checkValidity()) {
+document.getElementById("error_password_repeat").innerHTML = "De wachtwoorden komen niet overeen";
+} else {
+document.getElementById("error_password_repeat").innerHTML = "";
+}
 }
 
 function error_given_name() {
-    var testable = document.getElementById("test_given_name");
-    if (!testable.checkValidity()) {
-        document.getElementById("error_given_name").innerHTML = "De voornaam moet minimaal 2 karakters bevatten";
-    } else {
-        document.getElementById("error_given_name").innerHTML = "";
-    }
-
+if (!given_name.checkValidity()) {
+document.getElementById("error_given_name").innerHTML = "De voornaam moet minimaal 2 karakters bevatten";
+} else {
+document.getElementById("error_given_name").innerHTML = "";
+}
 }
 
 function error_family_name() {
-    var testable = document.getElementById("test_family_name");
-    if (!testable.checkValidity()) {
-        document.getElementById("error_family_name").innerHTML = "De achternaam moet minimaal 2 karakters bevatten";
-    } else {
-        document.getElementById("error_family_name").innerHTML = "";
-    }
-
+if (!family_name.checkValidity()) {
+document.getElementById("error_family_name").innerHTML = "De achternaam moet minimaal 2 karakters bevatten";
+} else {
+document.getElementById("error_family_name").innerHTML = "";
+}
 }
 
 function error_email() {
-    var testable = document.getElementById("test_email");
-    if (!testable.checkValidity()) {
-        document.getElementById("error_email").innerHTML = "Dit is geen geldig emailadres";
-    } else {
-        document.getElementById("error_email").innerHTML = "";
-    }
-
+if (!email.checkValidity()) {
+document.getElementById("error_email").innerHTML = "Dit is geen geldig emailadres";
+} else {
+document.getElementById("error_email").innerHTML = "";
+}
 }
