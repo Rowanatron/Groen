@@ -202,9 +202,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="form_block form_full_length">
                     <label> Omschrijving<br>
-                        <textarea id="test_description" rows = "5" cols = "50" name = "relation_description[]" onkeydown="setTimeout(error_description, 1500)"></textarea>
-                        <!--                                <input id="test_description" name="relation_description[]" type="text" maxlength="255"-->
-                        <!--                                       onkeydown="setTimeout(error_description, 1500)" value=" "/>-->
+                        <textarea id="test_description" rows = "5" cols = "50" maxlength="224" name = "relation_description[]" onkeydown="setTimeout(error_description, 1500)"></textarea>
                         <p id="error_description" class="error_message"></p>
                     </label>
                 </div>
@@ -279,7 +277,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "                        <div class=\"form_block form_full_length\">\n" +
             "                            <label> Omschrijving<br>\n" +
             "                                <textarea id=\"test_description\" rows = \"5\" cols = \"50\" name = \"relation_description[]\" onkeydown=\"setTimeout(error_description, 1500)\"></textarea>\n" +
-            "<!--                                <input id=\"test_description\" name=\"relation_description[]\" type=\"text\" maxlength=\"255\"-->\n" +
+            "<!--                                <input id=\"test_description\" name=\"relation_description[]\" type=\"text\" maxlength=\"224\"-->\n" +
             "<!--                                       onkeydown=\"setTimeout(error_description, 1500)\" value=\" \"/>-->\n" +
             "                                <p id=\"error_description\" class=\"error_message\"></p>\n" +
             "                            </label>\n" +
